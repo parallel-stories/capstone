@@ -1,5 +1,6 @@
 {
   "projects": {
-    "firebones": "firebones-6bc2a"
+    "firebones": "firebones-6bc2a",
+    "staging": "newagent-c275a"
   }
 }

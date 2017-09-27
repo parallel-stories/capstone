@@ -1,14 +1,15 @@
 const firebase = require('firebase')
 
 // -- // -- // -- // Firebase Config // -- // -- // -- //
-const config = {
-  apiKey: 'AIzaSyBzz-Wq2dzMgM7E8cdSYnYoX5fbVUT-XQo',
-  authDomain: 'firebones-6bc2a.firebaseapp.com',
-  databaseURL: 'https://firebones-6bc2a.firebaseio.com',
-  projectId: 'firebones-6bc2a',
-  storageBucket: 'firebones-6bc2a.appspot.com',
-  messagingSenderId: '1030378391678'
-}
+var config = {
+  apiKey: "AIzaSyCIQseEzcWRIo91HthkEbCCQEDGm9erHKY",
+  authDomain: "newagent-c275a.firebaseapp.com",
+  databaseURL: "https://newagent-c275a.firebaseio.com",
+  projectId: "newagent-c275a",
+  storageBucket: "newagent-c275a.appspot.com",
+  messagingSenderId: "1036024888547"
+};
+
 // -- // -- // -- // -- // -- // -- // -- // -- // -- //
 
 // Initialize the app, but make sure to do it only once.
