@@ -1,5 +1,5 @@
 // firebase
-import firebase from 'APP/fire'
+import firebase from 'app/fire'
 
 // Get the auth API from Firebase.
 const auth = firebase.auth()
