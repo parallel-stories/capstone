@@ -34,7 +34,9 @@ class Navbar extends Component {
   }
 
   handleLink = (e, type) => {
-    if( type === "read" ) {
+    if( type === "home" ) {
+      browserHistory.push(`/home`)
+    } else if( type === "read" ) {
       console.log('clicked on read!')
     } else if( type === "write" ) {
       browserHistory.push(`/write`)
@@ -43,11 +45,11 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log("WHAT IS PROPS", this.props);
     return (
       <div>
         <AppBar
           title="Parallel Stories"
+          onTitleTouchTap={(e)=>{this.handleLink(e, "home")}}
           iconElementLeft={<IconButton><List/></IconButton>}
           onLeftIconButtonTouchTap={this.handleToggle}
           iconElementRight={<IconButton><Face/></IconButton>}
@@ -55,14 +57,12 @@ class Navbar extends Component {
       		style={{boxShadow:"none", fontFamily:"Pacifico", textAlign:"center"}}
       		className="header">
           <Drawer open={this.state.open}>
+            <MenuItem onClick={(e)=>{this.handleLink(e, "home")}}>Home</MenuItem>
             <MenuItem onClick={(e)=>{this.handleLink(e, "read")}}>Read Stories</MenuItem>
             <MenuItem onClick={(e)=>{this.handleLink(e, "write")}}>Write a Story</MenuItem>
             <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
           </Drawer>
         </AppBar>
-        <LandingPage />
-        <hr />
-        <Footer/>
       </div>
   )} // end render
 };

@@ -4,7 +4,7 @@ import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 
 // components
-import Navbar from './components/Navbar'
+import LandingPage from './components/LandingPage'
 import WriteSpace from './components/WriteSpace'
 
 // authentication
@@ -40,7 +40,8 @@ const appTheme = getMuiTheme({
 render(
   <MuiThemeProvider muiTheme={getMuiTheme(appTheme)}>
     <Router history={browserHistory}>
-      <Route path="/" component={Navbar} />
+      <Route path="/" component={LandingPage} />
+      <Route path="/home" component={LandingPage} />
       <Route path="/write" component={WriteSpace} />
       <Route path='*' component={NotFound} />
     </Router>
