@@ -9,7 +9,13 @@ Run `npm run dev` to run the application
 Run `npm install` to install all dependencies
 
 *firebase*
+
 Run `npm install -g firebase-tools` if you don't have firebase installed
+
 Then log into firebase using `firebase login`
+
+Then use the staging branch in firebase using `firebase use staging`
+
+Run firebase using `firebase serve`
 
 ### More stuff here TBA
