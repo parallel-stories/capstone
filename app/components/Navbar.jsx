@@ -2,6 +2,11 @@
 import React, { Component } from 'react'
 import AppBar from 'material-ui/AppBar'
 
+//firebase
+import firebase from 'app/fire'
+const auth = firebase.auth()
+const google = new firebase.auth.GoogleAuthProvider()
+
 // drawer menu for Navbar
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
@@ -26,6 +31,7 @@ class Navbar extends Component {
     }
     this.handleToggle =  this.handleToggle.bind(this)
     this.handleLink = this.handleLink.bind(this)
+    this.popUpSignIn = this.popUpSignIn.bind(this)
   }
 
   // handles the toggle of the left drawer menu
@@ -44,6 +50,14 @@ class Navbar extends Component {
     this.handleToggle()
   }
 
+  popUpSignIn = () => {
+    auth.signInWithPopup(google)
+    .then((result) => {
+      console.log('is this the user', result.user)
+      {/*refactor, put this into a reducer, make popupsignin into a thunk*/}
+    })
+  }
+
   render() {
     return (
       <div>
@@ -53,7 +67,7 @@ class Navbar extends Component {
           iconElementLeft={<IconButton><List/></IconButton>}
           onLeftIconButtonTouchTap={this.handleToggle}
           iconElementRight={<IconButton><Face/></IconButton>}
-          onRightIconButtonTouchTap={() => alert('implement login function pls')}
+          onRightIconButtonTouchTap={this.popUpSignIn}
           style={{boxShadow: 'none', fontFamily: 'Pacifico', textAlign: 'center'}}
           className="header">
           <Drawer open={this.state.open}>
