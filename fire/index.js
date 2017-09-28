@@ -2,7 +2,7 @@ const firebase = require('firebase')
 
 // -- // -- // -- // Firebase Config // -- // -- // -- //
 var config = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: "AIzaSyCIQseEzcWRIo91HthkEbCCQEDGm9erHKY",
   authDomain: "newagent-c275a.firebaseapp.com",
   databaseURL: "https://newagent-c275a.firebaseio.com",
   projectId: "newagent-c275a",
