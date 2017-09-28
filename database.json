@@ -1,0 +1,40 @@
+{
+  "stories": [
+    {
+      "title": "my title",
+      "lastNode": 42
+    },
+    {
+      "title": "harry potter",
+      "lastNode": 10
+    }
+  ],
+  "users": [
+    {
+      "name": "ada lovelace",
+      "email": "alovelace@babbage.com",
+      "password": "itsasecret",
+      "stories": ["1", "42"],
+      "cards": ["11", "999"]
+    }
+  ],
+  "cards": [
+    {
+      "storyId": 50,
+      "communityId": 10,
+      "title": "Larry Flowerpot",
+      "text": "there once was a boy wizard....",
+      "parallels": [],
+      "previousCard": 9,
+      "nextCard": 12,
+      "userId": 400
+    }
+  ],
+  "community": [
+    {
+      "title": "The wizard who lived",
+      "description": "This is an original story",
+      "stories": [50, 99]
+    }
+  ]
+}

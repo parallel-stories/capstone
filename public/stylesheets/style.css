@@ -1,0 +1,32 @@
+html, body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+
+  margin: 0;
+  padding: 0;
+
+  background-color: #FAFBF6;
+}
+
+/* header */
+
+.header {
+  font-family: 'Pacifico', cursive;
+}
+
+/* containers on all tabs */
+
+.container, .container-fluid {
+  min-height: 400px;
+}
+
+/* Landing Page */
+.landing-text {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+    .btn, .btn-group {
+        width:100%;
+    }
+}
