@@ -1,6 +1,7 @@
+import React, { Component } from 'react'
 import ReactQuill from 'react-quill'
 
-class WritingSpace extends React.Component {
+class WriteSpace extends Component{
   constructor(props) {
     super(props)
     this.state = { text: '' } // You can also pass a Quill Delta here
@@ -18,3 +19,5 @@ class WritingSpace extends React.Component {
     )
   }
 }
+
+export default WriteSpace

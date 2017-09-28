@@ -1,5 +1,6 @@
 // react
 import React, { Component } from 'react'
+import {browserHistory} from 'react-router'
 import AppBar from 'material-ui/AppBar'
 
 // drawer menu for Navbar
@@ -14,6 +15,7 @@ import List from 'material-ui/svg-icons/action/list'
 
 // other components
 import LandingPage from './LandingPage'
+import WriteSpace from './WriteSpace'
 import Footer from './Footer'
 
 class Navbar extends Component {
@@ -21,7 +23,9 @@ class Navbar extends Component {
     super(props);
     this.state = {
       open: false
-    };
+    }
+    this.handleToggle =  this.handleToggle.bind(this)
+    this.handleLink = this.handleLink.bind(this)
   }
 
   // handles the toggle of the left drawer menu
@@ -29,7 +33,17 @@ class Navbar extends Component {
     this.setState({open: !this.state.open})
   }
 
+  handleLink = (e, type) => {
+    if( type === "read" ) {
+      console.log('clicked on read!')
+    } else if( type === "write" ) {
+      browserHistory.push(`/write`)
+    }
+    this.handleToggle();
+  }
+
   render() {
+    console.log("WHAT IS PROPS", this.props);
     return (
       <div>
         <AppBar
@@ -41,8 +55,8 @@ class Navbar extends Component {
       		style={{boxShadow:"none", fontFamily:"Pacifico", textAlign:"center"}}
       		className="header">
           <Drawer open={this.state.open}>
-            <MenuItem>Read Stories</MenuItem>
-            <MenuItem>Write a Story</MenuItem>
+            <MenuItem onClick={(e)=>{this.handleLink(e, "read")}}>Read Stories</MenuItem>
+            <MenuItem onClick={(e)=>{this.handleLink(e, "write")}}>Write a Story</MenuItem>
             <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
           </Drawer>
         </AppBar>
