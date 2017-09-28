@@ -1,29 +1,49 @@
 // react
-import React from 'react';
+import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
+
+// drawer menu for Navbar
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 
 // icons for Navbar
 import IconButton from 'material-ui/IconButton';
 import Face from 'material-ui/svg-icons/action/face';
+import List from 'material-ui/svg-icons/action/list';
 
 // other components
 import Auth from './Auth'
 
-function handleTouchTapRight() {
-  alert('Put a login here!!');
-}
+class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+  }
 
-const Navbar = () => (
-  <div>
-    <AppBar
-      title="Parallel Stories"
-      iconClassNameRight="muidocs-icon-navigation-expand-more"
-      iconElementRight={<IconButton><Face/></IconButton>}
-      onRightIconButtonTouchTap={handleTouchTapRight}
-  		style={{boxShadow:"none", fontFamily:"Pacifico", textAlign:"center"}}
-  		className="header"
-    />
-  </div>
-);
+  // handles the toggle of the left drawer menu
+  handleToggle = () => this.setState({open: !this.state.open});
+
+  render() {
+    return (
+      <div>
+        <AppBar
+          title="Parallel Stories"
+          iconElementLeft={<IconButton><List/></IconButton>}
+          onLeftIconButtonTouchTap={this.handleToggle}
+          iconElementRight={<IconButton><Face/></IconButton>}
+          onRightIconButtonTouchTap={() => alert('implement login function pls')}
+      		style={{boxShadow:"none", fontFamily:"Pacifico", textAlign:"center"}}
+      		className="header">
+          <Drawer open={this.state.open}>
+            <MenuItem>Menu Item</MenuItem>
+            <MenuItem>Menu Item 2</MenuItem>
+          </Drawer>
+        </AppBar>
+      </div>
+  )} // end render
+};
 
 export default Navbar;
