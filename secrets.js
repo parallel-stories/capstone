@@ -1,0 +1,1 @@
+process.env.FIREBASE_API_KEY = 'AIzaSyCIQseEzcWRIo91HthkEbCCQEDGm9erHKY'
