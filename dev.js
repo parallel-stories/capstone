@@ -3,6 +3,7 @@
  *
  * Usage: node dev
  **/
+require('./secrets.js')
 
 const app = require('.')
     , chalk = require('chalk'), {bold} = chalk
