@@ -28,7 +28,7 @@ class WriteSpace extends Component{
         <RaisedButton label="READ"
                       backgroundColor="#D2B48C"
                       style={style}
-                      onClick={(e)=>{this.handleLink(e, "read")}} />
+                      onClick={()=>console.log('SUBMIT STORY'))} />
       </div>
     )
   }
