@@ -24,7 +24,9 @@ class Navbar extends Component {
   }
 
   // handles the toggle of the left drawer menu
-  handleToggle = () => this.setState({open: !this.state.open});
+  handleToggle = () => {
+    this.setState({open: !this.state.open});
+  }
 
   render() {
     return (
@@ -38,8 +40,9 @@ class Navbar extends Component {
       		style={{boxShadow:"none", fontFamily:"Pacifico", textAlign:"center"}}
       		className="header">
           <Drawer open={this.state.open}>
-            <MenuItem>Menu Item</MenuItem>
-            <MenuItem>Menu Item 2</MenuItem>
+            <MenuItem>Read Stories</MenuItem>
+            <MenuItem>Write a Story</MenuItem>
+            <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
           </Drawer>
         </AppBar>
       </div>
