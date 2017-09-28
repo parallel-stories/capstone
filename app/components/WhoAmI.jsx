@@ -1,5 +1,5 @@
 import React from 'react'
-import firebase from 'APP/fire'
+import firebase from 'app/fire'
 const auth = firebase.auth()
 
 import Login from './Login'
