@@ -13,3 +13,5 @@ npm-debug.log
 
 # Firebase debug log
 firebase-debug.log
+
+secrets.js
