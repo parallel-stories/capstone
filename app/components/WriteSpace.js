@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import ReactQuill from 'react-quill'
+import Navbar from './Navbar'
 
-class WriteSpace extends Component{
+class WriteSpace extends Component {
   constructor(props) {
     super(props)
     this.state = { text: '' } // You can also pass a Quill Delta here
@@ -9,14 +10,17 @@ class WriteSpace extends Component{
   }
 
   handleChange(value) {
-    console.log( this.state.text )
     this.setState({ text: value })
   }
 
   render() {
     return (
-      <ReactQuill value={this.state.text}
-                  onChange={this.handleChange} />
+      <div>
+        <Navbar />
+        <ReactQuill value={this.state.text}
+                    onChange={this.handleChange}
+                    className="container container-fluid"/>
+      </div>
     )
   }
 }
