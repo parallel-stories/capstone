@@ -1,6 +1,8 @@
 'use strict'
 import React from 'react'
 import {Router} from 'react-router'
+import { Provider } from 'react-redux'
+import store from './store'
 import {render} from 'react-dom'
 import history from './history'
 import Routes from './routes'
@@ -32,10 +34,12 @@ const appTheme = getMuiTheme({
 })
 
 render(
-  <MuiThemeProvider muiTheme={getMuiTheme(appTheme)}>
-    <Router history={history}>
-      <Routes />
-    </Router>
-  </MuiThemeProvider>,
+  <Provider store={store}>
+    <MuiThemeProvider muiTheme={getMuiTheme(appTheme)}>
+      <Router history={history}>
+        <Routes />
+      </Router>
+    </MuiThemeProvider>
+  </Provider>,
   document.getElementById('main')
 )

@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Route, Switch} from 'react-router-dom'
 
 // authentication
-import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 
 import LandingPage from './components/LandingPage'
