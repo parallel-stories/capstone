@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardMedia, CardText} from 'material-ui/Card';
+import {Card, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 const SingleStory = () => (
