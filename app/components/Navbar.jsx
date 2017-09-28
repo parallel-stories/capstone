@@ -34,19 +34,11 @@ class Navbar extends Component {
   }
 
   handleLink = (e, type) => {
-<<<<<<< HEAD
-    if( type === "home" ) {
-=======
     if (type === 'home') {
->>>>>>> master
       history.push(`/home`)
     } else if (type === 'read') {
       console.log('clicked on read!')
-<<<<<<< HEAD
-    } else if( type === "write" ) {
-=======
     } else if (type === 'write') {
->>>>>>> master
       history.push(`/write`)
     }
     this.handleToggle()
