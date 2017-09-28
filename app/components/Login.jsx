@@ -1,6 +1,6 @@
 import React from 'react'
 
-import firebase from 'APP/fire'
+import firebase from 'app/fire'
 
 const google = new firebase.auth.GoogleAuthProvider()
 
