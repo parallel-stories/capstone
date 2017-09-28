@@ -1,4 +1,5 @@
 'use strict'
+require('./secrets.js')
 
 const {resolve} = require('path')
     , chalk = require('chalk')
