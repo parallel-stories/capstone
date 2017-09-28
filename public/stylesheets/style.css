@@ -20,6 +20,11 @@ html, body {
   min-height: 400px;
 }
 
+/* Landing Page */
+.landing-text {
+  text-align: center;
+}
+
 @media (max-width: 768px) {
     .btn, .btn-group {
         width:100%;

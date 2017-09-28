@@ -34,7 +34,7 @@ const appTheme = getMuiTheme({
 	card: {
 		fontWeight: typography.fontWeightLight
 	}
-});
+})
 
 render(
   <MuiThemeProvider muiTheme={getMuiTheme(appTheme)}>

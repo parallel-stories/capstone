@@ -1,19 +1,20 @@
 // react
-import React, { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
+import React, { Component } from 'react'
+import AppBar from 'material-ui/AppBar'
 
 // drawer menu for Navbar
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
+import Drawer from 'material-ui/Drawer'
+import MenuItem from 'material-ui/MenuItem'
+import RaisedButton from 'material-ui/RaisedButton'
 
 // icons for Navbar
-import IconButton from 'material-ui/IconButton';
-import Face from 'material-ui/svg-icons/action/face';
-import List from 'material-ui/svg-icons/action/list';
+import IconButton from 'material-ui/IconButton'
+import Face from 'material-ui/svg-icons/action/face'
+import List from 'material-ui/svg-icons/action/list'
 
 // other components
-import Auth from './Auth'
+import LandingPage from './LandingPage'
+import Footer from './Footer'
 
 class Navbar extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class Navbar extends Component {
 
   // handles the toggle of the left drawer menu
   handleToggle = () => {
-    this.setState({open: !this.state.open});
+    this.setState({open: !this.state.open})
   }
 
   render() {
@@ -45,8 +46,11 @@ class Navbar extends Component {
             <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
           </Drawer>
         </AppBar>
+        <LandingPage />
+        <hr />
+        <Footer/>
       </div>
   )} // end render
 };
 
-export default Navbar;
+export default Navbar
