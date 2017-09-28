@@ -6,6 +6,7 @@ import {render} from 'react-dom'
 // components
 import Navbar from './components/Navbar'
 import WriteSpace from './components/WriteSpace'
+import AllStories from './components/AllStories'
 
 // authentication
 import WhoAmI from './components/WhoAmI'
@@ -41,7 +42,8 @@ render(
   <MuiThemeProvider muiTheme={getMuiTheme(appTheme)}>
     <Router history={browserHistory}>
       <Route path="/" component={Navbar} />
-      <Route path="/write" component={WriteSpace} />
+			<Route path="/write" component={WriteSpace} />
+			<Route path="/read" component={AllStories} />
       <Route path='*' component={NotFound} />
     </Router>
   </MuiThemeProvider>,
