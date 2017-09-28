@@ -9,6 +9,7 @@ class WriteSpace extends Component{
   }
 
   handleChange(value) {
+    console.log( this.state.text )
     this.setState({ text: value })
   }
 
