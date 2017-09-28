@@ -37,7 +37,7 @@ class Navbar extends Component {
     if (type === 'home') {
       history.push('/home')
     } else if (type === 'read') {
-      console.log('clicked on read!')
+      history.push(`/read`)
     } else if (type === 'write') {
       history.push(`/write`)
     }

@@ -9,8 +9,8 @@ export default class AllStories extends Component{
     return (
       <div>
       <Navbar />
-      {/*create SingleStory component and map thru it here, displaying 3 cards per row*/}
       <div className="col-sm-4 col-md-4 col-lg-4" >
+        {/*map through all stories, displaying 3 cards per row*/}
         <SingleStory/>
       </div>
       </div>
