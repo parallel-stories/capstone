@@ -1,6 +1,5 @@
 // react
 import React, { Component } from 'react'
-import history from '../history'
 import AppBar from 'material-ui/AppBar'
 
 // drawer menu for Navbar
@@ -12,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import IconButton from 'material-ui/IconButton'
 import Face from 'material-ui/svg-icons/action/face'
 import List from 'material-ui/svg-icons/action/list'
+import history from '../history'
 
 // other components
 import LandingPage from './LandingPage'
@@ -20,11 +20,11 @@ import Footer from './Footer'
 
 class Navbar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       open: false
     }
-    this.handleToggle = this.handleToggle.bind(this)
+    this.handleToggle =  this.handleToggle.bind(this)
     this.handleLink = this.handleLink.bind(this)
   }
 
@@ -35,9 +35,9 @@ class Navbar extends Component {
 
   handleLink = (e, type) => {
     if (type === 'home') {
-      history.push('/home')
+      history.push(`/home`)
     } else if (type === 'read') {
-      history.push(`/read`)
+      console.log('clicked on read!')
     } else if (type === 'write') {
       history.push(`/write`)
     }
