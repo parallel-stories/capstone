@@ -1,6 +1,5 @@
 // react
 import React, { Component } from 'react'
-import {browserHistory} from 'react-router'
 import history from '../history'
 import AppBar from 'material-ui/AppBar'
 
