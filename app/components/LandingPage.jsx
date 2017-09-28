@@ -1,6 +1,9 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
+// react components
+import Navbar from './Navbar'
+
 const style = {
   margin: 12,
   color: 'rgb(255, 255, 255)'
@@ -9,6 +12,7 @@ const style = {
 const LandingPage = (props) => {
   return (
     <div className="container container-fluid landing-text">
+      <Navbar/>
       <div className="row">
         <br/>
         <br/>
