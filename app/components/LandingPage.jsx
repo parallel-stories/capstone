@@ -1,5 +1,5 @@
-import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import React from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
 
 // react components
 import Navbar from './Navbar'
@@ -7,7 +7,7 @@ import Navbar from './Navbar'
 const style = {
   margin: 12,
   color: 'rgb(255, 255, 255)'
-};
+}
 
 const LandingPage = (props) => {
   return (
@@ -49,8 +49,7 @@ const LandingPage = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-
-export default LandingPage;
+export default LandingPage
