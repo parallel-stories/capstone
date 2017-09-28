@@ -1,17 +1,9 @@
 'use strict'
 import React from 'react'
 import {Router} from 'react-router'
-import {Route, Switch} from 'react-router-dom'
 import {render} from 'react-dom'
 import history from './history'
-
-// components
-import LandingPage from './components/LandingPage'
-import WriteSpace from './components/WriteSpace'
-
-// authentication
-import WhoAmI from './components/WhoAmI'
-import NotFound from './components/NotFound'
+import Routes from './routes'
 
 // imports from Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -42,12 +34,7 @@ const appTheme = getMuiTheme({
 render(
   <MuiThemeProvider muiTheme={getMuiTheme(appTheme)}>
     <Router history={history}>
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/home" component={LandingPage} />
-        <Route path="/write" component={WriteSpace} />
-        <Route path='*' component={NotFound} />
-      </Switch>
+      <Routes />
     </Router>
   </MuiThemeProvider>,
   document.getElementById('main')

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import React, { Component } from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
 
 // react components
 import Navbar from './Navbar'
 
 const style = {
   margin: 10
-};
+}
 
 class LandingPage extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       open: false
     }
@@ -18,11 +18,11 @@ class LandingPage extends Component {
   }
 
   handleLink = (e, type) => {
-    if( type === "home" ) {
+    if (type === 'home') {
       this.props.history.push(`/home`)
-    } else if( type === "read" ) {
+    } else if (type === 'read') {
       console.log('clicked on read!')
-    } else if( type === "write" ) {
+    } else if (type === 'write') {
       this.props.history.push(`/write`)
     }
   }
@@ -49,7 +49,7 @@ class LandingPage extends Component {
               label="EXPLORE"
               backgroundColor="#D2B48C"
               style={style}
-              onClick={(e)=>{this.handleLink(e, "read")}}
+              onClick={(e) => { this.handleLink(e, 'read') }}
             />
           </div>
           <div className="col col-4 col-lg-4 col-md-4 col-sm-4">
@@ -57,7 +57,7 @@ class LandingPage extends Component {
               label="READ"
               backgroundColor="#D2B48C"
               style={style}
-              onClick={(e)=>{this.handleLink(e, "read")}}
+              onClick={(e) => { this.handleLink(e, 'read') }}
             />
           </div>
           <div className="col col-4 col-lg-4 col-md-4 col-sm-4">
@@ -65,7 +65,7 @@ class LandingPage extends Component {
               label="WRITE"
               backgroundColor="#D2B48C"
               style={style}
-              onClick={(e)=>{this.handleLink(e, "write")}}
+              onClick={(e) => { this.handleLink(e, 'write') }}
             />
           </div>
         </div>
@@ -74,5 +74,4 @@ class LandingPage extends Component {
   }
 }
 
-
-export default LandingPage;
+export default LandingPage
