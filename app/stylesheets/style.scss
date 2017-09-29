@@ -9,13 +9,19 @@
 html, body {
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-
   margin: 0;
   padding: 0;
-
   background-color: #FAFBF6;
-
 }
+// below html & body needed for sticky footer
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
+
 
 /* header */
 
@@ -23,10 +29,8 @@ html, body {
   font-family: 'Pacifico', cursive;
 }
 
-/* containers on all tabs */
-
-.container, .container-fluid {
-  min-height: 400px;
+.pageContent {
+  margin-top: 80px;
 }
 
 /* Landing Page */
@@ -34,11 +38,46 @@ html, body {
   text-align: center;
 }
 
-.footer a {
+.raisedButton button {
+  margin: 10;
+  background-color: #D2B48C;
+}
+
+.footer a, .footer a:visited {
   text-decoration: none;
-  color: #26C6DA
+  color:  #26C6DA;
+}
+
+.footer a:hover, .footer a:active {
+  text-decoration: underline;
 }
 
 .footer {
-  text-align: center
+  background-color: rgb(0,96,100);
+  color: #FAFBF6;
+  font-weight: 0;
+//sticky footer
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
 }
+
+/* container for communities */
+.card-container {
+  display: flex;
+}
+
+/* on a single community chain */
+.swipe-btn-up-down {
+  top:50%;
+  left:50%;
+}
+
+.swipe-btn-left-right {
+  margin: 0 auto;
+  vertical-align: middle;
+}
+

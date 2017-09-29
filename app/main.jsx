@@ -6,6 +6,8 @@ import MatUIStyle from './stylesheets/MatUIStyle'
 
 import React from 'react'
 import {Router} from 'react-router'
+import { Provider } from 'react-redux'
+import store from './store'
 import {render} from 'react-dom'
 import history from './history'
 import Routes from './routes'

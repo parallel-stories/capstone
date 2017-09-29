@@ -28,7 +28,7 @@ class WriteSpace extends Component {
             <RaisedButton label="READ"
                       backgroundColor="#D2B48C"
                       style={style}
-                      onClick={() => console.log('SUBMIT STORY')} />
+                      onClick={() => console.log('SUBMIT A NEW STORY LINE')} />
           </div>
         </div>
       </div>
