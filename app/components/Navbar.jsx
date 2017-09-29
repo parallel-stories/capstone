@@ -1,6 +1,12 @@
 // react
 import React, { Component } from 'react'
 import AppBar from 'material-ui/AppBar'
+import { connect } from 'react-redux'
+
+//login
+import WhoAmI from './WhoAmI'
+import firebase from 'app/fire'
+const auth = firebase.auth()
 
 // drawer menu for Navbar
 import Drawer from 'material-ui/Drawer'
@@ -52,8 +58,6 @@ class Navbar extends Component {
           onTitleTouchTap={(e) => { this.handleLink(e, 'home') }}
           iconElementLeft={<IconButton><List/></IconButton>}
           onLeftIconButtonTouchTap={this.handleToggle}
-          iconElementRight={<IconButton><Face/></IconButton>}
-          onRightIconButtonTouchTap={() => alert('implement login function pls')}
           style={{boxShadow: 'none', fontFamily: 'Pacifico', textAlign: 'center'}}
           className="header">
           <Drawer open={this.state.open}>
@@ -62,10 +66,11 @@ class Navbar extends Component {
             <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
             <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
           </Drawer>
+          <WhoAmI auth={auth} />
         </AppBar>
       </div>
     )
-  } // end render
-};
+  } 
+}
 
 export default Navbar
