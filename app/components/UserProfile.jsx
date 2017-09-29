@@ -13,6 +13,8 @@ class UserProfile extends Component {
     return (
       <div className="container-fluid" >
         <Navbar/>
+        <h1>Welcome User!</h1>
+        <p>Email: useremail </p>
         <div className="row" >
 
         </div>
