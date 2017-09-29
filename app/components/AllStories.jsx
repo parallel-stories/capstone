@@ -14,7 +14,6 @@ class AllStories extends Component{
 
   render() {
     const {allStories} = this.props
-    console.log('component', allStories)
     return (
       <div>
       <Navbar />

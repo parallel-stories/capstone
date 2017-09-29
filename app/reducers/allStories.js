@@ -5,7 +5,6 @@ import _ from 'lodash'
 const GET_ALL_STORIES = 'GET_ALL_STORIES'
 
 export const getAllStories = allStories => {
-  console.log('inside getAllStories', allStories)
   return {
     type: GET_ALL_STORIES,
     allStories
