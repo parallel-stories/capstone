@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 
-// react components
-import Navbar from './Navbar'
-
-const style = {
-  margin: 10
-}
-
 class LandingPage extends Component {
   constructor(props) {
     super(props)
@@ -29,46 +22,41 @@ class LandingPage extends Component {
 
   render() {
     return (
-      <div className="container container-fluid landing-text">
-        <Navbar/>
+      <div>
+
         <div className="row">
-          <br/>
-          <br/>
-          <img src="http://placekitten.com/200/200" alt="logo depicting a tree"/>
-          <h1>
-            Welcome to <span className="title">Parallel Stories</span>!
-          </h1>
-          <p>
-            Some Lorem Ipsum here etc.....
-          </p>
+          <div className="col-sm-12 col-md-12 col-lg-12 alignCenter">
+            <img src="http://lorempixel.com/200/200/nature/" alt="logo depicting a tree" />
+            <h1>
+              Welcome to <span className="title">Parallel Stories</span>!
+            </h1>
+            <p>
+              Some Lorem Ipsum here etc.....
+            </p>
+          </div>
         </div>
-        <br />
+
         <div className="row">
-          <div className="col col-4 col-lg-4 col-md-4 col-sm-4">
+          <div className="col col-4 col-lg-4 col-md-4 col-sm-4 alignCenter raisedButton">
             <RaisedButton
               label="EXPLORE"
-              backgroundColor="#D2B48C"
-              style={style}
               onClick={(e) => { this.handleLink(e, 'read') }}
             />
           </div>
-          <div className="col col-4 col-lg-4 col-md-4 col-sm-4">
+          <div className="col col-4 col-lg-4 col-md-4 col-sm-4 alignCenter raisedButton">
             <RaisedButton
               label="READ"
-              backgroundColor="#D2B48C"
-              style={style}
               onClick={(e) => { this.handleLink(e, 'read') }}
             />
           </div>
-          <div className="col col-4 col-lg-4 col-md-4 col-sm-4">
+          <div className="col col-4 col-lg-4 col-md-4 col-sm-4 alignCenter raisedButton">
             <RaisedButton
               label="WRITE"
-              backgroundColor="#D2B48C"
-              style={style}
               onClick={(e) => { this.handleLink(e, 'write') }}
             />
           </div>
         </div>
+
       </div>
     )
   }

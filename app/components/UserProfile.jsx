@@ -2,12 +2,9 @@
 import React, { Component } from 'react'
 import AppBar from 'material-ui/AppBar'
 
-//firebase
+// firebase
 import firebase from 'app/fire'
 const auth = firebase.auth()
-
-// other components
-import Navbar from './Navbar'
 
 export const name = user => {
   if (!user) return 'Nobody'
@@ -21,7 +18,6 @@ export const email = user => {
   return `Email: ${user.email}`
 }
 
-
 export default class UserProfile extends Component {
   componentDidMount() {
     this.unsubscribe = auth.onAuthStateChanged(user => this.setState({user}))
@@ -33,10 +29,9 @@ export default class UserProfile extends Component {
 
   render() {
     const {user} = this.state || {}
-    
+
     return (
       <div className="container-fluid" >
-        <Navbar/>
         <h1>Welcome {name(user)}!</h1>
         <p>{email(user)} </p>
         <div className="row" >
@@ -44,6 +39,5 @@ export default class UserProfile extends Component {
         </div>
       </div>
     )
-  } 
+  }
 }
-

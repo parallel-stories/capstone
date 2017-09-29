@@ -1,8 +1,7 @@
 // react
 import React, { Component } from 'react'
 
-//react components
-import Navbar from './Navbar'
+// react components
 import SingleCard from './SingleCard'
 
 // material ui
@@ -13,8 +12,8 @@ import UpArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
 import DownArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 
 // react swipe components
-import ReactDOM from 'react-dom';
-import ReactSwipe from 'react-swipe';
+import ReactDOM from 'react-dom'
+import ReactSwipe from 'react-swipe'
 
 class SingleCommunity extends Component {
   constructor(props) {
@@ -27,7 +26,6 @@ class SingleCommunity extends Component {
   render() {
     return (
       <div>
-        <Navbar/>
         <div className="row container-fluid">
           <IconButton className="swipe-btn-up-down"><UpArrow/></IconButton>
         </div>

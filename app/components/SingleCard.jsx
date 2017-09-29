@@ -1,7 +1,7 @@
 // react
 import React, { Component } from 'react'
-import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 
 export default class SingleCard extends Component {
   constructor(props) {
