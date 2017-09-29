@@ -2,11 +2,43 @@
   "stories": [
     {
       "title": "my title",
-      "lastNode": 1
+      "cards": [
+        {
+          "storyId": 0,
+          "communityId": 0,
+          "title": "Larry Flowerpot",
+          "text": "there once was a boy wizard...",
+          "parallels": [2],
+          "previousCard": null,
+          "nextCard": 1,
+          "userId": 0
+        },
+        {
+          "storyId": 0,
+          "communityId": 0,
+          "title": "Hermione Stranger",
+          "text": "there once was a witch...",
+          "parallels": [],
+          "previousCard": 0,
+          "nextCard": null,
+          "userId": 0
+        }
+      ]
     },
     {
       "title": "harry potter",
-      "lastNode": 2
+      "cards": [
+        {
+          "storyId": 1,
+          "communityId": 0,
+          "title": "Ronny Wes",
+          "text": "there once was a chess master...",
+          "parallels": [],
+          "previousCard": 0,
+          "nextCard": null,
+          "userId": 1
+        }
+      ]
     }
   ],
   "users": [
@@ -23,38 +55,6 @@
       "password": "itsasecret",
       "stories": [1],
       "cards": [2]
-    }
-  ],
-  "cards": [
-    {
-      "storyId": 0,
-      "communityId": 0,
-      "title": "Larry Flowerpot",
-      "text": "there once was a boy wizard...",
-      "parallels": [2],
-      "previousCard": null,
-      "nextCard": 1,
-      "userId": 0
-    },
-    {
-      "storyId": 0,
-      "communityId": 0,
-      "title": "Hermione Stranger",
-      "text": "there once was a witch...",
-      "parallels": [],
-      "previousCard": 0,
-      "nextCard": null,
-      "userId": 0
-    },
-    {
-      "storyId": 1,
-      "communityId": 0,
-      "title": "Ronny Wes",
-      "text": "there once was a chess master...",
-      "parallels": [],
-      "previousCard": 0,
-      "nextCard": null,
-      "userId": 1
     }
   ],
   "community": [

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import SingleStory from './SingleStory'
+import SingleStoryBoxDisplay from './SingleStory'
 import firebase from 'app/fire'
 import 'firebase/database'
 import {fetchAllStories} from '../reducers'
 import {connect} from 'react-redux'
 import _ from 'lodash'
+import { Link } from 'react-router-dom'
 
 class AllStories extends Component {
   componentWillMount() {
@@ -17,8 +18,8 @@ class AllStories extends Component {
       <div className="row">
         <div className="col-sm-4 col-md-4 col-lg-4" >
           {
-            !_.isEmpty(allStories) &&
-            Object.keys(allStories).map((key) => <SingleStory key={key} story={allStories[key]} />)
+            !_.isEmpty(allStories) && 
+            Object.keys(allStories).map((key) => <Link to={`/read/story/${key}`}><SingleStoryBoxDisplay key={key} story={allStories[key]} /></Link>)
           }
         </div>
       </div>

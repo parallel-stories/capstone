@@ -1,8 +1,12 @@
 import {combineReducers} from 'redux'
 import allStories from './allStories'
+import currentStoryline from './currentStoryline'
 
 export default combineReducers({
-  allStories
+  allStories,
+  currentStoryline
 })
 
 export * from './allStories'
+export * from './currentStoryline'
+
