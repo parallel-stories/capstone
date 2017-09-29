@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import SingleStory from './SingleStory'
 import Navbar from './Navbar'
-
+import firebase from 'app/fire'
+import 'firebase/database'
 
 export default class AllStories extends Component{
+  constructor() {
+    super()
+  }
+
   render() {
-    
+
     return (
       <div>
       <Navbar />
@@ -16,4 +21,8 @@ export default class AllStories extends Component{
       </div>
     )
   }
+}
+
+const mapStateToProps = state => {
+
 }
