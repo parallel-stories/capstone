@@ -13,10 +13,12 @@ import history from './history'
 import Routes from './routes'
 
 render(
-  <MatUIStyle>
-    <Router history={history}>
-      <Routes />
-    </Router>
-  </MatUIStyle>,
+  <Provider store={store}>
+    <MatUIStyle>
+      <Router history={history}>
+        <Routes />
+      </Router>
+    </MatUIStyle>
+  </Provider>,
   document.getElementById('main')
 )
