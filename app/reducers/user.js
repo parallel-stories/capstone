@@ -7,7 +7,7 @@ const INITIALIZE_USER = 'INITIALIZE_USER'
 
 const initializeUser = user => ({ type: INITIALIZE_USER, user})
 
-export default function loginReducer(user={}, action){
+export default function userReducer(user={}, action){
   switch (action.type) {
     case INITIALIZE_USER:
       return action.user

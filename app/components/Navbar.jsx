@@ -47,6 +47,9 @@ class Navbar extends Component {
     } else if (type === 'write') {
       history.push(`/write`)
     }
+    else if (type === 'userProf') {
+      history.push(`/userProfile`)
+    }
     this.handleToggle()
   }
 
@@ -64,6 +67,7 @@ class Navbar extends Component {
             <MenuItem onClick={(e) => { this.handleLink(e, 'home') }}>Home</MenuItem>
             <MenuItem onClick={(e) => { this.handleLink(e, 'read') }}>Read Stories</MenuItem>
             <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
+            <MenuItem onClick={(e) => { this.handleLink(e, 'userProf') }}>User Profile</MenuItem>
             <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
           </Drawer>
           <WhoAmI auth={auth} />

@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage'
 import WriteSpace from './components/WriteSpace'
 import AllStories from './components/AllStories'
 import SingleCommunity from './components/SingleCommunity'
+import UserProfile from './components/UserProfile'
 
 class Routes extends Component {
   render() {
@@ -18,6 +19,7 @@ class Routes extends Component {
         <Route path="/write" component={WriteSpace} />
         <Route exact path="/read" component={AllStories} />
         <Route path="/read/:id" component={SingleCommunity} />
+        <Route path="/userProfile" component={UserProfile} />
         <Route path='*' component={NotFound} />
       </Switch>
     )
