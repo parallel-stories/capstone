@@ -26,6 +26,7 @@ class Routes extends Component {
             <Route path="/write" component={WriteSpace} />
             <Route exact path="/read" component={AllStories} />
             <Route exact path="/read/story/:storylineId" component={SingleStoryPage} />
+            <Route exact path="/read/story/:storylineId/:cardId" component={SingleCard} />
             <Route path="/read/:id" component={SingleCommunity} />
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
