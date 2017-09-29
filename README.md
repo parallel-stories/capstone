@@ -6,7 +6,7 @@ Run `npm run dev` to run the application
 
 ### Installation
 
-Run `npm install` to install all dependencies
+Run `yarn install` to install all dependencies
 
 *firebase*
 
