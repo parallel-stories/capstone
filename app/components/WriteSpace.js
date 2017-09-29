@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import ReactQuill from 'react-quill'
-import RaisedButton from 'material-ui/RaisedButton'
+import Navbar from './Navbar'
+import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
   margin: 10,
-}
+};
 
-class WriteSpace extends Component {
+class WriteSpace extends Component{
   constructor(props) {
     super(props)
     this.state = { text: '' } // You can also pass a Quill Delta here
@@ -20,6 +21,7 @@ class WriteSpace extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <ReactQuill value={this.state.text}
                     onChange={this.handleChange}
                     className="container container-fluid"/>
@@ -28,7 +30,7 @@ class WriteSpace extends Component {
             <RaisedButton label="READ"
                       backgroundColor="#D2B48C"
                       style={style}
-                      onClick={() => console.log('SUBMIT A NEW STORY LINE')} />
+                      onClick={()=>console.log('SUBMIT A NEW STORY LINE')} />
           </div>
         </div>
       </div>

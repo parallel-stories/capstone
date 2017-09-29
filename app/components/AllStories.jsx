@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import SingleStory from './SingleStory'
+import Navbar from './Navbar'
 import firebase from 'app/fire'
 import 'firebase/database'
 import {fetchAllStories} from '../reducers'
 import {connect} from 'react-redux'
 import _ from 'lodash'
 
-class AllStories extends Component {
+class AllStories extends Component{
   componentWillMount() {
     this.props.fetchAllStories()
   }
@@ -14,7 +15,8 @@ class AllStories extends Component {
   render() {
     const {allStories} = this.props
     return (
-      <div className="row">
+      <div>
+      <Navbar />
         <div className="col-sm-4 col-md-4 col-lg-4" >
           {
             !_.isEmpty(allStories) &&
