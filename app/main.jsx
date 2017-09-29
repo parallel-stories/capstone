@@ -14,9 +14,11 @@ import Routes from './routes'
 
 render(
   <MatUIStyle>
-    <Router history={history}>
-      <Routes />
-    </Router>
+    <Provider store={store}>
+      <Router history={history}>
+        <Routes />
+      </Router>
+    </Provider>
   </MatUIStyle>,
   document.getElementById('main')
 )
