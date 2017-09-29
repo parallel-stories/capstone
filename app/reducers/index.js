@@ -8,3 +8,4 @@ export default combineReducers({
 })
 
 export * from './allStories'
+export * from './login'
