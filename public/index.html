@@ -6,7 +6,7 @@
     <!-- Defines the character set -->
   	<meta charset="UTF-8">
 
-    <!-- Responsive design? - This tag will make mobile browsers scale to device width -->
+    <!-- Make mobile browsers scale to device width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Google Fonts -->
@@ -16,12 +16,15 @@
     <!-- stylesheet for quill -->
     <link href="https://cdn.quilljs.com/1.3.2/quill.snow.css" rel="stylesheet">
 
-    <!-- stylesheets -->
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <!-- bootstrap needs -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- our stylesheet is in bundle -->
+    <script src="/bundle.js" async defer></script>
 
       </head>
-  <body>
+  <body class="Site">
     <div id=main></div>
-    <script async defer src=/bundle.js></script>
   </body>
 </html>
