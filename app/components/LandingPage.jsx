@@ -21,7 +21,7 @@ class LandingPage extends Component {
     if (type === 'home') {
       this.props.history.push(`/home`)
     } else if (type === 'read') {
-      console.log('clicked on read!')
+      this.props.history.push(`/read`)
     } else if (type === 'write') {
       this.props.history.push(`/write`)
     }

@@ -43,9 +43,12 @@ class Navbar extends Component {
     if (type === 'home') {
       history.push(`/home`)
     } else if (type === 'read') {
-      console.log('clicked on read!')
+      history.push(`/read`)
     } else if (type === 'write') {
       history.push(`/write`)
+    }
+    else if (type === 'userProf') {
+      history.push(`/userProfile`)
     }
     this.handleToggle()
   }
@@ -64,13 +67,14 @@ class Navbar extends Component {
             <MenuItem onClick={(e) => { this.handleLink(e, 'home') }}>Home</MenuItem>
             <MenuItem onClick={(e) => { this.handleLink(e, 'read') }}>Read Stories</MenuItem>
             <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
+            <MenuItem onClick={(e) => { this.handleLink(e, 'userProf') }}>User Profile</MenuItem>
             <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
           </Drawer>
           <WhoAmI auth={auth} />
         </AppBar>
       </div>
     )
-  } 
+  }
 }
 
 export default Navbar
