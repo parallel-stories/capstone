@@ -1,6 +1,6 @@
-import React from 'react';
-import {Card, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import React from 'react'
+import {Card, CardMedia, CardTitle, CardText} from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 
 const SingleStory = () => (
   <Card>
@@ -16,6 +16,6 @@ const SingleStory = () => (
       Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
     </CardText>
   </Card>
-);
+)
 
-export default SingleStory;
+export default SingleStory

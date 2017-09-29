@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 
-// react components
-import Navbar from './Navbar'
-
 const style = {
   margin: 10
 }
@@ -29,8 +26,7 @@ class LandingPage extends Component {
 
   render() {
     return (
-      <div className="container container-fluid landing-text">
-        <Navbar/>
+      <div>
         <div className="row">
           <br/>
           <br/>
