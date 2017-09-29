@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import {buttonStyle} from '../stylesheets/MatUIStyle'
 
 class LandingPage extends Component {
   constructor(props) {
@@ -41,7 +40,6 @@ class LandingPage extends Component {
           <div className="col col-4 col-lg-4 col-md-4 col-sm-4 alignCenter raisedButton">
             <RaisedButton
               label="EXPLORE"
-              style={buttonStyle}
               onClick={(e) => { this.handleLink(e, 'read') }}
             />
           </div>

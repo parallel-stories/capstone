@@ -25,7 +25,7 @@ body {
 
 /* header */
 
-.header {
+.header h1 {
   box-shadow: none;
   font-family: 'Pacifico', cursive;
 }
@@ -43,9 +43,15 @@ body {
   text-align: center;
 }
 
+.raisedButton,
+.raisedButton div,
 .raisedButton button {
+  box-shadow: none;
+}
+
+.raisedButton div {
   margin: 10;
-  background-color: #D2B48C;
+  background-color: rgb(210,180,140);
 }
 
 .footer a, .footer a:visited {
