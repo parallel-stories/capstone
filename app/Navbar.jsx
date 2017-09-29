@@ -1,6 +1,12 @@
 // react
 import React, { Component } from 'react'
 import AppBar from 'material-ui/AppBar'
+import { connect } from 'react-redux'
+
+// login
+import WhoAmI from './components/WhoAmI'
+import firebase from 'app/fire'
+const auth = firebase.auth()
 
 // drawer menu for Navbar
 import Drawer from 'material-ui/Drawer'
@@ -9,7 +15,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 // icons for Navbar
 import IconButton from 'material-ui/IconButton'
-import Face from 'material-ui/svg-icons/action/face'
 import List from 'material-ui/svg-icons/action/list'
 import history from './history'
 
@@ -32,7 +37,7 @@ class Navbar extends Component {
     if (type === 'home') {
       history.push(`/home`)
     } else if (type === 'read') {
-      console.log('clicked on read!')
+      history.push(`/read`)
     } else if (type === 'write') {
       history.push(`/write`)
     }
@@ -46,15 +51,14 @@ class Navbar extends Component {
         onTitleTouchTap={(e) => { this.handleLink(e, 'home') }}
         iconElementLeft={<IconButton><List/></IconButton>}
         onLeftIconButtonTouchTap={this.handleToggle}
-        iconElementRight={<IconButton><Face/></IconButton>}
-        onRightIconButtonTouchTap={() => alert('implement login function pls')}
-        style={{boxShadow: 'none', fontFamily: 'Pacifico', textAlign: 'center'}}>
+        className="header">
         <Drawer open={this.state.open}>
           <MenuItem onClick={(e) => { this.handleLink(e, 'home') }}>Home</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'read') }}>Read Stories</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
           <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
         </Drawer>
+        <WhoAmI auth={auth} />
       </AppBar>
     )
   }

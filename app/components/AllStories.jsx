@@ -14,7 +14,7 @@ class AllStories extends Component {
   render() {
     const {allStories} = this.props
     return (
-      <div>
+      <div className="row">
         <div className="col-sm-4 col-md-4 col-lg-4" >
           {
             !(_.isEmpty(allStories)) && Object.keys(allStories).map(key => <SingleStory key={key} story={allStories[key]} />)
