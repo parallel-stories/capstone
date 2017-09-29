@@ -6,6 +6,12 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme'
 import { cyan900, brown300, darkWhite, darkBlack, cyan500 } from 'material-ui/styles/colors'
 import typography from 'material-ui/styles/typography'
 
+// button style
+export const buttonStyle = {
+  margin: 10,
+  backgroundColor: '#D2B48C'
+}
+
 // app theme for MuiThemeProvider to user
 const Style = getMuiTheme({
   ...darkBaseTheme,
