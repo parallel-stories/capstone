@@ -1,0 +1,42 @@
+html, body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+
+  margin: 0;
+  padding: 0;
+
+  background-color: #FAFBF6;
+}
+
+/* header */
+
+.header {
+  font-family: 'Pacifico', cursive;
+}
+
+/* Landing Page */
+.landing-text {
+  text-align: center;
+}
+
+/* container for communities */
+.card-container {
+  display: flex;
+}
+
+/* on a single community chain */
+.swipe-btn-up-down {
+  top:50%;
+  left:50%;
+}
+
+.swipe-btn-left-right {
+  margin: 0 auto;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .btn, .btn-group {
+        width:100%;
+    }
+}

@@ -13,6 +13,6 @@ const SingleStory = ({story}) => (
       {story.description}
     </CardText>
   </Card>
-)
+);
 
-export default SingleStory
+export default SingleStory;
