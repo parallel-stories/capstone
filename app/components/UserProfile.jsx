@@ -1,20 +1,44 @@
 // react
 import React, { Component } from 'react'
 import AppBar from 'material-ui/AppBar'
-import { connect } from 'react-redux'
-import { fetchCurrentUser } from '../reducers/user'
+
+//firebase
+import firebase from 'app/fire'
+const auth = firebase.auth()
 
 // other components
 import Navbar from './Navbar'
 
-class UserProfile extends Component {
+export const name = user => {
+  if (!user) return 'Nobody'
+  if (user.isAnonymous) return 'Anonymous'
+  return user.displayName || user.email
+}
+
+export const email = user => {
+  if (!user) return null
+  if (user.isAnonymous) return null
+  return `Email: ${user.email}`
+}
+
+
+export default class UserProfile extends Component {
+  componentDidMount() {
+    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({user}))
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
+  }
 
   render() {
+    const {user} = this.state || {}
+    
     return (
       <div className="container-fluid" >
         <Navbar/>
-        <h1>Welcome User!</h1>
-        <p>Email: useremail </p>
+        <h1>Welcome {name(user)}!</h1>
+        <p>{email(user)} </p>
         <div className="row" >
 
         </div>
@@ -23,14 +47,3 @@ class UserProfile extends Component {
   } 
 }
 
-const mapState = null
-
-const mapDispatch = (dispatch) => {
-  return {
-    someFetchFunc: () => {
-      dispatch(fetchCurrentUser())
-    }
-  }
-}
-
-export default connect(mapState, mapDispatch)(UserProfile)
