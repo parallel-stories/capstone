@@ -1,3 +1,5 @@
+/* global React */
+
 // firebase
 import firebase from 'app/fire'
 

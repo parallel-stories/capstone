@@ -15,7 +15,7 @@ import DownArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import ReactDOM from 'react-dom'
 import ReactSwipe from 'react-swipe'
 
-class SingleCommunity extends Component {
+class SingleRoot extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -50,4 +50,4 @@ class SingleCommunity extends Component {
   } // end return
 }
 
-export default SingleCommunity
+export default SingleRoot
