@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import SingleStory from './SingleStory'
+import SingleStoryBoxDisplay from './SingleStoryBoxDisplay'
 import firebase from 'app/fire'
 import 'firebase/database'
 import _ from 'lodash'
+import {Link} from 'react-router-dom'
 
 class AllStoryBranches extends Component {
   constructor() {
@@ -15,7 +16,6 @@ class AllStoryBranches extends Component {
   componentDidMount() {
     firebase.database().ref().child('storyBranch').on('value', snap => {
       const storyBranches = snap.val()
-      console.log(storyBranches)
       this.setState({allStoryBranches: storyBranches})
     })
   }
@@ -27,7 +27,7 @@ class AllStoryBranches extends Component {
         <div className="col-sm-4 col-md-4 col-lg-4" >
           {
             !_.isEmpty(allStoryBranches) &&
-            Object.keys(allStoryBranches).map((key) => <SingleStory key={key} storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} />)
+            Object.keys(allStoryBranches).map((key) => <Link key={key} to={`/read/story_branch/${key}`}><SingleStoryBoxDisplay storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} /></Link>)
           }
         </div>
       </div>

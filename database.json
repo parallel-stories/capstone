@@ -1,69 +1,4 @@
 {
-<<<<<<< HEAD
-  "stories": [
-    {
-      "title": "my title",
-      "cards": [
-        {
-          "storyId": 0,
-          "communityId": 0,
-          "title": "Larry Flowerpot",
-          "text": "there once was a boy wizard...",
-          "parallels": [2],
-          "previousCard": null,
-          "nextCard": 1,
-          "userId": 0
-        },
-        {
-          "storyId": 0,
-          "communityId": 0,
-          "title": "Hermione Stranger",
-          "text": "there once was a witch...",
-          "parallels": [],
-          "previousCard": 0,
-          "nextCard": null,
-          "userId": 0
-        }
-      ]
-    },
-    {
-      "title": "harry potter",
-      "cards": [
-        {
-          "storyId": 1,
-          "communityId": 0,
-          "title": "Ronny Wes",
-          "text": "there once was a chess master...",
-          "parallels": [],
-          "previousCard": 0,
-          "nextCard": null,
-          "userId": 1
-        }
-      ]
-    }
-  ],
-  "users": [
-    {
-      "name": "ada lovelace",
-      "email": "alovelace@babbage.com",
-      "password": "itsasecret",
-      "stories": [0],
-      "cards": [0, 1]
-    },
-    {
-      "name": "grace hopper",
-      "email": "gracee@hopper.com",
-      "password": "itsasecret",
-      "stories": [1],
-      "cards": [2]
-    }
-  ],
-  "community": [
-    {
-      "title": "The wizard who lived",
-      "description": "This is an original story",
-      "stories": [0, 1]
-=======
   "storyCard": {
     "1": {
       "text": "Hello World!",
@@ -162,7 +97,6 @@
       "storyBranches": {
         "Larry Flowerpot: Playing With Fire": true
       }
->>>>>>> master
     }
   }
 }

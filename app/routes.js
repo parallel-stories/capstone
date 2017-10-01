@@ -6,13 +6,13 @@ import NotFound from './components/NotFound'
 
 import Navbar from './Navbar'
 import Footer from './Footer'
-
 import LandingPage from './components/LandingPage'
 import WriteSpace from './components/WriteSpace'
 import AllStoryBranches from './components/AllStoryBranches'
 import SingleCommunity from './components/SingleCommunity'
 import UserProfile from './components/UserProfile'
 import SingleCard from './components/SingleCard'
+import SingleStoryPage from './components/SingleStoryPage'
 
 class Routes extends Component {
   render() {
@@ -24,14 +24,9 @@ class Routes extends Component {
             <Route exact path="/" component={LandingPage} />
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
-<<<<<<< HEAD
-            <Route exact path="/read" component={AllStories} />
-            <Route exact path="/read/story/:storylineId" component={SingleStoryPage} />
-            <Route exact path="/read/story/:storylineId/:cardId" component={SingleCard} />
-=======
             <Route exact path="/read" component={AllStoryBranches} />
->>>>>>> master
-            <Route path="/read/:id" component={SingleCommunity} />
+            <Route exact path="/read/story_branch/:branchId" component={SingleStoryPage} />
+            <Route exact path="/read/:id" component={SingleCommunity} />
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
