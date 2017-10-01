@@ -21,11 +21,10 @@ class WriteSpace extends Component {
     return (
       <div>
         <ReactQuill value={this.state.text}
-                    onChange={this.handleChange}
-                    className="container container-fluid"/>
+                    onChange={this.handleChange}/>
         <div className="row">
           <div className="col col-4 col-lg-4 col-md-4 col-sm-4">
-            <RaisedButton label="READ"
+            <RaisedButton label="SUBMIT A NEW STORY"
                       backgroundColor="#D2B48C"
                       style={style}
                       onClick={() => console.log('SUBMIT A NEW STORY LINE')} />

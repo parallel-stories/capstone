@@ -7,6 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 // react components
 import AllStoryBranches from './AllStoryBranches';
 
+// source: https://github.com/JedWatson/react-select
+
 class Searchbar extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,7 @@ class Searchbar extends Component {
   }
 
   // update the state's query and also clears query
-  handleNewRequest() { this.setState({ query: this.state.query }) }
+  handleNewRequest(evt) { evt.preventDefault(); this.setState({ query: this.state.query }) }
   clearQuery() { this.setState({ query: '' }) }
 
 
@@ -46,9 +48,8 @@ class Searchbar extends Component {
             fullWidth={ true }
           />
         </form>
-        <div>
-          <AllStoryBranches filteredBranches={this.state.searchResults} />
-        </div>
+        <br />
+
       </div>
     )
   }
