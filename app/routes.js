@@ -12,6 +12,7 @@ import WriteSpace from './components/WriteSpace'
 import AllStoryBranches from './components/AllStoryBranches'
 import SingleCommunity from './components/SingleCommunity'
 import UserProfile from './components/UserProfile'
+import Searchbar from './components/Searchbar'
 
 class Routes extends Component {
   render() {
@@ -25,6 +26,7 @@ class Routes extends Component {
             <Route path="/write" component={WriteSpace} />
             <Route exact path="/read" component={AllStoryBranches} />
             <Route path="/read/:id" component={SingleCommunity} />
+            <Route path="/search" component={Searchbar} />
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
