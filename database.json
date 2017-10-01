@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "stories": [
     {
       "title": "my title",
@@ -62,6 +63,106 @@
       "title": "The wizard who lived",
       "description": "This is an original story",
       "stories": [0, 1]
+=======
+  "storyCard": {
+    "1": {
+      "text": "Hello World!",
+      "prevCard": "",
+      "nextCard": 2,
+      "branches": {}
+    },
+    "2": {
+      "text": "My name is Larry Flowerpot.",
+      "prevCard": 1,
+      "nextCard": 3,
+      "branches": {}
+    },
+    "3": {
+      "text": "I am a good wizard.",
+      "prevCard": 2,
+      "nextCard": 4,
+      "branches": {
+        "Larry Flowerpot: Playing With Fire": true
+      }
+    },
+    "4": {
+      "text": "I make good pancakes.",
+      "prevCard": 3,
+      "nextCard": "",
+      "branches": {}
+    },
+    "5": {
+      "text": "I like fire-breathing dragons.",
+      "prevCard": 3,
+      "nextCard": 6,
+      "branches": {}
+    },
+    "6": {
+      "text": "I have a pet dragon name Fiery.",
+      "prevCard": 5,
+      "nextCard": 7,
+      "branches": {}
+    },
+    "7": {
+      "text": "Let's play with the Fiery.",
+      "prevCard": 6,
+      "nextCard": 8,
+      "branches": {}
+    },
+    "8": {
+      "text": "That was fun.",
+      "prevCard": 7,
+      "nextCard": "",
+      "branches": {}
     }
-  ]
+  },
+  "storyBranch": {
+    "Larry Flowerpot: The Good Wizard": {
+      "storyCards": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      },
+      "storyRoot": "Larry Flowerpot: The Good Wizard"
+    },
+    "Larry Flowerpot: Playing With Fire": {
+      "storyCards": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true,
+        "5": true,
+        "6": true,
+        "7": true,
+        "8": true
+      },
+      "storyRoot": "Larry Flowerpot: The Good Wizard"
+    }
+  },
+  "storyRoot": {
+    "Larry Flowerpot: The Good Wizard": {
+      "Larry Flowerpot: The Good Wizard": true,
+      "Larry Flowerpot: Playing With Fire": true
+    }
+  },
+  "user": {
+    "1": {
+      "name": "Jamie Flowerpot",
+      "email": "jamie@flower.com",
+      "password": "itsasecret",
+      "storyBranches": {
+        "Larry Flowerpot: The Good Wizard": true
+      }
+    },
+    "2": {
+      "name": "Lily Pad",
+      "email": "lily@flower.com",
+      "password": "itsasecret",
+      "storyBranches": {
+        "Larry Flowerpot: Playing With Fire": true
+      }
+>>>>>>> master
+    }
+  }
 }

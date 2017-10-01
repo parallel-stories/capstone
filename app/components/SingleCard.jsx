@@ -1,13 +1,8 @@
-// react
 import React, { Component } from 'react'
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
 export default class SingleCard extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <Card>
