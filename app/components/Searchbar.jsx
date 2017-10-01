@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 
 // material UI
 import AutoComplete from 'material-ui/AutoComplete';
-import RaisedButton from 'material-ui/RaisedButton';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 // react components
 import AllStoryBranches from './AllStoryBranches';
-
-// source: https://github.com/JedWatson/react-select
 
 class Searchbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      allStoryBranches: ['harry potter', 'the last unicorn', 'Dune'],
       searchResults: [],
-      query: ''
+      query: '',
+      postive: true,
     }
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
@@ -25,13 +25,11 @@ class Searchbar extends Component {
     this.setState({
       query: query
     })
-    console.log(this.state.query)
   }
 
   // update the state's query and also clears query
-  handleNewRequest(evt) { evt.preventDefault(); this.setState({ query: this.state.query }) }
+  handleNewRequest(evt) { this.setState({ query: this.state.query }) }
   clearQuery() { this.setState({ query: '' }) }
-
 
   render() {
     return (
@@ -39,7 +37,7 @@ class Searchbar extends Component {
         <form onSubmit={ this.handleSubmit }>
           <AutoComplete
             hintText="Search by title or description"
-            dataSource={[1,2,3,4]}
+            dataSource={this.state.allStoryBranches}
             filter={ AutoComplete.fuzzyFilter }
             floatingLabelText="Search"
             searchText={this.state.query}
@@ -49,7 +47,18 @@ class Searchbar extends Component {
           />
         </form>
         <br />
-
+        <RadioButtonGroup style={{display: 'flex', flexDirection: 'row', maxWidth: 85}}
+          name="search-by" defaultSelected="all">
+          <RadioButton
+            value="all"
+            label="All" />
+          <RadioButton
+            value="title"
+            label="Title" />
+          <RadioButton
+            value="desc"
+            label="Description" />
+        </RadioButtonGroup>
       </div>
     )
   }

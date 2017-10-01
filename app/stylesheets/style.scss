@@ -36,7 +36,8 @@ body {
 }
 
 .landing-page {
-  margin-top: 80px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 /* Landing Page */
@@ -54,6 +55,14 @@ body {
   margin: 10;
   background-color: rgb(210,180,140);
 }
+
+/* search bar */
+.radio-btn-search {
+  float: left;
+  clear: none;
+}
+
+/* footer styles */
 
 .footer a, .footer a:visited {
   text-decoration: none;
