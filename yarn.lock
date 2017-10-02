@@ -2964,7 +2964,7 @@ html@1.0.0:
   dependencies:
     concat-stream "^1.4.7"
 
-htmlparser2@^3.9.1:
+htmlparser2@^3.9.0, htmlparser2@^3.9.1:
   version "3.9.2"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.9.2.tgz#1bdf87acca0f3f9e53fa4fcceb0f4b4cbb00b338"
   dependencies:
@@ -5098,6 +5098,12 @@ react-event-listener@^0.4.5:
     fbjs "^0.8.4"
     prop-types "^15.5.4"
     warning "^3.0.0"
+
+react-html-parser@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-html-parser/-/react-html-parser-2.0.0.tgz#146dd5f7f80b213934c385ee2b1fcf42c79eca33"
+  dependencies:
+    htmlparser2 "^3.9.0"
 
 react-quill@^1.1.0:
   version "1.1.0"
