@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 // material UI
-import AutoComplete from 'material-ui/AutoComplete';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import AutoComplete from 'material-ui/AutoComplete'
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
+import ActionFavorite from 'material-ui/svg-icons/action/favorite'
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
 // firebase
 import firebase from 'app/fire'
 import 'firebase/database'
 
 // react components
-import AllStoryBranches from './AllStoryBranches';
+import AllStoryBranches from './AllStoryBranches'
 
-class Searchbar extends Component {
+export default class Searchbar extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       // stores objects from call to firebase
       allStoryBranches: {},
@@ -25,9 +25,10 @@ class Searchbar extends Component {
       query: '',
       postive: true,
     }
-    this.handleUpdateInput = this.handleUpdateInput.bind(this);
-    this.handleNewRequest = this.handleNewRequest.bind(this);
-    this.clearQuery = this.clearQuery.bind(this);
+    this.handleUpdateInput = this.handleUpdateInput.bind(this)
+    this.handleNewRequest = this.handleNewRequest.bind(this)
+    this.clearQuery = this.clearQuery.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -43,17 +44,23 @@ class Searchbar extends Component {
   }
 
   // TODO: prevent refresh when the enter key is hit
+  // displays what is being written in the search
   handleUpdateInput(query) {
     this.setState({
       query: query
     })
   }
 
-  // update the state's query and also clears query
-  handleNewRequest(evt) {
+  // update the state's query but doesn't display
+  handleNewRequest(query) {
     this.setState({ query: this.state.query })
   }
+  // clears the query from the searchbar
   clearQuery() { this.setState({ query: '' }) }
+
+  handleSubmit(evt) {
+    evt.preventDefault()
+  }
 
   render() {
     const filtered = {}
@@ -61,7 +68,7 @@ class Searchbar extends Component {
     for(const key in this.state.allStoryBranches) {
       if(this.state.allStoryBranches.hasOwnProperty(key) &&
         key.toLowerCase().match(this.state.query.toLowerCase())) {
-          filtered[key] = this.state.allStoryBranches[key];
+          filtered[key] = this.state.allStoryBranches[key]
       }
     }
 
@@ -78,6 +85,7 @@ class Searchbar extends Component {
             onUpdateInput={this.handleUpdateInput}
             onNewRequest={this.handleNewRequest}
             fullWidth={ true }
+            onSubmit={() =>console.log('aahhhhh')}
           />
         </form>
         {
@@ -108,5 +116,3 @@ class Searchbar extends Component {
     )
   }
 }
-
-export default Searchbar;
