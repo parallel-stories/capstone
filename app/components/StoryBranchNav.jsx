@@ -31,7 +31,7 @@ class StoryBranchNav extends Component {
     this.state = {
       cards: [],
       selector: 0,
-      childParent: {},
+      childParent: [],
       isReadingBranchOptions: false
     }
     this.handleRightClick = this.handleRightClick.bind(this)
@@ -79,18 +79,27 @@ class StoryBranchNav extends Component {
     console.log('current card branches', this.state.cards[this.state.selector].branches)
     if (this.state.cards[this.state.selector].branches) {
       this.setState({isReadingBranchOptions: true})
-      // firebase.database().ref(`storyCard/5`).once('value', snap => {
-      //   this.setState({selector: this.state.selector + 1, childParent: Object.assign({}, this.state.childParent, {}), cards: [...this.state.cards, snap.val()]})
-      // })
     }
   }
 
-  handleOptionClick = () => {
-    console.log('options click')
+  handleOptionClick = (branch) => {
+    const newBranchCardId = this.state.cards[this.state.selector].branches[branch]
+    firebase.database().ref(`storyCard/${newBranchCardId}`).once('value', snap => {
+      this.setState({
+        isReadingBranchOptions: false,
+        childParent: [...this.state.childParent, this.state.selector + 1],
+        selector: this.state.selector + 1,
+        cards: [...this.state.cards, snap.val()]
+      })
+    })
   }
 
   handleUpClick = () => {
-    console.log('up click')
+    if (this.state.childParent.includes(this.state.selector)) {
+      const childParent = this.state.childParent
+      childParent.splice(this.state.childParent.indexOf(this.state.selector), 1)
+      this.setState({cards: this.state.cards.slice(0, this.state.selector), selector: this.state.selector - 1, childParent: childParent})
+    }
   }
 
   render() {
@@ -122,7 +131,7 @@ class StoryBranchNav extends Component {
         </div>
       </div>
     )
-  } // end return
+  }
 }
 
 export default StoryBranchNav

@@ -9,13 +9,16 @@ export default class OptionsCard extends Component {
         <CardTitle title="Choose another story branch:"/>
         <CardText>
           {
-            //
+            this.props.branches &&
+            Object.keys(this.props.branches).map((branch) => <button key={branch} onClick={(evt) => this.props.handleOptionClick(branch)}>{branch}</button>)
+           // Object.keys(this.props.branches).map((branch) => <p key={branch} onClick={() => console.log('clicked branch')}>{branch}</p>)
           }
         </CardText>
         <CardActions>
         {
-          this.props.branches &&
-          Object.keys(this.props.branches).map((branch) => <FlatButton key={branch} label={`${branch}`} onClick={() => console.log('clicked branch')} />)
+          // maybe button to exit branching and read original story branch
+          // this.props.branches &&
+          // Object.keys(this.props.branches).map((branch) => <FlatButton key={branch} label={`${branch}`} onClick={() => console.log('clicked branch')} />)
         }
         </CardActions>
       </Card>
