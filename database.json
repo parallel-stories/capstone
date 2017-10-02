@@ -23,12 +23,12 @@
     "4": {
       "text": "I make good pancakes.",
       "prevCard": 3,
-      "nextCard": "",
+      "nextCard": 5,
       "branches": {}
     },
     "5": {
       "text": "I like fire-breathing dragons.",
-      "prevCard": 3,
+      "prevCard": 4,
       "nextCard": 6,
       "branches": {}
     },
