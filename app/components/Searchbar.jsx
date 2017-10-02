@@ -3,6 +3,12 @@ import React, { Component } from 'react';
 // material UI
 import AutoComplete from 'material-ui/AutoComplete';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+
+// firebase
+import firebase from 'app/fire'
+import 'firebase/database'
 
 // react components
 import AllStoryBranches from './AllStoryBranches';
@@ -11,14 +17,31 @@ class Searchbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allStoryBranches: ['harry potter', 'the last unicorn', 'Dune'],
-      searchResults: [],
+      // stores objects from call to firebase
+      allStoryBranches: {},
+      // stores titles to search on
+      titles: [],
+      // put results here
+      searchResults: {},
+      // our query
       query: '',
       postive: true,
     }
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
     this.clearQuery = this.clearQuery.bind(this);
+  }
+
+  componentDidMount() {
+    // load all stories into state
+    firebase.database().ref().child('storyBranch').on('value', snap => {
+      const storyBranches = snap.val()
+      this.setState({
+        allStoryBranches: storyBranches,
+        titles: Object.keys(storyBranches)
+      }) // end set state
+    })
+
   }
 
   handleUpdateInput(query) {
@@ -37,7 +60,7 @@ class Searchbar extends Component {
         <form onSubmit={ this.handleSubmit }>
           <AutoComplete
             hintText="Search by title or description"
-            dataSource={this.state.allStoryBranches}
+            dataSource={this.state.titles}
             filter={ AutoComplete.fuzzyFilter }
             floatingLabelText="Search"
             searchText={this.state.query}
