@@ -33,12 +33,12 @@ class StoryBranchNav extends Component {
     }
     this.handleRightClick = this.handleRightClick.bind(this)
     this.handleLeftClick = this.handleLeftClick.bind(this)
+    this.handleDownClick = this.handleDownClick.bind(this)
   }
 
   componentDidMount() {
     if (_.isEmpty(this.props.currentStoryBranch)) {
       const storyBranchId = this.props.match.params.branchId
-      // getCard.call(this, storyBranchId, this.props.match.params.cardId, this.props.handleCurrentStoryChange)
       firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
         const storyBranch = snap.val()
         return this.props.handleCurrentStoryChange(storyBranchId, storyBranch)
@@ -56,7 +56,7 @@ class StoryBranchNav extends Component {
     
   }
 
-  handleRightClick = (evt) => {
+  handleRightClick = () => {
     const nextCardId = this.state.cards[this.state.selector].nextCard
 
     if(nextCardId !== ""){
@@ -66,10 +66,14 @@ class StoryBranchNav extends Component {
     }
   }
 
-  handleLeftClick = (evt) => {
+  handleLeftClick = () => {
     if(this.state.selector){
       this.setState({selector: this.state.selector - 1})
     }
+  }
+
+  handleDownClick = () => {
+
   }
 
   render() {
@@ -93,7 +97,7 @@ class StoryBranchNav extends Component {
           </IconButton>
         </div>
         <div className="row container-fluid">
-          <IconButton className="swipe-btn-up-down"><DownArrow /></IconButton>
+          <IconButton className="swipe-btn-up-down" onClick={this.handleDownClick}><DownArrow /></IconButton>
         </div>
       </div>
     )

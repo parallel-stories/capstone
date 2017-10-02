@@ -1,8 +1,14 @@
 {
   "storyCard": {
+    "0": {
+      "text": "Hello I AM THE FIRST",
+      "prevCard": "",
+      "nextCard": 1,
+      "branches": {}
+    },
     "1": {
       "text": "Hello World!",
-      "prevCard": "",
+      "prevCard": 0,
       "nextCard": 2,
       "branches": {}
     },
@@ -17,18 +23,18 @@
       "prevCard": 2,
       "nextCard": 4,
       "branches": {
-        "Larry Flowerpot: Playing With Fire": true
+        "Larry Flowerpot: Playing With Fire": 5
       }
     },
     "4": {
       "text": "I make good pancakes.",
       "prevCard": 3,
-      "nextCard": 5,
+      "nextCard": "",
       "branches": {}
     },
     "5": {
       "text": "I like fire-breathing dragons.",
-      "prevCard": 4,
+      "prevCard": 3,
       "nextCard": 6,
       "branches": {}
     },
@@ -54,23 +60,24 @@
   "storyBranch": {
     "Larry Flowerpot: The Good Wizard": {
       "storyCards": {
-        "1": true,
-        "2": true,
-        "3": true,
-        "4": true
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "3": 3
       },
       "storyRoot": "Larry Flowerpot: The Good Wizard"
     },
     "Larry Flowerpot: Playing With Fire": {
       "storyCards": {
-        "1": true,
-        "2": true,
-        "3": true,
-        "4": true,
-        "5": true,
-        "6": true,
-        "7": true,
-        "8": true
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8
       },
       "storyRoot": "Larry Flowerpot: The Good Wizard"
     }
