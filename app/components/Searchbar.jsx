@@ -21,8 +21,6 @@ class Searchbar extends Component {
       allStoryBranches: {},
       // stores titles to search on
       titles: [],
-      // put results here
-      searchResults: {},
       // our query
       query: '',
       postive: true,
@@ -44,6 +42,7 @@ class Searchbar extends Component {
 
   }
 
+  // TODO: prevent refresh when the enter key is hit
   handleUpdateInput(query) {
     this.setState({
       query: query
@@ -51,10 +50,14 @@ class Searchbar extends Component {
   }
 
   // update the state's query and also clears query
-  handleNewRequest(evt) { this.setState({ query: this.state.query }) }
+  handleNewRequest(evt) {
+    this.setState({ query: this.state.query })
+  }
   clearQuery() { this.setState({ query: '' }) }
 
   render() {
+    const filtered = {}
+
     return (
       <div className="container">
         <form onSubmit={ this.handleSubmit }>
@@ -90,6 +93,9 @@ class Searchbar extends Component {
             value="desc"
             label="Description" />
         </RadioButtonGroup>
+        <AllStoryBranches
+          searchResults={this.state.allStoryBranches}
+          searching={true}/>
       </div>
     )
   }

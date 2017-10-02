@@ -15,18 +15,29 @@ class AllStoryBranches extends Component {
   componentDidMount() {
     firebase.database().ref().child('storyBranch').on('value', snap => {
       const storyBranches = snap.val()
-      console.log(storyBranches)
       this.setState({allStoryBranches: storyBranches})
     })
   }
 
   render() {
-    const {allStoryBranches} = this.state
+    const { allStoryBranches } = this.state
+    const { searchResults, searching } = this.props
+
+    console.log(this.props.searchResults, searching)
+
     return (
-      <div className="">
+      <div className="container all-story-branches">
         {
+          searching?
+          !_.isEmpty(searchResults) &&
+          Object.keys(searchResults).map((key) =>
+            <SingleStory key={key} storyBranchTitle={key} storyBranchDetails={searchResults[key]} />
+          )
+          :
           !_.isEmpty(allStoryBranches) &&
-          Object.keys(allStoryBranches).map((key) => <SingleStory key={key} storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} />)
+          Object.keys(allStoryBranches).map((key) =>
+            <SingleStory key={key} storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} />
+          )
         }
       </div>
     )
