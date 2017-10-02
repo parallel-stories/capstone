@@ -23,13 +23,11 @@ class AllStoryBranches extends Component {
   render() {
     const {allStoryBranches} = this.state
     return (
-      <div className="row">
-        <div className="col-sm-4 col-md-4 col-lg-4" >
-          {
-            !_.isEmpty(allStoryBranches) &&
-            Object.keys(allStoryBranches).map((key) => <SingleStory key={key} storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} />)
-          }
-        </div>
+      <div className="">
+        {
+          !_.isEmpty(allStoryBranches) &&
+          Object.keys(allStoryBranches).map((key) => <SingleStory key={key} storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} />)
+        }
       </div>
     )
   }

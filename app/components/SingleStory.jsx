@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton'
 
 const SingleStory = ({storyBranchTitle, storyBranchDetails}) => {
   return (
-  <Card>
+  <Card className="single-story col-lg-4 col-md-4 col-sm-4">
     <CardMedia
       overlay={<CardTitle title={storyBranchTitle} subtitle={storyBranchDetails.storyRoot} />}
     >

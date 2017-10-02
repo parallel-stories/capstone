@@ -70,6 +70,14 @@ class Searchbar extends Component {
           />
         </form>
         <br />
+        {
+          this.state.titles.length !== this.state.titles.length && (
+            <div className='showing-search-results'>
+              <span>Now showing {this.state.titles.length} of {this.state.titles.length} total</span>
+              <button onClick={this.clearQuery}>Show all</button>
+            </div>
+          )
+        }
         <RadioButtonGroup style={{display: 'flex', flexDirection: 'row', maxWidth: 85}}
           name="search-by" defaultSelected="all">
           <RadioButton

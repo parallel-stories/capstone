@@ -62,6 +62,19 @@ body {
   clear: none;
 }
 
+.showing-search-results {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.showing-search-results button {
+  color: #00E672;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+}
+
 /* footer styles */
 
 .footer a, .footer a:visited {
@@ -89,6 +102,17 @@ body {
 /* container for communities */
 .card-container {
   display: flex;
+}
+
+.all-cards {
+	padding: 30px 30px;
+}
+
+.single-card {
+  margin: 30px 10px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px 5px;
 }
 
 /* on a single community chain */

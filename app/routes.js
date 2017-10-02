@@ -19,7 +19,7 @@ class Routes extends Component {
     return (
       <div>
         <Navbar />
-        <div className="pageContent">
+        <div>
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route path="/home" component={LandingPage} />
