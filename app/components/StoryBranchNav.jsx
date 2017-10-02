@@ -76,7 +76,6 @@ class StoryBranchNav extends Component {
   }
 
   handleDownClick = () => {
-    console.log('current card branches', this.state.cards[this.state.selector].branches)
     if (this.state.cards[this.state.selector].branches) {
       this.setState({isReadingBranchOptions: true})
     }
@@ -103,7 +102,6 @@ class StoryBranchNav extends Component {
   }
 
   render() {
-    console.log('STATE', this.state)
     return (
       <div>
         <div className="row container-fluid">
