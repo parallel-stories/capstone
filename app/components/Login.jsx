@@ -10,7 +10,7 @@ const google = new firebase.auth.GoogleAuthProvider()
 // const github = new firebase.auth.GithubAuthProvider()
 // // This last one is the email and password login we all know and
 // // vaguely tolerate:
-//const email = new firebase.auth.EmailAuthProvider()
+// const email = new firebase.auth.EmailAuthProvider()
 
 // If you want to request additional permissions, you'd do it
 // like so:

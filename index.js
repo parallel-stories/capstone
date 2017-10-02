@@ -1,6 +1,5 @@
 'use strict'
 
-
 const {resolve} = require('path')
     , chalk = require('chalk')
     , pkg = require('./package.json')
