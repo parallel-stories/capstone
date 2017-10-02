@@ -29,44 +29,62 @@ class StoryBranchNav extends Component {
     super(props)
     this.state = {
       cards: [],
-      selector: 0
+      selector: 0,
+      childParent: {}
     }
     this.handleRightClick = this.handleRightClick.bind(this)
+    this.handleLeftClick = this.handleLeftClick.bind(this)
+    this.handleDownClick = this.handleDownClick.bind(this)
+    this.handleUpClick = this.handleUpClick.bind(this)
   }
 
   componentDidMount() {
-    console.log(this.props)
     if (_.isEmpty(this.props.currentStoryBranch)) {
-      console.log('EMPTY STORY')
       const storyBranchId = this.props.match.params.branchId
-      // getCard.call(this, storyBranchId, this.props.match.params.cardId, this.props.handleCurrentStoryChange)
       firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
         const storyBranch = snap.val()
         return this.props.handleCurrentStoryChange(storyBranchId, storyBranch)
       })
       .then(() => {
         firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
-          console.log('set val after empty')
           this.setState({cards: [...this.state.cards, snap.val()]})
         })
       })
     } else {
-      console.log('THE ELSE', this.props.match.params.cardId)
       firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
-        console.log('set val if not empty')
         this.setState({cards: [...this.state.cards, snap.val()]})
       })
     }
-    console.log('HELLO')
+    
   }
 
-  handleRightClick = (evt) => {
-    //put logic that is no next card, don't do anything OR disable button
+  handleRightClick = () => {
     const nextCardId = this.state.cards[this.state.selector].nextCard
-    console.log('NEXT CARD', nextCardId)
-    firebase.database().ref(`storyCard/${nextCardId}`).once('value', snap => {
-      this.setState({selector: this.state.selector + 1, cards: [...this.state.cards, snap.val()]})
-    })
+
+    if(nextCardId !== ""){
+      firebase.database().ref(`storyCard/${nextCardId}`).once('value', snap => {
+        this.setState({selector: this.state.selector + 1, cards: [...this.state.cards, snap.val()]})
+      })
+    }
+  }
+
+  handleLeftClick = () => {
+    if(this.state.selector){
+      this.setState({selector: this.state.selector - 1})
+    }
+  }
+
+  handleDownClick = () => {
+    console.log('current card branches', this.state.cards[this.state.selector].branches)
+    if(this.state.cards[this.state.selector].branches){
+      firebase.database().ref(`storyCard/5`).once('value', snap => {
+        this.setState({selector: this.state.selector +1 , childParent:Object.assign({}, this.state.childParent, {}) , cards: [...this.state.cards, snap.val()]})
+      })
+    }
+  }
+
+  handleUpClick = () => {
+
   }
 
   render() {
@@ -74,10 +92,10 @@ class StoryBranchNav extends Component {
     return (
       <div>
         <div className="row container-fluid">
-          <IconButton className="swipe-btn-up-down"><UpArrow/></IconButton>
+          <IconButton className="swipe-btn-up-down" onClick={this.handleUpClick}><UpArrow/></IconButton>
         </div>
         <div className="row card-container">
-          <IconButton className="col swipe-btn-left-right">
+          <IconButton className="col swipe-btn-left-right" onClick={this.handleLeftClick}>
             <LeftArrow/>
           </IconButton>
           <ReactSwipe className="col carousel"
@@ -90,7 +108,7 @@ class StoryBranchNav extends Component {
           </IconButton>
         </div>
         <div className="row container-fluid">
-          <IconButton className="swipe-btn-up-down"><DownArrow /></IconButton>
+          <IconButton className="swipe-btn-up-down" onClick={this.handleDownClick}><DownArrow /></IconButton>
         </div>
       </div>
     )
