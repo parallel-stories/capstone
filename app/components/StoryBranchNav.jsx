@@ -61,6 +61,7 @@ class StoryBranchNav extends Component {
   }
 
   handleRightClick = (evt) => {
+    //put logic that is no next card, don't do anything OR disable button
     const nextCardId = this.state.cards[this.state.selector].nextCard
     console.log('NEXT CARD', nextCardId)
     firebase.database().ref(`storyCard/${nextCardId}`).once('value', snap => {
