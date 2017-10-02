@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 // react components
 import SingleCard from './SingleCard'
+import OptionsCard from './OptionsCard'
 
 // material ui
 import IconButton from 'material-ui/IconButton'
@@ -30,7 +31,8 @@ class StoryBranchNav extends Component {
     this.state = {
       cards: [],
       selector: 0,
-      childParent: {}
+      childParent: {},
+      isReadingBranchOptions: false
     }
     this.handleRightClick = this.handleRightClick.bind(this)
     this.handleLeftClick = this.handleLeftClick.bind(this)
@@ -55,13 +57,12 @@ class StoryBranchNav extends Component {
         this.setState({cards: [...this.state.cards, snap.val()]})
       })
     }
-    
   }
 
   handleRightClick = () => {
     const nextCardId = this.state.cards[this.state.selector].nextCard
 
-    if(nextCardId !== ""){
+    if (nextCardId !== '') {
       firebase.database().ref(`storyCard/${nextCardId}`).once('value', snap => {
         this.setState({selector: this.state.selector + 1, cards: [...this.state.cards, snap.val()]})
       })
@@ -69,22 +70,27 @@ class StoryBranchNav extends Component {
   }
 
   handleLeftClick = () => {
-    if(this.state.selector){
+    if (this.state.selector) {
       this.setState({selector: this.state.selector - 1})
     }
   }
 
   handleDownClick = () => {
     console.log('current card branches', this.state.cards[this.state.selector].branches)
-    if(this.state.cards[this.state.selector].branches){
-      firebase.database().ref(`storyCard/5`).once('value', snap => {
-        this.setState({selector: this.state.selector +1 , childParent:Object.assign({}, this.state.childParent, {}) , cards: [...this.state.cards, snap.val()]})
-      })
+    if (this.state.cards[this.state.selector].branches) {
+      this.setState({isReadingBranchOptions: true})
+      // firebase.database().ref(`storyCard/5`).once('value', snap => {
+      //   this.setState({selector: this.state.selector + 1, childParent: Object.assign({}, this.state.childParent, {}), cards: [...this.state.cards, snap.val()]})
+      // })
     }
   }
 
-  handleUpClick = () => {
+  handleOptionClick = () => {
+    console.log('options click')
+  }
 
+  handleUpClick = () => {
+    console.log('up click')
   }
 
   render() {
@@ -101,7 +107,11 @@ class StoryBranchNav extends Component {
           <ReactSwipe className="col carousel"
                       swipeOptions={{continuous: false}}
                       key={this.state.selector}>
-              <SingleCard currentCard={this.state.cards[this.state.selector]} />
+              {
+                this.state.isReadingBranchOptions
+                ? <OptionsCard branches={this.state.cards[this.state.selector].branches} handleOptionClick={this.handleOptionClick} />
+                : <SingleCard currentCard={this.state.cards[this.state.selector]} />
+              }
           </ReactSwipe>
           <IconButton className="col swipe-btn-left-right" onClick={this.handleRightClick}>
             <RightArrow />
