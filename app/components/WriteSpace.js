@@ -82,8 +82,6 @@ export default class WriteSpace extends Component {
 
     const cardKey = firebase.database().ref('storyCard').push(card).key
 
-    console.log(cardKey)
-
     const branch = {
       storyCards: [cardKey],
       storyRoot: this.state.title
