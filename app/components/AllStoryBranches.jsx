@@ -21,15 +21,31 @@ class AllStoryBranches extends Component {
   }
 
   render() {
-    const {allStoryBranches} = this.state
+    const { allStoryBranches } = this.state
+    const { searchResults, searching } = this.props
+
+    console.log(this.props.searchResults)
+
     return (
-      <div className="row">
-        <div className="col-sm-4 col-md-4 col-lg-4" >
-          {
-            !_.isEmpty(allStoryBranches) &&
-            Object.keys(allStoryBranches).map((key) => <Link key={key} to={`/read/story_branch/${key}`}><SingleStoryBoxDisplay storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} /></Link>)
-          }
-        </div>
+      <div className="container all-story-branches">
+        {
+          /* if this is called from the searchbar component -- searhing is true --
+            use the first rendering code
+            otherwise, use the second
+          */
+        }
+        {
+          searching?
+          !_.isEmpty(searchResults) &&
+          Object.keys(searchResults).map((key) =>
+            <SingleStoryBoxDisplay key={key} storyBranchTitle={key} storyBranchDetails={searchResults[key]} />
+          )
+          :
+          !_.isEmpty(allStoryBranches) &&
+          Object.keys(allStoryBranches).map((key) =>
+            <SingleStoryBoxDisplay key={key} storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} />
+          )
+        }
       </div>
     )
   }

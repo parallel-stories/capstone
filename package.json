@@ -73,6 +73,7 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-select": "^1.0.0-rc.10",
     "react-swipe": "^5.0.8",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.0",

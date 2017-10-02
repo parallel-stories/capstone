@@ -11,8 +11,12 @@ import WriteSpace from './components/WriteSpace'
 import AllStoryBranches from './components/AllStoryBranches'
 import StoryBranchNav from './components/StoryBranchNav'
 import UserProfile from './components/UserProfile'
+<<<<<<< HEAD
 import SingleCard from './components/SingleCard'
 import SingleStoryPage from './components/SingleStoryPage'
+=======
+import Searchbar from './components/Searchbar'
+>>>>>>> master
 
 class Routes extends Component {
   constructor() {
@@ -31,12 +35,13 @@ class Routes extends Component {
     return (
       <div>
         <Navbar />
-        <div className="pageContent">
+        <div>
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
             <Route exact path="/read" component={AllStoryBranches} />
+<<<<<<< HEAD
             <Route
               exact path="/read/story_branch/:branchId"
               render= {(props) => (
@@ -53,6 +58,10 @@ class Routes extends Component {
                   handleCurrentStoryChange={this.handleCurrentStoryChange}
                   currentStoryBranch={this.state.currentStoryBranch} />
               )} />
+=======
+            <Route path="/read/:id" component={SingleCommunity} />
+            <Route path="/search" component={Searchbar} />
+>>>>>>> master
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
