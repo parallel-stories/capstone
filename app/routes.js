@@ -23,13 +23,8 @@ class Routes extends Component {
             <Route exact path="/" component={LandingPage} />
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
-<<<<<<< HEAD
-            <Route exact path="/read" component={AllStories} />
-            <Route path="/read/story_community/:communityid" component={SingleCommunity} />
-=======
             <Route exact path="/read" component={AllStoryBranches} />
             <Route path="/read/:id" component={SingleCommunity} />
->>>>>>> master
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
