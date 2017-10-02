@@ -9,12 +9,24 @@ import Footer from './Footer'
 import LandingPage from './components/LandingPage'
 import WriteSpace from './components/WriteSpace'
 import AllStoryBranches from './components/AllStoryBranches'
-import SingleCommunity from './components/SingleCommunity'
+import StoryBranchNav from './components/StoryBranchNav'
 import UserProfile from './components/UserProfile'
 import SingleCard from './components/SingleCard'
 import SingleStoryPage from './components/SingleStoryPage'
 
 class Routes extends Component {
+  constructor() {
+    super()
+    this.state = {
+      currentStoryBranch: {}
+    }
+    this.handleCurrentStoryChange = this.handleCurrentStoryChange.bind(this)
+  }
+
+  handleCurrentStoryChange = (storyBranchId, storyBranch) => {
+    this.setState({currentStoryBranchTitle: storyBranchId, currentStoryBranch: storyBranch})
+  }
+
   render() {
     return (
       <div>
@@ -25,8 +37,22 @@ class Routes extends Component {
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
             <Route exact path="/read" component={AllStoryBranches} />
-            <Route exact path="/read/story_branch/:branchId" component={SingleStoryPage} />
-            <Route exact path="/read/:id" component={SingleCommunity} />
+            <Route
+              exact path="/read/story_branch/:branchId"
+              render= {(props) => (
+                <SingleStoryPage
+                  {...props}
+                  handleCurrentStoryChange={this.handleCurrentStoryChange}
+                  currentStoryBranch={this.state.currentStoryBranch} />
+              )} />
+            <Route
+              exact path="/read/story_branch/:branchId/:cardId"
+              render={(props) => (
+                <StoryBranchNav
+                  {...props}
+                  handleCurrentStoryChange={this.handleCurrentStoryChange}
+                  currentStoryBranch={this.state.currentStoryBranch} />
+              )} />
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
