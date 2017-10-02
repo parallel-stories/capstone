@@ -29,11 +29,13 @@ class StoryBranchNav extends Component {
     super(props)
     this.state = {
       cards: [],
-      selector: 0
+      selector: 0,
+      childParent: {}
     }
     this.handleRightClick = this.handleRightClick.bind(this)
     this.handleLeftClick = this.handleLeftClick.bind(this)
     this.handleDownClick = this.handleDownClick.bind(this)
+    this.handleUpClick = this.handleUpClick.bind(this)
   }
 
   componentDidMount() {
@@ -73,6 +75,15 @@ class StoryBranchNav extends Component {
   }
 
   handleDownClick = () => {
+    console.log('current card branches', this.state.cards[this.state.selector].branches)
+    if(this.state.cards[this.state.selector].branches){
+      firebase.database().ref(`storyCard/5`).once('value', snap => {
+        this.setState({selector: this.state.selector +1 , childParent:Object.assign({}, this.state.childParent, {}) , cards: [...this.state.cards, snap.val()]})
+      })
+    }
+  }
+
+  handleUpClick = () => {
 
   }
 
@@ -81,7 +92,7 @@ class StoryBranchNav extends Component {
     return (
       <div>
         <div className="row container-fluid">
-          <IconButton className="swipe-btn-up-down"><UpArrow/></IconButton>
+          <IconButton className="swipe-btn-up-down" onClick={this.handleUpClick}><UpArrow/></IconButton>
         </div>
         <div className="row card-container">
           <IconButton className="col swipe-btn-left-right" onClick={this.handleLeftClick}>
