@@ -2072,8 +2072,8 @@ error-ex@^1.2.0:
     is-arrayish "^0.2.1"
 
 es-abstract@^1.6.1, es-abstract@^1.7.0:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.8.2.tgz#25103263dc4decbda60e0c737ca32313518027ee"
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.9.0.tgz#690829a07cae36b222e7fd9b75c0d0573eb25227"
   dependencies:
     es-to-primitive "^1.1.1"
     function-bind "^1.1.1"
@@ -2382,8 +2382,8 @@ expand-range@^1.8.1:
     fill-range "^2.1.0"
 
 express@^4.14.0:
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/express/-/express-4.16.0.tgz#b519638e4eb58e7178c81b498ef22f798cb2e255"
+  version "4.16.1"
+  resolved "https://registry.yarnpkg.com/express/-/express-4.16.1.tgz#6b33b560183c9b253b7b62144df33a4654ac9ed0"
   dependencies:
     accepts "~1.3.4"
     array-flatten "1.1.1"
@@ -2408,8 +2408,8 @@ express@^4.14.0:
     qs "6.5.1"
     range-parser "~1.2.0"
     safe-buffer "5.1.1"
-    send "0.16.0"
-    serve-static "1.13.0"
+    send "0.16.1"
+    serve-static "1.13.1"
     setprototypeof "1.1.0"
     statuses "~1.3.1"
     type-is "~1.6.15"
@@ -3846,8 +3846,8 @@ map-stream@~0.1.0:
   resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.1.0.tgz#e56aa94c4c8055a16404a0674b78f215f7c8e194"
 
 material-ui@^0.19.2:
-  version "0.19.2"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.19.2.tgz#98c8898c933279b12df879d7184306aceb364cb5"
+  version "0.19.3"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.19.3.tgz#34b96401499773bc0b1ebf923b293bbf1632d375"
   dependencies:
     babel-runtime "^6.23.0"
     inline-style-prefixer "^3.0.2"
@@ -4917,7 +4917,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -5099,20 +5099,18 @@ react-event-listener@^0.4.5:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-<<<<<<< HEAD
+react-html-parser@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-html-parser/-/react-html-parser-2.0.1.tgz#726cf5f5767e6eb82b17f79ea77411c923c59ebf"
+  dependencies:
+    htmlparser2 "^3.9.0"
+
 react-input-autosize@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.0.1.tgz#e92190497b4026c2780ad0f2fd703c835ba03e33"
   dependencies:
     create-react-class "^15.5.2"
     prop-types "^15.5.8"
-=======
-react-html-parser@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-html-parser/-/react-html-parser-2.0.0.tgz#146dd5f7f80b213934c385ee2b1fcf42c79eca33"
-  dependencies:
-    htmlparser2 "^3.9.0"
->>>>>>> master
 
 react-quill@^1.1.0:
   version "1.1.0"
@@ -5167,16 +5165,18 @@ react-select@^1.0.0-rc.10:
     react-input-autosize "^2.0.1"
 
 react-swipe@^5.0.8:
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/react-swipe/-/react-swipe-5.0.8.tgz#95cae31f2d74e1b4886f01ffcb72837b375b66eb"
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-swipe/-/react-swipe-5.1.0.tgz#230026cbaa7c594a3d7ac506f38359b9a965ad12"
   dependencies:
-    object-assign "^4.1.0"
-    prop-types "^15.5.7"
-    swipe-js-iso "^2.0.3"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+    react "^16.0.0"
+    swipe-js-iso "^2.0.4"
+    webpack "^2.7.0"
 
 react-transition-group@^1.1.2:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-1.2.0.tgz#b51fc921b0c3835a7ef7c571c79fc82c73e9204f"
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-1.2.1.tgz#e11f72b257f921b213229a774df46612346c7ca6"
   dependencies:
     chain-function "^1.0.0"
     dom-helpers "^3.2.0"
@@ -5193,6 +5193,15 @@ react@^15.3.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
     prop-types "^15.5.10"
+
+react@^16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
@@ -5618,9 +5627,9 @@ semver@5.3.0, semver@~5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
-send@0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/send/-/send-0.16.0.tgz#16338dbb9a2ede4ad57b48420ec3b82d8e80a57b"
+send@0.16.1:
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/send/-/send-0.16.1.tgz#a70e1ca21d1382c11d0d9f6231deb281080d7ab3"
   dependencies:
     debug "2.6.9"
     depd "~1.1.1"
@@ -5657,14 +5666,14 @@ sequelize@^3.24.6:
     validator "^5.2.0"
     wkx "0.2.0"
 
-serve-static@1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.13.0.tgz#810c91db800e94ba287eae6b4e06caab9fdc16f1"
+serve-static@1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.13.1.tgz#4c57d53404a761d8f2e7c1e8a18a47dbf278a719"
   dependencies:
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
     parseurl "~1.3.2"
-    send "0.16.0"
+    send "0.16.1"
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
@@ -5968,8 +5977,8 @@ style-loader@^0.18.2:
     schema-utils "^0.3.0"
 
 superagent@^3.0.0:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/superagent/-/superagent-3.6.1.tgz#5780e09a5d1a94c62bb13d1f610bef5df6848343"
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/superagent/-/superagent-3.6.2.tgz#af87b454705e6b07ed3967bfe299428241681f33"
   dependencies:
     component-emitter "^1.2.0"
     cookiejar "^2.1.0"
@@ -6027,7 +6036,7 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
-swipe-js-iso@^2.0.3:
+swipe-js-iso@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/swipe-js-iso/-/swipe-js-iso-2.0.4.tgz#3371608112b30182e898f61d5bc02f7e38099c3d"
 
@@ -6398,7 +6407,7 @@ webpack-sources@^1.0.1:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
 
-webpack@^2.2.1:
+webpack@^2.2.1, webpack@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.7.0.tgz#b2a1226804373ffd3d03ea9c6bd525067034f6b1"
   dependencies:
