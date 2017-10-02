@@ -24,7 +24,7 @@ class Routes extends Component {
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
             <Route exact path="/read" component={AllStories} />
-            <Route path="/read/:id" component={SingleCommunity} />
+            <Route path="/read/story_community/:communityid" component={SingleCommunity} />
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
