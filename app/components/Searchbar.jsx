@@ -84,7 +84,7 @@ class Searchbar extends Component {
           this.state.query.length>0 &&
           filtered.length !== this.state.titles.length && (
             <div className='showing-search-results'>
-              <span>Now showing {filtered.length} of {this.state.titles.length} total</span>
+              <span>Now showing {Object.keys(filtered).length} of {this.state.titles.length} total</span>
               <button onClick={this.clearQuery}>Show all</button>
             </div>
           )
