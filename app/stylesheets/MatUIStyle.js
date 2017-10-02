@@ -6,6 +6,13 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme'
 import { cyan900, brown300, darkWhite, darkBlack, cyan500 } from 'material-ui/styles/colors'
 import typography from 'material-ui/styles/typography'
 
+export const dialogStyle = {
+  width: '100%',
+  maxWidth: 'none',
+  height: '100%',
+  maxHeight: 'none'
+}
+
 // app theme for MuiThemeProvider to user
 const Style = getMuiTheme({
   ...darkBaseTheme,
