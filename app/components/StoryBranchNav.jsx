@@ -21,13 +21,17 @@ import firebase from 'app/fire'
 // lodash
 import _ from 'lodash'
 
+// utils
+// import {getCard} from '../utils'
+
 class StoryBranchNav extends Component {
   constructor(props) {
     super(props)
     this.state = {
       cards: [],
-      counter: 0
+      selector: 0
     }
+    this.handleRightClick = this.handleRightClick.bind(this)
   }
 
   componentDidMount() {
@@ -35,6 +39,7 @@ class StoryBranchNav extends Component {
     if (_.isEmpty(this.props.currentStoryBranch)) {
       console.log('EMPTY STORY')
       const storyBranchId = this.props.match.params.branchId
+      // getCard.call(this, storyBranchId, this.props.match.params.cardId, this.props.handleCurrentStoryChange)
       firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
         const storyBranch = snap.val()
         return this.props.handleCurrentStoryChange(storyBranchId, storyBranch)
@@ -55,6 +60,14 @@ class StoryBranchNav extends Component {
     console.log('HELLO')
   }
 
+  handleRightClick = (evt) => {
+    const nextCardId = this.state.cards[this.state.selector].nextCard
+    console.log('NEXT CARD', nextCardId)
+    firebase.database().ref(`storyCard/${nextCardId}`).once('value', snap => {
+      this.setState({selector: this.state.selector + 1, cards: [...this.state.cards, snap.val()]})
+    })
+  }
+
   render() {
     console.log('STATE', this.state)
     return (
@@ -68,11 +81,11 @@ class StoryBranchNav extends Component {
           </IconButton>
           <ReactSwipe className="col carousel"
                       swipeOptions={{continuous: false}}
-                      key={this.state.cards.length}>
-              <SingleCard currentCard={this.state.cards[this.state.counter]} />
+                      key={this.state.selector}>
+              <SingleCard currentCard={this.state.cards[this.state.selector]} />
           </ReactSwipe>
-          <IconButton className="col swipe-btn-left-right">
-            <RightArrow/>
+          <IconButton className="col swipe-btn-left-right" onClick={this.handleRightClick}>
+            <RightArrow />
           </IconButton>
         </div>
         <div className="row container-fluid">
