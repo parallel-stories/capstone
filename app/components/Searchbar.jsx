@@ -58,6 +58,14 @@ class Searchbar extends Component {
   render() {
     const filtered = {}
 
+    for(const key in this.state.allStoryBranches) {
+      if(this.state.allStoryBranches.hasOwnProperty(key) &&
+        key.toLowerCase().match(this.state.query.toLowerCase())) {
+          filtered[key] = this.state.allStoryBranches[key];
+      }
+    }
+
+
     return (
       <div className="container">
         <form onSubmit={ this.handleSubmit }>
@@ -72,11 +80,11 @@ class Searchbar extends Component {
             fullWidth={ true }
           />
         </form>
-        <br />
         {
-          this.state.titles.length !== this.state.titles.length && (
+          this.state.query.length>0 &&
+          filtered.length !== this.state.titles.length && (
             <div className='showing-search-results'>
-              <span>Now showing {this.state.titles.length} of {this.state.titles.length} total</span>
+              <span>Now showing {filtered.length} of {this.state.titles.length} total</span>
               <button onClick={this.clearQuery}>Show all</button>
             </div>
           )
@@ -94,7 +102,7 @@ class Searchbar extends Component {
             label="Description" />
         </RadioButtonGroup>
         <AllStoryBranches
-          searchResults={this.state.allStoryBranches}
+          searchResults={filtered}
           searching={true}/>
       </div>
     )

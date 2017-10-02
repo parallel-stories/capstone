@@ -23,10 +23,16 @@ class AllStoryBranches extends Component {
     const { allStoryBranches } = this.state
     const { searchResults, searching } = this.props
 
-    console.log(this.props.searchResults, searching)
+    console.log(this.props.searchResults)
 
     return (
       <div className="container all-story-branches">
+        {
+          /* if this is called from the searchbar component -- searhing is true --
+            use the first rendering code
+            otherwise, use the second
+          */
+        }
         {
           searching?
           !_.isEmpty(searchResults) &&
