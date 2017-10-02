@@ -12,8 +12,6 @@ import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 
-import {makeCommunity, makeCard} from '../reducers'
-import {connect} from 'react-redux'
 import firebase from 'app/fire'
 import 'firebase/database'
 
@@ -28,7 +26,7 @@ const dialogStyle = {
   maxHeight: 'none',
 }
 
-class WriteSpace extends Component {
+export default class WriteSpace extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -52,6 +50,10 @@ class WriteSpace extends Component {
     this.clearStory = this.clearStory.bind(this)
   }
 
+  componentDidMount() {
+    // maybe load anything that the user has already written
+  }
+
   changeStoryText(value) {
     this.setState({
       text: value,
@@ -72,23 +74,26 @@ class WriteSpace extends Component {
   submitStory(evt) {
     evt.preventDefault()
 
-    const community = {
-      title: this.state.title,
-      description: this.state.text,
-      stories: {}
+    const card = {
+      previousCard: '',
+      nextCard: '',
+      text: this.state.text,
     }
 
-// only for creating a community NOT adding to story
-    const story = {
-      cards: {
-        previousCard: null,
-        text: this.state.text,
-        title: this.state.title,
-        userId: 'update this'
-      }
+    const cardKey = firebase.database().ref('storyCard').push(card).key
+
+    console.log(cardKey)
+
+    const branch = {
+      storyCards: [cardKey],
+      storyRoot: this.state.title
     }
 
-    this.props.makeCommunity(story, community)
+    const root = {}
+    root[this.state.title] = true
+
+    firebase.database().ref('storyBranch').child(this.state.title).set(branch)
+    firebase.database().ref('storyRoot').child(this.state.title).set(root)
 
     this.setState({
       openSubmit: false,
@@ -152,5 +157,3 @@ class WriteSpace extends Component {
     )
   }
 }
-
-export default connect(null, {makeCommunity, makeCard})(WriteSpace)
