@@ -35,8 +35,9 @@ body {
   text-align: center;
 }
 
-.pageContent {
-  margin-top: 80px;
+.landing-page {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 /* Landing Page */
@@ -67,6 +68,27 @@ input.form-control {
   background-color: rgb(210,180,140);
 }
 
+/* search bar */
+.radio-btn-search {
+  float: left;
+  clear: none;
+}
+
+.showing-search-results {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.showing-search-results button {
+  color: #8AB381;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+/* footer styles */
+
 .footer a, .footer a:visited {
   text-decoration: none;
   color:  #26C6DA;
@@ -94,6 +116,20 @@ input.form-control {
   display: flex;
 }
 
+.all-cards {
+	padding: 30px 30px;
+}
+
+.single-card {
+  margin: 5px 0px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.all-story-branches {
+  margin: 40px 0px;
+}
+
 /* on a single community chain */
 .swipe-btn-up-down {
   top:50%;
@@ -104,4 +140,3 @@ input.form-control {
   margin: 0 auto;
   vertical-align: middle;
 }
-

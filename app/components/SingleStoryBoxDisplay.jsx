@@ -2,9 +2,9 @@ import React from 'react'
 import {Card, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
-const SingleStory = ({storyBranchTitle, storyBranchDetails}) => {
+const SingleStoryBoxDisplay = ({storyBranchTitle, storyBranchDetails}) => {
   return (
-  <Card>
+  <Card className="single-card col-lg-4 col-md-4 col-sm-4">
     <CardMedia
       overlay={<CardTitle title={storyBranchTitle} subtitle={storyBranchDetails.storyRoot} />}
     >
@@ -17,4 +17,4 @@ const SingleStory = ({storyBranchTitle, storyBranchDetails}) => {
   )
 }
 
-export default SingleStory
+export default SingleStoryBoxDisplay
