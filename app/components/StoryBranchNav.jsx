@@ -87,8 +87,8 @@ class StoryBranchNav extends Component {
       this.setState({
         isReadingBranchOptions: false,
         childParent: [...this.state.childParent, this.state.selector + 1],
-        selector: this.state.selector + 1,
-        cards: [...this.state.cards, snap.val()]
+        cards: [...(this.state.cards.slice(0, this.state.selector + 1)), snap.val()],
+        selector: this.state.selector + 1
       })
     })
   }
