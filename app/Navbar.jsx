@@ -36,12 +36,10 @@ class Navbar extends Component {
   handleLink = (e, type) => {
     if (type === 'home') {
       history.push(`/home`)
-    } else if (type === 'read') {
-      history.push(`/read`)
     } else if (type === 'write') {
       history.push(`/write`)
-    } else if (type === 'search') {
-      history.push(`/search`)
+    } else if (type === 'read') {
+      history.push(`/read`)
     } else if (type === 'userProf') {
       history.push(`/userProfile`)
     }
@@ -58,9 +56,8 @@ class Navbar extends Component {
         style={{boxShadow: 'none', fontFamily: 'Pacifico', textAlign: 'center'}}>
         <Drawer open={this.state.open}>
           <MenuItem onClick={(e) => { this.handleLink(e, 'home') }}>Home</MenuItem>
-          <MenuItem onClick={(e) => { this.handleLink(e, 'read') }}>Read Stories</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
-          <MenuItem onClick={(e) => { this.handleLink(e, 'search') }}>Search for a Story</MenuItem>
+          <MenuItem onClick={(e) => { this.handleLink(e, 'read') }}>Read Stories</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'userProf') }}>User Profile</MenuItem>
           <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
         </Drawer>

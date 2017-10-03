@@ -37,7 +37,7 @@ class Routes extends Component {
             <Route exact path="/" component={LandingPage} />
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
-            <Route exact path="/read" component={AllStoryBranches} />
+            <Route exact path="/read" component={Searchbar} />
             <Route
               exact path="/read/story_branch/:branchId"
               render= {(props) => (
@@ -55,7 +55,6 @@ class Routes extends Component {
                   currentStoryBranch={this.state.currentStoryBranch} />
               )} />
             <Route path="/read/:id" component={StoryBranchNav} />
-            <Route path="/search" component={Searchbar} />
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
