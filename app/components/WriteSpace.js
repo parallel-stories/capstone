@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 // quill
 import ReactQuill from 'react-quill'
@@ -17,7 +18,7 @@ import 'firebase/database'
 
 import { dialogStyle } from '../stylesheets/MatUIStyle'
 
-import { saveCard, publishCard } from './functions/write.js'
+import { saveCard, publishCard, saveBranchTitle } from './functions/write.js'
 
 export default class WriteSpace extends Component {
   constructor(props) {
@@ -25,21 +26,27 @@ export default class WriteSpace extends Component {
     this.state = {
       openSubmit: false,
       dirtyText: false,
+      dirtyTitle: false,
+      editTitle: true,
       // saveCard & publishCard depend on the state below not changing
-      cardId: this.props.cardId || '',
+      cardId: '',
       card: {
         userId: 1,
         text: '',
-        branchTitle: 'House of Leaves',
-        rootTitle: this.props.rootTitle || '',
-        prevCard: this.props.prevCard || '',
-        nextCard: this.props.nextCard || ''
+        branchTitle: '',
+        rootTitle: '',
+        prevCard: '',
+        nextCard: ''
       }
       // TODO: implement warnings
       // to check for inputs -- can't be blank
       // and can't be more than 500 characters
     }
     this.changeStoryText = this.changeStoryText.bind(this)
+    this.changeBranchTitle = this.changeBranchTitle.bind(this)
+
+    this.editTitle = this.editTitle.bind(this)
+    this.saveTitle = this.saveTitle.bind(this)
 
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
@@ -72,9 +79,33 @@ export default class WriteSpace extends Component {
     })
   }
 
+  changeBranchTitle(evt) {
+    this.setState({
+      dirtyText: true,
+      card: Object.assign({}, this.state.card, {branchTitle: evt.target.value})
+    })
+  }
+
+  // change Title from H2 to Input field
+  editTitle = () => {
+    this.setState({
+      editTitle: true
+    })
+  }
+
+  saveTitle = () => {
+    const cardKey = saveBranchTitle(this.state.card, this.state.cardId)
+    this.setState({
+      editTitle: false,
+      cardId: cardKey
+    })
+  }
+
   // clear story and submit story handlers
   clearStory = () => {
-    this.setState({card: {text: ''}})
+    this.setState({
+      card: Object.assign({}, this.state.card, {text: ''})
+    })
   }
 
   saveStory(evt) {
@@ -123,8 +154,45 @@ export default class WriteSpace extends Component {
       <div>
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12">
-          Root Title: {this.state.card.rootTitle}<br />
-          Branch Title: {this.state.card.branchTitle}<br />
+          {
+            this.state.editTitle
+            ? <div className="form-group container">
+                <h2>
+                  <input type="text"
+                    className="form-control"
+                    value={this.state.card.branchTitle}
+                    placeholder="Story Title"
+                    id="titleField"
+                    onChange={this.changeBranchTitle} />
+                  </h2>
+                <div className="subtext">
+                  {
+                    (this.state.card.branchTitle != '')
+                    ? <Link to="#" onClick={this.saveTitle}>
+                        (save title)
+                      </Link>
+                    : <Link to="#">
+                        &nbsp;
+                      </Link>
+                  }
+                </div>
+              </div>
+            : <div className="form-group container">
+                <h2>{this.state.card.branchTitle}</h2>
+                <div className="subtext">
+                  <Link to="#" onClick={this.editTitle}>
+                    (edit title)
+                  </Link>
+                </div>
+              </div>
+          }
+
+          {
+            (this.state.card.rootTitle != '') && (
+              <div className="container">...A branch of <i>{this.state.card.rootTitle}</i></div>
+            )
+          }
+
             <ReactQuill value={this.state.card.text}
               onChange={this.changeStoryText}
               className="container container-fluid" />
@@ -175,12 +243,3 @@ export default class WriteSpace extends Component {
 // multiLine={true}
 // onChange={this.changeTitle}
 // />
-
-// <div className="form-group container">
-// <input type="text"
-//   className="form-control"
-//   value={this.state.title}
-//   placeholder="Story Title"
-//   id="titleField"
-//   onChange={this.changeTitle} />
-// </div>
