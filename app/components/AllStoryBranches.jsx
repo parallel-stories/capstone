@@ -38,7 +38,7 @@ class AllStoryBranches extends Component {
           searching ?
           !_.isEmpty(searchResults) &&
           Object.keys(searchResults).map((key) =>
-            <Link key={key} to={`/read/story_branch/${key}`}><SingleStory key={key} storyBranchTitle={key} storyBranchDetails={searchResults[key]} /></Link>
+            <Link key={key} to={`/read/story_branch/${key}`}><SingleStoryBoxDisplay key={key} storyBranchTitle={key} storyBranchDetails={searchResults[key]} /></Link>
           )
           :
           !_.isEmpty(allStoryBranches) &&
