@@ -38,10 +38,14 @@ export default class extends React.Component {
         for(const u in users) {
           {/*  exit out if user exists */ }
           if( user.uid===u.uid) break
+          else continue
         }
         {/* else add user to our db */ }
-        console.log('creating a new user with a huge callstack ')
-        firebase.database().ref('user').push(card)
+        console.log("creating a new user object...", user.uid)
+        const emptyBranch = {
+          "profileImg": 'http://placekitten.com/200/200'
+        }
+        firebase.database().ref('user').child(user.uid).push(emptyBranch)
       } {/* end if statement */ }
     }))
   }
