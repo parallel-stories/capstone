@@ -60,13 +60,26 @@ export const publishCard = function(card, cardId) {
   return cardKey // WriteSpace expects key back
 }
 
-//   const branch = {
-//     storyCards: [cardKey],
-//     storyRoot: this.state.title
-//   }
-
-//   const root = {}
-//   root[this.state.title] = true
-
-//   firebase.database().ref('storyBranch').child(this.state.title).set(branch)
-//   firebase.database().ref('storyRoot').child(this.state.title).set(root)
+export const saveBranchTitle = function(card, cardId) {
+  let cardKey = cardId
+  if (cardId == '') {
+    cardKey = saveCard(card, cardId) // returns firebase key
+  } else {
+    firebase.database().ref('storyCard').child(cardKey).child('branchTitle').once('value').then(snap => {
+      if (snap.val() != card.branchTitle) {
+        // update storybranch
+        firebase.database().ref('storyBranch').child(snap.val()).once('value').then(branchSnap => {
+          let data = branchSnap.val()
+          firebase.database().ref('storyBranch').child(card.branchTitle).set(data)
+          firebase.database().ref('storyBranch').child(snap.val()).set(null)
+        })
+        // update storycard
+        firebase.database().ref('storyCard').child(cardId).child('branchTitle').set(card.branchTitle)
+        // update user
+        firebase.database().ref('user').child(card.userId).child('storyBranches').child(card.branchTitle).set(true)
+        firebase.database().ref('user').child(card.userId).child('storyBranches').child(snap.val()).set(null)
+      }
+    })
+  }
+  return cardKey
+}
