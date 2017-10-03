@@ -24,8 +24,6 @@ class AllStoryBranches extends Component {
     const { allStoryBranches } = this.state
     const { searchResults, searching } = this.props
 
-    console.log(this.props.searchResults)
-
     return (
       <div className="container all-story-branches">
         {
