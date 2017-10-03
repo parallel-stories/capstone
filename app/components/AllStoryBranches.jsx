@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import SingleStory from './SingleStory'
+import SingleStoryBoxDisplay from './SingleStoryBoxDisplay'
 import firebase from 'app/fire'
 import 'firebase/database'
 import _ from 'lodash'
+import {Link} from 'react-router-dom'
 
 class AllStoryBranches extends Component {
   constructor() {
@@ -34,15 +35,15 @@ class AllStoryBranches extends Component {
           */
         }
         {
-          searching?
+          searching ?
           !_.isEmpty(searchResults) &&
           Object.keys(searchResults).map((key) =>
-            <SingleStory key={key} storyBranchTitle={key} storyBranchDetails={searchResults[key]} />
+            <Link key={key} to={`/read/story_branch/${key}`}><SingleStory key={key} storyBranchTitle={key} storyBranchDetails={searchResults[key]} /></Link>
           )
           :
           !_.isEmpty(allStoryBranches) &&
-          Object.keys(allStoryBranches).map((key) =>
-            <SingleStory key={key} storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} />
+
+          Object.keys(allStoryBranches).map((key) => <Link key={key} to={`/read/story_branch/${key}`}><SingleStoryBoxDisplay storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} /></Link>
           )
         }
       </div>
