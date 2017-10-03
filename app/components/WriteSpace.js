@@ -15,90 +15,96 @@ import TextField from 'material-ui/TextField'
 import firebase from 'app/fire'
 import 'firebase/database'
 
-const style = {
-  margin: 10,
-}
+import { dialogStyle } from '../stylesheets/MatUIStyle'
 
-const dialogStyle = {
-  width: '100%',
-  maxWidth: 'none',
-  height: '100%',
-  maxHeight: 'none',
-}
+import { saveCard, publishCard } from './functions/write.js'
 
 export default class WriteSpace extends Component {
   constructor(props) {
     super(props)
     this.state = {
       openSubmit: false,
-      text: '',
-      title: '',
+      dirtyText: false,
+      // saveCard & publishCard depend on the state below not changing
+      cardId: this.props.cardId || '',
+      card: {
+        userId: 1,
+        text: '',
+        branchTitle: 'House of Leaves',
+        rootTitle: this.props.rootTitle || '',
+        prevCard: this.props.prevCard || '',
+        nextCard: this.props.nextCard || ''
+      }
       // TODO: implement warnings
       // to check for inputs -- can't be blank
       // and can't be more than 500 characters
-      dirtyText: false,
-      dirtyTitle: false,
     }
     this.changeStoryText = this.changeStoryText.bind(this)
 
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
 
-    this.changeTitle = this.changeTitle.bind(this)
-
-    this.submitStory = this.submitStory.bind(this)
+    this.saveStory = this.saveStory.bind(this)
+    this.publishStory = this.publishStory.bind(this)
     this.clearStory = this.clearStory.bind(this)
   }
 
   componentDidMount() {
-    // maybe load anything that the user has already written
+    if (this.props.cardId) {
+      firebase.database().ref('storyCard').child(this.props.cardId).on('value', snap => {
+        if (!snap.val().published) {
+          this.setState({card: snap.val()})
+        } else {
+          this.setState({
+            card: {
+              text: 'This card has already been published.'
+            }
+          })
+        }
+      })
+    }
   }
 
   changeStoryText(value) {
     this.setState({
-      text: value,
-      dirtyText: true
-    })
-  }
-
-  changeTitle(evt) {
-    this.setState({
-      title: evt.target.value,
-      dirtyTitle: true
+      dirtyText: true,
+      card: Object.assign({}, this.state.card, {text: value})
     })
   }
 
   // clear story and submit story handlers
-  clearStory = () => { this.setState({text: ''}) }
+  clearStory = () => {
+    this.setState({card: {text: ''}})
+  }
 
-  submitStory(evt) {
+  saveStory(evt) {
     evt.preventDefault()
 
-    const card = {
-      previousCard: '',
-      nextCard: '',
-      text: this.state.text,
-    }
+    const cardKey = saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
 
-    const cardKey = firebase.database().ref('storyCard').push(card).key
+    this.setState({
+      cardId: cardKey,
+      dirtyText: false,
+      dirtyTitle: false
+    })
+  }
 
-    const branch = {
-      storyCards: [cardKey],
-      storyRoot: this.state.title
-    }
+  publishStory(evt) {
+    evt.preventDefault()
 
-    const root = {}
-    root[this.state.title] = true
-
-    firebase.database().ref('storyBranch').child(this.state.title).set(branch)
-    firebase.database().ref('storyRoot').child(this.state.title).set(root)
+    const cardKey = publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
 
     this.setState({
       openSubmit: false,
-      text: '',
-      title: '',
       dirtyText: false,
       dirtyTitle: false,
+      cardId: '',
+      card: Object.assign({}, this.state.card, {
+        userId: 1,
+        text: '',
+        prevCard: cardKey,
+        nextCard: ''
+      })
     })
   }
 
@@ -110,24 +116,38 @@ export default class WriteSpace extends Component {
     // actions to submit/cancel story submission
     const actionsDialog = [
       <FlatButton key='cancel' label="Cancel" primary={true} onClick={this.handleClose} />,
-      <FlatButton key='submit' label="Submit" primary={true} keyboardFocused={true} onClick={this.submitStory} />,
-    ]
-
-    const actionsStory = [
-      <RaisedButton key='submit' label="SUBMIT A NEW STORY" backgroundColor="#D2B48C" style={style}
-                    onClick={this.handleOpen} disabled={!this.state.text.length} />,
-      <RaisedButton key='clear' label="CLEAR ALL" backgroundColor="#B83939" style={style}
-                    onClick={this.clearStory} />,
+      <FlatButton key='submit' label="Publish Card & Continue Story" primary={true} keyboardFocused={true} onClick={this.publishStory} />,
     ]
 
     return (
       <div>
-        <ReactQuill value={this.state.text}
-                    onChange={this.changeStoryText}
-                    className="container container-fluid"/>
         <div className="row">
-          <div className="col col-4 col-lg-4 col-md-4 col-sm-4">
-            { actionsStory }
+          <div className="col-sm-12 col-md-12 col-lg-12">
+          Root Title: {this.state.card.rootTitle}<br />
+          Branch Title: {this.state.card.branchTitle}<br />
+            <ReactQuill value={this.state.card.text}
+              onChange={this.changeStoryText}
+              className="container container-fluid" />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-12 col-md-12 col-lg-12">
+            <div className="form-group container floatLeft">
+              <RaisedButton key='save'
+                label="SAVE CARD"
+                backgroundColor="#D2B48C"
+                onClick={this.saveStory}
+                disabled={!this.state.card.text.length} />
+              <RaisedButton key='submit'
+                label="PUBLISH CARD & CONTINUE STORY"
+                backgroundColor="#D2B48C"
+                onClick={this.handleOpen}
+                disabled={!this.state.card.text.length} />
+              <RaisedButton key='clear'
+                label="CLEAR"
+                backgroundColor="#B83939"
+                onClick={this.clearStory} />
+            </div>
           </div>
         </div>
         <Dialog
@@ -139,19 +159,28 @@ export default class WriteSpace extends Component {
           contentStyle={dialogStyle}
           autoScrollBodyContent={true}
         >
-          <form onSubmit={this.submitStory}>
-            <TextField
-              hintText="Name Your Story Line"
-              floatingLabelText="Title"
-              name="title"
-              fullWidth={true}
-              multiLine={true}
-              onChange={this.changeTitle}
-            />
-          </form>
-          { ReactHtmlParser(this.state.text) }
+          <form onSubmit={this.publishStory} />
+          { ReactHtmlParser(this.state.card.text) }
         </Dialog>
       </div>
     )
   }
 }
+
+// <TextField
+// hintText="Name Your Story Line"
+// floatingLabelText="Title"
+// name="title"
+// fullWidth={true}
+// multiLine={true}
+// onChange={this.changeTitle}
+// />
+
+// <div className="form-group container">
+// <input type="text"
+//   className="form-control"
+//   value={this.state.title}
+//   placeholder="Story Title"
+//   id="titleField"
+//   onChange={this.changeTitle} />
+// </div>

@@ -49,7 +49,7 @@ class LandingPage extends Component {
               onClick={(e) => { this.handleLink(e, 'read') }}
             />
           </div>
-          <div className="col col-4 col-lg-4 col-md-4 col-sm-4 alignCenter raisedButton">
+          <div className="col col-4 col-lg-4 col-md-4 col-sm-4 alignCenter raisedButton landingButton">
             <RaisedButton
               label="WRITE"
               onClick={(e) => { this.handleLink(e, 'write') }}

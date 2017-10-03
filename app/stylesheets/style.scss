@@ -52,7 +52,19 @@ body {
 }
 
 .raisedButton div {
-  margin: 10;
+  margin: 10px;
+}
+
+.floatLeft button {
+  float: left;
+  margin: 10px, 10px, 10px, 0;
+}
+
+input.form-control {
+  background: transparent;
+}
+
+.landingButton div {
   background-color: rgb(210,180,140);
 }
 
