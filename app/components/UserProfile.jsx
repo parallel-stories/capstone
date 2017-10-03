@@ -7,6 +7,9 @@ import firebase from 'app/fire'
 import 'firebase/database'
 const auth = firebase.auth()
 
+//components
+import AllStoryBranches from './AllStoryBranches'
+
 export const name = user => {
   if (!user) return 'Nobody'
   if (user.isAnonymous) return 'Anonymous'
@@ -44,14 +47,15 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    const {user} = this.state || {}
-    console.log('DA BRANCHES', this.state.storyBranches)
+    const {user , _ , storyBranches} = this.state || {}
+    console.log('DA BRANCHES', storyBranches)
     return (
       <div className="container-fluid" >
         <h1>Welcome {name(user)}!</h1>
         <p>{email(user)} </p>
+        <h1>My Story Branches</h1>
         <div className="row" >
-
+          <AllStoryBranches searchResults={storyBranches} searching={true} />
         </div>
       </div>
     )
