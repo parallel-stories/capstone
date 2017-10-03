@@ -10,18 +10,6 @@ const auth = firebase.auth()
 //components
 import AllStoryBranches from './AllStoryBranches'
 
-export const name = user => {
-  if (!user) return 'Nobody'
-  if (user.isAnonymous) return 'Anonymous'
-  return user.displayName || user.email
-}
-
-export const email = user => {
-  if (!user) return null
-  if (user.isAnonymous) return null
-  return `Email: ${user.email}`
-}
-
 export default class UserProfile extends Component {
   constructor(props){
     super(props)
@@ -48,15 +36,19 @@ export default class UserProfile extends Component {
 
   render() {
     const {user , _ , storyBranches} = this.state || {}
-    console.log('DA BRANCHES', storyBranches)
+    console.log('DA BRANCHES', user.email)
     return (
       <div className="container-fluid" >
-        <h1>Welcome {name(user)}!</h1>
-        <p>{email(user)} </p>
-        <h1>My Story Branches</h1>
-        <div className="row" >
-          <AllStoryBranches searchResults={storyBranches} searching={true} />
-        </div>
+        {!user.email ? <h1>Please login to view profile </h1> : 
+          <div>
+            <h1>Welcome {user.displayName}!</h1>
+            <p>{user.email} </p>
+            <h1>My Story Branches</h1>
+            <div className="row" >
+              <AllStoryBranches searchResults={storyBranches} searching={true} />
+            </div>
+          </div>
+        }
       </div>
     )
   }
