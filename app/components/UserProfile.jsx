@@ -4,6 +4,7 @@ import AppBar from 'material-ui/AppBar'
 
 // firebase
 import firebase from 'app/fire'
+import 'firebase/database'
 const auth = firebase.auth()
 
 export const name = user => {
@@ -19,8 +20,23 @@ export const email = user => {
 }
 
 export default class UserProfile extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      user: {},
+      uid: '',
+      storyBranches: {}
+    }
+
+  }
   componentDidMount() {
-    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({user}))
+    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({user:user, uid:user.uid}, () => {
+      firebase.database().ref().child('user').child(this.state.uid).child('storyBranches').on('value', snap => {
+        this.setState({storyBranches: snap.val()})
+      })
+    }))
+    
   }
 
   componentWillUnmount() {
@@ -29,7 +45,7 @@ export default class UserProfile extends Component {
 
   render() {
     const {user} = this.state || {}
-
+    console.log('DA BRANCHES', this.state.storyBranches)
     return (
       <div className="container-fluid" >
         <h1>Welcome {name(user)}!</h1>
