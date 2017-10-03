@@ -1,6 +1,7 @@
 import React from 'react'
 import firebase from 'app/fire'
 const auth = firebase.auth()
+import 'firebase/database'
 
 import Login from './Login'
 
@@ -24,11 +25,38 @@ export const WhoAmI = ({user, auth}) =>
 export default class extends React.Component {
   componentDidMount() {
     const {auth} = this.props
-    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({user}))
+    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({user}, ()=>{
+      let users
+      firebase.database().ref().child('user').on('value', snap => {
+        users = snap.val()
+      })
+      if( user ) {
+        {
+          /*  check if user exists
+          if not, add id to our *user* database */
+        }
+        for(const u in users) {
+          {/*  exit out if user exists */ }
+          if( user.uid===u.uid) break
+        }
+        {/* else add user to our db */ }
+        console.log('creating a new user with a huge callstack ')
+        firebase.database().ref('user').push(card)
+      } {/* end if statement */ }
+    }))
   }
 
   componentWillUnmount() {
     this.unsubscribe()
+  }
+
+  doesUserExist( user, userArr ) {
+    for(let u; u<userArr.length; u++) {
+      {/* exit out if user exists*/ }
+      if( user===userArr[u]) return
+    }
+    {/* else add user to our db */ }
+
   }
 
   render() {
