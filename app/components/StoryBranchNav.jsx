@@ -102,16 +102,30 @@ class StoryBranchNav extends Component {
   }
 
   render() {
+    //styling for single card
+    let flexContainer = {
+      display: "-webkit-flex",
+      display: "flex",
+      flexDirection: "row"
+
+    }
+
+    let flexItem = {
+      width: 800,
+      margin: 10
+    }
+
     return (
       <div>
         <div className="row container-fluid">
           <IconButton className="swipe-btn-up-down" onClick={this.handleUpClick}><UpArrow/></IconButton>
         </div>
-        <div className="row card-container">
+        <div className="row card-container" style={flexContainer}>
           <IconButton className="col swipe-btn-left-right" onClick={this.handleLeftClick}>
             <LeftArrow/>
           </IconButton>
           <ReactSwipe className="col carousel"
+                      style = {flexItem}
                       swipeOptions={{continuous: false}}
                       key={this.state.selector}>
               {
