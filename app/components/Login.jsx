@@ -2,6 +2,11 @@ import React from 'react'
 
 import firebase from 'app/fire'
 
+// material ui
+import IconButton from 'material-ui/IconButton'
+import Person from 'material-ui/svg-icons/social/person'
+import {lightGreen50, lightGreen600} from 'material-ui/styles/colors'
+
 const google = new firebase.auth.GoogleAuthProvider()
 
 // Firebase has several built in auth providers:
@@ -29,5 +34,9 @@ export default ({ auth }) =>
   // signInWithPopup will try to open a login popup, and if it's blocked, it'll
   // redirect. If you prefer, you can signInWithRedirect, which always
   // redirects.
-  <button className='google login'
-          onClick={() => auth.signInWithPopup(google)}>Login with Google</button>
+  <IconButton
+    className='google login'
+    onClick={() => auth.signInWithPopup(google)}
+    tooltip='Log In'>
+    <Person color={lightGreen50} hoverColor={lightGreen600}/>
+  </IconButton>

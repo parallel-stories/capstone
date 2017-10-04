@@ -4,21 +4,30 @@ const auth = firebase.auth()
 
 import Login from './Login'
 
+import IconButton from 'material-ui/IconButton'
+import LogOut from 'material-ui/svg-icons/action/exit-to-app'
+import {lightGreen50, lightGreen600} from 'material-ui/styles/colors'
+
 export const name = user => {
-  if (!user) return 'Nobody'
+  if (!user) return 'Hello, Nobody'
   if (user.isAnonymous) return 'Anonymous'
   return user.displayName || user.email
 }
 
 export const WhoAmI = ({user, auth}) =>
   <div className="whoami">
-    <span className="whoami-user-name">Hello, {name(user)}</span>
     { // If nobody is logged in, or the current user is anonymous,
       (!user || user.isAnonymous)?
       // ...then show signin links...
       <Login auth={auth}/>
       /// ...otherwise, show a logout button.
-      : <button className='logout' onClick={() => auth.signOut()}>logout</button> }
+      :
+      <IconButton
+        className='logout' onClick={() => auth.signOut()}
+        tooltip={name(user)}>
+        <LogOut color={lightGreen50} hoverColor={lightGreen600}/>
+      </IconButton>
+    }
   </div>
 
 export default class extends React.Component {
