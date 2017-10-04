@@ -60,10 +60,13 @@ export default class SingleStoryBoxDisplay extends Component {
   }
 
   updateUserPref = () => {
+    const storyKey = this.props.thisKey
     if( !this.state.checked ) {
       console.log('adding a favorite!')
+      firebase.database().ref('user').child(this.state.userId).child('faves').child(storyKey).set(true)
     } else {
       console.log('removed a fave :(')
+      firebase.database().ref('user').child(this.state.userId).child('faves').child(storyKey).remove()
     }
   }
 
