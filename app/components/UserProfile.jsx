@@ -57,7 +57,7 @@ export default class UserProfile extends Component {
 
   render() {
     const { user, storyBranches, favorites } = this.state || {}
-    console.log('what are our favorited stories???', this.state.favorites)
+
     return (
       <div className="container-fluid" >
         {!user ?
