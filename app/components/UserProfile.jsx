@@ -37,8 +37,11 @@ export default class UserProfile extends Component {
   componentDidMount() {
     this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
       if( user ) {
-        firebase.database().ref().child('user').child(this.state.user.uid).child('storyBranches').on('value', snap => {
-          this.setState({storyBranches: snap.val()})
+        firebase.database().ref().child('user').child(this.state.user.uid).child('storyBranches').on('value', branches => {
+          this.setState({storyBranches: branches.val()})
+        })
+        firebase.database().ref().child('user').child(this.state.user.uid).child('faves').on('value', faves => {
+          this.setState({favorites: faves.val()})
         })
       }
     }))
@@ -54,7 +57,7 @@ export default class UserProfile extends Component {
 
   render() {
     const { user, storyBranches, favorites } = this.state || {}
-
+    console.log('what are our favorited stories???', this.state.favorites)
     return (
       <div className="container-fluid" >
         {!user ?
@@ -84,7 +87,7 @@ export default class UserProfile extends Component {
             }
             <hr />
             <h2>Favorited Stories</h2>
-            { favorites ?
+            { !favorites ?
               <div>
                 <p>
                   It looks like you didn't favorite any stories yet.
@@ -98,10 +101,9 @@ export default class UserProfile extends Component {
                 />
               </div>
               :
-              <div>
-                <p>TODO: show favorited stories here</p>
+              <div className="row" >
+                <AllStoryBranches searchResults={favorites} searching={true} />
               </div>
-
             }
             <h2>Users You're Following</h2>
             <p>user profiles will go here</p>
