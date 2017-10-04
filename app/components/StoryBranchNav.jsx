@@ -102,30 +102,17 @@ class StoryBranchNav extends Component {
   }
 
   render() {
-    //styling for single card
-    let flexContainer = {
-      display: "-webkit-flex",
-      display: "flex",
-      flexDirection: "row"
-
-    }
-
-    let flexItem = {
-      width: 800,
-      margin: 10
-    }
 
     return (
       <div>
-        <div className="row container-fluid">
+        <div className="navPage">
           <IconButton className="swipe-btn-up-down" onClick={this.handleUpClick}><UpArrow/></IconButton>
         </div>
-        <div className="row card-container" style={flexContainer}>
-          <IconButton className="col swipe-btn-left-right" onClick={this.handleLeftClick}>
+        <div className="flexContainer">
+          <IconButton className="swipe-btn-left-right flexArrows" onClick={this.handleLeftClick}>
             <LeftArrow/>
           </IconButton>
-          <ReactSwipe className="col carousel"
-                      style = {flexItem}
+          <ReactSwipe className="flexCard"
                       swipeOptions={{continuous: false}}
                       key={this.state.selector}>
               {
@@ -134,11 +121,11 @@ class StoryBranchNav extends Component {
                 : <SingleCard currentCard={this.state.cards[this.state.selector]} />
               }
           </ReactSwipe>
-          <IconButton className="col swipe-btn-left-right" onClick={this.handleRightClick}>
+          <IconButton className="swipe-btn-left-right flexArrows" onClick={this.handleRightClick}>
             <RightArrow />
           </IconButton>
         </div>
-        <div className="row container-fluid">
+        <div className="">
           <IconButton className="swipe-btn-up-down" onClick={this.handleDownClick}><DownArrow /></IconButton>
         </div>
       </div>
