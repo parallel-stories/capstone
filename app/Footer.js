@@ -4,7 +4,7 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 import muiThemeable from 'material-ui/styles/muiThemeable'
 
 const Footer = () => (
-  <div className="footer alignCenter">
+  <div className="footer align-center">
   Made with&nbsp;<span role="img" aria-label="heart emoji">❤️</span>&nbsp;&nbsp;&nbsp;by Jamie, Jennifer, Mieka, &amp; Raz&nbsp;/&nbsp;Find us on&nbsp;<a target="_blank" href="https://github.com/parallel-stories/capstone">GitHub</a>
   </div>
 )
