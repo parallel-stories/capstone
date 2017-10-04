@@ -18,6 +18,12 @@ import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 // link from react-router-dom
 import {Link} from 'react-router-dom'
 
+const styles = {
+  card: {
+    boxShadow: "none",
+  },
+};
+
 export default class SingleStoryBoxDisplay extends Component {
   constructor() {
     super()
@@ -65,7 +71,8 @@ export default class SingleStoryBoxDisplay extends Component {
     const {storyBranchTitle, storyBranchDetails, thisKey} = this.props
 
     return (
-    <Card className="single-card col-lg-4 col-md-4 col-sm-4">
+    <Card className="single-card col-lg-4 col-md-4 col-sm-4"
+          style={{boxShadow:"none", borderWidth: 1}}>
       <CardHeader>
         <Checkbox
           checkedIcon={<ActionFavorite style={{color: '#FFB6C1'}} />}

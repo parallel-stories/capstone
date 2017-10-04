@@ -103,8 +103,11 @@ export default class UserProfile extends Component {
               </div>
 
             }
+            <h2>Users You're Following</h2>
+            <p>user profiles will go here</p>
           </div>
         } {/* end check to see if user is logged in */}
+        <br />
       </div>
     )
   }
