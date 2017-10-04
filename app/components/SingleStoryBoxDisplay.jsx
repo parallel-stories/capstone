@@ -5,8 +5,13 @@ import React, { Component } from 'react'
 import {Card, CardMedia, CardHeader, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
+// firebase
+import firebase from 'app/fire'
+import 'firebase/database'
+const auth = firebase.auth()
+
 // material ui components for favorites
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
+import Checkbox from 'material-ui/Checkbox'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
@@ -16,17 +21,58 @@ import {Link} from 'react-router-dom'
 export default class SingleStoryBoxDisplay extends Component {
   constructor() {
     super()
+    this.state = {
+      checked: false,
+      loggedIn: false,
+      userId: '',
+    }
+  }
+
+  componentDidMount() {
+    // check to see if a user favorited this story
+    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
+      if( user ) {
+        this.setState({
+          loggedIn: true,
+          userId: user.uid,
+        })
+      }
+    }))
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
+  }
+
+  updateCheck() {
+    this.setState((oldState) => {
+      return {
+        checked: !oldState.checked,
+      }
+    })
+    this.updateUserPref()
+  }
+
+  updateUserPref = () => {
+    if( !this.state.checked ) {
+      console.log('adding a favorite!')
+    } else {
+      console.log('removed a fave :(')
+    }
   }
 
   render() {
     const {storyBranchTitle, storyBranchDetails, thisKey} = this.props
-    
+
     return (
     <Card className="single-card col-lg-4 col-md-4 col-sm-4">
       <CardHeader>
-        <RadioButton
+        <Checkbox
           checkedIcon={<ActionFavorite style={{color: '#FFB6C1'}} />}
-          uncheckedIcon={<ActionFavoriteBorder />} />
+          uncheckedIcon={<ActionFavoriteBorder />}
+          checked={this.state.checked}
+          onCheck={this.updateCheck.bind(this)}
+        />
       </CardHeader>
       <Link key={thisKey} to={`/read/story_branch/${thisKey}`}>
         <CardMedia

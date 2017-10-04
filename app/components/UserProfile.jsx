@@ -28,7 +28,8 @@ export default class UserProfile extends Component {
 
     this.state = {
       user: {},
-      storyBranches: {}
+      storyBranches: {},
+      favorites: {},
     }
     this.handleLink = this.handleLink.bind(this)
   }
@@ -41,7 +42,6 @@ export default class UserProfile extends Component {
         })
       }
     }))
-
   }
 
   componentWillUnmount() {
@@ -53,7 +53,7 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    const { user, storyBranches } = this.state || {}
+    const { user, storyBranches, favorites } = this.state || {}
 
     return (
       <div className="container-fluid" >
@@ -82,11 +82,29 @@ export default class UserProfile extends Component {
                 <AllStoryBranches searchResults={storyBranches} searching={true} />
               </div>
             }
-          <hr />
-          <h2>Bookmarked Stories</h2>
-          <h2>Favorited Stories</h2>
+            <hr />
+            <h2>Favorited Stories</h2>
+            { favorites ?
+              <div>
+                <p>
+                  It looks like you didn't favorite any stories yet.
+                  Click the button below to favorite some!
+                </p>
+                <RaisedButton
+                  label="Read Stories"
+                  onClick={(e) => { this.handleLink(e, 'read') }}
+                  backgroundColor='#D1B38E'
+                  style={landingStyles.button}
+                />
+              </div>
+              :
+              <div>
+                <p>TODO: show favorited stories here</p>
+              </div>
+
+            }
           </div>
-        }
+        } {/* end check to see if user is logged in */}
       </div>
     )
   }
