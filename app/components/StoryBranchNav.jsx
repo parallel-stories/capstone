@@ -107,11 +107,11 @@ class StoryBranchNav extends Component {
         <div className="row container-fluid">
           <IconButton className="swipe-btn-up-down" onClick={this.handleUpClick}><UpArrow/></IconButton>
         </div>
-        <div className="row card-container">
-          <IconButton className="col swipe-btn-left-right" onClick={this.handleLeftClick}>
+        <div className="flex-container">
+          <IconButton className="col swipe-btn-left-right flex-arrows" onClick={this.handleLeftClick}>
             <LeftArrow/>
           </IconButton>
-          <ReactSwipe className="col carousel"
+          <ReactSwipe className="flex-card carousel"
                       swipeOptions={{continuous: false}}
                       key={this.state.selector}>
               {
@@ -120,7 +120,7 @@ class StoryBranchNav extends Component {
                 : <SingleCard currentCard={this.state.cards[this.state.selector]} />
               }
           </ReactSwipe>
-          <IconButton className="col swipe-btn-left-right" onClick={this.handleRightClick}>
+          <IconButton className="col swipe-btn-left-right flex-arrows" onClick={this.handleRightClick}>
             <RightArrow />
           </IconButton>
         </div>
