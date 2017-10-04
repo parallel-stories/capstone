@@ -34,15 +34,7 @@ class Navbar extends Component {
   }
 
   handleLink = (e, type) => {
-    if (type === 'home') {
-      history.push(`/home`)
-    } else if (type === 'write') {
-      history.push(`/write`)
-    } else if (type === 'read') {
-      history.push(`/read`)
-    } else if (type === 'userProf') {
-      history.push(`/userProfile`)
-    }
+    history.push(`/${type}`)
     this.handleToggle()
   }
 
@@ -50,15 +42,14 @@ class Navbar extends Component {
     return (
       <AppBar
         title="Parallel Stories"
-        onTitleTouchTap={(e) => { this.handleLink(e, 'home') }}
         iconElementLeft={<IconButton><List/></IconButton>}
         onLeftIconButtonTouchTap={this.handleToggle}
-        style={{boxShadow: 'none', fontFamily: 'Pacifico', textAlign: 'center'}}>
+        style={{boxShadow: 'none', fontFamily: 'Berkshire Swash, cursive', textAlign: 'center'}}>
         <Drawer open={this.state.open}>
           <MenuItem onClick={(e) => { this.handleLink(e, 'home') }}>Home</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'read') }}>Read Stories</MenuItem>
-          <MenuItem onClick={(e) => { this.handleLink(e, 'userProf') }}>User Profile</MenuItem>
+          <MenuItem onClick={(e) => { this.handleLink(e, 'userProfile') }}>User Profile</MenuItem>
           <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
         </Drawer>
         <WhoAmI auth={auth} />
