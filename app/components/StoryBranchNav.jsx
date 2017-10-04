@@ -102,17 +102,16 @@ class StoryBranchNav extends Component {
   }
 
   render() {
-
     return (
       <div>
-        <div className="navPage">
+        <div className="row container-fluid">
           <IconButton className="swipe-btn-up-down" onClick={this.handleUpClick}><UpArrow/></IconButton>
         </div>
-        <div className="flexContainer">
-          <IconButton className="swipe-btn-left-right flexArrows" onClick={this.handleLeftClick}>
+        <div className="row card-container">
+          <IconButton className="col swipe-btn-left-right" onClick={this.handleLeftClick}>
             <LeftArrow/>
           </IconButton>
-          <ReactSwipe className="flexCard"
+          <ReactSwipe className="col carousel"
                       swipeOptions={{continuous: false}}
                       key={this.state.selector}>
               {
@@ -121,11 +120,11 @@ class StoryBranchNav extends Component {
                 : <SingleCard currentCard={this.state.cards[this.state.selector]} />
               }
           </ReactSwipe>
-          <IconButton className="swipe-btn-left-right flexArrows" onClick={this.handleRightClick}>
+          <IconButton className="col swipe-btn-left-right" onClick={this.handleRightClick}>
             <RightArrow />
           </IconButton>
         </div>
-        <div className="">
+        <div className="row container-fluid">
           <IconButton className="swipe-btn-up-down" onClick={this.handleDownClick}><DownArrow /></IconButton>
         </div>
       </div>
