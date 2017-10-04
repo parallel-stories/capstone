@@ -18,7 +18,7 @@ import 'firebase/database'
 
 import { dialogStyle } from '../stylesheets/MatUIStyle'
 
-import { saveCard, publishCard, saveBranchTitle } from './functions/write.js'
+import { saveCard, publishCard, saveBranchTitle } from '../utils/write.js'
 
 export default class WriteSpace extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ export default class WriteSpace extends Component {
       dirtyText: false,
       dirtyTitle: false,
       editTitle: true,
-      // saveCard & publishCard depend on the state below not changing
+      // saveCard & publishCard depend on the state below not being refactored
       cardId: '',
       card: {
         userId: 1,
@@ -38,48 +38,39 @@ export default class WriteSpace extends Component {
         prevCard: '',
         nextCard: ''
       }
+      // end saveCard & publishCard needs
+
       // TODO: implement warnings
       // to check for inputs -- can't be blank
       // and can't be more than 500 characters
     }
-    this.changeStoryText = this.changeStoryText.bind(this)
-    this.changeBranchTitle = this.changeBranchTitle.bind(this)
-
-    this.editTitle = this.editTitle.bind(this)
-    this.saveTitle = this.saveTitle.bind(this)
-
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-
-    this.saveStory = this.saveStory.bind(this)
-    this.publishStory = this.publishStory.bind(this)
-    this.clearStory = this.clearStory.bind(this)
+    this.branchOff = this.branchOff.bind(this)
   }
 
   componentDidMount() {
-    if (this.props.cardId) {
-      firebase.database().ref('storyCard').child(this.props.cardId).on('value', snap => {
+    if (this.state.cardId != '') {
+      firebase.database().ref('storyCard').child(this.state.cardId).on('value', snap => {
         if (!snap.val().published) {
           this.setState({card: snap.val()})
         } else {
           this.setState({
-            card: {
-              text: 'This card has already been published.'
-            }
+            card: Object.assign({}, snap.val(), {
+              text: '<p>This card has already been published.</p>'.concat(snap.val().text)
+            })
           })
         }
       })
     }
   }
 
-  changeStoryText(value) {
+  changeStoryText = (value) => {
     this.setState({
       dirtyText: true,
       card: Object.assign({}, this.state.card, {text: value})
     })
   }
 
-  changeBranchTitle(evt) {
+  changeBranchTitle = (evt) => {
     this.setState({
       dirtyText: true,
       card: Object.assign({}, this.state.card, {branchTitle: evt.target.value})
@@ -108,39 +99,60 @@ export default class WriteSpace extends Component {
     })
   }
 
-  saveStory(evt) {
+  saveStory = (evt) => {
     evt.preventDefault()
 
-    const cardKey = saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
+    if (this.state.card.branchTitle == '') {
+      alert('Please give your story a title.')
+    } else {
+      const cardKey = saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
 
-    this.setState({
-      cardId: cardKey,
-      dirtyText: false,
-      dirtyTitle: false
-    })
+      this.setState({
+        dirtyText: false,
+        dirtyTitle: false,
+        cardId: cardKey
+      })
+    }
   }
 
-  publishStory(evt) {
+  publishStory = (evt) => {
     evt.preventDefault()
 
-    const cardKey = publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
+    if (this.state.card.branchTitle == '') {
+      alert('Please give your story a title.')
+    } else {
+      const cardKey = publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
 
-    this.setState({
-      openSubmit: false,
-      dirtyText: false,
-      dirtyTitle: false,
-      cardId: '',
-      card: Object.assign({}, this.state.card, {
-        userId: 1,
-        text: '',
-        prevCard: cardKey,
-        nextCard: ''
+      this.setState({
+        openSubmit: false,
+        dirtyText: false,
+        dirtyTitle: false,
+        editTitle: false,
+        cardId: '',
+        card: Object.assign({}, this.state.card, {
+          userId: 1,
+          text: '',
+          rootTitle: this.state.rootTitle,
+          prevCard: cardKey,
+          nextCard: ''
+        })
       })
-    })
+    }
+  }
+
+  branchOff = (evt) => {
+    evt.preventDefault()
+    console.log('branching time')
   }
 
   // to open/close dialog box on sumit story
-  handleOpen = () => { this.setState({openSubmit: true}) }
+  handleOpen = () => {
+    if (this.state.card.branchTitle == '') {
+      alert('Please give your story a title.')
+    } else {
+      this.setState({openSubmit: true})
+    }
+  }
   handleClose = () => { this.setState({openSubmit: false}) }
 
   render() {
@@ -215,6 +227,10 @@ export default class WriteSpace extends Component {
                 label="CLEAR"
                 backgroundColor="#B83939"
                 onClick={this.clearStory} />
+              <RaisedButton key='branch off'
+                label="BRANCH OFF"
+                backgroundColor="#00FF00"
+                onClick={this.branchOff} />
             </div>
           </div>
         </div>
@@ -228,6 +244,7 @@ export default class WriteSpace extends Component {
           autoScrollBodyContent={true}
         >
           <form onSubmit={this.publishStory} />
+          <h2>{this.state.card.branchTitle}</h2>
           { ReactHtmlParser(this.state.card.text) }
         </Dialog>
       </div>

@@ -52,6 +52,7 @@ export const publishCard = function(card, cardId) {
     if (snap.val() == 'unpublished') {
       firebase.database().ref('storyBranch').child(card.branchTitle).child('storyRoot').set(card.branchTitle)
       firebase.database().ref('storyRoot').child(card.branchTitle).child(card.branchTitle).set(true)
+      firebase.database().ref('storyCard').child(cardKey).child('rootTitle').set(card.branchTitle)
     }
   })
   // make sure branch is marked as published so that name cannot be rewritten
