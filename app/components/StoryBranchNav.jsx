@@ -29,9 +29,11 @@ class StoryBranchNav extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      currentStoryBranchTitle: '',
+      currentStoryBranch: {},
       cards: [],
       selector: 0,
-      childParent: [],
+      childParent: {},
       isReadingBranchOptions: false
     }
     this.handleRightClick = this.handleRightClick.bind(this)
@@ -41,28 +43,19 @@ class StoryBranchNav extends Component {
   }
 
   componentDidMount() {
-    if (_.isEmpty(this.props.currentStoryBranch)) {
-      const storyBranchId = this.props.match.params.branchId
-      firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
-        const storyBranch = snap.val()
-        return this.props.handleCurrentStoryChange(storyBranchId, storyBranch)
+    const storyBranchId = this.props.match.params.branchId
+    const cardId = this.props.match.params.cardId
+    firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', storySnap => {
+      firebase.database().ref(`storyCard/${cardId}`).once('value', cardSnap => {
+        this.setState({currentStoryBranchTitle: storyBranchId, currentStoryBranch: storySnap.val(), cards: [...this.state.cards, cardSnap.val()]})
       })
-      .then(() => {
-        firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
-          this.setState({cards: [...this.state.cards, snap.val()]})
-        })
-      })
-    } else {
-      firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
-        this.setState({cards: [...this.state.cards, snap.val()]})
-      })
-    }
+    })
   }
 
   handleRightClick = () => {
-    const nextCardId = this.state.cards[this.state.selector].nextCard
-
-    if (nextCardId !== '') {
+    // may not work if you start on a different branch vs original root branch?
+    const nextCardId = this.state.currentStoryBranch.storyCards[this.state.selector + 1]
+    if (nextCardId) {
       firebase.database().ref(`storyCard/${nextCardId}`).once('value', snap => {
         this.setState({selector: this.state.selector + 1, cards: [...this.state.cards, snap.val()]})
       })
@@ -82,30 +75,51 @@ class StoryBranchNav extends Component {
   }
 
   handleOptionClick = (branch) => {
-    const newBranchCardId = this.state.cards[this.state.selector].branches[branch]
-    firebase.database().ref(`storyCard/${newBranchCardId}`).once('value', snap => {
-      this.setState({
-        isReadingBranchOptions: false,
-        childParent: [...this.state.childParent, this.state.selector + 1],
-        cards: [...(this.state.cards.slice(0, this.state.selector + 1)), snap.val()],
-        selector: this.state.selector + 1
+    // make sure to take check if you are already on a branch? or the original branch??
+    // maybe cards should also hold their own branch and then it gets manually removed from the list?
+    firebase.database().ref(`storyBranch/${branch}`).once('value', storySnap => {
+      const newBranchCardId = this.state.cards[this.state.selector].branches[branch]
+      firebase.database().ref(`storyCard/${newBranchCardId}`).once('value', cardSnap => {
+        this.setState({
+          currentStoryBranchTitle: branch,
+          currentStoryBranch: storySnap.val(),
+          isReadingBranchOptions: false,
+          childParent: Object.assign({}, this.state.childParent, {[`${this.state.selector + 1}`]: this.state.currentStoryBranchTitle}),
+          cards: [...(this.state.cards.slice(0, this.state.selector + 1)), cardSnap.val()],
+          selector: this.state.selector + 1
+        })
       })
     })
   }
 
   handleUpClick = () => {
-    if (this.state.childParent.includes(this.state.selector)) {
+    const title = this.state.childParent[this.state.selector]
+    if (title) {
       const childParent = this.state.childParent
-      childParent.splice(this.state.childParent.indexOf(this.state.selector), 1)
-      this.setState({cards: this.state.cards.slice(0, this.state.selector), selector: this.state.selector - 1, childParent: childParent})
+      delete childParent[this.state.selector]
+      firebase.database().ref(`storyBranch/${title}`).once('value', storySnap => {
+        console.log(storySnap.val())
+        this.setState({
+          currentStoryBranchTitle: title,
+          currentStoryBranch: storySnap.val(),
+          cards: this.state.cards.slice(0, this.state.selector),
+          selector: this.state.selector - 1,
+          childParent: childParent})
+      })
     }
   }
 
   render() {
     return (
       <div>
+        <div>
+          <h1>STORY BRANCH: "{this.state.currentStoryBranchTitle}"</h1>
+          <h3>ROOT: "{this.state.currentStoryBranch.storyRoot}"</h3>
+        </div>
         <div className="row container-fluid">
-          <IconButton className="swipe-btn-up-down" onClick={this.handleUpClick}><UpArrow/></IconButton>
+          <IconButton className="swipe-btn-up-down" onClick={this.handleUpClick}>
+            <UpArrow/>
+          </IconButton>
         </div>
         <div className="row card-container">
           <IconButton className="col swipe-btn-left-right" onClick={this.handleLeftClick}>

@@ -10,8 +10,12 @@ export default class OptionsCard extends Component {
         <CardText>
           {
             this.props.branches &&
-            Object.keys(this.props.branches).map((branch) => <button key={branch} onClick={(evt) => this.props.handleOptionClick(branch)}>{branch}</button>)
-           // Object.keys(this.props.branches).map((branch) => <p key={branch} onClick={() => console.log('clicked branch')}>{branch}</p>)
+            Object.keys(this.props.branches).map(branch =>
+              <button
+                key={branch}
+                onClick={(evt) => this.props.handleOptionClick(branch)}>
+                {branch}
+              </button>)
           }
         </CardText>
         <CardActions>
