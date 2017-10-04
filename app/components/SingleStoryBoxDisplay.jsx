@@ -42,8 +42,14 @@ export default class SingleStoryBoxDisplay extends Component {
           loggedIn: true,
           userId: user.uid,
         })
+        firebase.database().ref()
+          .child('user').child(user.uid).child('faves').child(this.props.thisKey)
+          .on('value', snap => {
+            const val = snap.val()
+            if( val !== null ) this.setState({checked: val})
+        })
       }
-    }))
+    })) // end on AuthStateChanged
   }
 
   componentWillUnmount() {
@@ -62,10 +68,10 @@ export default class SingleStoryBoxDisplay extends Component {
   updateUserPref = () => {
     const storyKey = this.props.thisKey
     if( !this.state.checked ) {
-      console.log('adding a favorite!')
+      // adds story when favorited
       firebase.database().ref('user').child(this.state.userId).child('faves').child(storyKey).set(true)
     } else {
-      console.log('removed a fave :(')
+      // removes story when un-favorited
       firebase.database().ref('user').child(this.state.userId).child('faves').child(storyKey).remove()
     }
   }
