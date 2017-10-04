@@ -25,6 +25,7 @@ import _ from 'lodash'
 // utils
 // import {getCard} from '../utils'
 
+// OB/FF: consider splitting into "stateful" and "presentational" components
 class StoryBranchNav extends Component {
   constructor(props) {
     super(props)
@@ -34,6 +35,7 @@ class StoryBranchNav extends Component {
       childParent: [],
       isReadingBranchOptions: false
     }
+    // OB/FF: can remove `.bind`-ings here because of arrow functions below
     this.handleRightClick = this.handleRightClick.bind(this)
     this.handleLeftClick = this.handleLeftClick.bind(this)
     this.handleDownClick = this.handleDownClick.bind(this)

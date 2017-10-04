@@ -1,0 +1,7 @@
+- Recommendation: at least 1 issue per PR
+- Really awesome project project board!
+- Delete branches after mergin a PR
+- Moving more and more towards standard commit messages is good!
+- Recommendation: use react-bootstrap (also consider https://www.npmjs.com/package/bootstrap-only-css)
+- Recommendation: use only one CSS framework
+- Use URLs and links for story branch navigation

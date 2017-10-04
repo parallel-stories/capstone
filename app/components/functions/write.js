@@ -3,6 +3,7 @@ import 'firebase/database'
 
 const createCard = function(card) {
   // create card & generate random firebase key
+  // OB/FF: look out for async issues
   const cardKey = firebase.database().ref('storyCard').push(card).key
   // update previous card to point to this one
   if (card.prevCard) {
@@ -49,6 +50,7 @@ export const publishCard = function(card, cardId) {
 
   // if branch's root is marked unpublished, create storyroot with branch's name, include that branch as child of root, and update branch's root from unpublished to new name
   firebase.database().ref('storyBranch').child(card.branchTitle).child('storyRoot').once('value').then(snap => {
+    // OB/FF: you might be able to implement this as a database rule in firebase
     if (snap.val() == 'unpublished') {
       firebase.database().ref('storyBranch').child(card.branchTitle).child('storyRoot').set(card.branchTitle)
       firebase.database().ref('storyRoot').child(card.branchTitle).child(card.branchTitle).set(true)
@@ -66,6 +68,7 @@ export const saveBranchTitle = function(card, cardId) {
     cardKey = saveCard(card, cardId) // returns firebase key
   } else {
     firebase.database().ref('storyCard').child(cardKey).child('branchTitle').once('value').then(snap => {
+      // OB/FF: could potentially implement this as a cloud function (pushing logic further "back")
       if (snap.val() != card.branchTitle) {
         // update storybranch
         firebase.database().ref('storyBranch').child(snap.val()).once('value').then(branchSnap => {

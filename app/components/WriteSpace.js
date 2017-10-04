@@ -20,6 +20,7 @@ import { dialogStyle } from '../stylesheets/MatUIStyle'
 
 import { saveCard, publishCard, saveBranchTitle } from './functions/write.js'
 
+// OB/FF: consider splitting this up into a "state manager component" and a "presentational component"
 export default class WriteSpace extends Component {
   constructor(props) {
     super(props)
@@ -42,6 +43,7 @@ export default class WriteSpace extends Component {
       // to check for inputs -- can't be blank
       // and can't be more than 500 characters
     }
+    // OB/FF: class arrow functions
     this.changeStoryText = this.changeStoryText.bind(this)
     this.changeBranchTitle = this.changeBranchTitle.bind(this)
 
@@ -58,8 +60,10 @@ export default class WriteSpace extends Component {
 
   componentDidMount() {
     if (this.props.cardId) {
+      // OB/FF: could be `.once` (and/or stop listening later)
       firebase.database().ref('storyCard').child(this.props.cardId).on('value', snap => {
         if (!snap.val().published) {
+          // OB/FF: consider sanitizing HTML at this point
           this.setState({card: snap.val()})
         } else {
           this.setState({
@@ -192,7 +196,6 @@ export default class WriteSpace extends Component {
               <div className="container">...A branch of <i>{this.state.card.rootTitle}</i></div>
             )
           }
-
             <ReactQuill value={this.state.card.text}
               onChange={this.changeStoryText}
               className="container container-fluid" />
@@ -201,6 +204,7 @@ export default class WriteSpace extends Component {
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12">
             <div className="form-group container floatLeft">
+              {/* OB/FF: consider naming colors */}
               <RaisedButton key='save'
                 label="SAVE CARD"
                 backgroundColor="#D2B48C"
@@ -235,6 +239,7 @@ export default class WriteSpace extends Component {
   }
 }
 
+// OB/FF: un-undead code?
 // <TextField
 // hintText="Name Your Story Line"
 // floatingLabelText="Title"

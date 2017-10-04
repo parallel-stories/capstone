@@ -41,11 +41,13 @@ class Routes extends Component {
             <Route
               exact path="/read/story_branch/:branchId"
               render= {(props) => (
+                // OB/FF: move the state down / in
                 <SingleStoryPage
                   {...props}
                   handleCurrentStoryChange={this.handleCurrentStoryChange}
                   currentStoryBranch={this.state.currentStoryBranch} />
               )} />
+            {/* OB/FF: consider shortening URL (drop story_branch part) */}
             <Route
               exact path="/read/story_branch/:branchId/:cardId"
               render={(props) => (
@@ -54,6 +56,7 @@ class Routes extends Component {
                   handleCurrentStoryChange={this.handleCurrentStoryChange}
                   currentStoryBranch={this.state.currentStoryBranch} />
               )} />
+            {/* OB/FF: this is dead...... */}
             <Route path="/read/:id" component={StoryBranchNav} />
             <Route path="/search" component={Searchbar} />
             <Route path="/userProfile" component={UserProfile} />

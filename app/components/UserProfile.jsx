@@ -40,6 +40,7 @@ export default class UserProfile extends Component {
     this.unsubscribe()
   }
 
+  // OB/FF: if you can do an <a /> or a <Link /> instead that'd be ideal
   handleLink = (e, type) => {
     if (type === 'write') {
       this.props.history.push(`/write`)
@@ -47,6 +48,7 @@ export default class UserProfile extends Component {
   }
 
   render() {
+    // OB/FF: don't need the _ here right?
     const {user , _ , storyBranches} = this.state || {}
 
     return (

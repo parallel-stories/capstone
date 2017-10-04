@@ -3,6 +3,8 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 
+// OB/FF: name of class doesn't match name of file
+// OB/FF: maybe this is undead code?
 export default class DialogExampleSimple extends React.Component {
   state = {
     open: false,

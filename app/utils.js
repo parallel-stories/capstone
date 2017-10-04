@@ -1,5 +1,6 @@
 import firebase from 'app/fire'
 
+// OB/FF: broken right now
 export const getCard = (storyBranchId, cardId, handleCurrentStoryChange) => {
   firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
     const storyBranch = snap.val()

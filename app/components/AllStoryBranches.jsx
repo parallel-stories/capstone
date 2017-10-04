@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SingleStoryBoxDisplay from './SingleStoryBoxDisplay'
 import firebase from 'app/fire'
-import 'firebase/database'
+import 'firebase/database' // OB/FF: probably not necessary
 import _ from 'lodash'
 import {Link} from 'react-router-dom'
 
@@ -19,6 +19,8 @@ class AllStoryBranches extends Component {
       this.setState({allStoryBranches: storyBranches})
     })
   }
+
+  // OB/FF: stop listening?
 
   render() {
     const { allStoryBranches } = this.state

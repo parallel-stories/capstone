@@ -24,6 +24,7 @@ class Navbar extends Component {
     this.state = {
       open: false
     }
+    // OB/FF: class arrow function syntax means you don't need the next two lines
     this.handleToggle = this.handleToggle.bind(this)
     this.handleLink = this.handleLink.bind(this)
   }
@@ -34,6 +35,8 @@ class Navbar extends Component {
   }
 
   handleLink = (e, type) => {
+    // OB/FF: consider switch/case
+    // OB/FF: also could just history.push('/' + type)
     if (type === 'home') {
       history.push(`/home`)
     } else if (type === 'read') {
@@ -57,6 +60,7 @@ class Navbar extends Component {
         onLeftIconButtonTouchTap={this.handleToggle}
         style={{boxShadow: 'none', fontFamily: 'Pacifico', textAlign: 'center'}}>
         <Drawer open={this.state.open}>
+          {/* OB/FF: could this accept an href? */}
           <MenuItem onClick={(e) => { this.handleLink(e, 'home') }}>Home</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'read') }}>Read Stories</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
