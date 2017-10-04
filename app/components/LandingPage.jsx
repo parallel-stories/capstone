@@ -4,9 +4,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 // page
 import history from '../history'
 
-// material ui
-import {GridList, GridTile} from 'material-ui/GridList';
-
 const landingStyles = {
   button: {
     boxShadow: "none",
