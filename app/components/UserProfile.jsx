@@ -13,6 +13,15 @@ const auth = firebase.auth()
 //components
 import AllStoryBranches from './AllStoryBranches'
 
+// styling for button
+const landingStyles = {
+  button: {
+    boxShadow: "none",
+    marginBottom: "20px",
+    minWidth:"75px"
+  },
+}
+
 export default class UserProfile extends Component {
   constructor(props){
     super(props)
@@ -21,10 +30,9 @@ export default class UserProfile extends Component {
       user: {},
       storyBranches: {}
     }
-
     this.handleLink = this.handleLink.bind(this)
-
   }
+
   componentDidMount() {
     this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
       if( user ) {
@@ -41,13 +49,11 @@ export default class UserProfile extends Component {
   }
 
   handleLink = (e, type) => {
-    if (type === 'write') {
-      this.props.history.push(`/write`)
-    }
+    this.props.history.push(`/${type}`)
   }
 
   render() {
-    const {user , _ , storyBranches} = this.state || {}
+    const { user, storyBranches } = this.state || {}
 
     return (
       <div className="container-fluid" >
@@ -57,7 +63,7 @@ export default class UserProfile extends Component {
           <div>
             <h1>Welcome {user.displayName}!</h1>
             <p>{user.email} </p>
-            <h1>My Story Branches</h1>
+            <h2>My Story Branches</h2>
             { !storyBranches ?
               <div>
                 <p>
@@ -67,6 +73,8 @@ export default class UserProfile extends Component {
                 <RaisedButton
                   label="Write a New Story"
                   onClick={(e) => { this.handleLink(e, 'write') }}
+                  backgroundColor='#50AD55'
+                  style={landingStyles.button}
                 />
               </div>
               :
@@ -74,6 +82,9 @@ export default class UserProfile extends Component {
                 <AllStoryBranches searchResults={storyBranches} searching={true} />
               </div>
             }
+          <hr />
+          <h2>Bookmarked Stories</h2>
+          <h2>Favorited Stories</h2>
           </div>
         }
       </div>
