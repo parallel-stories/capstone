@@ -7,7 +7,7 @@
 }
 
 html, body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 300;
   margin: 0;
   padding: 0;
@@ -35,20 +35,7 @@ body {
   font-size: .8em
 }
 
-.alignCenter {
-  text-align: center;
-}
-
-.landing-page {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-/* Landing Page */
-.landing-text {
-  text-align: center;
-}
-
+/* button styling */
 .raisedButton,
 .raisedButton div,
 .raisedButton button {
@@ -68,8 +55,57 @@ input.form-control {
   background: transparent;
 }
 
-.landingButton div {
-  background-color: rgb(210,180,140);
+/* Landing Page */
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: center;
+}
+
+.landing-text {
+  text-align: center left;
+}
+.title {
+  font-style: italic;
+  font-family: 'Berkshire Swash', cursive;
+  text-align: center;
+}
+
+.landing-page {
+  padding: 0;
+  margin:0;
+}
+.landing-page img {
+  margin: auto;
+}
+
+.welcome-image {
+  display: block;
+  margin: 0 auto;
+}
+
+.welcome-header {
+  margin: 0;
+  padding: 0;
+  background-color: #D8F2ED;
+  padding-bottom: 50px;
+  padding-top: 30px;
+}
+
+.landing-more-info {
+  background-color: #E9E9E9;
+  padding-bottom: 40px;
+  padding-top: 40px;
+}
+.landing-more-info p {
+
+}
+
+/* who am i */
+.whoami {
+
 }
 
 /* search bar */

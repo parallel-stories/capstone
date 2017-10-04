@@ -16,7 +16,7 @@ export const dialogStyle = {
 // app theme for MuiThemeProvider to user
 const Style = getMuiTheme({
   ...darkBaseTheme,
-  fontFamily: 'Roboto, sans-serif',
+  fontFamily: 'Raleway, sans-serif',
   palette: {
     primary1Color: cyan900,
     primary2Color: brown300,
