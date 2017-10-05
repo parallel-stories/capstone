@@ -73,6 +73,7 @@ export const publishCard = function(card, cardId) {
 
   // if branch's root is marked unpublished, create storyroot with branch's name, set storyRoot to array with element isRoot as child of root, and update branch's root from unpublished to new name
   //*******************NEED TO REFACtoR TO MAP THRU CHILDREN */
+  // **** BUG: AFTER WE PUBLISH 2nd CARD IN BRANCH IS WHE BRANCH PUBLISHED IS SET TO TRUE
   // firebase.database().ref('storyRoot').child(card.branchTitle).child('storyRoot').once('value').then(snap => {
   //   if (snap.val() == 'unpublished') {
 
