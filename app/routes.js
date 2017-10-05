@@ -14,6 +14,7 @@ import UserProfile from './components/UserProfile'
 import SingleCard from './components/SingleCard'
 import SingleStoryPage from './components/SingleStoryPage'
 import Searchbar from './components/Searchbar'
+import SearchForUser from './components/SearchForUser'
 
 class Routes extends Component {
   constructor() {
@@ -38,7 +39,7 @@ class Routes extends Component {
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
             <Route exact path="/read" component={Searchbar} />
-            <Route exact path="/allUsers" component={Searchbar} />
+            <Route exact path="/allUsers" component={SearchForUser} />
             <Route
               exact path="/read/story_branch/:branchId"
               render= {(props) => (
