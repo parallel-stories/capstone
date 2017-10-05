@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import SingleStoryBoxDisplay from './SingleStoryBoxDisplay'
 import firebase from 'app/fire'
 import 'firebase/database'
 import _ from 'lodash'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+import UserCard from './UserCard'
 
 export default class AllUsers extends Component {
   constructor() {
@@ -24,7 +25,8 @@ export default class AllUsers extends Component {
     const { users } = this.state
 
     return (
-      <div className="container all-story-branches">
+      <div className="container">
+        <br/>
         {
           /* if this is called from the searchbar component -- searhing is true --
             use the first rendering code
@@ -34,9 +36,12 @@ export default class AllUsers extends Component {
         {
           !_.isEmpty(users) &&
           Object.keys(users).map((key) =>
-            <p key={key}>printing out a user</p>
+            <Link to='/allUsers/:id' key={key}>
+              <UserCard key={key}/>
+            </Link>
           )
         }
+        <br/>
       </div>
     )
   }

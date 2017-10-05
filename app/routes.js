@@ -15,6 +15,7 @@ import SingleCard from './components/SingleCard'
 import SingleStoryPage from './components/SingleStoryPage'
 import Searchbar from './components/Searchbar'
 import SearchForUser from './components/SearchForUser'
+import UserPage from './components/UserPage'
 
 class Routes extends Component {
   constructor() {
@@ -39,7 +40,6 @@ class Routes extends Component {
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
             <Route exact path="/read" component={Searchbar} />
-            <Route exact path="/allUsers" component={SearchForUser} />
             <Route
               exact path="/read/story_branch/:branchId"
               render= {(props) => (
@@ -57,6 +57,8 @@ class Routes extends Component {
                   currentStoryBranch={this.state.currentStoryBranch} />
               )} />
             <Route path="/read/:id" component={StoryBranchNav} />
+            <Route exact path="/allUsers" component={SearchForUser} />
+            <Route exact path="/allUsers/:id" component={UserPage} />
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
