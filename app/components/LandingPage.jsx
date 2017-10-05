@@ -28,7 +28,6 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="landing-page">
-
         <div className="row welcome-header">
           <div className="col col-sm-6 col-md-6 col-lg-6 welcome-image">
             <img src="https://image.flaticon.com/icons/svg/140/140671.svg" alt="logo depicting a tree" />

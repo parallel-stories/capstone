@@ -12,6 +12,7 @@ import RightArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import LeftArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
+import Divider from 'material-ui/Divider'
 
 // react swipe components
 import ReactDOM from 'react-dom'
@@ -101,17 +102,19 @@ class StoryBranchNav extends Component {
           !_.isEmpty(currentStoryBranch) && (
           <div>
             <div>
-              <h1>STORY BRANCH: "{currentStoryBranchId}"</h1>
-              <h3>ROOT: "{currentStoryBranch.storyRoot}"</h3>
+              <h2 className="align-center header">{currentStoryBranchId}</h2>
+              <h4 className="align-center"> Root: "{currentStoryBranch.storyRoot}"</h4>
+              <Divider />
+              <br />
             </div>
             <div className="flex-container">
               {
                 selector > 0
-                ? <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`}>
-                    <IconButton className="col swipe-btn-left-right flex-arrows">
+                ? <IconButton className="col swipe-btn-left-right flex-arrows">
+                    <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`}>
                       <LeftArrow/>
-                    </IconButton>
-                  </Link>
+                    </Link>
+                  </IconButton>
                 : <IconButton
                   className="col swipe-btn-left-right flex-arrows"
                   onClick={() => this.setState({isStart: true})}
@@ -140,11 +143,11 @@ class StoryBranchNav extends Component {
               </ReactSwipe>
               {
                 selector < currentStoryBranch.storyCards.length - 1
-                ? <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector + 1]}`}>
-                    <IconButton className="col swipe-btn-left-right flex-arrows">
+                ? <IconButton className="col swipe-btn-left-right flex-arrows">
+                    <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector + 1]}`}>
                       <RightArrow />
-                    </IconButton>
-                  </Link>
+                    </Link>
+                  </IconButton>
                 : <IconButton
                   className="col swipe-btn-left-right flex-arrows"
                   onClick={() => this.setState({isEnd: true})}
