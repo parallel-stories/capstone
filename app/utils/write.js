@@ -1,7 +1,7 @@
 import firebase from 'app/fire'
 import 'firebase/database'
 
-const createCard = function(card) {
+const createCard = function(card, pubBranch) {
   // create card & generate random firebase key
   const cardKey = firebase.database().ref('storyCard').push(card).key
   // update previous card to point to this one
@@ -14,13 +14,13 @@ const createCard = function(card) {
     if (snap.exists()) {
       const cards = [...snap.val(), cardKey]
       firebase.database().ref('storyBranch').child(card.branchTitle).child('storyCards').set(cards)
-    } 
+    }
     // else if branch does not exist, create branch and create card array
     else {
-      const branch = {}
-      //if there is no root, set storyRoot to be isRoot
+      const branch = pubBranch || {}
+      // if there is no root, set storyRoot to be isRoot
       if (card.rootTitle == '') {
-        //create cardArray
+        // create cardArray
         branch.storyCards = [cardKey]
         // set storybranch's root
         const isRoot = ['isRoot']
@@ -30,7 +30,7 @@ const createCard = function(card) {
         firebase.database().ref('storyCard').child(cardKey).child('rootTitle').set(isRoot)
         //in same level as branches, give key isRoot set to true
         firebase.database().ref('storyRoot').child(card.branchTitle).child('isRoot').set(true)
-      } 
+      }
       //else if there is a root add it to storyRoot array
       else {
         firebase.database().ref('storyBranch').child(card.rootTitle).once('value').then(snap => {
@@ -51,10 +51,10 @@ const createCard = function(card) {
   return cardKey
 }
 
-const createOrUpdateCard = function(card, cardId) {
+const createOrUpdateCard = function(card, cardId, branch) {
   let cardKey = cardId
   if (cardId == '') {
-    cardKey = createCard(card) // returns firebase key
+    cardKey = createCard(card, branch) // returns firebase key
   } else {
     firebase.database().ref('storyCard').child(cardId).child('branchTitle').once('value').then(snap => {
       // check if title has changed.
@@ -75,11 +75,10 @@ export const saveCard = function(card, cardId) {
 
 export const publishCard = function(card, cardId) {
   card.published = true
-  const cardKey = createOrUpdateCard(card, cardId) // returns firebase key
-
-  // **** BUG: AFTER WE PUBLISH 2nd CARD IN BRANCH IS WHE BRANCH PUBLISHED IS SET TO TRUE
-  //set branch to published so its name cant be edited
-  firebase.database().ref('storyBranch').child(card.branchTitle).child('published').set(true)
+  const branch = {}
+  // set branch to published so its name cant be edited
+  branch.published = true
+  const cardKey = createOrUpdateCard(card, cardId, branch) // returns firebase key
 
   return cardKey // WriteSpace expects key back
 }
