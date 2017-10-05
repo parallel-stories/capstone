@@ -17,18 +17,24 @@ const createCard = function(card) {
       firebase.database().ref('storyBranch').child(card.branchTitle).child('storyCards').set(cards)
     } else {
       const branch = {}
-      // if there is a root, set it in branch, otherwise set root to unpublished
+      //if there is no root, set storyRoot to unpublished
+      //else if there is a root add it to storyRoot array
       if (card.rootTitle == '') {
         branch.storyCards = [cardKey]
-        branch.storyRoot = 'unpublished'
+        // set storybranch's root
+        const isRoot = ['isRoot']
+        firebase.database().ref('storyBranch').child(card.branchTitle).child('storyRoot').set(isRoot)
+        // add root to storycard
+        firebase.database().ref('storyCard').child(cardKey).child('rootTitle').set(isRoot)
         firebase.database().ref('storyBranch').child(card.branchTitle).set(branch)
       } else {
-        firebase.database().ref('storyBranch').child(card.rootTitle).child('storyCards').once('value').then(snap => {
-          const branchPoint = snap.val().indexOf(card.prevCard)
-          const rootCards = snap.val().slice(0, branchPoint+1)
+        firebase.database().ref('storyBranch').child(card.rootTitle).once('value').then(snap => {
+          const branchPoint = snap.val().storyCards.indexOf(card.prevCard)
+          const rootCards = snap.val().storyCards.slice(0, branchPoint+1)
           branch.storyCards = [...rootCards, cardKey]
-          branch.storyRoot = card.rootTitle
+          branch.storyRoot = [...snap.val().storyRoot, card.rootTitle]
           firebase.database().ref('storyBranch').child(card.branchTitle).set(branch)
+          firebase.database().ref('storyCard').child(cardKey).child('rootTitle').set(branch.storyRoot)
         })
       }
     }
@@ -65,19 +71,23 @@ export const publishCard = function(card, cardId) {
   card.published = true
   const cardKey = createOrUpdateCard(card, cardId) // returns firebase key
 
-  // if branch's root is marked unpublished, create storyroot with branch's name, include that branch as child of root, and update branch's root from unpublished to new name
-  firebase.database().ref('storyBranch').child(card.branchTitle).child('storyRoot').once('value').then(snap => {
-    if (snap.val() == 'unpublished') {
-      // set storybranch's root
-      firebase.database().ref('storyBranch').child(card.branchTitle).child('storyRoot').set(card.branchTitle)
-      // set a root in storyroots
-      firebase.database().ref('storyRoot').child(card.branchTitle).child(card.branchTitle).set(true)
-      // add root to storycard
-      firebase.database().ref('storyCard').child(cardKey).child('rootTitle').set(card.branchTitle)
-    }
-  })
-  // make sure branch is marked as published so that name cannot be rewritten
-  firebase.database().ref('storyBranch').child(card.branchTitle).child('published').set(true)
+  // if branch's root is marked unpublished, create storyroot with branch's name, set storyRoot to array with element isRoot as child of root, and update branch's root from unpublished to new name
+  //*******************NEED TO REFACtoR TO MAP THRU CHILDREN */
+  // firebase.database().ref('storyRoot').child(card.branchTitle).child('storyRoot').once('value').then(snap => {
+  //   if (snap.val() == 'unpublished') {
+
+  //     // set a root in storyroots
+  //     firebase.database().ref('storyRoot').child(card.branchTitle).set(true)
+      
+  //     // make sure branch is marked as published so that name cannot be rewritten
+  //     firebase.database().ref('storyBranch').child(card.branchTitle).child('published').set(true)
+  //   } else {
+      //logic for if a branch's root is published
+      // make sure branch is marked as published so that name cannot be rewritten
+      firebase.database().ref('storyBranch').child(card.branchTitle).child('published').set(true)
+  //  }
+  // })
+
 
   return cardKey // WriteSpace expects key back
 }
