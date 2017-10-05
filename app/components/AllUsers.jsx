@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+
+import _ from 'lodash'
+
 import firebase from 'app/fire'
 import 'firebase/database'
-import _ from 'lodash'
-import { Link } from 'react-router-dom'
+const auth = firebase.auth()
 
 import UserCard from './UserCard'
 
@@ -10,7 +12,8 @@ export default class AllUsers extends Component {
   constructor() {
     super()
     this.state = {
-      users: {}
+      users: {},
+      currentUser: {}
     }
   }
 
@@ -19,6 +22,15 @@ export default class AllUsers extends Component {
       const users = snap.val()
       this.setState({ users })
     })
+    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
+      if( user ) {
+        this.setState({ currentUser: user, })
+      }
+    })) //end auth
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   render() {
@@ -36,9 +48,7 @@ export default class AllUsers extends Component {
         {
           !_.isEmpty(users) &&
           Object.keys(users).map((key) =>
-            <Link to='/allUsers/:id' key={key}>
-              <UserCard key={key}/>
-            </Link>
+            <UserCard key={key} thisKey={key} currentUser={this.state.currentUser}/>
           )
         }
         <br/>
