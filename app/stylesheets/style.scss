@@ -185,3 +185,21 @@ input.form-control {
   margin: 0 auto;
   vertical-align: middle;
 }
+
+/* flexbox styling for story branch nav */
+.flex-container {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.flex-arrows {
+  width: 100px;
+  flex: 0 0 100px;
+}
+
+.flex-card {
+  width: 1000px;
+  text-align: center;
+}
