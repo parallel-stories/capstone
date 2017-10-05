@@ -18,7 +18,8 @@ import 'firebase/database'
 
 import { dialogStyle } from '../stylesheets/MatUIStyle'
 
-import { saveCard, publishCard, saveBranchTitle } from '../utils/write.js'
+import { saveCard, publishCard } from '../utils/write.js'
+import { branchCard } from '../utils/branch.js'
 
 export default class WriteSpace extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ export default class WriteSpace extends Component {
       dirtyText: false,
       dirtyTitle: false,
       editTitle: true,
+      published: false,
       // saveCard & publishCard depend on the state below not being refactored
       cardId: '',
       card: {
@@ -44,12 +46,11 @@ export default class WriteSpace extends Component {
       // to check for inputs -- can't be blank
       // and can't be more than 500 characters
     }
-    this.branchOff = this.branchOff.bind(this)
   }
 
   componentDidMount() {
     if (this.state.cardId != '') {
-      firebase.database().ref('storyCard').child(this.state.cardId).on('value', snap => {
+      firebase.database().ref('storyCard').child(this.state.cardId).once('value', snap => {
         if (!snap.val().published) {
           this.setState({card: snap.val()})
         } else {
@@ -85,7 +86,7 @@ export default class WriteSpace extends Component {
   }
 
   saveTitle = () => {
-    const cardKey = saveBranchTitle(this.state.card, this.state.cardId)
+    const cardKey = saveCard(this.state.card, this.state.cardId)
     this.setState({
       editTitle: false,
       cardId: cardKey
@@ -110,6 +111,7 @@ export default class WriteSpace extends Component {
       this.setState({
         dirtyText: false,
         dirtyTitle: false,
+        editTitle: false,
         cardId: cardKey
       })
     }
@@ -132,7 +134,7 @@ export default class WriteSpace extends Component {
         card: Object.assign({}, this.state.card, {
           userId: 1,
           text: '',
-          rootTitle: this.state.rootTitle,
+          rootTitle: this.state.card.branchTitle,
           prevCard: cardKey,
           nextCard: ''
         })
@@ -142,7 +144,22 @@ export default class WriteSpace extends Component {
 
   branchOff = (evt) => {
     evt.preventDefault()
-    console.log('branching time')
+    this.setState({
+      openSubmit: false,
+      dirtyText: false,
+      dirtyTitle: false,
+      editTitle: true,
+      published: false,
+      cardId: '',
+      card: {
+        userId: 1,
+        text: '',
+        branchTitle: '',
+        rootTitle: this.state.card.branchTitle,
+        prevCard: this.state.card.prevCard,
+        nextCard: ''
+      }
+    })
   }
 
   // to open/close dialog box on sumit story

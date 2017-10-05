@@ -1,6 +1,11 @@
 import firebase from 'app/fire'
 import 'firebase/database'
 
-const branchCard = function(card) {
-
+export const branchCard = function(card) {
+  // so far unnecessary
 }
+
+
+/****************
+ * need to deal with roots !!!
+ */
