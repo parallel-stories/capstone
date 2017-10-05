@@ -38,6 +38,7 @@ class Routes extends Component {
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
             <Route exact path="/read" component={Searchbar} />
+            <Route exact path="/allUsers" component={Searchbar} />
             <Route
               exact path="/read/story_branch/:branchId"
               render= {(props) => (
