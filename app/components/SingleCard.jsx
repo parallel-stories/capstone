@@ -6,6 +6,7 @@ import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import Snackbar from 'material-ui/Snackbar'
+import Divider from 'material-ui/Divider'
 
 // html parser
 import ReactHtmlParser from 'react-html-parser'
@@ -49,6 +50,24 @@ export default class SingleCard extends Component {
     return branchLinks
   }
 
+  getButton = (valCheck, label, bkColor, callback) => {
+    if (valCheck) {
+      return <FlatButton label={label} backgroundColor={bkColor} onClick={callback} />
+    }
+  }
+
+  getPrevButton = (parentCardId, parentBranchId) => {
+    if (parentCardId) {
+      return (
+        <Link to={`/read/story_branch/${parentBranchId}/${parentCardId}`}>
+        {
+          this.getButton(parentCardId, 'Return to previous story branch', '#50AD55', this.props.handleReturnToPrevBranch)
+        }
+        </Link>
+      )
+    }
+  }
+
   render() {
     const {handleReturnToPrevBranch} = this.props
     const {currentCard, currentStoryBranchId} = this.props.currentState
@@ -66,33 +85,22 @@ export default class SingleCard extends Component {
             : <div></div>
           }
         </CardText>
+        <Divider />
         <CardActions>
-          <FlatButton label="Branch" />
+          <FlatButton label="Branch" backgroundColor='#D1B38E' />
           {
-            branches.length &&
-            (
-              <div>
-                <FlatButton label="Read Branches" onClick={this.handleDownClick} />
-                {
-                  getDialogBox(
-                    'Choose another story branch:',
-                    branches,
-                    getCancelAlertButton(() => this.setState({isReadingBranchOptions: false})),
-                    isReadingBranchOptions, true
-                  )
-                }
-              </div>
+            this.getButton(branches.length, 'Read Branches', '#50AD55', this.handleDownClick)
+          }
+          {
+            getDialogBox(
+              'Choose another story branch:',
+              branches,
+              getCancelAlertButton(() => this.setState({isReadingBranchOptions: false})),
+              isReadingBranchOptions, true
             )
           }
           {
-            parentCardId &&
-            (
-              <div>
-                <Link to={`/read/story_branch/${parentBranchId}/${parentCardId}`}>
-                  <FlatButton label="Return to previous story branch" onClick={handleReturnToPrevBranch}/>
-                </Link>
-              </div>
-            )
+            this.getPrevButton(parentCardId, parentBranchId)
           }
           <Snackbar
             open={this.state.isChangingBranch}
