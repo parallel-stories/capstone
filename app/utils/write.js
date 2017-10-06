@@ -41,6 +41,7 @@ const createCard = function(card, pubBranch) {
           firebase.database().ref('storyBranch').child(card.branchTitle).set(branch)
           firebase.database().ref('storyCard').child(cardKey).child('rootTitle').set(branch.storyRoot)
           firebase.database().ref('storyRoot').child(card.rootTitle).child(card.branchTitle).set(true)
+          firebase.database().ref('storyCard').child(card.prevCard).child('branches').set(true)
           firebase.database().ref('storyCard').child(card.prevCard).child('branches').child(card.branchTitle).set(cardKey)
         })
       }
