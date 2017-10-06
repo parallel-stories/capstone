@@ -34,7 +34,7 @@ export default class WriteSpace extends Component {
       // saveCard & publishCard depend on the state below not being refactored
       cardId: '',
       card: {
-        userId: 1,
+        userId: '',
         text: '',
         branchTitle: '',
         rootTitle: '',
@@ -50,10 +50,20 @@ export default class WriteSpace extends Component {
   }
 
   componentDidMount() {
+    //set user
+    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
+      if( user ) {
+        this.setState({
+          card: Object.assign({}, this.state.card, {
+            userId: user.uid
+          })
+        })
+      }
+    }))      
+
     if (this.props.isBranch) {
       this.setState({
         card: Object.assign({}, this.state.card, {
-          userId: 1, // will get via props maybe
           rootTitle: this.props.match.params.rootId,
           prevCard: this.props.match.params.cardId,
         })
@@ -74,6 +84,10 @@ export default class WriteSpace extends Component {
         }
       })
     }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   changeStoryText = (value) => {
