@@ -28,7 +28,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route path="/home" component={LandingPage} />
-            <Route exact path="/write" component={WriteSpace} />
+            <Route exact path="/write" render={(props)=><WriteSpace isBranch={false} {...props} />} />
             <Route exact path="/write/:rootId/:cardId/new_branch" render={(props)=><WriteSpace isBranch={true} {...props} />} />
             <Route exact path="/read" component={Searchbar} />
             <Route exact path="/read/story_branch/:branchId" component={SingleStoryPage} />

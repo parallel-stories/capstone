@@ -7,7 +7,11 @@ export const branchCard = function(card) {
 
 
 /****************
- * need to deal with roots !!!
+ * delete all dummy data like user id
  * need to deal with duplicate titles so they don't overwrite each other
- * make it so that you can't change a branch's title once first card is published
+ * setState on CompDIDMount depending on if isBranch is true or false
+ * if isBranch then setState towhatever is in BranchOff button rn
+ * put in logic to tell the save and publish button which handler to use
+ * whether it is branching off save handler or new story save handler
+ * same for publish (are we publishing new story or new branch)
  */
