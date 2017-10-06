@@ -33,14 +33,18 @@ export default class Searchbar extends Component {
 
   componentDidMount() {
     // load all stories into state
-    firebase.database().ref().child('storyBranch').on('value', snap => {
+    this.storyListener = firebase.database().ref('storyBranch')
+    this.storyListener.on('value', snap => {
       const storyBranches = snap.val()
       this.setState({
         allStoryBranches: storyBranches,
         titles: Object.keys(storyBranches)
       }) // end set state
     })
+  }
 
+  componentWillUnmount() {
+    this.storyListener.off()
   }
 
   // TODO: prevent refresh when the enter key is hit
@@ -85,7 +89,6 @@ export default class Searchbar extends Component {
             onUpdateInput={this.handleUpdateInput}
             onNewRequest={this.handleNewRequest}
             fullWidth={ true }
-            onSubmit={() =>console.log('aahhhhh')}
           />
         </form>
         {

@@ -37,8 +37,6 @@ export default class UserProfile extends Component {
   }
 
   componentDidMount() {
-    console.log('MOUNTING USERpage', this.state)
-    console.log('READY HERER')
     this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
       if (user) {
         this.branchListener = firebase.database().ref(`user/${this.state.user.uid}/storyBranches`)
@@ -56,7 +54,6 @@ export default class UserProfile extends Component {
   }
 
   componentWillUnmount() {
-    console.log('UNMOUNTING USERpage', this.state)
     this.branchListener.off()
     this.favesListener.off()
     this.unsubscribe()
@@ -68,9 +65,6 @@ export default class UserProfile extends Component {
 
   render() {
     const { user, storyBranches, favorites } = this.state
-    console.log('USER STATE:', this.state)
-    console.log('FAVES:', favorites)
-    console.log('BRANCHES:', storyBranches)
 
     return (
       <div className="container-fluid" >
@@ -95,7 +89,6 @@ export default class UserProfile extends Component {
                   />
                 </div>)
               : (<div className="row" >
-                  {console.log('at storyBranch comp')}
                   <AllStoryBranches searchResults={storyBranches} searching={true} />
                 </div>)
             }
@@ -115,7 +108,6 @@ export default class UserProfile extends Component {
                   />
                 </div>)
               : (<div className="row" >
-                {console.log('at fave branch')}
                   <AllStoryBranches searchResults={favorites} searching={true} />
                 </div>)
             }

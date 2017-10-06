@@ -7,7 +7,6 @@ export const getCard = (storyBranchId, cardId, handleCurrentStoryChange) => {
   })
   .then(() => {
     firebase.database().ref(`storyCard/${cardId}`).once('value', snap => {
-      console.log('set val after empty')
       this.setState({cards: [...this.state.cards, snap.val()]})
     })
   })
