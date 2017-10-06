@@ -25,11 +25,11 @@ export default class SingleStoryPage extends Component {
     return (
       <div>
         <div>
-          <h1>{storyBranchId}</h1>
-          <h3>{storyBranch.storyRoot}</h3>
-          <img src="http://lorempixel.com/400/200/" alt="Hello" />
+          <h2 className="align-center">{storyBranchId}</h2>
+          <h4 className="align-center">Root: {storyBranch.storyRoot}</h4>
+          <img className="story-branch" src="http://lorempixel.com/400/200/" alt="Hello" />
         </div>
-        <div>
+        <div className="start-read">
         {
           !_.isEmpty(storyBranch) &&
           <Link to={`/read/story_branch/${storyBranchId}/${storyBranch.storyCards.shift()}`}>Start Reading</Link>
