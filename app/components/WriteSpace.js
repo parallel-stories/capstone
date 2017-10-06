@@ -51,22 +51,25 @@ export default class WriteSpace extends Component {
   }
 
   componentDidMount() {
-    //set user
+    // set user
     this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
-      if( user ) {
+      if (user) {
         this.setState({
           card: Object.assign({}, this.state.card, {
             userId: user.uid
           })
         })
       }
-    }))      
+    }))
 
+    // set state based on url, get root title array of root branch from firebase
     if (this.props.isBranch) {
-      this.setState({
-        card: Object.assign({}, this.state.card, {
-          rootTitle: this.props.match.params.rootId,
-          prevCard: this.props.match.params.cardId,
+      firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
+        this.setState({
+          card: Object.assign({}, this.state.card, {
+            rootTitle: [...snap.val().rootTitle, this.props.match.params.rootId],
+            prevCard: this.props.match.params.cardId,
+          })
         })
       })
     }
@@ -161,7 +164,7 @@ export default class WriteSpace extends Component {
         card: Object.assign({}, this.state.card, {
           userId: 1,
           text: '',
-          rootTitle: this.state.card.rootTitle ||this.state.card.branchTitle,
+          rootTitle: this.state.card.rootTitle || [this.state.card.branchTitle],
           prevCard: cardKey,
           nextCard: ''
         })
