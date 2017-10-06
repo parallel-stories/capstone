@@ -49,6 +49,17 @@ export default class WriteSpace extends Component {
   }
 
   componentDidMount() {
+    if (this.props.isBranch) {
+      this.setState({
+        card: Object.assign({}, this.state.card, {
+          userId: 1, // will get via props maybe
+          rootTitle: this.props.match.params.rootId,
+          prevCard: this.props.match.params.cardId,
+        })
+      })
+    }
+
+    // this is to check if someone is editing a saved, unpublished card. deal with is published logic.
     if (this.state.cardId != '') {
       firebase.database().ref('storyCard').child(this.state.cardId).once('value', snap => {
         if (!snap.val().published) {
@@ -140,26 +151,6 @@ export default class WriteSpace extends Component {
         })
       })
     }
-  }
-
-  branchOff = (evt) => {
-    evt.preventDefault()
-    this.setState({
-      openSubmit: false,
-      dirtyText: false,
-      dirtyTitle: false,
-      editTitle: true,
-      published: false,
-      cardId: '',
-      card: {
-        userId: 1,
-        text: '',
-        branchTitle: '',
-        rootTitle: this.state.card.branchTitle,
-        prevCard: this.state.card.prevCard,
-        nextCard: ''
-      }
-    })
   }
 
   // to open/close dialog box on sumit story
