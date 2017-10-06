@@ -203,10 +203,18 @@ input.form-control {
 }
 
 /* style for single story page*/
-img.story-branch {
+.story-branch {
   margin: auto
 }
 
-div.start-read{
-  margin: auto
+.start-read {
+  margin: 20px auto
 }
+
+.story-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column
+}
+
