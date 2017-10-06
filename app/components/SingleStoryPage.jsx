@@ -22,12 +22,17 @@ export default class SingleStoryPage extends Component {
     const storyBranchId = this.props.match.params.branchId
     const storyBranch = this.state.currentStoryBranch
 
+    const getStoryRootTitle = () => {
+      const roots = _.isEmpty(storyBranch) ? [] : storyBranch.storyRoot
+      return roots.length > 1 ? roots[roots.length - 1] : storyBranchId
+    }
+
     return (
       <div>
         <div>
           <h2 className="align-center">{storyBranchId}</h2>
-          <h4 className="align-center">Root: {storyBranch.storyRoot}</h4>
-          <img className="story-branch" src="http://lorempixel.com/400/200/" alt="Hello" />
+          <h4 className="align-center">Root: "{getStoryRootTitle()}"</h4>
+          <img className="story-branch" src="http://lorempixel.com/400/200/" alt="This is an amazing picture." />
         </div>
         <div className="start-read">
         {
