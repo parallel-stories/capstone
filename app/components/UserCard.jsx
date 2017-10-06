@@ -15,6 +15,7 @@ export default class UserCard extends Component {
   constructor() {
     super()
     this.state = {
+      fullName: 'unknown',
       following: false,
       storiesAuthored: 0,
     }
@@ -54,11 +55,12 @@ export default class UserCard extends Component {
 
   render() {
     const { thisKey } = this.props
+    console.log("WHAT IS PROPS ON THE ALL USERS PAGE", this.props.user, this.props.thisKey)
     return (
       <Card className="single-card col-lg-4 col-md-4 col-sm-4">
         <Link to={`/allUsers/${thisKey}`} key={thisKey}>
           <CardHeader
-            title='user name'
+            title={`${this.state.fullName}`}
             subtitle={`${this.state.storiesAuthored}`}
             avatar="http://via.placeholder.com/150x150"
             />
