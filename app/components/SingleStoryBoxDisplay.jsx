@@ -52,7 +52,7 @@ export default class SingleStoryBoxDisplay extends Component {
   }
 
   componentWillUnmount() {
-    this.favesListener.off()
+    if (this.favesListener) this.favesListener.off()
     this.unsubscribe()
   }
 

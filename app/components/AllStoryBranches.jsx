@@ -14,11 +14,7 @@ class AllStoryBranches extends Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-    this.listenerRef = firebase.database().ref('storyBranch')
-=======
     this.listenerRef = firebase.database().ref('storyBranch/')
->>>>>>> master
     this.listenerRef.on('value', snap => {
       const storyBranches = snap.val()
       this.setState({allStoryBranches: storyBranches})
