@@ -13,8 +13,10 @@ import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 
+//firebase
 import firebase from 'app/fire'
 import 'firebase/database'
+const auth = firebase.auth()
 
 import { dialogStyle } from '../stylesheets/MatUIStyle'
 
