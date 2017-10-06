@@ -42,17 +42,17 @@ export default class SingleStoryBoxDisplay extends Component {
           loggedIn: true,
           userId: user.uid,
         })
-        firebase.database().ref()
-          .child('user').child(user.uid).child('faves').child(this.props.thisKey)
-          .on('value', snap => {
-            const val = snap.val()
-            if( val !== null ) this.setState({checked: val})
+        this.favesListener = firebase.database().ref(`user/${user.uid}/faves/${this.props.thisKey}`)
+        this.favesListener.on('value', snap => {
+          const val = snap.val()
+          if( val !== null ) this.setState({checked: val})
         })
       }
     })) // end on AuthStateChanged
   }
 
   componentWillUnmount() {
+    this.favesListener.off()
     this.unsubscribe()
   }
 
