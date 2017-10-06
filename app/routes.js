@@ -18,14 +18,6 @@ import Searchbar from './components/Searchbar'
 class Routes extends Component {
   constructor() {
     super()
-    this.state = {
-      currentStoryBranch: {}
-    }
-    this.handleCurrentStoryChange = this.handleCurrentStoryChange.bind(this)
-  }
-
-  handleCurrentStoryChange = (storyBranchId, storyBranch) => {
-    this.setState({currentStoryBranchTitle: storyBranchId, currentStoryBranch: storyBranch})
   }
 
   render() {
@@ -38,23 +30,8 @@ class Routes extends Component {
             <Route path="/home" component={LandingPage} />
             <Route path="/write" component={WriteSpace} />
             <Route exact path="/read" component={Searchbar} />
-            <Route
-              exact path="/read/story_branch/:branchId"
-              render= {(props) => (
-                <SingleStoryPage
-                  {...props}
-                  handleCurrentStoryChange={this.handleCurrentStoryChange}
-                  currentStoryBranch={this.state.currentStoryBranch} />
-              )} />
-            <Route
-              exact path="/read/story_branch/:branchId/:cardId"
-              render={(props) => (
-                <StoryBranchNav
-                  {...props}
-                  handleCurrentStoryChange={this.handleCurrentStoryChange}
-                  currentStoryBranch={this.state.currentStoryBranch} />
-              )} />
-            <Route path="/read/:id" component={StoryBranchNav} />
+            <Route exact path="/read/story_branch/:branchId" component={SingleStoryPage} />
+            <Route exact path="/read/story_branch/:branchId/:cardId" component={StoryBranchNav} />
             <Route path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>

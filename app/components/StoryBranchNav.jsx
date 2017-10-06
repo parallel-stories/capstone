@@ -1,5 +1,6 @@
 // react
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 
 // react components
 import SingleCard from './SingleCard'
@@ -9,8 +10,9 @@ import OptionsCard from './OptionsCard'
 import IconButton from 'material-ui/IconButton'
 import RightArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import LeftArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
-import UpArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
-import DownArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-down'
+import FlatButton from 'material-ui/FlatButton'
+import Dialog from 'material-ui/Dialog'
+import Divider from 'material-ui/Divider'
 
 // react swipe components
 import ReactDOM from 'react-dom'
@@ -23,110 +25,148 @@ import firebase from 'app/fire'
 import _ from 'lodash'
 
 // utils
-// import {getCard} from '../utils'
+import {getStoryBranch, getStoryCard, getDialogBox, getCancelAlertButton} from '../utils/storyBranchNavUtils'
 
 class StoryBranchNav extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cards: [],
+      currentStoryBranchId: '',
+      currentStoryBranch: {},
+      currentCardId: '',
+      currentCard: {},
       selector: 0,
-      childParent: [],
-      isReadingBranchOptions: false
-    }
-    this.handleRightClick = this.handleRightClick.bind(this)
-    this.handleLeftClick = this.handleLeftClick.bind(this)
-    this.handleDownClick = this.handleDownClick.bind(this)
-    this.handleUpClick = this.handleUpClick.bind(this)
-  }
-
-  componentDidMount() {
-    if (_.isEmpty(this.props.currentStoryBranch)) {
-      const storyBranchId = this.props.match.params.branchId
-      firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
-        const storyBranch = snap.val()
-        return this.props.handleCurrentStoryChange(storyBranchId, storyBranch)
-      })
-      .then(() => {
-        firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
-          this.setState({cards: [...this.state.cards, snap.val()]})
-        })
-      })
-    } else {
-      firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
-        this.setState({cards: [...this.state.cards, snap.val()]})
-      })
+      childParent: {},
+      isEnd: false,
+      isStart: false
     }
   }
 
-  handleRightClick = () => {
-    const nextCardId = this.state.cards[this.state.selector].nextCard
-
-    if (nextCardId !== '') {
-      firebase.database().ref(`storyCard/${nextCardId}`).once('value', snap => {
-        this.setState({selector: this.state.selector + 1, cards: [...this.state.cards, snap.val()]})
-      })
-    }
-  }
-
-  handleLeftClick = () => {
-    if (this.state.selector) {
-      this.setState({selector: this.state.selector - 1})
-    }
-  }
-
-  handleDownClick = () => {
-    if (this.state.cards[this.state.selector].branches) {
-      this.setState({isReadingBranchOptions: true})
-    }
-  }
-
-  handleOptionClick = (branch) => {
-    const newBranchCardId = this.state.cards[this.state.selector].branches[branch]
-    firebase.database().ref(`storyCard/${newBranchCardId}`).once('value', snap => {
-      this.setState({
-        isReadingBranchOptions: false,
-        childParent: [...this.state.childParent, this.state.selector + 1],
-        cards: [...(this.state.cards.slice(0, this.state.selector + 1)), snap.val()],
-        selector: this.state.selector + 1
-      })
+  updateFullState = (branchId, cardId, info) => {
+    this.setState({
+      currentStoryBranchId: branchId,
+      currentStoryBranch: info[0].val(),
+      currentCardId: cardId,
+      selector: info[0].val().storyCards.indexOf(+cardId),
+      currentCard: info[1].val()
     })
   }
 
-  handleUpClick = () => {
-    if (this.state.childParent.includes(this.state.selector)) {
-      const childParent = this.state.childParent
-      childParent.splice(this.state.childParent.indexOf(this.state.selector), 1)
-      this.setState({cards: this.state.cards.slice(0, this.state.selector), selector: this.state.selector - 1, childParent: childParent})
+  componentDidMount() {
+    const {branchId, cardId} = this.props.match.params
+    Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
+    .then(info => this.updateFullState(branchId, cardId, info))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {branchId, cardId} = nextProps.match.params
+    if (branchId === this.state.currentStoryBranchId && cardId !== this.state.currentCardId) {
+      getStoryCard(cardId).then(cardSnap => this.setState({
+        currentCardId: cardId,
+        selector: this.state.currentStoryBranch.storyCards.indexOf(+cardId),
+        currentCard: cardSnap.val()
+      }))
+    } else {
+      Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
+      .then(info => this.updateFullState(branchId, cardId, info))
     }
   }
 
+  handleOptionClick = () => {
+    const {childParent, currentCardId, currentStoryBranchId} = this.state
+    this.setState({childParent: Object.assign(
+      {},
+      childParent,
+      {[`${currentCardId}`]: [currentStoryBranchId, currentCardId]}
+    )})
+  }
+
+  handleReturnToPrevBranch = () => {
+    const childParent = this.state.childParent
+    delete childParent[this.state.currentCardId]
+    this.setState({childParent})
+  }
+
   render() {
+    const {currentStoryBranch, currentStoryBranchId, currentCard, isStart, isEnd, selector} = this.state
+
+    let parentBranchId, parentCardId
+    if (this.state.childParent[this.state.currentCardId]) {
+      parentBranchId = this.state.childParent[this.state.currentCardId][0]
+      parentCardId = this.state.childParent[this.state.currentCardId][1]
+    }
+
     return (
       <div>
-        <div className="row container-fluid">
-          <IconButton className="swipe-btn-up-down" onClick={this.handleUpClick}><UpArrow/></IconButton>
-        </div>
-        <div className="flex-container">
-          <IconButton className="col swipe-btn-left-right flex-arrows" onClick={this.handleLeftClick}>
-            <LeftArrow/>
-          </IconButton>
-          <ReactSwipe className="flex-card carousel"
-                      swipeOptions={{continuous: false}}
-                      key={this.state.selector}>
+        {
+          !_.isEmpty(currentStoryBranch) && (
+          <div>
+            <div>
+              <h2 className="align-center header">{currentStoryBranchId}</h2>
+              <h4 className="align-center"> Root: "{currentStoryBranch.storyRoot}"</h4>
+              <Divider />
+              <br />
+            </div>
+            <div className="flex-container">
               {
-                this.state.isReadingBranchOptions
-                ? <OptionsCard branches={this.state.cards[this.state.selector].branches} handleOptionClick={this.handleOptionClick} />
-                : <SingleCard currentCard={this.state.cards[this.state.selector]} />
+                selector > 0
+                ? <IconButton className="col swipe-btn-left-right flex-arrows">
+                    <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`}>
+                      <LeftArrow/>
+                    </Link>
+                  </IconButton>
+                : <IconButton
+                  className="col swipe-btn-left-right flex-arrows"
+                  onClick={() => this.setState({isStart: true})}
+                  >
+                    <LeftArrow/>
+                    {
+                      getDialogBox(
+                        '',
+                        'This is the start of the story.',
+                        getCancelAlertButton(() => this.setState({isStart: false})),
+                        isStart,
+                        false
+                      )
+                    }
+                  </IconButton>
               }
-          </ReactSwipe>
-          <IconButton className="col swipe-btn-left-right flex-arrows" onClick={this.handleRightClick}>
-            <RightArrow />
-          </IconButton>
-        </div>
-        <div className="row container-fluid">
-          <IconButton className="swipe-btn-up-down" onClick={this.handleDownClick}><DownArrow /></IconButton>
-        </div>
+              <ReactSwipe className="flex-card carousel"
+                          swipeOptions={{continuous: false}}
+                          key={selector}>
+                  <SingleCard
+                    currentState={this.state}
+                    parent={parentCardId ? {parentBranchId, parentCardId} : false}
+                    handleReturnToPrevBranch={this.handleReturnToPrevBranch}
+                    handleOptionClick={this.handleOptionClick}
+                  />
+              </ReactSwipe>
+              {
+                selector < currentStoryBranch.storyCards.length - 1
+                ? <IconButton className="col swipe-btn-left-right flex-arrows">
+                    <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector + 1]}`}>
+                      <RightArrow />
+                    </Link>
+                  </IconButton>
+                : <IconButton
+                  className="col swipe-btn-left-right flex-arrows"
+                  onClick={() => this.setState({isEnd: true})}
+                  >
+                    <RightArrow />
+                    {
+                      getDialogBox(
+                        '',
+                        'Sorry. There are currently no more scenes for this story.',
+                        getCancelAlertButton(() => this.setState({isEnd: false})),
+                        isEnd,
+                        false
+                      )
+                    }
+                  </IconButton>
+              }
+            </div>
+          </div>
+        )}
       </div>
     )
   }
