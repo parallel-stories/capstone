@@ -1,4 +1,4 @@
-var functions = require('firebase-functions')
+// var functions = require('firebase-functions')
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/preview/functions/write-firebase-functions

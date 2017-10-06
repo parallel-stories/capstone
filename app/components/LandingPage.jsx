@@ -37,7 +37,9 @@ class LandingPage extends Component {
               Welcome to <span className="title">Parallel Stories</span>!
             </h1>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt augue erat, a tincidunt urna rutrum eu. Ut a urna pharetra, convallis turpis sit amet, luctus mauris. Nam consectetur, justo at commodo ultricies, felis ipsum lobortis mi, et tristique mi est eget quam. Pellentesque euismod posuere est sed pharetra. Duis eu libero nisl. Proin sit amet egestas ligula, ac placerat felis. Suspendisse eleifend enim eu eros consectetur, sed consequat erat ornare. Fusce vehicula, metus hendrerit malesuada efficitur, nulla orci gravida diam, at consectetur purus felis eget massa. Etiam blandit urna at odio hendrerit elementum. Aenean fringilla, lorem eu hendrerit sollicitudin, ex dolor varius augue, vel efficitur sem lectus ac lorem.
+              Use the navigation bar on the top left of this page to Write a Story, Read Stories, Favorite Stories, and See your user profile!
+              Also, please give us feedback using this{' '}
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUBon3g9H6Ymanjoi1-BZHQGafJuJytHt7Cs8Le_IPLgOoeg/viewform" target="_blank">form</a>
             </p>
           </div>
         </div>
