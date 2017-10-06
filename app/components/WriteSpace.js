@@ -235,10 +235,6 @@ export default class WriteSpace extends Component {
                 label="CLEAR"
                 backgroundColor="#B83939"
                 onClick={this.clearStory} />
-              <RaisedButton key='branch off'
-                label="BRANCH OFF"
-                backgroundColor="#00FF00"
-                onClick={this.branchOff} />
             </div>
           </div>
         </div>
