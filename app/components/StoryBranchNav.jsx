@@ -46,7 +46,7 @@ class StoryBranchNav extends Component {
       currentStoryBranchId: branchId,
       currentStoryBranch: info[0].val(),
       currentCardId: cardId,
-      selector: info[0].val().storyCards.indexOf(+cardId),
+      selector: info[0].val().storyCards.indexOf(cardId),
       currentCard: info[1].val()
     })
   }
@@ -62,7 +62,7 @@ class StoryBranchNav extends Component {
     if (branchId === this.state.currentStoryBranchId && cardId !== this.state.currentCardId) {
       getStoryCard(cardId).then(cardSnap => this.setState({
         currentCardId: cardId,
-        selector: this.state.currentStoryBranch.storyCards.indexOf(+cardId),
+        selector: this.state.currentStoryBranch.storyCards.indexOf(cardId),
         currentCard: cardSnap.val()
       }))
     } else {
