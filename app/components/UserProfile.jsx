@@ -54,8 +54,8 @@ export default class UserProfile extends Component {
   }
 
   componentWillUnmount() {
-    if (this.branchListener) this.branchListener.off()
-    if (this.favesListener) this.favesListener.off()
+    this.branchListener.off()
+    this.favesListener.off()
     this.unsubscribe()
   }
 
