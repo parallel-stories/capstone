@@ -37,7 +37,11 @@ class LandingPage extends Component {
               Welcome to <span className="title">Parallel Stories</span>!
             </h1>
             <p>
-              Use the navigation bar on the top left of this page to Write a Story, Read Stories, Favorite Stories, and See your user profile!
+              Use the navigation bar on the top left of this page to{' '}
+              <b>Write a Story</b>,
+              <b>Read Stories</b>,
+              <b>Favorite Stories</b>,
+              and <b>See your user profile</b>!
               Also, please give us feedback using this{' '}
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUBon3g9H6Ymanjoi1-BZHQGafJuJytHt7Cs8Le_IPLgOoeg/viewform" target="_blank">form</a>
             </p>

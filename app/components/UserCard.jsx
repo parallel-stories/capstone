@@ -28,7 +28,7 @@ export default class UserCard extends Component {
   }
 
   componentWillUnmount() {
-
+    if( this.followingListener ) this.followingListener.off()
   }
 
   updateFollowing = () => {
@@ -42,12 +42,13 @@ export default class UserCard extends Component {
 
   updateUserFollow = () => {
     const userKey = this.props.thisKey
+    this.followingListener = firebase.database().ref('user').child(this.props.currentUser.uid).child('following').child(userKey)
     if( !this.state.following ) {
       // adds story when favorited
-      firebase.database().ref('user').child(this.props.currentUser.uid).child('following').child(userKey).set(true)
+      this.followingListener.set(true)
     } else {
       // removes story when un-favorited
-      firebase.database().ref('user').child(this.props.currentUser.uid).child('following').child(userKey).remove()
+      this.followingListener.remove()
     }
   }
 
