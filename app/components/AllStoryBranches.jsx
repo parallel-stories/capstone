@@ -14,10 +14,15 @@ class AllStoryBranches extends Component {
   }
 
   componentDidMount() {
-    firebase.database().ref().child('storyBranch').on('value', snap => {
+    this.listenerRef = firebase.database().ref('storyBranch/')
+    this.listenerRef.on('value', snap => {
       const storyBranches = snap.val()
       this.setState({allStoryBranches: storyBranches})
     })
+  }
+
+  componentWillUnmount() {
+    this.listenerRef.off()
   }
 
   render() {
@@ -35,14 +40,14 @@ class AllStoryBranches extends Component {
         {
           searching ?
           !_.isEmpty(searchResults) &&
-          Object.keys(searchResults).map((key) =>
-            <Link key={key} to={`/read/story_branch/${key}`}><SingleStoryBoxDisplay key={key} storyBranchTitle={key} storyBranchDetails={searchResults[key]} /></Link>
-          )
+            Object.keys(searchResults).map((key) =>
+              <SingleStoryBoxDisplay key={key} storyBranchTitle={key} storyBranchDetails={searchResults[key]} thisKey={key}/>
+            )
           :
           !_.isEmpty(allStoryBranches) &&
-
-          Object.keys(allStoryBranches).map((key) => <Link key={key} to={`/read/story_branch/${key}`}><SingleStoryBoxDisplay storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} /></Link>
-          )
+            Object.keys(allStoryBranches).map((key) =>
+              <SingleStoryBoxDisplay key={key} storyBranchTitle={key} storyBranchDetails={allStoryBranches[key]} thisKey={key}/>
+            )
         }
       </div>
     )
