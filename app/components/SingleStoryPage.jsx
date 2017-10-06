@@ -14,22 +14,13 @@ export default class SingleStoryPage extends Component {
   componentDidMount() {
     const storyBranchId = this.props.match.params.branchId
     firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
-<<<<<<< HEAD
-      const storyBranch = snap.val()
-      this.props.handleCurrentStoryChange(storyBranchId, storyBranch)
-=======
       this.setState({currentStoryBranch: snap.val()})
->>>>>>> master
     })
   }
 
   render() {
     const storyBranchId = this.props.match.params.branchId
-<<<<<<< HEAD
-    const storyBranch = this.props.currentStoryBranch
-=======
     const storyBranch = this.state.currentStoryBranch
->>>>>>> master
 
     return (
       <div>
