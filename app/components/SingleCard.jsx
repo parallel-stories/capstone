@@ -71,12 +71,9 @@ export default class SingleCard extends Component {
   getBranchingButton = (rootId, cardId) => {
     return (
       <Link to={`/write/${rootId}/${cardId}/new_branch`}>
-      {
-        this.getButton(true, 'Create A Branch', '#D1B38E', null)
-      }
+        <FlatButton label='Create A Branch' backgroundColor='#D1B38E' />
       </Link>
     )
-  
   }
 
   render() {
@@ -100,7 +97,7 @@ export default class SingleCard extends Component {
         <CardActions>
           {
             this.getBranchingButton(currentStoryBranchId, currentCardId)
-          }   
+          }
           {
             this.getButton(branches.length, 'Read Branches', '#50AD55', this.handleDownClick)
           }

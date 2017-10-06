@@ -19,7 +19,6 @@ import 'firebase/database'
 import { dialogStyle } from '../stylesheets/MatUIStyle'
 
 import { saveCard, publishCard } from '../utils/write.js'
-import { branchCard } from '../utils/branch.js'
 
 export default class WriteSpace extends Component {
   constructor(props) {
