@@ -18,6 +18,9 @@ import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 // link from react-router-dom
 import {Link} from 'react-router-dom'
 
+//libraries
+import _ from 'lodash'
+
 const styles = {
   card: {
     boxShadow: "none",
@@ -79,9 +82,14 @@ export default class SingleStoryBoxDisplay extends Component {
   render() {
     const {storyBranchTitle, storyBranchDetails, thisKey} = this.props
 
+    const getStoryRootTitle = () => {
+      const roots = _.isEmpty(storyBranchDetails) ? [] : storyBranchDetails.storyRoot
+      return roots.length > 1 ? roots[roots.length - 1] : storyBranchTitle
+    }
+
     return (
     <Card className="single-card col-lg-4 col-md-4 col-sm-4"
-          style={{boxShadow:"none", borderWidth: 1}}>
+          style={{boxShadow: "none", borderWidth: 1}}>
       <CardHeader>
         <Checkbox
           checkedIcon={<ActionFavorite style={{color: '#FFB6C1'}} />}
@@ -92,7 +100,7 @@ export default class SingleStoryBoxDisplay extends Component {
       </CardHeader>
       <Link key={thisKey} to={`/read/story_branch/${thisKey}`}>
         <CardMedia
-          overlay={<CardTitle title={storyBranchTitle} subtitle={storyBranchDetails.storyRoot} />}
+          overlay={<CardTitle title={storyBranchTitle} subtitle={getStoryRootTitle()} />}
         >
           <img src="images/book_icon.svg" alt="" />
         </CardMedia>
