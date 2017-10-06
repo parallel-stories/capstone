@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 
 // react components
 import SingleCard from './SingleCard'
-import OptionsCard from './OptionsCard'
 
 // material ui
 import IconButton from 'material-ui/IconButton'
