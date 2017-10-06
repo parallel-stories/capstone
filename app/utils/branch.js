@@ -16,4 +16,7 @@ export const branchCard = function(card) {
  * same for publish (are we publishing new story or new branch)
  *
  * after clicking new branch and getting to new_branch route, upon saving the new text, change the url to no longer be "new_branch" but be a write url with the new card ID
+ *
+ * IF ISROOT, change root title display to branch title in read page
  */
+

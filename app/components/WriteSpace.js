@@ -145,7 +145,7 @@ export default class WriteSpace extends Component {
         card: Object.assign({}, this.state.card, {
           userId: 1,
           text: '',
-          rootTitle: this.state.card.branchTitle,
+          rootTitle: this.state.card.rootTitle ||this.state.card.branchTitle,
           prevCard: cardKey,
           nextCard: ''
         })
