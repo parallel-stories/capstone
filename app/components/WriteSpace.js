@@ -26,6 +26,7 @@ export default class WriteSpace extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      user: {},
       openSubmit: false,
       dirtyText: false,
       dirtyTitle: false,
