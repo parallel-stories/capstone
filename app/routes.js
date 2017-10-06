@@ -15,6 +15,7 @@ import SingleCard from './components/SingleCard'
 import SingleStoryPage from './components/SingleStoryPage'
 import Searchbar from './components/Searchbar'
 import AllUsers from './components/AllUsers'
+import UserPage from './components/UserPage'
 
 class Routes extends Component {
   constructor() {
@@ -34,7 +35,7 @@ class Routes extends Component {
             <Route exact path="/read/story_branch/:branchId" component={SingleStoryPage} />
             <Route exact path="/read/story_branch/:branchId/:cardId" component={StoryBranchNav} />
             <Route exact path="/allUsers" component={AllUsers} />
-            <Route path="/allUsers/:id" component={AllUsers} />
+            <Route path="/allUsers/:id" component={UserPage} />
             <Route exact path="/userProfile" component={UserProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
