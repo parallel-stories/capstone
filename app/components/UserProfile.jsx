@@ -32,6 +32,7 @@ export default class UserProfile extends Component {
       user: {},
       storyBranches: {},
       favorites: {},
+      usersFollowed: {},
     }
     this.handleLink = this.handleLink.bind(this)
   }
@@ -64,7 +65,7 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    const { user, storyBranches, favorites } = this.state
+    const { user, storyBranches, favorites, usersFollowed } = this.state
 
     return (
       <div className="container-fluid" >
@@ -112,9 +113,27 @@ export default class UserProfile extends Component {
                 </div>)
             }
             <h2>Users You're Following</h2>
-            <p>user profiles will go here</p>
+            { _.isEmpty(usersFollowed)?
+              (<div>
+                <p>
+                You're not currently following anyone!
+                Click the button below to see what other users are up to!
+                </p>
+                <RaisedButton
+                  label="All Users"
+                  onClick={(e) => { this.handleLink(e, 'allUsers') }}
+                  backgroundColor='#D1B38E'
+                  style={landingStyles.button}
+                />
+            </div>)
+            :
+            (<div className="row" >
+              <p> Followed Users Will Go Here </p>
+            </div>)
+          }
           </div>
         } {/* end check to see if user is logged in */}
+        <br />
         <br />
       </div>
     )

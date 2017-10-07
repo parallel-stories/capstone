@@ -224,5 +224,12 @@ input.form-control {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.story-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column
 }
