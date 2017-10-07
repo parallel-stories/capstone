@@ -25,12 +25,13 @@ export default class SingleStoryPage extends Component {
 
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(storyBranch) ? [] : storyBranch.storyRoot
+      console.log(roots)
       return roots.length > 1 ? roots[roots.length - 1] : storyBranchId
     }
 
     return (
       <div className="story-container">
-        <div>
+        <div className="story-container">
           <h2 className="align-center">{storyBranchId}</h2>
           <h4 className="align-center">Root: "{getStoryRootTitle()}"</h4>
           <img className="story-branch" src="http://lorempixel.com/400/200/" alt="This is an amazing picture." />
