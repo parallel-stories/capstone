@@ -29,33 +29,35 @@ export default class UserCard extends Component {
   }
 
   componentWillUnmount() {
-    if( this.followingListener ) this.followingListener.off()
+
   }
 
   updateFollowing = () => {
-    this.setState((oldState) => {
-      return {
-        following: !oldState.following,
-      }
-    })
-    this.updateUserFollow()
+    if( this.props.currentUser ) {
+      this.setState((oldState) => {
+        return {
+          following: !oldState.following,
+        }
+      })
+      this.updateUserFollow()
+    } else {
+      console.log('log in to follow people!')
+    }
   }
 
   updateUserFollow = () => {
     const userKey = this.props.thisKey
-    this.followingListener = firebase.database().ref('user').child(this.props.currentUser.uid).child('following').child(userKey)
     if( !this.state.following ) {
       // adds story when favorited
-      this.followingListener.set(true)
+      firebase.database().ref('user').child(this.props.currentUser.uid).child('following').child(userKey).set(true)
     } else {
       // removes story when un-favorited
-      this.followingListener.remove()
+      firebase.database().ref('user').child(this.props.currentUser.uid).child('following').child(userKey).remove()
     }
   }
 
   render() {
     const { thisKey } = this.props
-    console.log("WHAT IS PROPS ON THE ALL USERS PAGE", this.props.user, this.props.thisKey)
     return (
       <Card className="single-card col-lg-4 col-md-4 col-sm-4">
         <Link to={`/allUsers/${thisKey}`} key={thisKey}>
