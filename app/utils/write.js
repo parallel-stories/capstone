@@ -52,12 +52,13 @@ const createOrUpdateCard = function(card, cardId, publishThisBranch) {
     cardKey = createCard(card) // returns firebase key
   // else update card
   } else {
-    firebase.database().ref(`storyCard/${cardId}`).update(card)
-    // check if title has changed.
+    // check if title has changed from old db info, THEN update db w new info
     firebase.database().ref(`storyCard/${cardId}/branchTitle`).once('value').then(snap => {
       const oldBranchTitle = snap.val()
+      // only update card info AFTER retrieving orig data
+      firebase.database().ref(`storyCard/${cardId}`).update(card)
       if (card.branchTitle != oldBranchTitle) {
-        updateBranchTitle(card, cardKey, oldBranchTitle)
+        updateBranchTitle(card, cardKey, oldBranchTitle, publishThisBranch)
       }
     })
   }
@@ -84,12 +85,32 @@ export const publishCard = function(card, cardId) {
   return createOrUpdateCard(card, cardId, publishThisBranch) // returns firebase key
 }
 
-const updateBranchTitle = function(card, cardKey, oldBranchTitle) {
+const updateBranchTitle = function(card, cardKey, oldBranchTitle, publishThisBranch) {
+  // update storyBranch
   firebase.database().ref(`storyBranch/${oldBranchTitle}`).once('value').then(snap => {
-    const data = snap.val() // save old branch node data to transfer to new
+    // save old branch node data to transfer to new
+    const data = snap.val()
+    // doublecheck if branch should be marked published so this isn't overwritten w async functions
+    if (publishThisBranch) data.published = true
+    // create new branch node and set old to null to remove it
     firebase.database().ref(`storyBranch/${card.branchTitle}`).set(data)
     firebase.database().ref(`storyBranch/${oldBranchTitle}`).set(null)
   })
+  // update storyRoot top-level if branch is not child
+  firebase.database().ref(`storyRoot/${oldBranchTitle}`).once('value').then(snap => {
+    // if the branch is not a root, snap.val() doesn't exist, this won't do anything anyway
+    const data = snap.val()
+    firebase.database().ref(`storyRoot/${card.branchTitle}`).set(data)
+    firebase.database().ref(`storyRoot/${oldBranchTitle}`).set(null)
+  })
+  // update storyRoot parent if branch is child
+  if (card.rootTitle.length > 1) {
+    firebase.database().ref(`storyRoot/${card.rootTitle[card.rootTitle.length-1]}/${oldBranchTitle}`).once('value').then(snap => {
+      const data = snap.val()
+      firebase.database().ref(`storyRoot/${card.branchTitle}`).set(data)
+      firebase.database().ref(`storyRoot/${oldBranchTitle}`).set(null)
+    })
+  }
   // update user
   firebase.database().ref(`user/${card.userId}/storyBranches/${card.branchTitle}`).set(true)
   firebase.database().ref(`user/${card.userId}/storyBranches/${oldBranchTitle}`).set(null)

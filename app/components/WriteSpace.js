@@ -31,6 +31,7 @@ export default class WriteSpace extends Component {
       dirtyText: false,
       dirtyTitle: false,
       editTitle: true,
+      titleIsPub: false,
       // saveCard & publishCard depend on the state below not being refactored
       cardId: '',
       card: {
@@ -72,6 +73,17 @@ export default class WriteSpace extends Component {
             prevCard: this.props.match.params.cardId,
           })
         })
+      })
+    }
+
+    // check if branch title has already been published to disable any title changes
+    if (this.state.card.branchTitle != '') {
+      firebase.database().ref(`storyBranch/${this.state.card.branchTitle}`).once('value', snap => {
+        if (snap.val().published) {
+          this.setState({
+            titleIsPub: true
+          })
+        }
       })
     }
 
@@ -117,7 +129,7 @@ export default class WriteSpace extends Component {
   }
 
   saveTitle = () => {
-    const cardKey = saveCard(this.state.card, this.state.cardId)
+    const cardKey = saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
     this.setState({
       editTitle: false,
       cardId: cardKey
@@ -165,6 +177,7 @@ export default class WriteSpace extends Component {
         dirtyText: false,
         dirtyTitle: false,
         editTitle: false,
+        titleIsPub: true,
         cardId: '',
         card: Object.assign({}, this.state.card, {
           text: '',
@@ -201,38 +214,46 @@ export default class WriteSpace extends Component {
       <div>
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12">
-          {
-            this.state.editTitle
-            ? <div className="form-group container">
-                <h2>
-                  <input type="text"
-                    className="form-control"
-                    value={this.state.card.branchTitle}
-                    placeholder="Story Title"
-                    id="titleField"
-                    onChange={this.changeBranchTitle} />
+
+          <div className="form-group container">
+          {// if title is pub, don't allow title to be changed, otherwise allow editing based on state.editTitle status
+            this.state.titleIsPub
+              ? <h2>
+                  {this.state.card.branchTitle}
+                </h2>
+              : !this.state.editTitle
+                ? <h2>
+                    {this.state.card.branchTitle}
                   </h2>
-                <div className="subtext">
-                  {
-                    (this.state.card.branchTitle != '')
+                : <h2>
+                    <input type="text"
+                      className="form-control"
+                      value={this.state.card.branchTitle}
+                      placeholder="Story Title"
+                      id="titleField"
+                      onChange={this.changeBranchTitle} />
+                  </h2>
+          }
+            <div className="subtext">
+            {// if title is pub, no save/edit links should be displayed beneath title; otherwise display links based on state.editTitle status and if there is actually title text to save
+              this.state.titleIsPub
+                ? <Link to="#">
+                    &nbsp;
+                  </Link>
+                : !this.state.editTitle
+                  ? <Link to="#" onClick={this.editTitle}>
+                      (edit title)
+                    </Link>
+                  : (this.state.card.branchTitle != '')
                     ? <Link to="#" onClick={this.saveTitle}>
                         (save title)
                       </Link>
                     : <Link to="#">
                         &nbsp;
                       </Link>
-                  }
-                </div>
-              </div>
-            : <div className="form-group container">
-                <h2>{this.state.card.branchTitle}</h2>
-                <div className="subtext">
-                  <Link to="#" onClick={this.editTitle}>
-                    (edit title)
-                  </Link>
-                </div>
-              </div>
-          }
+            }
+            </div>
+          </div>
 
           {
             (this.state.card.rootTitle.length > 1) && (
