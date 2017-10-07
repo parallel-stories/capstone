@@ -40,8 +40,6 @@ export default class AllUsers extends Component {
     const filtered = this.props.filtered
     const followedUsers = this.props.followedUsers
 
-    console.log('users followed!!', this.props.followedUsers)
-
     return (
       <div className="container all-users">
         <br/>

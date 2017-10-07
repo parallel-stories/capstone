@@ -12,23 +12,32 @@ import AllStoryBranches from './AllStoryBranches'
 export default class UserPage extends Component {
   constructor(props){
     super(props)
-
     this.state = {
       user: {},
-      storyBranches: {},
-      favorites: {},
     }
+  }
 
+  componentDidMount() {
+    const userId = this.props.match.params.id
+    this.userListener = firebase.database().ref(`user/${userId}`)
+    this.userListener.on('value', user => {
+      this.setState({ user: !user.val() ? {} : user.val() })
+    })
+  }
+
+  componentWillUnmount() {
+    if( this.userListener ) this.userListener.off()
   }
 
   render() {
-    const { user, storyBranches, favorites } = this.state || {}
+    const storyBranches = this.state.user.storyBranches
+    const favorites = this.state.user.faves
 
     return (
       <div className="container-fluid" >
         <div>
-          <h1><em>User: </em> {user.displayName || 'This user has no name'}</h1>
-          <p> A description will go here </p>
+          <h2><b>{this.state.user.username}</b></h2>
+          <p>{this.state.user.description}</p>
           <hr />
           <h2>Stories Authored</h2>
           { !storyBranches || !Object.keys(storyBranches).length?
@@ -51,7 +60,7 @@ export default class UserPage extends Component {
           </div>
           :
           <div className="row" >
-            <AllStoryBranches searchResults={storyBranches} searching={true} />
+            <AllStoryBranches searchResults={favorites} searching={true} />
           </div>
           }
         </div>
