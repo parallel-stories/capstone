@@ -125,12 +125,14 @@ class StoryBranchNav extends Component {
         {
           !_.isEmpty(currentStoryBranch) && (
           <div>
+          {/*
             <div>
               <h2 className="align-center header">{currentStoryBranchId}</h2>
               <h4 className="align-center"> Root: "{getStoryRootTitle()}"</h4>
               <Divider />
               <br />
             </div>
+          */}
             <div className="flex-container">
               {
                 selector > 0

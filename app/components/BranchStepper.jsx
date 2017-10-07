@@ -21,14 +21,18 @@ class BranchStepper extends Component {
     super(props)
     this.state = {
       stepIndex: 0,
-      branchId: '',
-      cardId: ''
+      branches: [],
+      currentStoryBranchId: '',
+      currentStoryBranch: {},
+      currentCardId: '',
+      currentCard: {},
+      selector: 0,
+      childParent: {}
     }
   }
 
   componentDidMount() {
     console.log('MOUNTING STEPPER')
-    // console.log('MMOUNT:', this.props.match.params)
     this.setState({
       branchId: this.props.match.params.branchId,
       cardId: this.props.match.params.cardId
@@ -80,6 +84,24 @@ class BranchStepper extends Component {
     )
   }
 
+  renderBranches = (stepInd, title, branchId, cardId) => {
+    return (
+      <Step>
+        <StepButton onClick={() => this.setState({stepIndex: stepInd})}>
+          {
+            stepInd === 0
+            ? title
+            : `Branched Off To: ${title}`
+          }
+        </StepButton>
+        <StepContent>
+            <StoryBranchNav branchId={this.state.branchId} cardId={this.state.cardId} />
+          {this.renderStepActions(stepInd)}
+        </StepContent>
+      </Step>
+    )
+  }
+
   render() {
     const {stepIndex} = this.state
     console.log('STEPPER STATE:', this.state)
@@ -91,9 +113,13 @@ class BranchStepper extends Component {
           linear={false}
           orientation="vertical"
         >
+        {
+          this.branchOff()
+        }
+        {/*
           <Step>
             <StepButton onClick={() => this.setState({stepIndex: 0})}>
-              Select campaign settings
+              <p>Title: "{this.state.branchId}"</p>
             </StepButton>
             <StepContent>
               {
@@ -104,7 +130,7 @@ class BranchStepper extends Component {
             </StepContent>
           </Step>
           <Step>
-            <StepButton onClick={() => this.setState({stepIndex: 1})}>
+          <StepButton onClick={() => this.setState({stepIndex: 1})}>
               Create an ad group
             </StepButton>
             <StepContent>
@@ -126,6 +152,7 @@ class BranchStepper extends Component {
               {this.renderStepActions(2)}
             </StepContent>
           </Step>
+          */}
         </Stepper>
       </div>
     )
