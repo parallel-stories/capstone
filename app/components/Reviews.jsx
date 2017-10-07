@@ -103,6 +103,25 @@ export default class Review extends Component {
       <div className="container review">
         <br />
         <h3 className="review-header"> Ratings & Reviews </h3>
+          {!this.state.reviews.length?
+            <p>
+            There are no reviews for this story yet. Step right up and be the first to comment.
+            </p>
+            :
+            productReviews && productReviews.map( review => (
+              <Card key={review.id}>
+                <CardHeader
+                  title={`Review for ${productName}`}
+                />
+                <Rating
+                  value={review.rating}
+                  max={5}
+                  readOnly={true}
+                />
+                <CardText> {review.content} </CardText>
+              </Card>
+            ))
+          }
           {
           <div className='add-review-form'>
             <RaisedButton label="Add a Review"
@@ -139,22 +158,7 @@ export default class Review extends Component {
               </form>
             </Dialog>
             <br />
-            </div>
-          }
-          {
-          productReviews && productReviews.map( review => (
-            <Card key={review.id}>
-              <CardHeader
-                title={`Review for ${productName}`}
-              />
-              <Rating
-                value={review.rating}
-                max={5}
-                readOnly={true}
-              />
-              <CardText> {review.content} </CardText>
-            </Card>
-          ))
+          </div>
           }
       </div>
     )
