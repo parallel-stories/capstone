@@ -46,7 +46,7 @@ export default class UserProfile extends Component {
         this.followListener = firebase.database().ref(`user/${this.state.user.uid}/following`)
         this.branchListener.on('value', branches => {
           this.favesListener.on('value', faves => {
-            this.favesListener.on('value', follows => {
+            this.followListener.on('value', follows => {
               this.setState({
                 storyBranches: !branches.val() ? {} : branches.val(),
                 favorites: !faves.val() ? {} : faves.val(),

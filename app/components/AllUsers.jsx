@@ -39,6 +39,13 @@ export default class AllUsers extends Component {
     const { users } = this.state
     const filtered = this.props.filtered
     const followedUsers = this.props.followedUsers
+    let filteredUsers = {}
+
+    if( filtered === true ) {
+      for( const key of Object.keys(followedUsers) ){
+        if( users[key] ) filteredUsers[key] = users[key]
+      }
+    }
 
     return (
       <div className="container all-users">
@@ -51,11 +58,11 @@ export default class AllUsers extends Component {
           }
           {
             filtered ?
-            !_.isEmpty(users) &&
-            Object.keys(users).map(key =>
+            !_.isEmpty(filteredUsers) &&
+            Object.keys(filteredUsers).map(key =>
               <UserCard key={key}
                 thisKey={key}
-                user={this.state.users[key]}
+                user={filteredUsers[key]}
                 currentUser={this.state.currentUser}/>
             )
             :

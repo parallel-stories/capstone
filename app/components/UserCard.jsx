@@ -71,7 +71,6 @@ export default class UserCard extends Component {
           <CardHeader
             title={`${this.props.user.username}`}
             subtitle={`${numStoriesAuthored} stories authored`}
-            avatar="http://via.placeholder.com/150x150"
             />
           <CardText>
             <p>{this.props.user.description}</p>
