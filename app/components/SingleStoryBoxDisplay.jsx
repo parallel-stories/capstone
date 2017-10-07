@@ -83,7 +83,6 @@ export default class SingleStoryBoxDisplay extends Component {
     const {storyBranchTitle, storyBranchDetails, thisKey} = this.props
 
     const getStoryRootTitle = () => {
-      console.log('branch details', storyBranchDetails)
       const roots = _.isEmpty(storyBranchDetails) ? [] : storyBranchDetails.storyRoot
       return roots.length > 1 ? roots[roots.length - 1] : storyBranchTitle
     }

@@ -25,7 +25,6 @@ export default class SingleStoryPage extends Component {
 
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(storyBranch) ? [] : storyBranch.storyRoot
-      console.log(roots)
       return roots.length > 1 ? roots[roots.length - 1] : storyBranchId
     }
 
