@@ -39,7 +39,7 @@ export default class AllUsers extends Component {
     const { users } = this.state
 
     return (
-      <div className="container">
+      <div className="container all-users">
         <br/>
         {
           !_.isEmpty(users) &&

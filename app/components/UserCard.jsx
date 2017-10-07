@@ -17,23 +17,26 @@ export default class UserCard extends Component {
     this.state = {
       fullName: 'unknown',
       following: false,
-      storiesAuthored: 0,
+      storiesAuthored: {},
     }
   }
 
   componentDidMount() {
-    firebase.database().ref().child('user').child(this.props.currentUser.uid).once('value', snap => {
-        const following = snap.val()
-        if( following !== null ) this.setState({ following })
+    this.followListener = firebase.database().ref(`user/${this.props.currentUser.uid}/following/${this.props.thisKey}`)
+    this.followListener.on('value', snap => {
+      const val = snap.val()
+      if( val ) this.setState({following: val})
     })
   }
 
   componentWillUnmount() {
-
+    if( this.followListener ) this.followListener.off()
   }
 
   updateFollowing = () => {
-    if( this.props.currentUser ) {
+    if( this.props.thisKey === this.props.currentUser.uid ) {
+      alert(' you cant follow yourself lulz ')
+    } else if( this.props.currentUser ) {
       this.setState((oldState) => {
         return {
           following: !oldState.following,
@@ -41,7 +44,7 @@ export default class UserCard extends Component {
       })
       this.updateUserFollow()
     } else {
-      console.log('log in to follow people!')
+      alert('Please Log In or Sign Up to Follow Users')
     }
   }
 
@@ -58,6 +61,8 @@ export default class UserCard extends Component {
 
   render() {
     const { thisKey } = this.props
+    const numStoriesAuthored = Object.keys(this.props.user.storyBranches).length
+
     return (
       <Card
         className="single-card col-lg-4 col-md-4 col-sm-4"
@@ -65,7 +70,7 @@ export default class UserCard extends Component {
         <Link to={`/allUsers/${thisKey}`} key={thisKey}>
           <CardHeader
             title={`${this.props.user.username}`}
-            subtitle={`${this.state.storiesAuthored}`}
+            subtitle={`${numStoriesAuthored} stories authored`}
             avatar="http://via.placeholder.com/150x150"
             />
           <CardText>
@@ -75,7 +80,8 @@ export default class UserCard extends Component {
         <CardActions>
           <FloatingActionButton mini={true}
             style={{marginRight: 20, boxShadow: "none"}}
-            onClick={ this.updateFollowing } >
+            onClick={ this.updateFollowing }
+            secondary={ this.state.following }>
             <ContentAdd />
           </FloatingActionButton>
         </CardActions>
