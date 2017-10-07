@@ -10,6 +10,11 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
+// firebase
+import firebase from 'app/fire'
+import 'firebase/database'
+const auth = firebase.auth()
+
 // import from another component
 import Ratings from './Ratings'
 
@@ -23,14 +28,19 @@ export default class Review extends Component {
       // for the review
       userRating: 0,
       userReview: '',
+      userId: null,
       // to check for inputs
-      dirty: false
+      dirty: false,
     }
 
   }
 
   componentDidMount() {
 
+  }
+
+  componentWillUnmount() {
+    if (this.reviewListener) this.reviewListener.off()
   }
 
   // handles the dialog modal
@@ -53,7 +63,13 @@ export default class Review extends Component {
       userReview: evt.target.value,
       dirty: true
     })
-  };
+  }
+
+  // send review to firebase
+  addNewReview = (review) => {
+    console.log('adding new review!!!', review)
+    firebase.database().ref('review').child(this.props.storyId).set(review)
+  }
 
   // handles submitting the form
   handleSubmit = (evt) => {
@@ -62,11 +78,12 @@ export default class Review extends Component {
     const review = {
       content: this.state.userReview,
       rating: this.state.userRating,
+      userId: this.state.userId,
       storyId: this.props.storyId,
-      userId: this.props.currentUser.id || null
     }
 
-    this.props.addNewReview(review)
+    this.addNewReview(review)
+
     this.setState({
       open: false,
       userRating: 0,
@@ -84,10 +101,11 @@ export default class Review extends Component {
     const dirty = this.state.dirty;
 
     let warning = '';
-    let disableSubmit = inputValue.length > 500 || inputValue.length<=0;
+    let disableSubmit = inputValue.length > 500 || inputValue.length<=0 || this.state.userRating===0
 
-    if (!inputValue && dirty) warning = 'The comment cannot be blank';
-    else if (inputValue.length > 500 && dirty) warning = 'Review must be less than 500 characters';
+    if (!inputValue && dirty) warning = 'The comment cannot be blank'
+    else if (inputValue.length > 500 && dirty) warning = 'Review must be less than 500 characters'
+    else if (this.state.userRating === 0 && dirty) warning = 'Give the story a rating!'
 
     // actions are: close form, open form
     const actions =
@@ -147,7 +165,7 @@ export default class Review extends Component {
                   onChange={this.changeReview}
                 />
               { warning && <p className="alert alert-warning">{warning}</p> }
-                <br />
+              <br />
               </form>
             </Dialog>
           </div>
