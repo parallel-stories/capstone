@@ -41,7 +41,7 @@ class Navbar extends Component {
   render() {
     return (
       <AppBar
-        title="Parallel Stories"
+        title={<a href="/home" className="title-logo">Parallel Stories</a>}
         iconElementLeft={<IconButton><List/></IconButton>}
         onLeftIconButtonTouchTap={this.handleToggle}
         style={{boxShadow: 'none', fontFamily: 'Berkshire Swash, cursive', textAlign: 'center'}}>

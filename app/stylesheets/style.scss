@@ -21,6 +21,15 @@ body {
   width: 100%;
 }
 
+.title-logo {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.title-logo:hover {
+  text-decoration: none;
+  color: #FFFFFF;
+}
 
 /* header */
 
@@ -217,4 +226,3 @@ input.form-control {
   align-items: center;
   flex-direction: column
 }
-
