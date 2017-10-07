@@ -59,15 +59,17 @@ export default class UserCard extends Component {
   render() {
     const { thisKey } = this.props
     return (
-      <Card className="single-card col-lg-4 col-md-4 col-sm-4">
+      <Card
+        className="single-card col-lg-4 col-md-4 col-sm-4"
+        style={{boxShadow:"none", outlineStyle:"dashed", outlineColor:"#EDE2D4"}}>
         <Link to={`/allUsers/${thisKey}`} key={thisKey}>
           <CardHeader
-            title={`${this.state.fullName}`}
+            title={`${this.props.user.username}`}
             subtitle={`${this.state.storiesAuthored}`}
             avatar="http://via.placeholder.com/150x150"
             />
           <CardText>
-            User description will go here
+            <p>{this.props.user.description}</p>
           </CardText>
         </Link>
         <CardActions>
