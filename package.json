@@ -66,6 +66,7 @@
     "passport-local": "^1.0.0",
     "pg": "^6.1.0",
     "pretty-error": "^2.0.2",
+    "prop-types": "^15.6.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-html-parser": "^2.0.0",

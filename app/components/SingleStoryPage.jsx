@@ -4,6 +4,9 @@ import firebase from 'app/fire'
 import _ from 'lodash'
 import FlatButton from 'material-ui/FlatButton'
 
+// react components
+import Reviews from './Reviews'
+
 export default class SingleStoryPage extends Component {
   constructor(props) {
     super(props)
@@ -41,6 +44,7 @@ export default class SingleStoryPage extends Component {
             <Link to={`/read/story_branch/${storyBranchId}/${storyBranch.storyCards.shift()}`}><FlatButton label="Start Reading" backgroundColor="#50AD55"></FlatButton></Link>
           }
         </div>
+        <Reviews storyId={storyBranchId}/>
       </div>
     )
   }
