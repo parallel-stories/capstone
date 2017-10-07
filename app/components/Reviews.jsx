@@ -122,9 +122,7 @@ export default class Review extends Component {
       <FlatButton label="Cancel" primary={true} onClick={this.handleClose}/>,
       <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} disabled={disableSubmit}/>
     ]
-
-    console.log("WHAT ARE REVIEWS", storyReviews, storyReviews.length, typeof storyReviews)
-
+    
     return (
       <div className="container review">
         <br />
@@ -168,13 +166,17 @@ export default class Review extends Component {
             </p>
             :
             storyReviews && Object.keys(storyReviews).map( key => (
-              <Card key={key}>
-                <Ratings
-                  value={storyReviews[key].rating}
-                  max={5}
-                  readOnly={true} />
-                <CardText> {storyReviews[key].content} </CardText>
-              </Card>
+              <div key={key}>
+                <br />
+                <Card style={{ backgroundColor:"#EFE6D9", boxShadow: "none" }}>
+                  <Ratings
+                    value={storyReviews[key].rating}
+                    max={5}
+                    readOnly={true} />
+                  <CardText> {storyReviews[key].content} </CardText>
+                </Card>
+                <br />
+              </div>
             ))
           }
           <br />
