@@ -21,7 +21,7 @@ export default class Review extends Component {
       // controls whether the box to submit reviews is open or not
       open: false,
       // for the review
-      userRating: 5,
+      userRating: 0,
       userReview: '',
       // to check for inputs
       dirty: false
@@ -42,7 +42,7 @@ export default class Review extends Component {
 	}
 
   // handles changing items inside the form
-  setRating = (evt, index, value) => {
+  setRating = (value) => {
     this.setState({
       userRating: value
     })
@@ -102,7 +102,7 @@ export default class Review extends Component {
         <h3 className="review-header"> Ratings & Reviews </h3>
           {!this.state.reviews.length?
             <p>
-            There are no reviews for <b>{storyId}</b> yet. Step right up and be the first to comment!
+            There are no reviews for <b>{storyId}</b> yet. Step right up and be the first to review 🖋!
             </p>
             :
             storyReviews && storyReviews.map( review => (
@@ -134,7 +134,10 @@ export default class Review extends Component {
               autoScrollBodyContent={true}
             >
               <form onSubmit={this.onSubmit}>
-                <Ratings />
+                <Ratings
+                  value={this.state.userRating}
+                  max={5}
+                  onChange={this.setRating}/>
                 <TextField
                   hintText="Write your review here"
                   floatingLabelText="Review"
