@@ -15,6 +15,9 @@ import firebase from 'app/fire'
 import 'firebase/database'
 const auth = firebase.auth()
 
+// lodash
+import _ from 'lodash'
+
 // import from another component
 import Ratings from './Ratings'
 
@@ -22,7 +25,7 @@ export default class Review extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: [],
+      reviews: {},
       // controls whether the box to submit reviews is open or not
       open: false,
       // for the review
@@ -36,7 +39,11 @@ export default class Review extends Component {
   }
 
   componentDidMount() {
-
+    this.favesListener = firebase.database().ref(`review/${this.props.storyId}`)
+    this.favesListener.on('value', snap => {
+      const reviews = snap.val()
+      this.setState({ reviews })
+    })
   }
 
   componentWillUnmount() {
@@ -67,8 +74,8 @@ export default class Review extends Component {
 
   // send review to firebase
   addNewReview = (review) => {
-    console.log('adding new review!!!', review)
-    firebase.database().ref('review').child(this.props.storyId).set(review)
+    const newKey = Object.keys(this.state.reviews).length + 1
+    firebase.database().ref('review').child(this.props.storyId).child(newKey).set(review)
   }
 
   // handles submitting the form
@@ -93,7 +100,7 @@ export default class Review extends Component {
   }
 
   render() {
-    const storyReviews = this.props.reviews;
+    const storyReviews = this.state.reviews;
     const storyId = this.props.storyId;
 
     // warning if user enters invalid length into comment box
@@ -101,7 +108,7 @@ export default class Review extends Component {
     const dirty = this.state.dirty;
 
     let warning = '';
-    let disableSubmit = inputValue.length > 500 || inputValue.length<=0 || this.state.userRating===0
+    let disableSubmit = inputValue.length>500 || inputValue.length<=0 || this.state.userRating===0
 
     if (!inputValue && dirty) warning = 'The comment cannot be blank'
     else if (inputValue.length > 500 && dirty) warning = 'Review must be less than 500 characters'
@@ -112,31 +119,14 @@ export default class Review extends Component {
     [
       <FlatButton label="Cancel" primary={true} onClick={this.handleClose}/>,
       <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} disabled={disableSubmit}/>
-    ];
+    ]
+
+    console.log("WHAT ARE REVIEWS", storyReviews)
 
     return (
       <div className="container review">
         <br />
         <h3 className="review-header"> Ratings & Reviews </h3>
-          {!this.state.reviews.length?
-            <p>
-            There are no reviews for <b>{storyId}</b> yet. Step right up and be the first to review 🖋!
-            </p>
-            :
-            storyReviews && storyReviews.map( review => (
-              <Card key={review.id}>
-                <CardHeader
-                  title={`Review for ${storyId}`}
-                />
-                <Rating
-                  value={review.rating}
-                  max={5}
-                  readOnly={true}
-                />
-                <CardText> {review.content} </CardText>
-              </Card>
-            ))
-          }
           {
           <div className='add-review-form'>
             <RaisedButton label="Add a Review"
@@ -169,6 +159,15 @@ export default class Review extends Component {
               </form>
             </Dialog>
           </div>
+          }
+          {Object.keys(storyReviews).length===0?
+            <p>
+              There are no reviews for <b>{storyId}</b> yet. Step right up and be the first to review 🖋!
+            </p>
+            :
+            <p>
+              There are no reviews for <b>{storyId}</b> yet. Step right up and be the first to review 🖋!
+            </p>
           }
           <br />
           <br />
