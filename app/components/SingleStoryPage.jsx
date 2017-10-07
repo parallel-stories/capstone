@@ -44,7 +44,7 @@ export default class SingleStoryPage extends Component {
             <Link to={`/read/story_branch/${storyBranchId}/${storyBranch.storyCards.shift()}`}><FlatButton label="Start Reading" backgroundColor="#50AD55"></FlatButton></Link>
           }
         </div>
-        <Reviews />
+        <Reviews storyId={storyBranchId}/>
       </div>
     )
   }

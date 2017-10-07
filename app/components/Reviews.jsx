@@ -10,6 +10,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
+// import from another component
 import Ratings from './Ratings'
 
 export default class Review extends Component {
@@ -25,31 +26,29 @@ export default class Review extends Component {
       // to check for inputs
       dirty: false
     }
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
 
-    this.setRating = this.setRating.bind(this);
-    this.changeReview = this.changeReview.bind(this);
+  }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-  };
+  componentDidMount() {
+
+  }
 
   // handles the dialog modal
-  handleOpen() {
+  handleOpen = () => {
 		this.setState({ open: true });
 	}
-  handleClose() {
+  handleClose = () => {
 		this.setState({ open: false, dirty: false  });
 	}
 
   // handles changing items inside the form
-  setRating(event, index, value) {
+  setRating = (evt, index, value) => {
     this.setState({
       userRating: value
     })
-  };
+  }
 
-  changeReview(evt) {
+  changeReview = (evt) => {
     this.setState({
       userReview: evt.target.value,
       dirty: true
@@ -57,13 +56,13 @@ export default class Review extends Component {
   };
 
   // handles submitting the form
-  handleSubmit(evt) {
+  handleSubmit = (evt) => {
     evt.preventDefault();
 
     const review = {
       content: this.state.userReview,
       rating: this.state.userRating,
-      productId: this.props.productId,
+      storyId: this.props.storyId,
       userId: this.props.currentUser.id || null
     }
 
@@ -74,24 +73,22 @@ export default class Review extends Component {
       userReview: '',
       dirty: false
     })
-  };
-
-  componentDidMount() {
-
-	};
+  }
 
   render() {
-    const productReviews = this.props.reviews;
-    const productName = this.props.productName;
+    const storyReviews = this.props.reviews;
+    const storyId = this.props.storyId;
 
     // warning if user enters invalid length into comment box
     const inputValue = this.state.userReview;
     const dirty = this.state.dirty;
+
     let warning = '';
     let disableSubmit = inputValue.length > 500 || inputValue.length<=0;
 
     if (!inputValue && dirty) warning = 'The comment cannot be blank';
     else if (inputValue.length > 500 && dirty) warning = 'Review must be less than 500 characters';
+
     // actions are: close form, open form
     const actions =
     [
@@ -105,13 +102,13 @@ export default class Review extends Component {
         <h3 className="review-header"> Ratings & Reviews </h3>
           {!this.state.reviews.length?
             <p>
-            There are no reviews for this story yet. Step right up and be the first to comment.
+            There are no reviews for <b>{storyId}</b> yet. Step right up and be the first to comment!
             </p>
             :
-            productReviews && productReviews.map( review => (
+            storyReviews && storyReviews.map( review => (
               <Card key={review.id}>
                 <CardHeader
-                  title={`Review for ${productName}`}
+                  title={`Review for ${storyId}`}
                 />
                 <Rating
                   value={review.rating}
@@ -130,21 +127,14 @@ export default class Review extends Component {
             />
             <br />
             <Dialog
-              title={`Write a Review for ${productName}`}
+              title={`Write a Review for ${storyId}`}
               actions={actions}
               modal={true}
               open={this.state.open}
               autoScrollBodyContent={true}
             >
               <form onSubmit={this.onSubmit}>
-                <DropDownMenu value={this.state.userRating} onChange={this.setRating}>
-                  <MenuItem value={5} primaryText="⭐⭐⭐⭐⭐"/>
-                  <MenuItem value={4} primaryText="⭐⭐⭐⭐"/>
-                  <MenuItem value={3} primaryText="⭐⭐⭐"/>
-                  <MenuItem value={2} primaryText="⭐⭐"/>
-                  <MenuItem value={1} primaryText="⭐"/>
-                  <MenuItem value={0} primaryText="No stars"/>
-                </DropDownMenu>
+                <Ratings />
                 <TextField
                   hintText="Write your review here"
                   floatingLabelText="Review"
@@ -157,9 +147,10 @@ export default class Review extends Component {
                 <br />
               </form>
             </Dialog>
-            <br />
           </div>
           }
+          <br />
+          <br />
       </div>
     )
   }
