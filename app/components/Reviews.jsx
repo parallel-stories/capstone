@@ -42,7 +42,9 @@ export default class Review extends Component {
     this.favesListener = firebase.database().ref(`review/${this.props.storyId}`)
     this.favesListener.on('value', snap => {
       const reviews = snap.val()
-      this.setState({ reviews })
+      if( reviews ) {
+        this.setState({ reviews })
+      } // end if
     })
   }
 
@@ -52,10 +54,10 @@ export default class Review extends Component {
 
   // handles the dialog modal
   handleOpen = () => {
-		this.setState({ open: true });
+		this.setState({ open: true })
 	}
   handleClose = () => {
-		this.setState({ open: false, dirty: false  });
+		this.setState({ open: false, dirty: false  })
 	}
 
   // handles changing items inside the form
@@ -74,7 +76,7 @@ export default class Review extends Component {
 
   // send review to firebase
   addNewReview = (review) => {
-    const newKey = Object.keys(this.state.reviews).length + 1
+    const newKey = Object.keys(this.state.reviews).length
     firebase.database().ref('review').child(this.props.storyId).child(newKey).set(review)
   }
 
@@ -121,7 +123,7 @@ export default class Review extends Component {
       <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} disabled={disableSubmit}/>
     ]
 
-    console.log("WHAT ARE REVIEWS", storyReviews)
+    console.log("WHAT ARE REVIEWS", storyReviews, storyReviews.length, typeof storyReviews)
 
     return (
       <div className="container review">
@@ -160,14 +162,20 @@ export default class Review extends Component {
             </Dialog>
           </div>
           }
-          {Object.keys(storyReviews).length===0?
+          {_.isEmpty(storyReviews)?
             <p>
               There are no reviews for <b>{storyId}</b> yet. Step right up and be the first to review 🖋!
             </p>
             :
-            <p>
-              There are no reviews for <b>{storyId}</b> yet. Step right up and be the first to review 🖋!
-            </p>
+            storyReviews && Object.keys(storyReviews).map( key => (
+              <Card key={key}>
+                <Ratings
+                  value={storyReviews[key].rating}
+                  max={5}
+                  readOnly={true} />
+                <CardText> {storyReviews[key].content} </CardText>
+              </Card>
+            ))
           }
           <br />
           <br />
