@@ -31,16 +31,17 @@ export default class WriteSpace extends Component {
       dirtyText: false,
       dirtyTitle: false,
       editTitle: true,
-      published: false,
       // saveCard & publishCard depend on the state below not being refactored
       cardId: '',
       card: {
-        userId: '',
-        text: '',
         branchTitle: '',
-        rootTitle: '',
+        branches: {},
+        nextCard: '',
         prevCard: '',
-        nextCard: ''
+        published: false,
+        rootTitle: ['isRoot'],
+        text: '',
+        userId: ''
       }
       // end saveCard & publishCard needs
 
@@ -135,6 +136,8 @@ export default class WriteSpace extends Component {
 
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
+    } else if (this.state.card.text == '') {
+      alert('Please write some text.')
     } else {
       const cardKey = saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
 
@@ -152,6 +155,8 @@ export default class WriteSpace extends Component {
 
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
+    } else if (this.state.card.text == '') {
+      alert('Please write some text.')
     } else {
       const cardKey = publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
 
@@ -162,9 +167,10 @@ export default class WriteSpace extends Component {
         editTitle: false,
         cardId: '',
         card: Object.assign({}, this.state.card, {
-          userId: 1,
           text: '',
-          rootTitle: this.state.card.rootTitle || [this.state.card.branchTitle],
+          rootTitle: this.state.card.rootTitle != []
+            ? this.state.card.rootTitle
+            : [this.state.card.branchTitle],
           prevCard: cardKey,
           nextCard: ''
         })
@@ -176,6 +182,8 @@ export default class WriteSpace extends Component {
   handleOpen = () => {
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
+    } else if (this.state.card.text == '') {
+      alert('Please write some text.')
     } else {
       this.setState({openSubmit: true})
     }
@@ -227,8 +235,8 @@ export default class WriteSpace extends Component {
           }
 
           {
-            (this.state.card.rootTitle != '') && (
-              <div className="container">...A branch of <i>{this.state.card.rootTitle}</i></div>
+            (this.state.card.rootTitle.length > 1) && (
+              <div className="container">...A branch of <i>{this.state.card.rootTitle[this.state.card.rootTitle.length-1]}</i></div>
             )
           }
 
@@ -274,12 +282,3 @@ export default class WriteSpace extends Component {
     )
   }
 }
-
-// <TextField
-// hintText="Name Your Story Line"
-// floatingLabelText="Title"
-// name="title"
-// fullWidth={true}
-// multiLine={true}
-// onChange={this.changeTitle}
-// />
