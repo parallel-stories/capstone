@@ -37,19 +37,38 @@ export default class AllUsers extends Component {
 
   render() {
     const { users } = this.state
+    const filtered = this.props.filtered
+    const followedUsers = this.props.followedUsers
+
+    console.log('users followed!!', this.props.followedUsers)
 
     return (
       <div className="container all-users">
         <br/>
-        {
-          !_.isEmpty(users) &&
-          Object.keys(users).map(key =>
-            <UserCard key={key}
-              thisKey={key}
-              user={this.state.users[key]}
-              currentUser={this.state.currentUser}/>
-          )
-        }
+          {
+            /* if this is called from the user profile component -- ie filtered is true --
+              use the first rendering code
+              otherwise, use the second
+            */
+          }
+          {
+            filtered ?
+            !_.isEmpty(users) &&
+            Object.keys(users).map(key =>
+              <UserCard key={key}
+                thisKey={key}
+                user={this.state.users[key]}
+                currentUser={this.state.currentUser}/>
+            )
+            :
+            !_.isEmpty(users) &&
+            Object.keys(users).map(key =>
+              <UserCard key={key}
+                thisKey={key}
+                user={this.state.users[key]}
+                currentUser={this.state.currentUser}/>
+            )
+          }
         <br/>
         <br/>
       </div>
