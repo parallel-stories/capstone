@@ -33,7 +33,6 @@ export const WhoAmI = ({user, auth}) =>
       <FlatButton
         className='google-login'
         onClick={() => auth.signOut().then( () => history.push(`/home`) )}
-        tooltip={name(user)}
         label="LOGOUT"
         style={loggingStyles.button} />
 

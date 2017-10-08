@@ -41,18 +41,13 @@ export default class UserProfile extends Component {
   componentDidMount() {
     this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
       if (user) {
-        this.branchListener = firebase.database().ref(`user/${this.state.user.uid}/storyBranches`)
-        this.favesListener = firebase.database().ref(`user/${this.state.user.uid}/faves`)
-        this.followListener = firebase.database().ref(`user/${this.state.user.uid}/following`)
-        this.branchListener.on('value', branches => {
-          this.favesListener.on('value', faves => {
-            this.followListener.on('value', follows => {
-              this.setState({
-                storyBranches: !branches.val() ? {} : branches.val(),
-                favorites: !faves.val() ? {} : faves.val(),
-                usersFollowed: !follows.val() ? {} : follows.val(),
-              })
-            })
+        this.userListener = firebase.database().ref(`user/${this.state.user.uid}`)
+
+        this.userListener.on('value', user => {
+          this.setState({
+            storyBranches: !user.val().storyBranches ? {} : user.val().storyBranches,
+            favorites: !user.val().faves ? {} : user.val().faves,
+            usersFollowed: !user.val().following ? {} : user.val().following,
           })
         })
       }
@@ -60,9 +55,7 @@ export default class UserProfile extends Component {
   }
 
   componentWillUnmount() {
-    if (this.branchListener) this.branchListener.off()
-    if (this.favesListener) this.favesListener.off()
-    if (this.usersFollowed) this.usersFollowed.off()
+    if (this.userListener) this.userListener.off()
     this.unsubscribe()
   }
 
@@ -76,11 +69,12 @@ export default class UserProfile extends Component {
     return (
       <div className="container-fluid" >
         {!user ?
-          <h1>Please login to view profile </h1>
+          <h1>Please login to view your profile!</h1>
           :
           <div>
             <h1>Welcome {user.displayName}!</h1>
-            <p>{user.email} </p>
+            <p>Email: {user.email}</p>
+            <p>{user.description}</p>
             <h2>My Story Branches</h2>
             { _.isEmpty(storyBranches)
               ? (<div>
