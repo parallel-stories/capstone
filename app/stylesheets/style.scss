@@ -24,11 +24,24 @@ body {
 .title-logo {
   text-decoration: none;
   color: #FFFFFF;
+  text-align: center;
+  display: block;
 }
 
 .title-logo:hover {
   text-decoration: none;
   color: #FFFFFF;
+}
+
+/* Navbar and child elemenets */
+.google-login {
+  vertical-align: middle;
+  min-height: 100%;
+}
+
+.google-logout {
+  vertical-align: middle;
+  min-height: 100%;
 }
 
 /* header */

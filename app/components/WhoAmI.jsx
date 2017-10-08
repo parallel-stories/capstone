@@ -5,15 +5,22 @@ const auth = firebase.auth()
 import history from '../history'
 import Login from './Login'
 
-import IconButton from 'material-ui/IconButton'
-import LogOut from 'material-ui/svg-icons/action/exit-to-app'
-import {lightGreen50, lightGreen600} from 'material-ui/styles/colors'
+import FlatButton from 'material-ui/FlatButton'
 
 export const name = user => {
   if (!user) return 'Hello, Nobody'
   if (user.isAnonymous) return 'Anonymous'
   return user.displayName || user.email
 }
+
+const loggingStyles = {
+  button: {
+    boxShadow: "none",
+    minWidth:"75px",
+    color: "#FFFFFF"
+  },
+}
+
 
 export const WhoAmI = ({user, auth}) =>
   <div className="whoami">
@@ -23,11 +30,13 @@ export const WhoAmI = ({user, auth}) =>
       <Login auth={auth}/>
       /// ...otherwise, show a logout button.
       :
-      <IconButton
-        className='logout' onClick={() => auth.signOut().then( () => history.push(`/home`) )}
-        tooltip={name(user)}>
-        <LogOut color={lightGreen50} hoverColor={lightGreen600}/>
-      </IconButton>
+      <FlatButton
+        className='google-login'
+        onClick={() => auth.signOut().then( () => history.push(`/home`) )}
+        tooltip={name(user)}
+        label="LOGOUT"
+        style={loggingStyles.button} />
+
     }
   </div>
 
