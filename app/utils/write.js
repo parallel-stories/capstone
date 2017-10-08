@@ -35,8 +35,9 @@ const createCard = function(card) {
           firebase.database().ref(`storyBranch/${card.branchTitle}/storyCards`).set([...rootCards, cardKey])
           // add to storyRoot with child branch
           firebase.database().ref(`storyRoot/${card.rootTitle[card.rootTitle.length-1]}/${card.branchTitle}`).set(true)
-          // add branch point to previous card
-          firebase.database().ref(`storyCard/${card.prevCard}/branches/${card.branchTitle}`).set(cardKey)
+          // add branch point references
+          firebase.database().ref(`storyBranch/${card.branchTitle}/branchPoint/from`).set(card.prevCard)
+          firebase.database().ref(`storyBranch/${card.branchTitle}/branchPoint/to`).set(cardKey)
         })
       }
     }
@@ -65,9 +66,19 @@ const createOrUpdateCard = function(card, cardId, publishThisBranch) {
   // keep track of user's unpublished cards. null instead of false as null will cause firebase to remove reference to a published card.
   const unpub = (card.published) ? null : true
   firebase.database().ref(`user/${card.userId}/unpublishedCards/${cardKey}`).set(unpub)
-  // if 3rd argument boolean "publishThisBranch" is passed in, set branch to published so its name can't be edited
-  publishThisBranch
-    && firebase.database().ref(`storyBranch/${card.branchTitle}/published`).set(true)
+  // if 3rd argument boolean "publishThisBranch" is passed in ...
+  if (publishThisBranch) {
+    // ... set branch to published so its name can't be edited
+    firebase.database().ref(`storyBranch/${card.branchTitle}/published`).set(true)
+    // add branchpoint to its story root card
+    firebase.database().ref(`storyBranch/${card.branchTitle}`).once('value').then(snap => {
+      if (snap.val().branchPoint) {
+        const branchFrom = snap.val().branchPoint.from
+        const branchTo = snap.val().branchPoint.to
+        firebase.database().ref(`storyCard/${branchFrom}/branches/${card.branchTitle}`).set(branchTo)
+      }
+    })
+  }
   // WriteSpace expects key back
   return cardKey
 }
@@ -103,14 +114,17 @@ const updateBranchTitle = function(card, cardKey, oldBranchTitle, publishThisBra
     firebase.database().ref(`storyRoot/${card.branchTitle}`).set(data)
     firebase.database().ref(`storyRoot/${oldBranchTitle}`).set(null)
   })
+
   // update storyRoot parent if branch is child
   if (card.rootTitle.length > 1) {
     firebase.database().ref(`storyRoot/${card.rootTitle[card.rootTitle.length-1]}/${oldBranchTitle}`).once('value').then(snap => {
+      // if the branch is not a root, snap.val() doesn't exist, this won't do anything anyway
       const data = snap.val()
-      firebase.database().ref(`storyRoot/${card.branchTitle}`).set(data)
-      firebase.database().ref(`storyRoot/${oldBranchTitle}`).set(null)
+      firebase.database().ref(`storyRoot/${card.rootTitle[card.rootTitle.length-1]}/${card.branchTitle}`).set(data)
+      firebase.database().ref(`storyRoot/${card.rootTitle[card.rootTitle.length-1]}/${oldBranchTitle}`).set(null)
     })
   }
+
   // update user
   firebase.database().ref(`user/${card.userId}/storyBranches/${card.branchTitle}`).set(true)
   firebase.database().ref(`user/${card.userId}/storyBranches/${oldBranchTitle}`).set(null)
