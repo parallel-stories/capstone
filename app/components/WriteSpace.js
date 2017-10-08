@@ -64,12 +64,13 @@ export default class WriteSpace extends Component {
       }
     }))
 
-    // set state based on url, get root title array of root branch from firebase
+    // set state based on url get root title array of root branch from firebase
     if (this.props.isBranch) {
-      firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
+      firebase.database().ref(`storyBranch/${this.props.match.params.rootId}/storyRoot`).once('value', snap => {
+        //
         this.setState({
           card: Object.assign({}, this.state.card, {
-            rootTitle: [...snap.val().rootTitle, this.props.match.params.rootId],
+            rootTitle: [...snap.val(), this.props.match.params.rootId],
             prevCard: this.props.match.params.cardId,
           })
         })
