@@ -4,7 +4,11 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import {Link} from 'react-router-dom'
 
-export const getStoryBranch = storyBranchId => firebase.database().ref(`storyBranch/${storyBranchId}`).once('value')
+export const getStoryBranch = storyBranchId => {
+  //console.log('utils branch:', storyBranchId)
+  //console.log('utils branch type:', typeof storyBranchId)
+  return firebase.database().ref(`storyBranch/${storyBranchId}`).once('value')
+}
 
 export const getStoryCard = cardId => firebase.database().ref(`storyCard/${cardId}`).once('value')
 

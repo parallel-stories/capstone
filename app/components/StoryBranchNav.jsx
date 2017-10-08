@@ -43,12 +43,8 @@ class StoryBranchNav extends Component {
   }
 
   updateFullState = (branchId, cardId, info, message) => {
-    // console.log('cardId', cardId)
-    console.log('Coming FROM:', message)
-    console.log('branchId:', branchId)
-    console.log('cardId:', cardId)
-    console.log('INFO branch:', info[0].val())
-    console.log('INFO Card:', info[1].val())
+    // console.log('message:', message)
+    // console.log('branch in nav:', info[0].val())
     this.setState({
       currentStoryBranchId: branchId,
       currentStoryBranch: info[0].val(),
@@ -59,35 +55,15 @@ class StoryBranchNav extends Component {
   }
 
   componentDidMount() {
-    console.log('MOUNT NAV')
-    // console.log('NAV MOUNTING PROPS:', this.props)
     const {branchId, cardId} = this.props
-    console.log('branchId:', branchId)
-    console.log('cardId:', cardId)
-    // console.log('PROPS', this.props.match.params)
-    // console.log('passed down', branchId, cardId)
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
     .then(info => this.updateFullState(branchId, cardId, info, 'MOUNTING NAV'))
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('NAV RECEIVE PROPS')
-    //console.log('next props:', nextProps)
     const {branchId, cardId} = nextProps
-    console.log('branchId:', branchId)
-    console.log('cardId:', cardId)
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
     .then(info => this.updateFullState(branchId, cardId, info, 'receiving props NAV'))
-    // if (branchId === this.state.currentStoryBranchId && cardId !== this.state.currentCardId) {
-      // getStoryCard(cardId).then(cardSnap => this.setState({
-      //   currentCardId: cardId,
-      //   selector: this.state.currentStoryBranch.storyCards.indexOf(cardId),
-      //   currentCard: cardSnap.val()
-      // }))
-    // } else {
-    //   Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
-    //   .then(info => this.updateFullState(branchId, cardId, info, 'RE-MOUNTING NAV'))
-    // }
   }
 
   handleOptionClick = () => {
@@ -116,10 +92,9 @@ class StoryBranchNav extends Component {
 
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(currentStoryBranch) ? [] : currentStoryBranch.storyRoot
-      //console.log('ROOTS:', roots)
       return roots.length > 1 ? roots[roots.length - 1] : currentStoryBranchId
     }
-    console.log('NAV STATE:', this.state)
+
     return (
       <div>
         {

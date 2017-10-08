@@ -16,35 +16,45 @@ import {
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 
+// utils
+import {getStoryBranch, getStoryCard, getDialogBox, getCancelAlertButton} from '../utils/storyBranchNavUtils'
+
 class BranchStepper extends Component {
   constructor(props) {
     super(props)
     this.state = {
       stepIndex: 0,
       branches: [],
-      currentStoryBranchId: '',
-      currentStoryBranch: {},
-      currentCardId: '',
-      currentCard: {},
-      selector: 0,
-      childParent: {}
+     // branchIds: ''
     }
   }
 
   componentDidMount() {
-    console.log('MOUNTING STEPPER')
-    this.setState({
-      branchId: this.props.match.params.branchId,
-      cardId: this.props.match.params.cardId
-    })
+    //console.log('MOUNTING STEPPER')
+    const {branchId, cardId} = this.props.match.params
+    getStoryBranch(branchId)
+    .then(info => this.setState({
+      branches: [{...info.val(), branchId, cardId}],
+      branchIds: [branchId]
+    }))
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('STEPPER NEXT PROPS:', nextProps)
-    this.setState({
-      branchId: nextProps.match.params.branchId,
-      cardId: nextProps.match.params.cardId
-    })
+    const {branchId, cardId} = nextProps.match.params
+    const {branches, stepIndex} = this.state
+    const currentBranch = this.state.branches[this.state.stepIndex]
+    if (branchId === currentBranch.branchId) {
+      console.log('SAME BRANCH')
+      currentBranch.cardId = nextProps.match.params.cardId
+      branches[this.state.stepIndex] = currentBranch
+      this.setState({branches})
+    } else {
+      console.log('DIFFS BRANCH')
+      getStoryBranch(branchId)
+      .then(info => {
+        this.setState({stepIndex: this.state.stepIndex + 1, branches: [...(this.state.branches.slice(0, stepIndex + 1)), {...info.val(), branchId, cardId}]})
+      })
+    }
   }
 
   handleNext = () => {
@@ -84,18 +94,18 @@ class BranchStepper extends Component {
     )
   }
 
-  renderBranches = (stepInd, title, branchId, cardId) => {
+  renderBranches = (stepInd, branchId, cardId) => {
     return (
-      <Step>
+      <Step key={branchId}>
         <StepButton onClick={() => this.setState({stepIndex: stepInd})}>
           {
             stepInd === 0
-            ? title
-            : `Branched Off To: ${title}`
+            ? branchId
+            : `Branched Off To: ${branchId}`
           }
         </StepButton>
         <StepContent>
-            <StoryBranchNav branchId={this.state.branchId} cardId={this.state.cardId} />
+            <StoryBranchNav branchId={branchId} cardId={cardId} />
           {this.renderStepActions(stepInd)}
         </StepContent>
       </Step>
@@ -103,8 +113,9 @@ class BranchStepper extends Component {
   }
 
   render() {
-    const {stepIndex} = this.state
+    const {stepIndex, branches} = this.state
     console.log('STEPPER STATE:', this.state)
+    console.log('BRANCHES', branches)
 
     return (
       <div style={{maxWidth: 1000, maxHeight: 400, margin: 'auto'}}>
@@ -114,7 +125,7 @@ class BranchStepper extends Component {
           orientation="vertical"
         >
         {
-          this.branchOff()
+          branches.map((branch, ind) => this.renderBranches(ind, branch.branchId, branch.cardId))
         }
         {/*
           <Step>
@@ -154,6 +165,9 @@ class BranchStepper extends Component {
           </Step>
           */}
         </Stepper>
+        {
+          branches.length && <p>Where are you?</p>
+        }
       </div>
     )
   }
