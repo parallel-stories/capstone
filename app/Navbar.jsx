@@ -41,7 +41,7 @@ class Navbar extends Component {
   render() {
     return (
       <AppBar
-        title="Parallel Stories"
+        title={<a href="/home" className="title-logo">Parallel Stories</a>}
         iconElementLeft={<IconButton><List/></IconButton>}
         onLeftIconButtonTouchTap={this.handleToggle}
         style={{boxShadow: 'none', fontFamily: 'Berkshire Swash, cursive', textAlign: 'center'}}>
@@ -49,6 +49,7 @@ class Navbar extends Component {
           <MenuItem onClick={(e) => { this.handleLink(e, 'home') }}>Home</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'read') }}>Read Stories</MenuItem>
+          <MenuItem onClick={(e) => { this.handleLink(e, 'allUsers') }}>All Users</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'userProfile') }}>User Profile</MenuItem>
           <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>
         </Drawer>

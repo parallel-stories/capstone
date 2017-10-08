@@ -2,6 +2,7 @@ import React from 'react'
 import firebase from 'app/fire'
 const auth = firebase.auth()
 
+import history from '../history'
 import Login from './Login'
 
 import IconButton from 'material-ui/IconButton'
@@ -23,7 +24,7 @@ export const WhoAmI = ({user, auth}) =>
       /// ...otherwise, show a logout button.
       :
       <IconButton
-        className='logout' onClick={() => auth.signOut()}
+        className='logout' onClick={() => auth.signOut().then( () => history.push(`/home`) )}
         tooltip={name(user)}>
         <LogOut color={lightGreen50} hoverColor={lightGreen600}/>
       </IconButton>
