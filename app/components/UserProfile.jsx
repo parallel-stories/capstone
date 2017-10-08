@@ -12,6 +12,7 @@ const auth = firebase.auth()
 
 //components
 import AllStoryBranches from './AllStoryBranches'
+import AllUsers from './AllUsers'
 
 import _ from 'lodash'
 
@@ -32,6 +33,7 @@ export default class UserProfile extends Component {
       user: {},
       storyBranches: {},
       favorites: {},
+      usersFollowed: {},
     }
     this.handleLink = this.handleLink.bind(this)
   }
@@ -41,11 +43,15 @@ export default class UserProfile extends Component {
       if (user) {
         this.branchListener = firebase.database().ref(`user/${this.state.user.uid}/storyBranches`)
         this.favesListener = firebase.database().ref(`user/${this.state.user.uid}/faves`)
+        this.followListener = firebase.database().ref(`user/${this.state.user.uid}/following`)
         this.branchListener.on('value', branches => {
           this.favesListener.on('value', faves => {
-            this.setState({
-              storyBranches: !branches.val() ? {} : branches.val(),
-              favorites: !faves.val() ? {} : faves.val()
+            this.followListener.on('value', follows => {
+              this.setState({
+                storyBranches: !branches.val() ? {} : branches.val(),
+                favorites: !faves.val() ? {} : faves.val(),
+                usersFollowed: !follows.val() ? {} : follows.val(),
+              })
             })
           })
         })
@@ -56,6 +62,7 @@ export default class UserProfile extends Component {
   componentWillUnmount() {
     if (this.branchListener) this.branchListener.off()
     if (this.favesListener) this.favesListener.off()
+    if (this.usersFollowed) this.usersFollowed.off()
     this.unsubscribe()
   }
 
@@ -64,7 +71,7 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    const { user, storyBranches, favorites } = this.state
+    const { user, storyBranches, favorites, usersFollowed } = this.state
 
     return (
       <div className="container-fluid" >
@@ -112,9 +119,30 @@ export default class UserProfile extends Component {
                 </div>)
             }
             <h2>Users You're Following</h2>
-            <p>user profiles will go here</p>
+            { _.isEmpty(usersFollowed)?
+              <div>
+                <p>
+                You're not currently following anyone!
+                Click the button below to see what other users are up to!
+                </p>
+                <RaisedButton
+                  label="All Users"
+                  onClick={(e) => { this.handleLink(e, 'allUsers') }}
+                  backgroundColor='#D1B38E'
+                  style={landingStyles.button}
+                />
+            </div>
+            :
+            <div className="row" >
+              <AllUsers
+                filtered={true}
+                userId={this.state.user.uid}
+                followedUsers={this.state.usersFollowed}/>
+            </div>
+          }
           </div>
         } {/* end check to see if user is logged in */}
+        <br />
         <br />
       </div>
     )
