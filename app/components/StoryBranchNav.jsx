@@ -37,12 +37,11 @@ class StoryBranchNav extends Component {
       currentCard: {},
       selector: 0,
       childParent: {},
-      isEnd: false,
-      isStart: false
+      branchingPointIndex: 0
     }
   }
 
-  updateFullState = (branchId, cardId, info, message) => {
+  updateFullState = (branchId, cardId, info, branchingPointIndex) => {
     // console.log('message:', message)
     // console.log('branch in nav:', info[0].val())
     this.setState({
@@ -50,29 +49,34 @@ class StoryBranchNav extends Component {
       currentStoryBranch: info[0].val(),
       currentCardId: cardId,
       selector: info[0].val().storyCards.indexOf(cardId),
-      currentCard: info[1].val()
+      currentCard: info[1].val(),
+      branchingPointIndex: branchingPointIndex
     })
   }
 
   componentDidMount() {
-    const {branchId, cardId} = this.props
+    const {branchId, cardId, branchingPointIndex} = this.props
+    console.log('NAV props:', this.props)
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
-    .then(info => this.updateFullState(branchId, cardId, info, 'MOUNTING NAV'))
+    .then(info => this.updateFullState(branchId, cardId, info, branchingPointIndex))
   }
 
   componentWillReceiveProps(nextProps) {
-    const {branchId, cardId} = nextProps
+    const {branchId, cardId, branchingPointIndex} = nextProps
+    console.log('NAV next props:', nextProps)
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
-    .then(info => this.updateFullState(branchId, cardId, info, 'receiving props NAV'))
+    .then(info => this.updateFullState(branchId, cardId, info))
   }
 
   handleOptionClick = () => {
     const {childParent, currentCardId, currentStoryBranchId} = this.state
-    this.setState({childParent: Object.assign(
-      {},
-      childParent,
-      {[`${currentCardId}`]: [currentStoryBranchId, currentCardId]}
-    )})
+    this.setState({
+      childParent: Object.assign(
+        {},
+        childParent,
+        {[`${currentCardId}`]: [currentStoryBranchId, currentCardId]}
+      )
+    })
   }
 
   handleReturnToPrevBranch = () => {
@@ -82,7 +86,15 @@ class StoryBranchNav extends Component {
   }
 
   render() {
-    const {currentStoryBranch, currentStoryBranchId, currentCard, isStart, isEnd, selector} = this.state
+    const {
+      currentStoryBranch,
+      currentStoryBranchId,
+      currentCard,
+      isStart,
+      isEnd,
+      selector,
+      branchingPointIndex
+    } = this.state
 
     let parentBranchId, parentCardId
     if (this.state.childParent[this.state.currentCardId]) {
@@ -94,6 +106,8 @@ class StoryBranchNav extends Component {
       const roots = _.isEmpty(currentStoryBranch) ? [] : currentStoryBranch.storyRoot
       return roots.length > 1 ? roots[roots.length - 1] : currentStoryBranchId
     }
+
+    console.log('IN MOUNTED NAV:', this.state)
 
     return (
       <div>
@@ -110,26 +124,17 @@ class StoryBranchNav extends Component {
           */}
             <div className="flex-container">
               {
-                selector > 0
+                selector > branchingPointIndex
                 ? <IconButton className="col swipe-btn-left-right flex-arrows">
                     <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`}>
                       <LeftArrow/>
                     </Link>
                   </IconButton>
                 : <IconButton
+                  disabled={true}
                   className="col swipe-btn-left-right flex-arrows"
-                  onClick={() => this.setState({isStart: true})}
                   >
                     <LeftArrow/>
-                    {
-                      getDialogBox(
-                        '',
-                        'This is the start of the story.',
-                        getCancelAlertButton(() => this.setState({isStart: false})),
-                        isStart,
-                        false
-                      )
-                    }
                   </IconButton>
               }
               <ReactSwipe className="flex-card carousel"
@@ -150,19 +155,10 @@ class StoryBranchNav extends Component {
                     </Link>
                   </IconButton>
                 : <IconButton
+                  disabled={true}
                   className="col swipe-btn-left-right flex-arrows"
-                  onClick={() => this.setState({isEnd: true})}
                   >
                     <RightArrow />
-                    {
-                      getDialogBox(
-                        '',
-                        'Sorry. There are currently no more scenes for this story.',
-                        getCancelAlertButton(() => this.setState({isEnd: false})),
-                        isEnd,
-                        false
-                      )
-                    }
                   </IconButton>
               }
             </div>
