@@ -4,8 +4,6 @@ import AppBar from 'material-ui/AppBar'
 
 // material ui
 import RaisedButton from 'material-ui/RaisedButton'
-import IconButton from 'material-ui/IconButton'
-import EditPen from 'material-ui/svg-icons/editor/mode-edit'
 
 // firebase
 import firebase from 'app/fire'
@@ -15,6 +13,7 @@ const auth = firebase.auth()
 //components
 import AllStoryBranches from './AllStoryBranches'
 import AllUsers from './AllUsers'
+import EditUserProfile from './EditUserProfile'
 
 import _ from 'lodash'
 
@@ -38,6 +37,7 @@ export default class UserProfile extends Component {
       usersFollowed: {},
       displayName: '',
       description: '',
+      isEditing: false,
     }
     this.handleLink = this.handleLink.bind(this)
   }
@@ -69,8 +69,17 @@ export default class UserProfile extends Component {
     this.props.history.push(`/${type}`)
   }
 
-  editProfile = () => {
-    console.log('do something with user profile here!!!')
+  /* edit profile displayName and description */
+  toggleEdit = () => {
+    this.setState({ isEditing: !this.state.isEditing })
+  }
+  editDisplayName = (evt) => {
+    evt.preventDefault()
+    this.setState({ displayName: evt.target.value })
+  }
+  editDesc = (evt) => {
+    evt.preventDefault()
+    this.setState({ description: evt.target.value })
   }
 
   render() {
@@ -82,18 +91,13 @@ export default class UserProfile extends Component {
           <h1>Please login to view your profile!</h1>
           :
           <div>
-            <span>
-              <h1>
-                Welcome {user.displayName}!
-                <IconButton tooltip="Edit your display name and/or profile description"
-                      onClick={this.editProfile}>
-                  <EditPen />
-                </IconButton>
-              </h1>
-            </span>
-            <p><b>Email: </b>{user.email}</p>
-            <p><b>Display Name: </b>{this.state.displayName}</p>
-            <p>{this.state.description}</p>
+            <EditUserProfile user={user}
+              toggleEdit={this.toggleEdit}
+              displayName={this.state.displayName}
+              description={this.state.description}
+              isEditing={this.state.isEditing}
+              editDisplayName={this.editDisplayName}
+              editDesc={this.editDesc}/>
             <hr />
             <h2>My Story Branches</h2>
             { _.isEmpty(storyBranches)
