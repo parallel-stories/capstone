@@ -120,10 +120,12 @@ export default class WriteSpace extends Component {
   }
 
   saveTitle = () => {
-    const cardKey = saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
-    this.setState({
-      editTitle: false,
-      cardId: cardKey
+    saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
+    .then(cardKey => {
+      this.setState({
+        editTitle: false,
+        cardId: cardKey
+      })
     })
   }
 
@@ -142,16 +144,16 @@ export default class WriteSpace extends Component {
     } else if (this.state.card.text == '') {
       alert('Please write some text.')
     } else {
-      const cardKey = saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
-
-      this.setState({
-        dirtyText: false,
-        dirtyTitle: false,
-        editTitle: false,
-        cardId: cardKey
+      saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
+      .then(cardKey => {
+        this.setState({
+          dirtyText: false,
+          dirtyTitle: false,
+          editTitle: false,
+          cardId: cardKey
+        })
+        history.push(`/write/${cardKey}`)
       })
-
-      history.push(`/write/${cardKey}`)
     }
   }
 
@@ -163,24 +165,24 @@ export default class WriteSpace extends Component {
     } else if (this.state.card.text == '') {
       alert('Please write some text.')
     } else {
-      const cardKey = publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
-      // history.push(`/read/${this.state.card.branchTitle}`)
-      this.setState({
-        openSubmit: false,
-        dirtyText: false,
-        dirtyTitle: false,
-        editTitle: false,
-        titleIsPub: true,
-        cardId: '',
-        card: Object.assign({}, this.state.card, {
-          text: '',
-          rootTitle: this.state.card.rootTitle != []
-            ? this.state.card.rootTitle
-            : [this.state.card.branchTitle],
-          prevCard: cardKey,
-          nextCard: ''
-        })
-      })
+      publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
+      .then(cardKey => history.push(`/read/${this.state.card.branchTitle}/${cardKey}`))
+        // this.setState({
+        //   openSubmit: false,
+        //   dirtyText: false,
+        //   dirtyTitle: false,
+        //   editTitle: false,
+        //   titleIsPub: true,
+        //   cardId: '',
+        //   card: Object.assign({}, this.state.card, {
+        //     text: '',
+        //     rootTitle: this.state.card.rootTitle != []
+        //       ? this.state.card.rootTitle
+        //       : [this.state.card.branchTitle],
+        //     prevCard: cardKey,
+        //     nextCard: ''
+        //   })
+        // })
     }
   }
 
