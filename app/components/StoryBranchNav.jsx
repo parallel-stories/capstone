@@ -42,8 +42,6 @@ class StoryBranchNav extends Component {
   }
 
   updateFullState = (branchId, cardId, info, branchingPointIndex) => {
-    // console.log('message:', message)
-    // console.log('branch in nav:', info[0].val())
     this.setState({
       currentStoryBranchId: branchId,
       currentStoryBranch: info[0].val(),
@@ -56,16 +54,15 @@ class StoryBranchNav extends Component {
 
   componentDidMount() {
     const {branchId, cardId, branchingPointIndex} = this.props
-    console.log('NAV props:', this.props)
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
     .then(info => this.updateFullState(branchId, cardId, info, branchingPointIndex))
   }
 
   componentWillReceiveProps(nextProps) {
     const {branchId, cardId, branchingPointIndex} = nextProps
-    console.log('NAV next props:', nextProps)
+    console.log('nav for:', branchId, cardId)
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
-    .then(info => this.updateFullState(branchId, cardId, info))
+    .then(info => this.updateFullState(branchId, cardId, info, branchingPointIndex))
   }
 
   handleOptionClick = () => {
@@ -107,7 +104,7 @@ class StoryBranchNav extends Component {
       return roots.length > 1 ? roots[roots.length - 1] : currentStoryBranchId
     }
 
-    console.log('IN MOUNTED NAV:', this.state)
+    console.log('IN MOUNTED NAV STATE:', this.state)
 
     return (
       <div>

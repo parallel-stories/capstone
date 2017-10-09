@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
+import history from '../history'
+
 // components
 import SingleCard from './SingleCard'
 import StoryBranchNav from './StoryBranchNav'
@@ -32,10 +34,16 @@ class BranchStepper extends Component {
     const {branchId, cardId} = this.props.match.params
     getStoryBranch(branchId)
     .then(info => {
-      console.log('MOUNTING BRANCH:', info.val())
       this.setState({
         branches: [{...info.val(), branchId, cardId, branchingPointIndex: 0}]
       })
+    })
+  }
+
+  branchAlreadyRead = (branchId) => {
+    return this.state.branches.some(branch => {
+      console.log('ALREADY EXISTS:', branch.branchId === branchId )
+      return branch.branchId === branchId
     })
   }
 
@@ -44,11 +52,11 @@ class BranchStepper extends Component {
     const {branches, stepIndex} = this.state
     const currentBranch = branches[stepIndex]
     if (branchId === currentBranch.branchId) {
-      console.log('SAME BRANCH:')
+      console.log('SAME BRANCH')
       currentBranch.cardId = cardId
       branches[stepIndex] = currentBranch
       this.setState({branches})
-    } else {
+    } else if (!this.branchAlreadyRead()) {
       console.log('DIFFS BRANCH')
       getStoryBranch(branchId)
       .then(info => {
@@ -104,8 +112,11 @@ class BranchStepper extends Component {
 
   renderBranch = (stepInd, branchId, cardId, branchingPointIndex) => {
     return (
-      <Step key={branchId}>
-        <StepButton onClick={() => this.setState({stepIndex: stepInd})}>
+      <Step key={stepInd}>
+        <StepButton onClick={() => {
+          this.setState({stepIndex: stepInd})
+          history.push(`/read/story_branch/${branchId}/${cardId}`)
+        }}>
           {
             stepInd === 0
             ? branchId
@@ -128,17 +139,15 @@ class BranchStepper extends Component {
     const {stepIndex, branches} = this.state
     console.log('STEPPER STATE:', this.state)
 
-    console.log('BRANCHes STATE:', branches)
-
     return (
       <div style={{maxWidth: 1000, maxHeight: 400, margin: 'auto'}}>
         <Stepper
-            activeStep={0}
+            activeStep={stepIndex}
             linear={false}
             orientation="vertical"
           >
           {
-            branches.map((branch, ind) => this.renderBranch(ind, branch.branchId, branch.cardId, branch.branchingPointIndex))
+            branches.map((branch, ind) => this.renderBranch(ind, branch.branchId, branch.cardId, branch.branchingPointIndex, branch.currentCardId))
           }
         </Stepper>
       </div>

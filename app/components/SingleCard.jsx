@@ -36,7 +36,7 @@ export default class SingleCard extends Component {
           branchLinks.push(
             <Link
               key={branch}
-              to={`/read/story_branch/${branch}/${currentCardId}`}
+              to={`/read/story_branch/${branch}/${currentCard.branches[branch]}`}
               onClick={() => {
                 this.setState({isReadingBranchOptions: false, isChangingBranch: true})
                 this.props.handleOptionClick()
@@ -112,11 +112,13 @@ export default class SingleCard extends Component {
           {
             this.getPrevButton(parentCardId, parentBranchId)
           }
-          <Snackbar
-            open={this.state.isChangingBranch}
-            message={`You are now on story branch "${currentStoryBranchId}"`}
-            autoHideDuration={2000}
-          />
+          {
+          // <Snackbar
+          //   open={this.state.isChangingBranch}
+          //   message={`You are now on story branch "${currentStoryBranchId}"`}
+          //   autoHideDuration={2000}
+          // />
+          }
         </CardActions>
       </Card>
     )
