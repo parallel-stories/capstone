@@ -20,6 +20,7 @@ const auth = firebase.auth()
 import { dialogStyle } from '../stylesheets/MatUIStyle'
 
 import { saveCard, publishCard } from '../utils/write.js'
+import history from '../history'
 
 export default class WriteSpace extends Component {
   constructor(props) {
@@ -63,9 +64,10 @@ export default class WriteSpace extends Component {
       }
     }))
 
-    // set state based on url get root title array of root branch from firebase
-    if (this.props.isBranch) {
+    // set state based on url
+    if (this.props.isBranch) { // if branching
       firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
+        // get root title array of root card from firebase
         this.setState({
           card: Object.assign({}, this.state.card, {
             rootTitle: [...snap.val().rootTitle, snap.val().branchTitle],
@@ -73,30 +75,20 @@ export default class WriteSpace extends Component {
           })
         })
       })
-    }
-
-    // check if branch title has already been published to disable any title changes
-    if (this.state.card.branchTitle != '') {
-      firebase.database().ref(`storyBranch/${this.state.card.branchTitle}`).once('value', snap => {
-        if (snap.val().published) {
-          this.setState({
-            titleIsPub: true
-          })
-        }
-      })
-    }
-
-    // this is to check if someone is editing a saved, unpublished card. deal with is published logic.
-    if (this.state.cardId != '') {
-      firebase.database().ref('storyCard').child(this.state.cardId).once('value', snap => {
+    } else if (this.props.match.params.cardId) { // if editing saved card
+      firebase.database().ref('storyCard').child(this.props.match.params.cardId).once('value', snap => {
         if (!snap.val().published) {
-          this.setState({card: snap.val()})
-        } else {
-          this.setState({
-            card: Object.assign({}, snap.val(), {
-              text: '<p>This card has already been published.</p>'.concat(snap.val().text)
+          // check if title is published to allow/prevent editing
+          firebase.database().ref(`storyBranch/${snap.val().branchTitle}`).once('value', branchSnap => {
+            const titleIsPub = (branchSnap.val().published)
+            this.setState({
+              titleIsPub: titleIsPub,
+              cardId: this.props.match.params.cardId,
+              card: snap.val()
             })
           })
+        } else {
+          history.push(`/read/${snap.val().branchTitle}/${this.state.cardId}`)
         }
       })
     }
@@ -158,6 +150,8 @@ export default class WriteSpace extends Component {
         editTitle: false,
         cardId: cardKey
       })
+
+      history.push(`/write/${cardKey}`)
     }
   }
 
@@ -170,7 +164,7 @@ export default class WriteSpace extends Component {
       alert('Please write some text.')
     } else {
       const cardKey = publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
-
+      // history.push(`/read/${this.state.card.branchTitle}`)
       this.setState({
         openSubmit: false,
         dirtyText: false,

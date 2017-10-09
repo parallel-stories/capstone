@@ -78,7 +78,6 @@ export default class Searchbar extends Component {
 
     return (
       <div className="container">
-        <h2 className="align-center">All Stories</h2>
         <form onSubmit={ this.handleSubmit }>
           <AutoComplete
             hintText="Search by title or description"
