@@ -72,6 +72,9 @@ export default class UserProfile extends Component {
   /* edit profile displayName and description */
   toggleEdit = () => {
     this.setState({ isEditing: !this.state.isEditing })
+    if( !this.setState.isEditing && this.state.user) {
+      this.updateUserInfo()
+    }
   }
   editDisplayName = (evt) => {
     evt.preventDefault()
@@ -80,6 +83,10 @@ export default class UserProfile extends Component {
   editDesc = (evt) => {
     evt.preventDefault()
     this.setState({ description: evt.target.value })
+  }
+  updateUserInfo = () => {
+    firebase.database().ref('user').child(this.state.user.uid).child('description').set(this.state.description)
+    firebase.database().ref('user').child(this.state.user.uid).child('username').set(this.state.displayName)
   }
 
   render() {
@@ -97,7 +104,8 @@ export default class UserProfile extends Component {
               description={this.state.description}
               isEditing={this.state.isEditing}
               editDisplayName={this.editDisplayName}
-              editDesc={this.editDesc}/>
+              editDesc={this.editDesc}
+              updateUserInfo={this.updateUserInfo}/>
             <hr />
             <h2>My Story Branches</h2>
             { _.isEmpty(storyBranches)
