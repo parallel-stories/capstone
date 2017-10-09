@@ -12,7 +12,6 @@ import TextField from 'material-ui/TextField'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 // lodash
@@ -122,7 +121,7 @@ export default class Review extends Component {
       <FlatButton label="Cancel" primary={true} onClick={this.handleClose}/>,
       <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} disabled={disableSubmit}/>
     ]
-    
+
     return (
       <div className="container review">
         <br />

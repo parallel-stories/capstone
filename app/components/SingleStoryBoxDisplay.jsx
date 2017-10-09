@@ -7,7 +7,6 @@ import FlatButton from 'material-ui/FlatButton'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 // material ui components for favorites
@@ -98,7 +97,7 @@ export default class SingleStoryBoxDisplay extends Component {
           onCheck={this.updateCheck.bind(this)}
         />
       </CardHeader>
-      <Link key={thisKey} to={`/read/story_branch/${thisKey}`}>
+      <Link key={thisKey} to={`/read/${thisKey}`}>
         <CardMedia
           overlay={<CardTitle title={storyBranchTitle} subtitle={getStoryRootTitle()} />}
         >

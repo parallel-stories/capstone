@@ -7,7 +7,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 //components
@@ -35,7 +34,6 @@ export default class UserProfile extends Component {
       favorites: {},
       usersFollowed: {},
     }
-    this.handleLink = this.handleLink.bind(this)
   }
 
   componentDidMount() {

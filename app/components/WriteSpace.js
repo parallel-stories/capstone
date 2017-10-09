@@ -15,7 +15,6 @@ import TextField from 'material-ui/TextField'
 
 //firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 import { dialogStyle } from '../stylesheets/MatUIStyle'
@@ -92,7 +91,7 @@ export default class WriteSpace extends Component {
     if (this.state.cardId != '') {
       firebase.database().ref('storyCard').child(this.state.cardId).once('value', snap => {
         if (!snap.val().published) {
-          this.setState({card: snap.val()})
+          this.setState({card: ReactHtmlParser(snap.val())})
         } else {
           this.setState({
             card: Object.assign({}, snap.val(), {

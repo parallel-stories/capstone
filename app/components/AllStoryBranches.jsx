@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import SingleStoryBoxDisplay from './SingleStoryBoxDisplay'
 import firebase from 'app/fire'
-import 'firebase/database'
 import _ from 'lodash'
 import {Link} from 'react-router-dom'
 
