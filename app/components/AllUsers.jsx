@@ -48,34 +48,42 @@ export default class AllUsers extends Component {
 
     return (
       <div className="container all-box-display">
-        <br/>
-          {
-            /* if this is called from the user profile component -- ie filtered is true --
-              use the first rendering code
-              otherwise, use the second
-            */
-          }
-          {
-            filtered ?
-            !_.isEmpty(filteredUsers) &&
-            Object.keys(filteredUsers).map(key =>
-              <UserCard key={key}
-                thisKey={key}
-                user={filteredUsers[key]}
-                currentUser={this.state.currentUser}/>
-            )
-            :
-            !_.isEmpty(users) &&
-            Object.keys(users).map(key =>
-              <UserCard key={key}
-                thisKey={key}
-                user={this.state.users[key]}
-                currentUser={this.state.currentUser}/>
-            )
-          }
-        <br/>
-        <br/>
-      </div>
+        {
+          filtered?
+          <span></span>
+          :
+          <div>
+            <h2 className="align-center">All Users</h2>
+            <br/>
+          </div>
+        }
+        {
+          /* if this is called from the user profile component -- ie filtered is true --
+            use the first rendering code
+            otherwise, use the second
+          */
+        }
+        {
+          filtered ?
+          !_.isEmpty(filteredUsers) &&
+          Object.keys(filteredUsers).map(key =>
+            <UserCard key={key}
+              thisKey={key}
+              user={filteredUsers[key]}
+              currentUser={this.state.currentUser}/>
+          )
+          :
+          !_.isEmpty(users) &&
+          Object.keys(users).map(key =>
+            <UserCard key={key}
+              thisKey={key}
+              user={this.state.users[key]}
+              currentUser={this.state.currentUser}/>
+          )
+        }
+      <br/>
+      <br/>
+    </div>
     )
   }
 }
