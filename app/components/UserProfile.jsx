@@ -35,7 +35,6 @@ export default class UserProfile extends Component {
       favorites: {},
       usersFollowed: {},
     }
-    this.handleLink = this.handleLink.bind(this)
   }
 
   componentDidMount() {
