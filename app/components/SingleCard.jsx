@@ -59,7 +59,7 @@ export default class SingleCard extends Component {
   getPrevButton = (parentCardId, parentBranchId) => {
     if (parentCardId) {
       return (
-        <Link to={`/read/story_branch/${parentBranchId}/${parentCardId}`}>
+        <Link to={`/read/${parentBranchId}/${parentCardId}`}>
         {
           this.getButton(parentCardId, 'Return to previous story branch', '#50AD55', this.props.handleReturnToPrevBranch)
         }
