@@ -24,8 +24,6 @@ class Navbar extends Component {
     this.state = {
       open: false
     }
-    this.handleToggle = this.handleToggle.bind(this)
-    this.handleLink = this.handleLink.bind(this)
   }
 
   // handles the toggle of the left drawer menu
