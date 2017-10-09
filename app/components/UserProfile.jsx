@@ -69,6 +69,10 @@ export default class UserProfile extends Component {
     this.props.history.push(`/${type}`)
   }
 
+  editProfile = () => {
+    console.log('do something with user profile here!!!')
+  }
+
   render() {
     const { user, storyBranches, favorites, usersFollowed } = this.state
 
@@ -82,7 +86,7 @@ export default class UserProfile extends Component {
               <h1>
                 Welcome {user.displayName}!
                 <IconButton tooltip="Edit your display name and/or profile description"
-                      onClick={() => console.log('do something with user profile here!')}>
+                      onClick={this.editProfile}>
                   <EditPen />
                 </IconButton>
               </h1>
