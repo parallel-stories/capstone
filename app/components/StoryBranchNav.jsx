@@ -110,7 +110,7 @@ class StoryBranchNav extends Component {
               {
                 selector > 0
                 ? <IconButton className="col swipe-btn-left-right flex-arrows">
-                    <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`}>
+                    <Link to={`/read/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`}>
                       <LeftArrow/>
                     </Link>
                   </IconButton>

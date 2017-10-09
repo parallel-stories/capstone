@@ -33,8 +33,8 @@ class Routes extends Component {
             <Route exact path="/write" render={(props)=><WriteSpace isBranch={false} {...props} />} />
             <Route exact path="/write/:rootId/:cardId/new_branch" render={(props)=><WriteSpace isBranch={true} {...props} />} />
             <Route exact path="/read" component={Searchbar} />
-            <Route exact path="/read/story_branch/:branchId" component={SingleStoryPage} />
-            <Route exact path="/read/story_branch/:branchId/:cardId" component={StoryBranchNav} />
+            <Route exact path="/read/:branchId" component={SingleStoryPage} />
+            <Route exact path="/read/:branchId/:cardId" component={StoryBranchNav} />
             <Route exact path="/allUsers" component={AllUsers} />
             <Route path="/allUsers/:id" component={UserPage} />
             <Route exact path="/userProfile" component={UserProfile} />

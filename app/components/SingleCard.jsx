@@ -36,7 +36,7 @@ export default class SingleCard extends Component {
           branchLinks.push(
             <Link
               key="branch"
-              to={`/read/story_branch/${branch}/${currentCardId}`}
+              to={`/read/${branch}/${currentCardId}`}
               onClick={() => {
                 this.setState({isReadingBranchOptions: false, isChangingBranch: true})
                 this.props.handleOptionClick()
