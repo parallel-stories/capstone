@@ -29,7 +29,7 @@ class AllStoryBranches extends Component {
     const { searchResults, searching } = this.props
 
     return (
-      <div className="container all-story-branches">
+      <div className="container all-box-display">
         {
           /* if this is called from the searchbar component -- searhing is true --
             use the first rendering code

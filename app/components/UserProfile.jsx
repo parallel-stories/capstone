@@ -12,6 +12,7 @@ const auth = firebase.auth()
 //components
 import AllStoryBranches from './AllStoryBranches'
 import AllUsers from './AllUsers'
+import EditUserProfile from './EditUserProfile'
 
 import _ from 'lodash'
 
@@ -33,24 +34,24 @@ export default class UserProfile extends Component {
       storyBranches: {},
       favorites: {},
       usersFollowed: {},
+      displayName: '',
+      description: '',
+      isEditing: false,
     }
   }
 
   componentDidMount() {
     this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
       if (user) {
-        this.branchListener = firebase.database().ref(`user/${this.state.user.uid}/storyBranches`)
-        this.favesListener = firebase.database().ref(`user/${this.state.user.uid}/faves`)
-        this.followListener = firebase.database().ref(`user/${this.state.user.uid}/following`)
-        this.branchListener.on('value', branches => {
-          this.favesListener.on('value', faves => {
-            this.followListener.on('value', follows => {
-              this.setState({
-                storyBranches: !branches.val() ? {} : branches.val(),
-                favorites: !faves.val() ? {} : faves.val(),
-                usersFollowed: !follows.val() ? {} : follows.val(),
-              })
-            })
+        this.userListener = firebase.database().ref(`user/${this.state.user.uid}`)
+
+        this.userListener.on('value', user => {
+          this.setState({
+            storyBranches: !user.val().storyBranches ? {} : user.val().storyBranches,
+            favorites: !user.val().faves ? {} : user.val().faves,
+            usersFollowed: !user.val().following ? {} : user.val().following,
+            displayName: !user.val().username? '' : user.val().username,
+            description: !user.val().description? '' : user.val().description,
           })
         })
       }
@@ -58,14 +59,32 @@ export default class UserProfile extends Component {
   }
 
   componentWillUnmount() {
-    if (this.branchListener) this.branchListener.off()
-    if (this.favesListener) this.favesListener.off()
-    if (this.usersFollowed) this.usersFollowed.off()
+    if (this.userListener) this.userListener.off()
     this.unsubscribe()
   }
 
   handleLink = (e, type) => {
     this.props.history.push(`/${type}`)
+  }
+
+  /* edit profile displayName and description */
+  toggleEdit = () => {
+    this.setState({ isEditing: !this.state.isEditing })
+    if( !this.setState.isEditing && this.state.user) {
+      this.updateUserInfo()
+    }
+  }
+  editDisplayName = (evt) => {
+    evt.preventDefault()
+    this.setState({ displayName: evt.target.value })
+  }
+  editDesc = (evt) => {
+    evt.preventDefault()
+    this.setState({ description: evt.target.value })
+  }
+  updateUserInfo = () => {
+    firebase.database().ref('user').child(this.state.user.uid).child('description').set(this.state.description)
+    firebase.database().ref('user').child(this.state.user.uid).child('username').set(this.state.displayName)
   }
 
   render() {
@@ -74,11 +93,18 @@ export default class UserProfile extends Component {
     return (
       <div className="container-fluid" >
         {!user ?
-          <h1>Please login to view profile </h1>
+          <h1>Please login to view your profile!</h1>
           :
           <div>
-            <h1>Welcome {user.displayName}!</h1>
-            <p>{user.email} </p>
+            <EditUserProfile user={user}
+              toggleEdit={this.toggleEdit}
+              displayName={this.state.displayName}
+              description={this.state.description}
+              isEditing={this.state.isEditing}
+              editDisplayName={this.editDisplayName}
+              editDesc={this.editDesc}
+              updateUserInfo={this.updateUserInfo}/>
+            <hr />
             <h2>My Story Branches</h2>
             { _.isEmpty(storyBranches)
               ? (<div>
@@ -116,6 +142,7 @@ export default class UserProfile extends Component {
                   <AllStoryBranches searchResults={favorites} searching={true} />
                 </div>)
             }
+            <hr />
             <h2>Users You're Following</h2>
             { _.isEmpty(usersFollowed)?
               <div>

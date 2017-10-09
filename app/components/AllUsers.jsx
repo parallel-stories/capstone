@@ -47,7 +47,7 @@ export default class AllUsers extends Component {
     }
 
     return (
-      <div className="container all-users">
+      <div className="container all-box-display">
         <br/>
           {
             /* if this is called from the user profile component -- ie filtered is true --

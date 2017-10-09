@@ -88,7 +88,7 @@ export default class SingleStoryBoxDisplay extends Component {
 
     return (
     <Card className="single-card col-lg-4 col-md-4 col-sm-4"
-          style={{boxShadow: "none", borderWidth: 1}}>
+          style={{boxShadow: "none", outlineStyle:"dashed", outlineColor:"#EDE2D4"}}>
       <CardHeader>
         <Checkbox
           checkedIcon={<ActionFavorite style={{color: '#FFB6C1'}} />}
