@@ -61,7 +61,8 @@ export default class UserCard extends Component {
 
   render() {
     const { thisKey } = this.props
-    const numStoriesAuthored = Object.keys(this.props.user.storyBranches).length
+    const storiesAuthored = this.props.user.storyBranches || {}
+    const numStories = Object.keys(storiesAuthored).length
 
     return (
       <Card
@@ -70,7 +71,7 @@ export default class UserCard extends Component {
         <Link to={`/allUsers/${thisKey}`} key={thisKey}>
           <CardHeader
             title={`${this.props.user.username}`}
-            subtitle={`${numStoriesAuthored} stories authored`}
+            subtitle={`${numStories} stories authored`}
             />
           <CardText>
             <p>{this.props.user.description}</p>
