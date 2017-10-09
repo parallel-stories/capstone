@@ -1,3 +1,5 @@
+//**everything that is async should return a promise */
+
 import firebase from 'app/fire'
 import 'firebase/database'
 
@@ -16,8 +18,9 @@ const createAndOrUpdateCard = function(card, cardId) {
   // if new card, create card
   if (cardId == '') {
     cardKey = createCard(card) // returns firebase key
+    //***return updateCard and .then off of it
     updateCard(card, cardId, cardKey)
-  // else update card
+  //*** else update card and return update card as promise
   } else {
     // check if title has changed from old db info, THEN update db w new info
     firebase.database().ref(`storyCard/${cardId}/branchTitle`).once('value').then(snap => {
