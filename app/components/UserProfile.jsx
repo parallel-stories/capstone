@@ -94,6 +94,7 @@ export default class UserProfile extends Component {
             <p><b>Email: </b>{user.email}</p>
             <p><b>Display Name: </b>{this.state.displayName}</p>
             <p>{this.state.description}</p>
+            <hr />
             <h2>My Story Branches</h2>
             { _.isEmpty(storyBranches)
               ? (<div>
@@ -131,6 +132,7 @@ export default class UserProfile extends Component {
                   <AllStoryBranches searchResults={favorites} searching={true} />
                 </div>)
             }
+            <hr />
             <h2>Users You're Following</h2>
             { _.isEmpty(usersFollowed)?
               <div>
