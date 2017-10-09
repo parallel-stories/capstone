@@ -10,7 +10,6 @@ import FlatButton from 'material-ui/FlatButton'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 
 export default class UserCard extends Component {
   constructor() {
