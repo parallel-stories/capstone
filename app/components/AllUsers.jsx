@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 import UserCard from './UserCard'

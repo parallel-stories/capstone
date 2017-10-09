@@ -5,7 +5,6 @@ import AutoComplete from 'material-ui/AutoComplete'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 
 // react components
 import AllUsers from './AllUsers'

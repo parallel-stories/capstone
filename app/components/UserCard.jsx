@@ -9,7 +9,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 
 export default class UserCard extends Component {
   constructor() {

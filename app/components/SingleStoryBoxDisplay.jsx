@@ -7,7 +7,6 @@ import FlatButton from 'material-ui/FlatButton'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 // material ui components for favorites

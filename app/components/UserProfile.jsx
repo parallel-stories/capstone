@@ -7,7 +7,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 //components
