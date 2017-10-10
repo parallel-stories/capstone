@@ -4,6 +4,14 @@ import firebase from 'app/fire'
 import _ from 'lodash'
 import {Link} from 'react-router-dom'
 
+function onlyPublished(storyObj) {
+  const pubStories = {}
+  for (const key in storyObj) {
+    if (key.published) pubStories.key = storyObj.key
+  }
+  return pubStories
+}
+
 class AllStoryBranches extends Component {
   constructor() {
     super()
@@ -15,7 +23,7 @@ class AllStoryBranches extends Component {
   componentDidMount() {
     this.listenerRef = firebase.database().ref('storyBranch/')
     this.listenerRef.on('value', snap => {
-      const storyBranches = snap.val()
+      const storyBranches = onlyPublished(snap.val())
       this.setState({allStoryBranches: storyBranches})
     })
   }
