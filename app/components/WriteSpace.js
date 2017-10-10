@@ -190,25 +190,35 @@ export default class WriteSpace extends Component {
     } else if (this.state.card.text == '') {
       alert('Please write some text.')
     } else {
-      publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
-      .then(cardKey => history.push(`/read/${this.state.card.branchTitle}/${cardKey}`))
-       // this.setState({
-        //   openSubmit: false,
-        //   dirtyText: false,
-        //   dirtyTitle: false,
-        //   editTitle: false,
-        //   titleIsPub: true,
-        //   cardId: '',
-        //   card: Object.assign({}, this.state.card, {
-        //     text: '',
-        //     rootTitle: this.state.card.rootTitle != []
-        //       ? this.state.card.rootTitle
-        //       : [this.state.card.branchTitle],
-        //     prevCard: cardKey,
-        //     nextCard: ''
-        //   })
-        // })
+      return publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
     }
+  }
+
+  publishAndContinue = (evt) => {
+    this.publishStory(evt)
+    .then(cardKey => {
+      this.setState({
+        openSubmit: false,
+        dirtyText: false,
+        dirtyTitle: false,
+        editTitle: false,
+        titleIsPub: true,
+        cardId: '',
+        card: Object.assign({}, this.state.card, {
+          text: '',
+          rootTitle: this.state.card.rootTitle != []
+            ? this.state.card.rootTitle
+            : [this.state.card.branchTitle],
+          prevCard: cardKey,
+          nextCard: ''
+        })
+      })
+    })
+  }
+
+  publishAndRead = (evt) => {
+    this.publishStory(evt)
+    .then(cardKey => history.push(`/read/${this.state.card.branchTitle}/${cardKey}`))
   }
 
   // to open/close dialog box on sumit story
@@ -229,7 +239,8 @@ export default class WriteSpace extends Component {
     // actions to submit/cancel story submission
     const actionsDialog = [
       <FlatButton key='cancel' label="Cancel" primary={true} onClick={this.handleClose} />,
-      <FlatButton key='submit' label="Publish Card & Continue Story" primary={true} keyboardFocused={true} onClick={this.publishStory} />,
+      <FlatButton label="Publish Card & Continue Story" primary={true} keyboardFocused={true} onClick={this.publishAndContinue} />,
+      <FlatButton label="Publish Card & Read Story" primary={true} keyboardFocused={true} onClick={this.publishAndRead} />
     ]
 
     const unauthPopUpActions = [
@@ -338,7 +349,7 @@ export default class WriteSpace extends Component {
           contentStyle={dialogStyle}
           autoScrollBodyContent={true}
         >
-          <form onSubmit={this.publishStory} />
+          <form onSubmit={this.publishAndRead} />
           <h2>{this.state.card.branchTitle}</h2>
           { ReactHtmlParser(this.state.card.text) }
         </Dialog>
