@@ -32,6 +32,7 @@ export default class UserProfile extends Component {
     this.state = {
       user: {},
       storyBranches: {},
+      unpublishedCards:{},
       favorites: {},
       usersFollowed: {},
       displayName: '',
@@ -48,6 +49,7 @@ export default class UserProfile extends Component {
         this.userListener.on('value', user => {
           this.setState({
             storyBranches: !user.val().storyBranches ? {} : user.val().storyBranches,
+            unpublishedCards: !user.val().unpublishedCards ? {} : user.val().unpublishedCards,
             favorites: !user.val().faves ? {} : user.val().faves,
             usersFollowed: !user.val().following ? {} : user.val().following,
             displayName: !user.val().username? '' : user.val().username,
@@ -88,8 +90,8 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    const { user, storyBranches, favorites, usersFollowed } = this.state
-
+    const { user, storyBranches, unpublishedCards, favorites, usersFollowed } = this.state
+    console.log('unpub', unpublishedCards)
     return (
       <div className="container-fluid" >
         {!user ?
@@ -104,6 +106,8 @@ export default class UserProfile extends Component {
               editDisplayName={this.editDisplayName}
               editDesc={this.editDesc}
               updateUserInfo={this.updateUserInfo}/>
+            <hr />
+            <h2>My Draft Scenes</h2>
             <hr />
             <h2>My Story Branches</h2>
             { _.isEmpty(storyBranches)
