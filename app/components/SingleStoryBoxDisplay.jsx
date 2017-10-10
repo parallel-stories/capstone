@@ -20,6 +20,9 @@ import {Link} from 'react-router-dom'
 //libraries
 import _ from 'lodash'
 
+//utils
+import { isOwnBranch } from '../utils/singleStoryBox.js'
+
 const styles = {
   card: {
     boxShadow: "none",
