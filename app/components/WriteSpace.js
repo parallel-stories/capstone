@@ -22,6 +22,8 @@ import { dialogStyle } from '../stylesheets/MatUIStyle'
 import { saveCard, publishCard } from '../utils/write.js'
 import history from '../history'
 
+import _ from 'lodash'
+
 export default class WriteSpace extends Component {
   constructor(props) {
     super(props)
@@ -32,6 +34,7 @@ export default class WriteSpace extends Component {
       dirtyTitle: false,
       editTitle: true,
       titleIsPub: false,
+      openUnauthPopUp: true,
       // saveCard & publishCard depend on the state below not being refactored
       cardId: '',
       card: {
@@ -182,6 +185,8 @@ export default class WriteSpace extends Component {
   }
   handleClose = () => { this.setState({openSubmit: false}) }
 
+  handleUnauthPopUpClose = () => { this.setState({openUnauthPopUp: false}) }
+
   render() {
     // actions to submit/cancel story submission
     const actionsDialog = [
@@ -189,8 +194,25 @@ export default class WriteSpace extends Component {
       <FlatButton key='submit' label="Publish Card & Continue Story" primary={true} keyboardFocused={true} onClick={this.publishStory} />,
     ]
 
+    const unauthPopUpActions = [
+      <FlatButton key='cancel' label="Cancel" primary={true} onClick={this.handleUnauthPopUpClose} />
+    ]
+
     return (
-      <div>
+      <div>        
+          {(!this.state.user || _.isEmpty(this.state.user)) &&
+            <Dialog
+            title="Please Log In"
+            actions={unauthPopUpActions}
+            modal={false}
+            open={this.state.openUnauthPopUp}
+            onRequestClose={this.handleUnauthPopUpClose}
+            contentStyle={dialogStyle}
+            autoScrollBodyContent={true}
+          > In order to write a story, you must log in using the button on the top right.
+          </Dialog>
+          }
+        
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12" style={{'height': '435px'}}>
 
