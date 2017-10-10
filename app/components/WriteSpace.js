@@ -170,22 +170,6 @@ export default class WriteSpace extends Component {
     } else {
       publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
       .then(cardKey => history.push(`/read/${this.state.card.branchTitle}/${cardKey}`))
-        // this.setState({
-        //   openSubmit: false,
-        //   dirtyText: false,
-        //   dirtyTitle: false,
-        //   editTitle: false,
-        //   titleIsPub: true,
-        //   cardId: '',
-        //   card: Object.assign({}, this.state.card, {
-        //     text: '',
-        //     rootTitle: this.state.card.rootTitle != []
-        //       ? this.state.card.rootTitle
-        //       : [this.state.card.branchTitle],
-        //     prevCard: cardKey,
-        //     nextCard: ''
-        //   })
-        // })
     }
   }
 
@@ -230,47 +214,47 @@ export default class WriteSpace extends Component {
           }
         
         <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-12">
+          <div className="col-sm-12 col-md-12 col-lg-12" style={{'height': '435px'}}>
 
-          <div className="form-group container">
-          {// if title is pub, don't allow title to be changed, otherwise allow editing based on state.editTitle status
-            this.state.titleIsPub
-              ? <h2>
-                  {this.state.card.branchTitle}
-                </h2>
-              : !this.state.editTitle
+            <div className="form-group container">
+            {// if title is pub, don't allow title to be changed, otherwise allow editing based on state.editTitle status
+              this.state.titleIsPub
                 ? <h2>
                     {this.state.card.branchTitle}
                   </h2>
-                : <h2>
-                    <input type="text"
-                      className="form-control"
-                      value={this.state.card.branchTitle}
-                      placeholder="Story Title"
-                      id="titleField"
-                      onChange={this.changeBranchTitle} />
-                  </h2>
-          }
-            <div className="subtext">
-            {// if title is pub, no save/edit links should be displayed beneath title; otherwise display links based on state.editTitle status and if there is actually title text to save
-              this.state.titleIsPub
-                ? <Link to="#">
-                    &nbsp;
-                  </Link>
                 : !this.state.editTitle
-                  ? <Link to="#" onClick={this.editTitle}>
-                      (edit title)
-                    </Link>
-                  : (this.state.card.branchTitle != '')
-                    ? <Link to="#" onClick={this.saveTitle}>
-                        (save title)
-                      </Link>
-                    : <Link to="#">
-                        &nbsp;
-                      </Link>
+                  ? <h2>
+                      {this.state.card.branchTitle}
+                    </h2>
+                  : <h2>
+                      <input type="text"
+                        className="form-control"
+                        value={this.state.card.branchTitle}
+                        placeholder="Story Title"
+                        id="titleField"
+                        onChange={this.changeBranchTitle} />
+                    </h2>
             }
+              <div className="subtext">
+              {// if title is pub, no save/edit links should be displayed beneath title; otherwise display links based on state.editTitle status and if there is actually title text to save
+                this.state.titleIsPub
+                  ? <Link to="#">
+                      &nbsp;
+                    </Link>
+                  : !this.state.editTitle
+                    ? <Link to="#" onClick={this.editTitle}>
+                        (edit title)
+                      </Link>
+                    : (this.state.card.branchTitle != '')
+                      ? <Link to="#" onClick={this.saveTitle}>
+                          (save title)
+                        </Link>
+                      : <Link to="#">
+                          &nbsp;
+                        </Link>
+              }
+              </div>
             </div>
-          </div>
 
           {
             (this.state.card.rootTitle.length > 1) && (
@@ -280,26 +264,30 @@ export default class WriteSpace extends Component {
 
             <ReactQuill value={this.state.card.text}
               onChange={this.changeStoryText}
-              className="container container-fluid" />
+              className="container container-fluid"
+              style={{'height': '250px'}} />
           </div>
         </div>
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12">
-            <div className="form-group container floatLeft">
+            <div className="container">
               <RaisedButton key='save'
-                label="SAVE CARD"
+                label="SAVE SCENE"
                 backgroundColor="#D2B48C"
+                style={{'marginRight': '10px'}}
                 onClick={this.saveStory}
                 disabled={!this.state.card.text.length} />
               <RaisedButton key='submit'
-                label="PUBLISH CARD & CONTINUE STORY"
+                label="PUBLISH SCENE"
                 backgroundColor="#D2B48C"
+                style={{'marginRight': '10px'}}
                 onClick={this.handleOpen}
                 disabled={!this.state.card.text.length} />
               <RaisedButton key='clear'
                 label="CLEAR"
                 backgroundColor="#B83939"
-                onClick={this.clearStory} />
+                onClick={this.clearStory}
+                disabled={!this.state.card.text.length} />
             </div>
           </div>
         </div>
