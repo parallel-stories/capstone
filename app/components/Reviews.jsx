@@ -132,6 +132,7 @@ export default class Review extends Component {
               primary={true}
               onClick={this.handleOpen}
             />
+            <br/>
             <br />
             <Dialog
               title={`Write a Review for ${storyId}`}

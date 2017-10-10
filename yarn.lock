@@ -3853,6 +3853,12 @@ map-stream@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.1.0.tgz#e56aa94c4c8055a16404a0674b78f215f7c8e194"
 
+material-ui-chip-input@^0.17.2:
+  version "0.17.2"
+  resolved "https://registry.yarnpkg.com/material-ui-chip-input/-/material-ui-chip-input-0.17.2.tgz#4d1c065cad8d9b96ad6b0b3d3fa916fc27b66da8"
+  dependencies:
+    prop-types "^15.5.7"
+
 material-ui@^0.19.2:
   version "0.19.3"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.19.3.tgz#34b96401499773bc0b1ebf923b293bbf1632d375"

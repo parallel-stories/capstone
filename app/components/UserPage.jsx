@@ -63,6 +63,8 @@ export default class UserPage extends Component {
           </div>
           }
         </div>
+        <br/>
+        <br/>
       </div>
     )
   }
