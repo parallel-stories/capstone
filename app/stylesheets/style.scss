@@ -147,6 +147,17 @@ input.form-control {
   font-size: inherit;
 }
 
+.searchbar-filter {
+  float: left;
+  height: 100%;
+}
+
+.searchbar-filter .radio {
+  vertical-align: middle;
+  min-height: 100%;
+}
+
+
 /* footer styles */
 
 .footer a, .footer a:visited {

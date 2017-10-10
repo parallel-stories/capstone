@@ -6,6 +6,10 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
+// material UI - dropdown menu
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
+
 // firebase
 import firebase from 'app/fire'
 
@@ -23,6 +27,9 @@ export default class Searchbar extends Component {
       // our query
       query: '',
       postive: true,
+      tags: [],
+      // default val for drop-down menu
+      value: 'none',
     }
     this.handleUpdateInput = this.handleUpdateInput.bind(this)
     this.handleNewRequest = this.handleNewRequest.bind(this)
@@ -40,14 +47,25 @@ export default class Searchbar extends Component {
         titles: Object.keys(storyBranches)
       }) // end set state
     })
+    // get all tags from the db
+    this.tagsListener = firebase.database().ref(`tags`)
+    this.tagsListener.on('value', snap => {
+      const tags = snap.val()
+      if( tags ) {
+        for(const tag in tags ) {
+          this.setState({
+            tags: [...this.state.tags, tag]
+          })
+        }
+      } // end if
+    })
   }
 
   componentWillUnmount() {
-    this.storyListener.off()
+    if (this.storyListener) this.storyListener.off()
+    if (this.tagsListener) this.tagsListener.off()
   }
 
-  // TODO: prevent refresh when the enter key is hit
-  // displays what is being written in the search
   handleUpdateInput(query) {
     this.setState({
       query: query
@@ -65,6 +83,10 @@ export default class Searchbar extends Component {
     evt.preventDefault()
   }
 
+  handleChange = (event, index, value) => {
+    this.setState({value})
+  }
+
   render() {
     const filtered = {}
 
@@ -74,7 +96,6 @@ export default class Searchbar extends Component {
           filtered[key] = this.state.allStoryBranches[key]
       }
     }
-
 
     return (
       <div className="container">
@@ -99,18 +120,28 @@ export default class Searchbar extends Component {
             </div>
           )
         }
-        <RadioButtonGroup style={{display: 'flex', flexDirection: 'row', maxWidth: 85}}
-          name="search-by" defaultSelected="all">
-          <RadioButton
-            value="all"
-            label="All" />
-          <RadioButton
-            value="title"
-            label="Title" />
-          <RadioButton
-            value="desc"
-            label="Description" />
-        </RadioButtonGroup>
+        <DropDownMenu value={this.state.value} onChange={this.handleChange} className="searchbar-filter">
+          <MenuItem value='none' primaryText='(none)'/>
+          {
+            this.state.tags.map( tag => (
+              <MenuItem key={tag} value={tag} primaryText={`${tag}`} />
+            ))
+          }
+        </DropDownMenu>
+        <div className="searchbar-filter radio">
+          <RadioButtonGroup style={{display: 'flex', flexDirection: 'row', maxWidth: '100px'}}
+            name="search-by" defaultSelected="all"
+            labelStyle={{width: '0px', padding: '0px'}}>
+            <RadioButton
+              value="all"
+              label="All" />
+            <RadioButton
+              value="title"
+              label="Title" />
+          </RadioButtonGroup>
+        </div>
+        <br/>
+        <br/>
         <AllStoryBranches
           searchResults={filtered}
           searching={true}/>
