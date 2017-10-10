@@ -97,7 +97,7 @@ class StoryBranchNav extends Component {
 
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(currentStoryBranch) ? [] : currentStoryBranch.storyRoot
-      return roots.length > 1 ? roots[roots.length - 1].replace(/"/g,"") : currentStoryBranch.replace(/"/g,"")
+      return roots.length > 1 ? roots[roots.length - 1].replace(/"/g,"") : currentStoryBranchId
     }
 
     return (
