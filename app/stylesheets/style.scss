@@ -147,6 +147,18 @@ input.form-control {
   font-size: inherit;
 }
 
+.searchbar-filter {
+  float: left;
+  height: 100%;
+}
+
+.searchbar-filter .tag-label {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+
 /* footer styles */
 
 .footer a, .footer a:visited {
@@ -189,6 +201,7 @@ input.form-control {
   margin: 5px 0px;
   text-decoration: none;
   min-height: 300px;
+  max-height: 500px;
 }
 
 /* on a single community chain */

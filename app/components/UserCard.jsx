@@ -66,7 +66,7 @@ export default class UserCard extends Component {
 
     return (
       <Card
-        className="single-card col-lg-4 col-md-4 col-sm-4"
+        className="single-card col-lg-4 col-md-4 col-sm-6"
         style={{boxShadow:"none", outlineStyle:"dashed", outlineColor:"#EDE2D4"}}>
         <Link to={`/allUsers/${thisKey}`} key={thisKey}>
           <CardHeader
