@@ -136,26 +136,17 @@ export default class Searchbar extends Component {
             </div>
           )
         }
-        <DropDownMenu value={this.state.value} onChange={this.handleChange}
-                    style={styles.customWidth} className="searchbar-filter">
-          <MenuItem value='none' primaryText='(none)'/>
-          {
-            this.state.tags.map( tag => (
-              <MenuItem key={tag} value={tag} primaryText={`${tag}`} />
-            ))
-          }
-        </DropDownMenu>
-        <div className="searchbar-filter radio">
-          <RadioButtonGroup style={{display: 'flex', flexDirection: 'row', maxWidth: '100px'}}
-            name="search-by" defaultSelected="all"
-            labelStyle={{width: '0px', padding: '0px'}}>
-            <RadioButton
-              value="all"
-              label="All" />
-            <RadioButton
-              value="title"
-              label="Title" />
-          </RadioButtonGroup>
+        <div>
+          <DropDownMenu value={this.state.value} autoWidth={false}
+                      onChange={this.handleChange}
+                      style={styles.customWidth} className="searchbar-filter">
+            <MenuItem value='none' primaryText='(Search by Tag)'/>
+            {
+              this.state.tags.map( tag => (
+                <MenuItem key={tag} value={tag} primaryText={`${tag}`} />
+              ))
+            }
+          </DropDownMenu>
         </div>
         <br/>
         <br/>

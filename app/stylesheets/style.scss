@@ -152,9 +152,10 @@ input.form-control {
   height: 100%;
 }
 
-.searchbar-filter .radio {
+.searchbar-filter .tag-label {
+  display: inline-block;
   vertical-align: middle;
-  min-height: 100%;
+  line-height: normal;
 }
 
 
