@@ -10,7 +10,6 @@ import Reviews from './Reviews'
 // tagging imports
 import ChipInput from 'material-ui-chip-input'
 
-
 export default class SingleStoryPage extends Component {
   constructor(props) {
     super(props)
@@ -59,7 +58,6 @@ export default class SingleStoryPage extends Component {
     }
   }
 
-
   handleDeleteTag = (deleteMe) => {
     this.setState({
       tags: this.state.tags.filter(tag => tag !== deleteMe)
@@ -77,12 +75,12 @@ export default class SingleStoryPage extends Component {
 
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(storyBranch) ? [] : storyBranch.storyRoot
-      return roots.length > 1 ? roots[roots.length - 1].replace(/"/g,"") : storyBranchId.replace(/"/g,"")
+      return roots.length > 1 ? roots[roots.length - 1].replace(/"/g, '') : storyBranchId.replace(/"/g, '')
     }
 
     return (
       <div className="story-container">
-        <div>
+        <div className="story-container">
           <h2 className="align-center">{storyBranchId}</h2>
           <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
           <span>

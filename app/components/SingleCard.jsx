@@ -1,3 +1,5 @@
+/* global Treant $ */
+
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
@@ -5,21 +7,26 @@ import {Link} from 'react-router-dom'
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
-import Snackbar from 'material-ui/Snackbar'
 import Divider from 'material-ui/Divider'
+import Toggle from 'material-ui/Toggle'
 
 // html parser
 import ReactHtmlParser from 'react-html-parser'
 
 // utils
 import {getDialogBox, getCancelAlertButton} from '../utils/storyBranchNavUtils'
+import history from '../history'
+import _ from 'lodash'
+
+// tree graph
+import Tree from 'react-tree-graph'
 
 export default class SingleCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       isReadingBranchOptions: false,
-      isChangingBranch: false
+      branchExpanded: false
     }
   }
 
@@ -35,8 +42,8 @@ export default class SingleCard extends Component {
         if (branch !== currentStoryBranchId && branch !== parentBranchId) {
           branchLinks.push(
             <Link
-              key="branch"
-              to={`/read/${branch}/${currentCardId}`}
+              key={branch}
+              to={`/read/${branch}/${currentCard.branches[branch]}`}
               onClick={() => {
                 this.setState({isReadingBranchOptions: false, isChangingBranch: true})
                 this.props.handleOptionClick()
@@ -51,21 +58,7 @@ export default class SingleCard extends Component {
   }
 
   getButton = (valCheck, label, bkColor, callback) => {
-    if (valCheck) {
-      return <FlatButton label={label} backgroundColor={bkColor} onClick={callback} />
-    }
-  }
-
-  getPrevButton = (parentCardId, parentBranchId) => {
-    if (parentCardId) {
-      return (
-        <Link to={`/read/${parentBranchId}/${parentCardId}`}>
-        {
-          this.getButton(parentCardId, 'Return to previous story branch', '#50AD55', this.props.handleReturnToPrevBranch)
-        }
-        </Link>
-      )
-    }
+    if (valCheck) return <FlatButton label={label} backgroundColor={bkColor} onClick={callback} />
   }
 
   getBranchingButton = (rootId, cardId, currentCard) => {
@@ -76,16 +69,51 @@ export default class SingleCard extends Component {
     )
   }
 
+  handleBranchExpandChange = () => {
+    this.setState({branchExpanded: !this.state.expanded})
+  }
+
+  handleToggle = (event, toggle) => {
+    this.setState({branchExpanded: !this.state.branchExpanded})
+  };
+
   render() {
-    const {handleReturnToPrevBranch} = this.props
     const {currentCard, currentStoryBranchId, currentCardId} = this.props.currentState
     const {parentBranchId, parentCardId} = this.props.parent
-    const {isReadingBranchOptions, isChangingBranch} = this.state
+    const {isReadingBranchOptions} = this.state
     const branches = this.getBranchOptions()
 
+    const graphBranchOptions = () => {
+      const branching = (branchId) => {
+        this.props.handleOptionClick()
+        history.push(`/read/${branchId}/${currentCard.branches[branchId]}`)
+      }
+      const topBranches = Object.keys(currentCard.branches).filter(branchId => branchId !== currentStoryBranchId).slice(0, 3)
+      if (topBranches.length < 3) {
+        return topBranches.map(branchId => ({
+          name: branchId,
+          onClick: () => branching(branchId)
+        }))
+      } else {
+        return topBranches.map((branchId, ind) => {
+          return ind === 2
+          ? {name: 'MORE BRANCHES', onClick: () => this.setState({isReadingBranchOptions: true})}
+          : {name: branchId, onClick: () => branching(branchId)}
+        })
+      }
+    }
+
+    let data = {}
+    if (branches.length) {
+      data = {
+        name: `${currentStoryBranchId}`,
+        children: graphBranchOptions(branches)
+      }
+    }
+
     return (
-      <Card>
-        <CardTitle title=""/>
+      <Card expanded={this.state.expanded} onExpandChange={this.handleToggle}>
+        <CardTitle title="" subtitle={`Scene originally from "${currentCard.branchTitle}"`} subtitleStyle={{padding: '3px 10px 3px 0px', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right'}} />
         <CardText>
           {
             currentCard
@@ -94,31 +122,37 @@ export default class SingleCard extends Component {
               : <div><h3>This card hasn't been published yet!</h3>Stay tuned for more from <Link to={`/allUsers/currentCard.userId`}>this user.</Link></div>
             : <div></div>
           }
-        </CardText>
-        <Divider />
-        <CardActions>
+          <Divider />
+          </CardText>
+          <CardText actAsExpander={true}>
+            <Toggle
+              toggled={this.state.branchExpanded}
+              onToggle={this.handleToggle}
+              labelPosition="left"
+              label="Check out alternate branches from the scene: "
+            />
+           </CardText>
+          <CardActions expandable={true}>
+          <p>(LEFT: current story branch, RIGHT: alternate branches)</p>
+          {
+            !_.isEmpty(data)
+            ? <Tree data={data} nodeOffset={15} treeClassName="cardBranchTree" height={200} width={600} animated />
+            : <p>No alternate branches.</p>
+          }
+          <div>
+          Want to write your own branch of this story?{' '}
           {
             this.getBranchingButton(currentStoryBranchId, currentCardId, currentCard)
           }
-          {
-            this.getButton(branches.length, 'Read Branches', '#50AD55', this.handleDownClick)
-          }
+          </div>
           {
             getDialogBox(
-              'Choose another story branch:',
+              'Choose another story branch to read:',
               branches,
               getCancelAlertButton(() => this.setState({isReadingBranchOptions: false})),
               isReadingBranchOptions, true
             )
           }
-          {
-            this.getPrevButton(parentCardId, parentBranchId)
-          }
-          <Snackbar
-            open={this.state.isChangingBranch}
-            message={`You are now on story branch "${currentStoryBranchId}"`}
-            autoHideDuration={2000}
-          />
         </CardActions>
       </Card>
     )

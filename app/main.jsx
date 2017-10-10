@@ -1,8 +1,11 @@
 'use strict'
 // bootstrap and our stylesheet
 import './stylesheets/style.scss'
+
 // our material ui style
 import MatUIStyle from './stylesheets/MatUIStyle'
+
+import 'react-tree-graph/dist/style.css'
 
 import React from 'react'
 import {Router} from 'react-router'
