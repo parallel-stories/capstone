@@ -10,6 +10,8 @@ import Reviews from './Reviews'
 // tagging imports
 import ChipInput from 'material-ui-chip-input'
 
+// get header image
+import * as gettyAPI from '../api/getty'
 
 export default class SingleStoryPage extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ export default class SingleStoryPage extends Component {
     this.state = {
       currentStoryBranch: {},
       tags: [],
+      imageURL: 'http://lorempixel.com/400/200/',
     }
   }
 
@@ -35,10 +38,17 @@ export default class SingleStoryPage extends Component {
         })
       } // end if
     })
+    // get an image from getty
+    this.getImage(this.props.match.params.branchId)
   }
 
   componentWillUnmount() {
     if(this.tagsListener) this.tagsListener.off()
+  }
+
+  getImage = (query) => {
+    gettyAPI.getImage(query)
+        .then(imageURL => this.setState({ imageURL }))
   }
 
   handleAddTag = (newTag) => {
@@ -79,6 +89,7 @@ export default class SingleStoryPage extends Component {
       const roots = _.isEmpty(storyBranch) ? [] : storyBranch.storyRoot
       return roots.length > 1 ? roots[roots.length - 1].replace(/"/g,"") : storyBranchId.replace(/"/g,"")
     }
+    console.log('WHAT IS THE IMAGE', this.state.imageURL)
 
     return (
       <div className="story-container">
@@ -86,7 +97,7 @@ export default class SingleStoryPage extends Component {
           <h2 className="align-center">{storyBranchId}</h2>
           <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
           <span>
-            <img className="story-branch" src="http://lorempixel.com/400/200/" alt="This is an amazing picture." />
+            <img className="story-branch" src={this.state.imageURL} alt="This is an amazing picture." />
           </span>
           <br/>
         </div>

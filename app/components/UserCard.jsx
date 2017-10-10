@@ -36,7 +36,7 @@ export default class UserCard extends Component {
   updateFollowing = () => {
     if( this.props.thisKey === this.props.currentUser.uid ) {
       alert('You can\'t follow yourself!')
-    } else if( this.props.currentUser ) {
+    } else if( this.props.currentUser.uid ) {
       this.setState((oldState) => {
         return {
           following: !oldState.following,
@@ -63,6 +63,7 @@ export default class UserCard extends Component {
     const { thisKey } = this.props
     const storiesAuthored = this.props.user.storyBranches || {}
     const numStories = Object.keys(storiesAuthored).length
+    const username = this.props.user.username || 'no display name'
 
     return (
       <Card
@@ -70,7 +71,7 @@ export default class UserCard extends Component {
         style={{boxShadow:"none", outlineStyle:"dashed", outlineColor:"#EDE2D4"}}>
         <Link to={`/allUsers/${thisKey}`} key={thisKey}>
           <CardHeader
-            title={`${this.props.user.username}`}
+            title={`${username}`}
             subtitle={`${numStories} stories authored`}
             />
           <CardText>
