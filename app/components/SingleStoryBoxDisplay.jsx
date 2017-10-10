@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 // material ui
 import {Card, CardMedia, CardHeader, CardTitle, CardText} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 
 // firebase
 import firebase from 'app/fire'
@@ -20,6 +20,10 @@ import {Link} from 'react-router-dom'
 //libraries
 import _ from 'lodash'
 
+//utils
+import { isOwnBranch } from '../utils/singleStoryBox.js'
+import history from '../history'
+
 const styles = {
   card: {
     boxShadow: "none",
@@ -33,6 +37,7 @@ export default class SingleStoryBoxDisplay extends Component {
       checked: false,
       loggedIn: false,
       userId: '',
+      isMyStory: false
     }
   }
 
@@ -49,8 +54,13 @@ export default class SingleStoryBoxDisplay extends Component {
           const val = snap.val()
           if( val !== null ) this.setState({checked: val})
         })
+        isOwnBranch(user.uid,this.props.storyBranchTitle)
+        .then(bool => {
+          this.setState({isMyStory: bool})
+        })
       }
     })) // end on AuthStateChanged
+
   }
 
   componentWillUnmount() {
@@ -78,9 +88,13 @@ export default class SingleStoryBoxDisplay extends Component {
     }
   }
 
+  continueMyStory = () => {
+    history.push(`/write/continue/${this.props.storyBranchTitle}`)
+  }
+
   render() {
     const {storyBranchTitle, storyBranchDetails, thisKey} = this.props
-
+    
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(storyBranchDetails) ? [] : storyBranchDetails.storyRoot
       return roots.length > 1 ? roots[roots.length - 1] : storyBranchTitle
@@ -103,6 +117,7 @@ export default class SingleStoryBoxDisplay extends Component {
           No description available
         </CardText>
       </Link>
+      {this.state.isMyStory ? <RaisedButton label="Continue Writing" secondary={true} onClick={this.continueMyStory} />: null}
     </Card>
     )
   }
