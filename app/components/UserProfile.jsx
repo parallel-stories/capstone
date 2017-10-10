@@ -1,5 +1,6 @@
 // react
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 
 // material ui
@@ -91,7 +92,7 @@ export default class UserProfile extends Component {
 
   render() {
     const { user, storyBranches, unpublishedCards, favorites, usersFollowed } = this.state
-    console.log('unpub', unpublishedCards)
+    
     return (
       <div className="container-fluid" >
         {!user ?
@@ -108,6 +109,21 @@ export default class UserProfile extends Component {
               updateUserInfo={this.updateUserInfo}/>
             <hr />
             <h2>My Draft Scenes</h2>
+            {_.isEmpty(unpublishedCards)
+              ? (<div>
+                <p>
+                  It looks like you don't have any drafts.
+                </p>
+                </div>)
+              : (<div className="row" >
+                <ul>
+                {Object.keys(unpublishedCards).map(draft => (
+                  <li key={draft}><Link to={`/write/${draft}`}>Draft</Link></li>
+                ))}
+                </ul>
+                </div>)
+            }
+
             <hr />
             <h2>My Story Branches</h2>
             { _.isEmpty(storyBranches)
