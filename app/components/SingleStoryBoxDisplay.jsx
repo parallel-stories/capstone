@@ -112,7 +112,7 @@ export default class SingleStoryBoxDisplay extends Component {
           No description available
         </CardText>
       </Link>
-      {this.state.isMyStory ? <h1>mine</h1>: <h1>not mine</h1>}
+      {this.state.isMyStory ? <h1>mineee</h1>: null}
     </Card>
     )
   }
