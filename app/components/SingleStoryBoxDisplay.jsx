@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 // material ui
 import {Card, CardMedia, CardHeader, CardTitle, CardText} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 
 // firebase
 import firebase from 'app/fire'
@@ -22,6 +22,7 @@ import _ from 'lodash'
 
 //utils
 import { isOwnBranch } from '../utils/singleStoryBox.js'
+import history from '../history'
 
 const styles = {
   card: {
@@ -87,6 +88,10 @@ export default class SingleStoryBoxDisplay extends Component {
     }
   }
 
+  continueMyStory = () => {
+    history.push(`/write/continue/${this.props.storyBranchTitle}`)
+  }
+
   render() {
     const {storyBranchTitle, storyBranchDetails, thisKey} = this.props
     
@@ -112,7 +117,7 @@ export default class SingleStoryBoxDisplay extends Component {
           No description available
         </CardText>
       </Link>
-      {this.state.isMyStory ? <h1>mineee</h1>: null}
+      {this.state.isMyStory ? <RaisedButton label="Continue Writing" secondary={true} onClick={this.continueMyStory} />: null}
     </Card>
     )
   }
