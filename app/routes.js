@@ -18,10 +18,6 @@ import AllUsers from './components/AllUsers'
 import UserPage from './components/UserPage'
 
 class Routes extends Component {
-  constructor() {
-    super()
-  }
-
   render() {
     return (
       <div>

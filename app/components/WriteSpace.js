@@ -91,7 +91,7 @@ export default class WriteSpace extends Component {
               card: Object.assign({}, this.state.card, {
                 branchTitle: storyBranchId,
                 prevCard: lastStoryCardId,
-                rootTitle: cardSnap.val().storyRoot,
+                rootTitle: cardSnap.val().rootTitle,
                 userId: cardSnap.val().userId
               })
             })
