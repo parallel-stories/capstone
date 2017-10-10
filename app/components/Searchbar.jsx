@@ -16,6 +16,12 @@ import firebase from 'app/fire'
 // react components
 import AllStoryBranches from './AllStoryBranches'
 
+const styles = {
+  customWidth: {
+    width: 200,
+  },
+}
+
 export default class Searchbar extends Component {
   constructor(props) {
     super(props)
@@ -130,7 +136,8 @@ export default class Searchbar extends Component {
             </div>
           )
         }
-        <DropDownMenu value={this.state.value} onChange={this.handleChange} className="searchbar-filter">
+        <DropDownMenu value={this.state.value} onChange={this.handleChange}
+                    style={styles.customWidth} className="searchbar-filter">
           <MenuItem value='none' primaryText='(none)'/>
           {
             this.state.tags.map( tag => (

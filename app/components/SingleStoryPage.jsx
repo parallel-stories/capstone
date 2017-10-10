@@ -61,7 +61,7 @@ export default class SingleStoryPage extends Component {
     // remove from tags db
     firebase.database().ref('tags').child(deleteMe).child(this.props.match.params.branchId).remove()
     // remove this tag from story db
-    firebase.database().ref('storyBranch').child(this.props.match.params.branchId).child('tags').child(deleteMe).set(true)
+    firebase.database().ref('storyBranch').child(this.props.match.params.branchId).child('tags').child(deleteMe).remove()
   }
 
   render() {
@@ -95,7 +95,7 @@ export default class SingleStoryPage extends Component {
             fullWidth={true}
             hintText="Add a Tag"
             onRequestAdd={(chip) => this.handleAddTag(chip)}
-            onRequestDelete={(chip, index) => this.handleDeleteTag(chip, index)}
+            onRequestDelete={(chip) => this.handleDeleteTag(chip)}
             />
         </div>
         <Reviews storyId={storyBranchId}/>
