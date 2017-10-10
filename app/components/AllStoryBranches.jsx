@@ -3,14 +3,7 @@ import SingleStoryBoxDisplay from './SingleStoryBoxDisplay'
 import firebase from 'app/fire'
 import _ from 'lodash'
 import {Link} from 'react-router-dom'
-
-function onlyPublished(storyObj) {
-  const pubStories = {}
-  for (const key in storyObj) {
-    if (key.published) pubStories.key = storyObj.key
-  }
-  return pubStories
-}
+import {onlyPublished} from '../utils/storyBranchNavUtils'
 
 class AllStoryBranches extends Component {
   constructor() {
