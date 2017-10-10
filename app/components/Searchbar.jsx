@@ -90,10 +90,20 @@ export default class Searchbar extends Component {
   render() {
     const filtered = {}
 
-    for(const key in this.state.allStoryBranches) {
-      if(this.state.allStoryBranches.hasOwnProperty(key) &&
-        key.toLowerCase().match(this.state.query.toLowerCase())) {
-          filtered[key] = this.state.allStoryBranches[key]
+    if( this.state.value!=='none' ) {
+      for(const key in this.state.allStoryBranches) {
+        if(this.state.allStoryBranches.hasOwnProperty(key) &&
+          this.state.allStoryBranches[key].tags!==undefined &&
+          Object.keys(this.state.allStoryBranches[key].tags).indexOf(this.state.value)>-1) {
+            filtered[key] = this.state.allStoryBranches[key]
+        }
+      }
+    } else {
+      for(const key in this.state.allStoryBranches) {
+        if(this.state.allStoryBranches.hasOwnProperty(key) &&
+          key.toLowerCase().match(this.state.query.toLowerCase())) {
+            filtered[key] = this.state.allStoryBranches[key]
+        }
       }
     }
 
