@@ -10,9 +10,6 @@ import Reviews from './Reviews'
 // tagging imports
 import ChipInput from 'material-ui-chip-input'
 
-// get header image
-import * as gettyAPI from '../api/getty'
-
 export default class SingleStoryPage extends Component {
   constructor(props) {
     super(props)
@@ -47,17 +44,27 @@ export default class SingleStoryPage extends Component {
   }
 
   getImage = (query) => {
-    gettyAPI.getImage(query)
-        .then(imageURL => this.setState({ imageURL }))
+    const api = 'https://api.gettyimages.com/v3/search/images?fields=id,title,thumb,referral_destinations&sort_order=best&phrase='
+    const headers = { 'Api-Key': 'qk4wms73dv6nf7fjzb3q927k' }
+
+    /* grabs the first image from getty API that matches the query */
+    fetch(`${api}/${query}`, { headers })
+      .then(res => res.json())
+      .then(data => {
+        const rand = Math.floor(Math.random() * data.images.length)
+        this.setState({ imageURL: data.images[rand].display_sizes[0].uri })
+      })
+      .catch(() => console.log("error"))
+
   }
 
   handleAddTag = (newTag) => {
     /*
-    Tags cannot contain
+    Here because data sent to firebase cannot contain
     ".", "#", "$", "[", "]"
     */
     if(newTag.includes(".")||newTag.includes("#")||newTag.includes("$")||newTag.includes("[")||newTag.includes("]")) {
-      alert('tags cannot contain ".", "#", "$", "[", or "]" ')
+      alert(`tags cannot contain ".", "#", "$", "[", or "]" `)
     } else {
       this.setState({
         tags: [...this.state.tags, newTag]
