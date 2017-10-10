@@ -9,7 +9,7 @@ export const getCardBranchScene = function(cardId) {
     return firebase.database().ref(`storyBranch/${branchTitle}/storyCards`).once('value') 
       .then(snap => {
         if(snap.val()) {
-          return `from ${branchTitle}, scene ${snap.val().length}`
+          return `${branchTitle}, Scene ${snap.val().length}`
         }
     })
   })
