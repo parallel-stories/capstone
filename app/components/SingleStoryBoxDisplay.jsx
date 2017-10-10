@@ -36,6 +36,7 @@ export default class SingleStoryBoxDisplay extends Component {
       checked: false,
       loggedIn: false,
       userId: '',
+      isMyStory: false
     }
   }
 
@@ -52,8 +53,13 @@ export default class SingleStoryBoxDisplay extends Component {
           const val = snap.val()
           if( val !== null ) this.setState({checked: val})
         })
+        isOwnBranch(user.uid,this.props.storyBranchTitle)
+        .then(bool => {
+          this.setState({isMyStory: bool})
+        })
       }
     })) // end on AuthStateChanged
+
   }
 
   componentWillUnmount() {
@@ -83,7 +89,7 @@ export default class SingleStoryBoxDisplay extends Component {
 
   render() {
     const {storyBranchTitle, storyBranchDetails, thisKey} = this.props
-
+    
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(storyBranchDetails) ? [] : storyBranchDetails.storyRoot
       return roots.length > 1 ? roots[roots.length - 1] : storyBranchTitle
@@ -106,6 +112,7 @@ export default class SingleStoryBoxDisplay extends Component {
           No description available
         </CardText>
       </Link>
+      {this.state.isMyStory ? <h1>mine</h1>: <h1>not mine</h1>}
     </Card>
     )
   }
