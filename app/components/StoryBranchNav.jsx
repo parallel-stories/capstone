@@ -24,6 +24,8 @@ import firebase from 'app/fire'
 // lodash
 import _ from 'lodash'
 
+import history from '../history'
+
 // utils
 import {getStoryBranch, getStoryCard, getDialogBox, getCancelAlertButton} from '../utils/storyBranchNavUtils'
 
@@ -82,6 +84,20 @@ class StoryBranchNav extends Component {
     this.setState({childParent})
   }
 
+  handleNavClick = (direction) => {
+    const {currentStoryBranchId, currentStoryBranch, selector} = this.state
+    switch (direction) {
+    case 'left':
+      history.push(`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`)
+      break
+    case 'right':
+      history.push(`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector + 1]}`)
+      break
+    default:
+      break
+    }
+  }
+
   render() {
     const {
       currentStoryBranch,
@@ -105,7 +121,17 @@ class StoryBranchNav extends Component {
     }
 
     console.log('IN MOUNTED NAV STATE:', this.state)
-
+    const navButtonStyle = {
+      icon: {
+        width: '70px',
+        height: '70px'
+      },
+      button: {
+        width: '70px',
+        height: '70px',
+        padding: '20px'
+      }
+    }
     return (
       <div>
         {
@@ -122,17 +148,22 @@ class StoryBranchNav extends Component {
             <div className="flex-container">
               {
                 selector > branchingPointIndex
-                ? <IconButton className="col swipe-btn-left-right flex-arrows">
-                    <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`}>
-                      <LeftArrow/>
-                    </Link>
+                ? <IconButton
+                  iconStyle={navButtonStyle.icon}
+                  style={navButtonStyle.button}
+                  className="col swipe-btn-left-right flex-arrows"
+                  onClick={() => this.handleNavClick('left')}>
+                      <LeftArrow color="#006064"/>
                   </IconButton>
-                : <IconButton
+                : <div><IconButton
+                  iconStyle={navButtonStyle.icon}
+                  style={navButtonStyle.button}
                   disabled={true}
                   className="col swipe-btn-left-right flex-arrows"
                   >
-                    <LeftArrow/>
+                    <LeftArrow color="#006064" />
                   </IconButton>
+                  </div>
               }
               <ReactSwipe className="flex-card carousel"
                           swipeOptions={{continuous: false}}
@@ -146,16 +177,21 @@ class StoryBranchNav extends Component {
               </ReactSwipe>
               {
                 selector < currentStoryBranch.storyCards.length - 1
-                ? <IconButton className="col swipe-btn-left-right flex-arrows">
-                    <Link to={`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector + 1]}`}>
-                      <RightArrow />
-                    </Link>
+                ? <IconButton
+                  iconStyle={navButtonStyle.icon}
+                  style={navButtonStyle.button}
+                  className="col swipe-btn-left-right flex-arrows"
+                  onClick={() => this.handleNavClick('right')}
+                  >
+                      <RightArrow color="#006064" />
                   </IconButton>
                 : <IconButton
+                  iconStyle={navButtonStyle.icon}
+                  npstyle={navButtonStyle.button}
                   disabled={true}
                   className="col swipe-btn-left-right flex-arrows"
                   >
-                    <RightArrow />
+                    <RightArrow color="#006064" />
                   </IconButton>
               }
             </div>

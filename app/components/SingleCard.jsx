@@ -1,3 +1,5 @@
+/* global Treant $ */
+
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
@@ -13,6 +15,8 @@ import ReactHtmlParser from 'react-html-parser'
 
 // utils
 import {getDialogBox, getCancelAlertButton} from '../utils/storyBranchNavUtils'
+
+import Tree from 'react-tree-graph'
 
 export default class SingleCard extends Component {
   constructor(props) {
@@ -83,15 +87,47 @@ export default class SingleCard extends Component {
     const {isReadingBranchOptions, isChangingBranch} = this.state
     const branches = this.getBranchOptions()
 
+    // const simpleChartConfig = {
+    //   chart: {
+    //     container: '#tree-simple'
+    //   },
+    //   nodeStructure: {
+    //     text: { name: 'Parent node' },
+    //     children: [
+    //       {
+    //         text: { name: 'First child' }
+    //       },
+    //       {
+    //         text: { name: 'Second child' }
+    //       }
+    //     ]
+    //   }
+    // }
+
+    // const chart = new Treant(simpleChartConfig, () => console.log('Tree Loaded'), $)
+
+    let data = {
+      name: 'Parent',
+      children: [{
+        name: 'Child One'
+      }, {
+        name: 'Child Two'
+      }, {
+        name: 'Child Three'
+      }]
+    }
+
     return (
       <Card>
-        <CardTitle title=""/>
+        <CardTitle title="" subtitle={`Scene originally from "${currentCard.branchTitle}"`} subtitleStyle={{padding: '3px 10px 3px 0px', color: 'white', backgroundColor: '#d4d4d4', 'textAlign': 'right'}} />
         <CardText>
           {
             currentCard
             ? ReactHtmlParser(currentCard.text)
             : <div></div>
           }
+          <Tree data={data} height={400} width={400} />
+
         </CardText>
         <Divider />
         <CardActions>

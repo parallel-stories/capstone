@@ -42,7 +42,7 @@ class BranchStepper extends Component {
 
   branchAlreadyRead = (branchId) => {
     return this.state.branches.some(branch => {
-      console.log('ALREADY EXISTS:', branch.branchId === branchId )
+      console.log('ALREADY EXISTS:', branchId, branch.branchId)
       return branch.branchId === branchId
     })
   }
@@ -56,7 +56,7 @@ class BranchStepper extends Component {
       currentBranch.cardId = cardId
       branches[stepIndex] = currentBranch
       this.setState({branches})
-    } else if (!this.branchAlreadyRead()) {
+    } else if (!this.branchAlreadyRead(branchId)) {
       console.log('DIFFS BRANCH')
       getStoryBranch(branchId)
       .then(info => {
