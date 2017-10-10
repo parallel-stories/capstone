@@ -16,6 +16,7 @@ import AllUsers from './AllUsers'
 import EditUserProfile from './EditUserProfile'
 
 import _ from 'lodash'
+import { getCardBranchScene } from '../utils/userProfile.js'
 
 // styling for button
 const landingStyles = {
@@ -39,6 +40,7 @@ export default class UserProfile extends Component {
       displayName: '',
       description: '',
       isEditing: false,
+      resolvedDrafts: []
     }
   }
 
@@ -55,10 +57,18 @@ export default class UserProfile extends Component {
             usersFollowed: !user.val().following ? {} : user.val().following,
             displayName: !user.val().username? '' : user.val().username,
             description: !user.val().description? '' : user.val().description,
-          })
+          }, () => {
+            let draftCards = Object.keys(this.state.unpublishedCards).map(cardId => {
+              return getCardBranchScene(cardId)
+            })
+            Promise.all(draftCards)
+            .then(resolvedDrafts => {
+              this.setState({resolvedDrafts})
+            })
         })
-      }
-    }))
+      })
+    }
+  }))  
   }
 
   componentWillUnmount() {
@@ -91,8 +101,8 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    const { user, storyBranches, unpublishedCards, favorites, usersFollowed } = this.state
-    
+    const { user, storyBranches, unpublishedCards, favorites, usersFollowed, resolvedDrafts } = this.state
+    let cardKeys = Object.keys(unpublishedCards)
     return (
       <div className="container-fluid" >
         {!user ?
@@ -117,8 +127,8 @@ export default class UserProfile extends Component {
                 </div>)
               : (<div className="row" >
                 <ul>
-                {Object.keys(unpublishedCards).map(draft => (
-                  <li key={draft}><Link to={`/write/${draft}`}>Draft</Link></li>
+                {resolvedDrafts.map((draft, index) => (
+                  <li key={draft}><Link to={`/write/${cardKeys[index]}`}>{draft}</Link></li>
                 ))}
                 </ul>
                 </div>)
