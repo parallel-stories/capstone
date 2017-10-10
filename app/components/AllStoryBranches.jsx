@@ -3,6 +3,7 @@ import SingleStoryBoxDisplay from './SingleStoryBoxDisplay'
 import firebase from 'app/fire'
 import _ from 'lodash'
 import {Link} from 'react-router-dom'
+import {onlyPublished} from '../utils/storyBranchNavUtils'
 
 class AllStoryBranches extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class AllStoryBranches extends Component {
   componentDidMount() {
     this.listenerRef = firebase.database().ref('storyBranch/')
     this.listenerRef.on('value', snap => {
-      const storyBranches = snap.val()
+      const storyBranches = onlyPublished(snap.val())
       this.setState({allStoryBranches: storyBranches})
     })
   }
