@@ -30,7 +30,7 @@ export default class SingleCard extends Component {
     const {currentCard, currentStoryBranchId, currentCardId} = this.props.currentState
     const {parentBranchId, parentCardId} = this.props.parent
 
-    if (currentCard.branches) {
+    if (currentCard && currentCard.branches) {
       Object.keys(currentCard.branches).forEach(branch => {
         if (branch !== currentStoryBranchId && branch !== parentBranchId) {
           branchLinks.push(

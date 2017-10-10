@@ -78,21 +78,43 @@ export default class WriteSpace extends Component {
           })
         })
       })
-    } else if (this.props.match.params.cardId) { // if editing saved card
-      firebase.database().ref('storyCard').child(this.props.match.params.cardId).once('value', snap => {
-        if (!snap.val().published) {
-          // check if title is published to allow/prevent editing
-          firebase.database().ref(`storyBranch/${snap.val().branchTitle}`).once('value', branchSnap => {
-            const titleIsPub = (branchSnap.val().published)
+    } else if (this.props.match.params.storyBranch) { // if continuing published storyline
+      const storyBranchId = decodeURI(this.props.match.params.storyBranch)
+      firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
+        // check if title is published to allow/prevent editing
+        const titleIsPub = (snap.val().published)
+        const lastStoryCardId = snap.val().storyCards[snap.val().storyCards.length - 1]
+        firebase.database().ref(`storyCard/${lastStoryCardId}`).once('value', cardSnap => {
+          if (cardSnap.val().userId == this.state.user.uid) {
             this.setState({
               titleIsPub: titleIsPub,
-              cardId: this.props.match.params.cardId,
-              card: snap.val()
+              card: Object.assign({}, this.state.card, {
+                branchTitle: storyBranchId,
+                prevCard: lastStoryCardId,
+                rootTitle: cardSnap.val().rootTitle,
+                userId: cardSnap.val().userId
+              })
             })
-          })
-        } else {
-          history.push(`/read/${snap.val().branchTitle}/${this.state.cardId}`)
-        }
+          } else history.push(`/read/${this.props.match.params.storyBranch}`)
+        })
+      })
+    } else if (this.props.match.params.cardId) { // if editing saved card
+      firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
+        if (snap.val().userId == this.state.user.uid) {
+          if (!snap.val().published) {
+            // check if title is published to allow/prevent editing
+            firebase.database().ref(`storyBranch/${snap.val().branchTitle}`).once('value', branchSnap => {
+              const titleIsPub = (branchSnap.val().published)
+              this.setState({
+                titleIsPub: titleIsPub,
+                cardId: this.props.match.params.cardId,
+                card: snap.val()
+              })
+            })
+          } else {
+            history.push(`/read/${snap.val().branchTitle}/${this.state.cardId}`)
+          }
+        } else history.push('/404')
       })
     }
   }
@@ -170,6 +192,22 @@ export default class WriteSpace extends Component {
     } else {
       publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
       .then(cardKey => history.push(`/read/${this.state.card.branchTitle}/${cardKey}`))
+       // this.setState({
+        //   openSubmit: false,
+        //   dirtyText: false,
+        //   dirtyTitle: false,
+        //   editTitle: false,
+        //   titleIsPub: true,
+        //   cardId: '',
+        //   card: Object.assign({}, this.state.card, {
+        //     text: '',
+        //     rootTitle: this.state.card.rootTitle != []
+        //       ? this.state.card.rootTitle
+        //       : [this.state.card.branchTitle],
+        //     prevCard: cardKey,
+        //     nextCard: ''
+        //   })
+        // })
     }
   }
 
@@ -199,7 +237,7 @@ export default class WriteSpace extends Component {
     ]
 
     return (
-      <div>        
+      <div>
           {(!this.state.user || _.isEmpty(this.state.user)) &&
             <Dialog
             title="Please Log In"
@@ -212,7 +250,7 @@ export default class WriteSpace extends Component {
           > In order to write a story, you must log in using the button on the top right.
           </Dialog>
           }
-        
+
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12" style={{'height': '435px'}}>
 
