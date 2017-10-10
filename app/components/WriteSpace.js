@@ -13,6 +13,10 @@ import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 
+//for unauth user alert
+import {getDialogBox, getCancelAlertButton} from '../utils/storyBranchNavUtils'
+
+
 //firebase
 import firebase from 'app/fire'
 const auth = firebase.auth()
@@ -207,6 +211,17 @@ export default class WriteSpace extends Component {
 
     return (
       <div>
+        
+          {!Object.keys(this.state.user).length ?
+            getDialogBox(
+              '',
+              'You must be logged in to write a story.',
+              getCancelAlertButton(() => console.log('turn this into a login button pls')),
+              null,
+              false
+            ) : null
+          }
+        
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12">
 
