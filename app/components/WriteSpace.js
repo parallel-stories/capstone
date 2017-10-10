@@ -200,7 +200,7 @@ export default class WriteSpace extends Component {
 
     return (
       <div>        
-          {(!this.state.user || _.isEmpty(this.state.user)) &&
+          {!this.state.user &&
             <Dialog
             title="Please Log In"
             actions={unauthPopUpActions}
