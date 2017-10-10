@@ -33,10 +33,10 @@ class Routes extends Component {
             <Route path="/home" component={LandingPage} />
             <Route exact path="/write" render={(props)=><WriteSpace isBranch={false} {...props} />} />
             <Route exact path="/write/:cardId" render={(props)=><WriteSpace isBranch={false} {...props} />} />
-            <Route exac t path="/write/:rootId/:cardId/new_branch" render={(props)=><WriteSpace isBranch={true} {...props} />} />
+            <Route exact path="/write/:rootId/:cardId/new_branch" render={(props)=><WriteSpace isBranch={true} {...props} />} />
             <Route exact path="/read" component={Searchbar} />
-            <Route exact path="/read/story_branch/:branchId" component={SingleStoryPage} />
-            <Route exact path="/read/story_branch/:branchId/:cardId" component={BranchStepper} />
+            <Route exact path="/read/:branchId" component={SingleStoryPage} />
+            <Route exact path="/read/:branchId/:cardId" component={BranchStepper} />
             <Route path="/userProfile" component={UserProfile} />
             <Route exact path="/allUsers" component={AllUsers} />
             <Route path="/allUsers/:id" component={UserPage} />

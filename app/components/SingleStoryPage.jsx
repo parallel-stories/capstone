@@ -10,7 +10,6 @@ import Reviews from './Reviews'
 // tagging imports
 import ChipInput from 'material-ui-chip-input'
 
-
 export default class SingleStoryPage extends Component {
   constructor(props) {
     super(props)

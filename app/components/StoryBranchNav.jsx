@@ -4,15 +4,12 @@ import {Link} from 'react-router-dom'
 
 // react components
 import SingleCard from './SingleCard'
-import BranchStepper from './BranchStepper'
 
 // material ui
 import IconButton from 'material-ui/IconButton'
 import RightArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import LeftArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
-import FlatButton from 'material-ui/FlatButton'
-import Dialog from 'material-ui/Dialog'
-import Divider from 'material-ui/Divider'
+import FlatButton from 'material-ui/FlatButton''
 
 // react swipe components
 import ReactDOM from 'react-dom'
@@ -24,10 +21,9 @@ import firebase from 'app/fire'
 // lodash
 import _ from 'lodash'
 
-import history from '../history'
-
 // utils
-import {getStoryBranch, getStoryCard, getDialogBox, getCancelAlertButton} from '../utils/storyBranchNavUtils'
+import {getStoryBranch, getStoryCard} from '../utils/storyBranchNavUtils'
+import history from '../history'
 
 class StoryBranchNav extends Component {
   constructor(props) {
@@ -62,7 +58,6 @@ class StoryBranchNav extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {branchId, cardId, branchingPointIndex} = nextProps
-    console.log('nav for:', branchId, cardId)
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
     .then(info => this.updateFullState(branchId, cardId, info, branchingPointIndex))
   }
@@ -78,20 +73,14 @@ class StoryBranchNav extends Component {
     })
   }
 
-  handleReturnToPrevBranch = () => {
-    const childParent = this.state.childParent
-    delete childParent[this.state.currentCardId]
-    this.setState({childParent})
-  }
-
   handleNavClick = (direction) => {
     const {currentStoryBranchId, currentStoryBranch, selector} = this.state
     switch (direction) {
     case 'left':
-      history.push(`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`)
+      history.push(`/read/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector - 1]}`)
       break
     case 'right':
-      history.push(`/read/story_branch/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector + 1]}`)
+      history.push(`/read/${currentStoryBranchId}/${currentStoryBranch.storyCards[selector + 1]}`)
       break
     default:
       break
@@ -103,8 +92,6 @@ class StoryBranchNav extends Component {
       currentStoryBranch,
       currentStoryBranchId,
       currentCard,
-      isStart,
-      isEnd,
       selector,
       branchingPointIndex
     } = this.state
@@ -120,7 +107,6 @@ class StoryBranchNav extends Component {
       return roots.length > 1 ? roots[roots.length - 1] : currentStoryBranchId
     }
 
-    console.log('IN MOUNTED NAV STATE:', this.state)
     const navButtonStyle = {
       icon: {
         width: '70px',
@@ -132,30 +118,26 @@ class StoryBranchNav extends Component {
         padding: '20px'
       }
     }
+
     return (
       <div>
         {
           !_.isEmpty(currentStoryBranch) && (
-          <div>
-          {/*
-            <div>
-              <h2 className="align-center header">{currentStoryBranchId}</h2>
-              <h4 className="align-center"> Root: "{getStoryRootTitle()}"</h4>
-              <Divider />
-              <br />
-            </div>
-          */}
-            <div className="flex-container">
+          <div className="flex-container">
               {
                 selector > branchingPointIndex
                 ? <IconButton
                   iconStyle={navButtonStyle.icon}
                   style={navButtonStyle.button}
                   className="col swipe-btn-left-right flex-arrows"
-                  onClick={() => this.handleNavClick('left')}>
-                      <LeftArrow color="#006064"/>
+                  onClick={() => this.handleNavClick('left')}
+                  tooltip="Go to previous scene"
+                  tooltipPosition={'bottom-right'}
+                  touch={true}
+                  >
+                    <LeftArrow color="#006064"/>
                   </IconButton>
-                : <div><IconButton
+                : <IconButton
                   iconStyle={navButtonStyle.icon}
                   style={navButtonStyle.button}
                   disabled={true}
@@ -163,7 +145,6 @@ class StoryBranchNav extends Component {
                   >
                     <LeftArrow color="#006064" />
                   </IconButton>
-                  </div>
               }
               <ReactSwipe className="flex-card carousel"
                           swipeOptions={{continuous: false}}
@@ -171,7 +152,6 @@ class StoryBranchNav extends Component {
                   <SingleCard
                     currentState={this.state}
                     parent={parentCardId ? {parentBranchId, parentCardId} : false}
-                    handleReturnToPrevBranch={this.handleReturnToPrevBranch}
                     handleOptionClick={this.handleOptionClick}
                   />
               </ReactSwipe>
@@ -182,19 +162,20 @@ class StoryBranchNav extends Component {
                   style={navButtonStyle.button}
                   className="col swipe-btn-left-right flex-arrows"
                   onClick={() => this.handleNavClick('right')}
+                  tooltip="Go to next scene"
+                  touch={true}
                   >
                       <RightArrow color="#006064" />
                   </IconButton>
                 : <IconButton
                   iconStyle={navButtonStyle.icon}
-                  npstyle={navButtonStyle.button}
+                  style={navButtonStyle.button}
                   disabled={true}
                   className="col swipe-btn-left-right flex-arrows"
                   >
                     <RightArrow color="#006064" />
                   </IconButton>
               }
-            </div>
           </div>
         )}
       </div>

@@ -261,3 +261,28 @@ input.form-control {
   align-items: center;
   flex-direction: column
 }
+
+
+svg.cardBranchTree .node circle {
+	fill: #006064;
+	stroke: #006064;
+	stroke-width: 1.5px;
+}
+
+svg.cardBranchTree .node text {
+	font-size: 13px;
+	background-color: black;
+	fill: #006064;
+  margin: 5px;
+  padding: 10px
+}
+
+svg.cardBranchTree .node {
+	cursor: pointer;
+}
+
+svg.cardBranchTree path.link {
+	fill: none;
+	stroke: #D1B38E;
+	stroke-width: 1.5px;
+}
