@@ -1,0 +1,114 @@
+{
+  "review" : {
+  },
+  "storyBranch" : {
+    "Angry Birdy" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpFbYGBGQnQkk6Tl3" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Marry Me" : {
+      "storyCards" : [ "-KvmnufmxpyyRm9gK_4q" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "bad bad dream" : {
+      "published" : true,
+      "storyCards" : [ "-KvmnufmxpyyRm9gK_4q", "-Kvn0nLUW8PN66dJgp3q" ],
+      "storyRoot" : [ "isRoot", "Marry Me" ]
+    },
+    "robber bird" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpFbYGBGQnQkk6Tl3", "-Kvn1mABbF02gtqZyes7" ],
+      "storyRoot" : [ "isRoot", "Angry Birdy" ],
+      "tags" : {
+        "bird" : true,
+        "sandwich" : true,
+        "thievery" : true
+      }
+    }
+  },
+  "storyCard" : {
+    "-KvmnufmxpyyRm9gK_4q" : {
+      "branchTitle" : "Marry Me",
+      "branches" : {
+        "bad bad dream" : "-Kvn0nLUW8PN66dJgp3q"
+      },
+      "nextCard" : "-Kvn0nLUW8PN66dJgp3q",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : "",
+      "text" : "<p>I am the best, so marry me?</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvmpFbYGBGQnQkk6Tl3" : {
+      "branchTitle" : "Angry Birdy",
+      "branches" : {
+        "TESTING BIRDY" : "-Kvxd8hbYpM8A7EBTx4-",
+        "robber bird" : "-Kvn1mABbF02gtqZyes7"
+      },
+      "nextCard" : "-Kvxd8hbYpM8A7EBTx4-",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>If you live in NYC, you know what the bird situation is like. </p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-Kvn0nLUW8PN66dJgp3q" : {
+      "branchTitle" : "bad bad dream",
+      "nextCard" : "",
+      "prevCard" : "-KvmnufmxpyyRm9gK_4q",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Marry Me" ],
+      "text" : "<p>this morning i woke up bleary-eye and beautiful, per usual. I rolled over and poked my boyfriend in the shoulder, so that he would kiss me or otherwise make a compliment of some important kind. He was pretty bleary-eyed as well, but - luckily for him, cuz otherwise he would have gotten a beating of some very violent kind - he did kiss me and tell me something nice, although I've already forgotten was. I think it was about how sweet I am (he is as discerning person, even in blearyhood.</p><p>\"Guess what I just dreamed about,\" he said.</p><p>\"What?\" I said. I hoped and assumed it was about marrying me, which I imagine is his one true goal in life.</p><p>\"We were planning our wedding -\"</p><p>(Here I chuckled to myself because duh he really has nothing else good to dream about, and I knew it).</p><p>\", but then I got too stressed out with the wedding planning, and decided I didn't want to get married anymore.\" </p><p>The hidden face inside of my real face fell, but my real face stayed smiling and good, ready for more kisses.</p>",
+      "userId" : "37dk3UmG6sUZ4dfysVOgXcK9Quw2"
+    },
+    "-Kvn1mABbF02gtqZyes7" : {
+      "branchTitle" : "robber bird",
+      "nextCard" : "",
+      "prevCard" : "-KvmpFbYGBGQnQkk6Tl3",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Angry Birdy" ],
+      "text" : "<p> Just the other day, I was eating a sandwich, a delcious sandwich, with cured ham and stewed meats and also some kind of foreign cheese whose name I cannot recall, when a bird alighted on my knee and started squawking, if that's how you spell squawking. </p><p>\"What's going on little birdy?\" I asked him, ready to listen to his troubles and also tell him my own.</p><p>\"I'm a hungry birdy.\"</p><p>\"Oh,\" I said. I was hoping for a more dramatic, bar-client to bar-tender kind of deal.</p><p>\"I'm planning on stealing your sandwich,\" he said.</p><p>\"Oh,\" I said, now hurrying a little bit on eating my sandwich so that he would have less to steal.</p><p>\"I'm gonna steal a lot of your sandwich,\" he said.</p><p>\"Oh,\" I said. (This interaction was becoming much more agressive than I had anticipated, and now I understood why people are so wary about talking to strangers).</p><p>Then an idea occurred to me:</p><p>\"Hey!\" I said. \"If I give you all my sandwich, then there is no way for you to steal it. It would be gift acceptance and not robbery.\"</p><p>\"Wow,\" the bird said, \"You have really defeated me.\"</p><p>\"Yeah,\" I said. \"Anyway, here is my sandwich. I think you'll like it.\"</p><p>The bird smiled, but just a little too craftily.</p>",
+      "userId" : "37dk3UmG6sUZ4dfysVOgXcK9Quw2"
+    }
+  },
+  "storyRoot" : {
+    "Angry Birdy" : {
+      "isRoot" : true,
+      "robber bird" : true
+    },
+    "Marry Me" : {
+      "bad bad dream" : true,
+      "isRoot" : true
+    }
+  },
+  "tags" : {
+    "bird" : {
+      "robber bird" : true
+    },
+    "sandwich" : {
+      "robber bird" : true
+    },
+    "thievery" : {
+      "robber bird" : true
+    }
+  },
+  "user" : {
+    "37dk3UmG6sUZ4dfysVOgXcK9Quw2" : {
+      "description" : "I like stories about birds!",
+      "storyBranches" : {
+        "bad bad dream" : true,
+        "robber bird" : true
+      },
+      "username" : "Flintwinch"
+    },
+    "hi2QjsWg5TQ3M4upATVJUCUn1Tv1" : {
+      "description" : "My favorite cat is Pusheen",
+      "storyBranches" : {
+        "Angry Birdy" : true,
+        "Marry Me" : true
+      },
+      "username" : "Kittenberg123"
+    }
+  }
+}

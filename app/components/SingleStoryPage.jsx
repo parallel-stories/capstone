@@ -44,7 +44,7 @@ export default class SingleStoryPage extends Component {
   }
 
   getImage = (query) => {
-    const api = 'https://api.gettyimages.com/v3/search/images?fields=id,title,thumb,referral_destinations&sort_order=best&phrase='
+    const api = 'https://api.gettyimages.com/v3/search/images?fields=id,title,thumb,referral_destinations&sort_order=most_popular&phrase='
     const headers = { 'Api-Key': 'qk4wms73dv6nf7fjzb3q927k' }
 
     /* grabs the first image from getty API that matches the query */
@@ -52,7 +52,7 @@ export default class SingleStoryPage extends Component {
       .then(res => res.json())
       .then(data => {
         const rand = Math.floor(Math.random() * data.images.length)
-        this.setState({ imageURL: data.images[rand].display_sizes[0].uri })
+        this.setState({ imageURL: data.images[0].display_sizes[0].uri })
       })
       .catch(() => console.log("error"))
 

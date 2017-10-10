@@ -15,6 +15,7 @@ import firebase from 'app/fire'
 
 // react components
 import AllStoryBranches from './AllStoryBranches'
+import {onlyPublished} from '../utils/storyBranchNavUtils'
 
 const styles = {
   customWidth: {
@@ -47,13 +48,11 @@ export default class Searchbar extends Component {
     // load all stories into state
     this.storyListener = firebase.database().ref('storyBranch')
     this.storyListener.on('value', snap => {
-      const storyBranches = snap.val()
-      if( storyBranches ) {
-        this.setState({
-          allStoryBranches: storyBranches,
-          titles: Object.keys(storyBranches)
-        }) // end set state
-      }
+      const storyBranches = onlyPublished(snap.val())
+      this.setState({
+        allStoryBranches: storyBranches,
+        titles: Object.keys(storyBranches)
+      }) // end set state
     })
     // get all tags from the db
     this.tagsListener = firebase.database().ref(`tags`)

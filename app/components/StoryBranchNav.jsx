@@ -95,6 +95,11 @@ class StoryBranchNav extends Component {
       parentCardId = this.state.childParent[this.state.currentCardId][1]
     }
 
+    const getStoryRootTitle = () => {
+      const roots = _.isEmpty(currentStoryBranch) ? [] : currentStoryBranch.storyRoot
+      return roots.length > 1 ? roots[roots.length - 1].replace(/"/g,"") : currentStoryBranchId
+    }
+
     return (
       <div>
         {
@@ -102,7 +107,7 @@ class StoryBranchNav extends Component {
           <div>
             <div>
               <h2 className="align-center header">{currentStoryBranchId}</h2>
-              <h4 className="align-center"> Root: "{currentStoryBranch.storyRoot}"</h4>
+              <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
               <Divider />
               <br />
             </div>
