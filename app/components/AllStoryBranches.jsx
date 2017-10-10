@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import SingleStoryBoxDisplay from './SingleStoryBoxDisplay'
 import firebase from 'app/fire'
-import 'firebase/database'
 import _ from 'lodash'
 import {Link} from 'react-router-dom'
 
@@ -30,7 +29,7 @@ class AllStoryBranches extends Component {
     const { searchResults, searching } = this.props
 
     return (
-      <div className="container all-story-branches">
+      <div className="container all-box-display">
         {
           /* if this is called from the searchbar component -- searhing is true --
             use the first rendering code

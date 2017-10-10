@@ -15,12 +15,12 @@ import TextField from 'material-ui/TextField'
 
 //firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 import { dialogStyle } from '../stylesheets/MatUIStyle'
 
 import { saveCard, publishCard } from '../utils/write.js'
+import history from '../history'
 
 export default class WriteSpace extends Component {
   constructor(props) {
@@ -31,16 +31,18 @@ export default class WriteSpace extends Component {
       dirtyText: false,
       dirtyTitle: false,
       editTitle: true,
-      published: false,
+      titleIsPub: false,
       // saveCard & publishCard depend on the state below not being refactored
       cardId: '',
       card: {
-        userId: '',
-        text: '',
         branchTitle: '',
-        rootTitle: '',
+        branches: {},
+        nextCard: '',
         prevCard: '',
-        nextCard: ''
+        published: false,
+        rootTitle: ['isRoot'],
+        text: '',
+        userId: ''
       }
       // end saveCard & publishCard needs
 
@@ -51,37 +53,42 @@ export default class WriteSpace extends Component {
   }
 
   componentDidMount() {
-    //set user
+    // set user
     this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
-      if( user ) {
+      if (user) {
         this.setState({
           card: Object.assign({}, this.state.card, {
             userId: user.uid
           })
         })
       }
-    }))      
+    }))
 
-    if (this.props.isBranch) {
-      this.setState({
-        card: Object.assign({}, this.state.card, {
-          rootTitle: this.props.match.params.rootId,
-          prevCard: this.props.match.params.cardId,
+    // set state based on url
+    if (this.props.isBranch) { // if branching
+      firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
+        // get root title array of root card from firebase
+        this.setState({
+          card: Object.assign({}, this.state.card, {
+            rootTitle: [...snap.val().rootTitle, snap.val().branchTitle],
+            prevCard: this.props.match.params.cardId
+          })
         })
       })
-    }
-
-    // this is to check if someone is editing a saved, unpublished card. deal with is published logic.
-    if (this.state.cardId != '') {
-      firebase.database().ref('storyCard').child(this.state.cardId).once('value', snap => {
+    } else if (this.props.match.params.cardId) { // if editing saved card
+      firebase.database().ref('storyCard').child(this.props.match.params.cardId).once('value', snap => {
         if (!snap.val().published) {
-          this.setState({card: snap.val()})
-        } else {
-          this.setState({
-            card: Object.assign({}, snap.val(), {
-              text: '<p>This card has already been published.</p>'.concat(snap.val().text)
+          // check if title is published to allow/prevent editing
+          firebase.database().ref(`storyBranch/${snap.val().branchTitle}`).once('value', branchSnap => {
+            const titleIsPub = (branchSnap.val().published)
+            this.setState({
+              titleIsPub: titleIsPub,
+              cardId: this.props.match.params.cardId,
+              card: snap.val()
             })
           })
+        } else {
+          history.push(`/read/${snap.val().branchTitle}/${this.state.cardId}`)
         }
       })
     }
@@ -113,10 +120,12 @@ export default class WriteSpace extends Component {
   }
 
   saveTitle = () => {
-    const cardKey = saveCard(this.state.card, this.state.cardId)
-    this.setState({
-      editTitle: false,
-      cardId: cardKey
+    saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
+    .then(cardKey => {
+      this.setState({
+        editTitle: false,
+        cardId: cardKey
+      })
     })
   }
 
@@ -132,14 +141,18 @@ export default class WriteSpace extends Component {
 
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
+    } else if (this.state.card.text == '') {
+      alert('Please write some text.')
     } else {
-      const cardKey = saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
-
-      this.setState({
-        dirtyText: false,
-        dirtyTitle: false,
-        editTitle: false,
-        cardId: cardKey
+      saveCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
+      .then(cardKey => {
+        this.setState({
+          dirtyText: false,
+          dirtyTitle: false,
+          editTitle: false,
+          cardId: cardKey
+        })
+        history.push(`/write/${cardKey}`)
       })
     }
   }
@@ -149,23 +162,27 @@ export default class WriteSpace extends Component {
 
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
+    } else if (this.state.card.text == '') {
+      alert('Please write some text.')
     } else {
-      const cardKey = publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
-
-      this.setState({
-        openSubmit: false,
-        dirtyText: false,
-        dirtyTitle: false,
-        editTitle: false,
-        cardId: '',
-        card: Object.assign({}, this.state.card, {
-          userId: 1,
-          text: '',
-          rootTitle: this.state.card.rootTitle ||this.state.card.branchTitle,
-          prevCard: cardKey,
-          nextCard: ''
-        })
-      })
+      publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
+      .then(cardKey => history.push(`/read/${this.state.card.branchTitle}/${cardKey}`))
+        // this.setState({
+        //   openSubmit: false,
+        //   dirtyText: false,
+        //   dirtyTitle: false,
+        //   editTitle: false,
+        //   titleIsPub: true,
+        //   cardId: '',
+        //   card: Object.assign({}, this.state.card, {
+        //     text: '',
+        //     rootTitle: this.state.card.rootTitle != []
+        //       ? this.state.card.rootTitle
+        //       : [this.state.card.branchTitle],
+        //     prevCard: cardKey,
+        //     nextCard: ''
+        //   })
+        // })
     }
   }
 
@@ -173,6 +190,8 @@ export default class WriteSpace extends Component {
   handleOpen = () => {
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
+    } else if (this.state.card.text == '') {
+      alert('Please write some text.')
     } else {
       this.setState({openSubmit: true})
     }
@@ -190,42 +209,50 @@ export default class WriteSpace extends Component {
       <div>
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12">
-          {
-            this.state.editTitle
-            ? <div className="form-group container">
-                <h2>
-                  <input type="text"
-                    className="form-control"
-                    value={this.state.card.branchTitle}
-                    placeholder="Story Title"
-                    id="titleField"
-                    onChange={this.changeBranchTitle} />
+
+          <div className="form-group container">
+          {// if title is pub, don't allow title to be changed, otherwise allow editing based on state.editTitle status
+            this.state.titleIsPub
+              ? <h2>
+                  {this.state.card.branchTitle}
+                </h2>
+              : !this.state.editTitle
+                ? <h2>
+                    {this.state.card.branchTitle}
                   </h2>
-                <div className="subtext">
-                  {
-                    (this.state.card.branchTitle != '')
+                : <h2>
+                    <input type="text"
+                      className="form-control"
+                      value={this.state.card.branchTitle}
+                      placeholder="Story Title"
+                      id="titleField"
+                      onChange={this.changeBranchTitle} />
+                  </h2>
+          }
+            <div className="subtext">
+            {// if title is pub, no save/edit links should be displayed beneath title; otherwise display links based on state.editTitle status and if there is actually title text to save
+              this.state.titleIsPub
+                ? <Link to="#">
+                    &nbsp;
+                  </Link>
+                : !this.state.editTitle
+                  ? <Link to="#" onClick={this.editTitle}>
+                      (edit title)
+                    </Link>
+                  : (this.state.card.branchTitle != '')
                     ? <Link to="#" onClick={this.saveTitle}>
                         (save title)
                       </Link>
                     : <Link to="#">
                         &nbsp;
                       </Link>
-                  }
-                </div>
-              </div>
-            : <div className="form-group container">
-                <h2>{this.state.card.branchTitle}</h2>
-                <div className="subtext">
-                  <Link to="#" onClick={this.editTitle}>
-                    (edit title)
-                  </Link>
-                </div>
-              </div>
-          }
+            }
+            </div>
+          </div>
 
           {
-            (this.state.card.rootTitle != '') && (
-              <div className="container">...A branch of <i>{this.state.card.rootTitle}</i></div>
+            (this.state.card.rootTitle.length > 1) && (
+              <div className="container">...A branch of <i>{this.state.card.rootTitle[this.state.card.rootTitle.length-1]}</i></div>
             )
           }
 
@@ -271,12 +298,3 @@ export default class WriteSpace extends Component {
     )
   }
 }
-
-// <TextField
-// hintText="Name Your Story Line"
-// floatingLabelText="Title"
-// name="title"
-// fullWidth={true}
-// multiLine={true}
-// onChange={this.changeTitle}
-// />

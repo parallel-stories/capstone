@@ -7,7 +7,6 @@ import FlatButton from 'material-ui/FlatButton'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 // material ui components for favorites
@@ -89,7 +88,7 @@ export default class SingleStoryBoxDisplay extends Component {
 
     return (
     <Card className="single-card col-lg-4 col-md-4 col-sm-4"
-          style={{boxShadow: "none", borderWidth: 1}}>
+          style={{boxShadow: "none", outlineStyle:"dashed", outlineColor:"#EDE2D4"}}>
       <CardHeader>
         <Checkbox
           checkedIcon={<ActionFavorite style={{color: '#FFB6C1'}} />}
@@ -98,7 +97,7 @@ export default class SingleStoryBoxDisplay extends Component {
           onCheck={this.updateCheck.bind(this)}
         />
       </CardHeader>
-      <Link key={thisKey} to={`/read/story_branch/${thisKey}`}>
+      <Link key={thisKey} to={`/read/${thisKey}`}>
         <CardMedia
           overlay={<CardTitle title={storyBranchTitle} subtitle={getStoryRootTitle()} />}
         >

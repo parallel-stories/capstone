@@ -5,7 +5,6 @@ import AutoComplete from 'material-ui/AutoComplete'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 
 // react components
 import AllUsers from './AllUsers'
@@ -30,14 +29,18 @@ export default class SearchForUser extends Component {
 
   componentDidMount() {
     // load all stories into state
-    firebase.database().ref().child('storyBranch').on('value', snap => {
+    this.listenerRef = firebase.database().ref('storyBranch')
+    this.listenerRef.on('value', snap => {
       const storyBranches = snap.val()
       this.setState({
         allStoryBranches: storyBranches,
         titles: Object.keys(storyBranches)
       }) // end set state
     })
+  }
 
+  componentWillUnmount() {
+    this.listenerRef.off()
   }
 
   // TODO: prevent refresh when the enter key is hit

@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
+import FlatButton from 'material-ui/FlatButton'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 
 export default class UserCard extends Component {
   constructor() {
@@ -35,7 +35,7 @@ export default class UserCard extends Component {
 
   updateFollowing = () => {
     if( this.props.thisKey === this.props.currentUser.uid ) {
-      alert(' you cant follow yourself lulz ')
+      alert('You can\'t follow yourself!')
     } else if( this.props.currentUser ) {
       this.setState((oldState) => {
         return {
@@ -61,7 +61,8 @@ export default class UserCard extends Component {
 
   render() {
     const { thisKey } = this.props
-    const numStoriesAuthored = Object.keys(this.props.user.storyBranches).length
+    const storiesAuthored = this.props.user.storyBranches || {}
+    const numStories = Object.keys(storiesAuthored).length
 
     return (
       <Card
@@ -70,7 +71,7 @@ export default class UserCard extends Component {
         <Link to={`/allUsers/${thisKey}`} key={thisKey}>
           <CardHeader
             title={`${this.props.user.username}`}
-            subtitle={`${numStoriesAuthored} stories authored`}
+            subtitle={`${numStories} stories authored`}
             />
           <CardText>
             <p>{this.props.user.description}</p>
@@ -80,7 +81,8 @@ export default class UserCard extends Component {
           <FloatingActionButton mini={true}
             style={{marginRight: 20, boxShadow: "none"}}
             onClick={ this.updateFollowing }
-            secondary={ this.state.following }>
+            secondary={ this.state.following }
+            disabled={ this.props.thisKey===this.props.currentUser.uid }>
             <ContentAdd />
           </FloatingActionButton>
         </CardActions>

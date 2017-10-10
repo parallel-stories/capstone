@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 import UserCard from './UserCard'
@@ -48,7 +47,7 @@ export default class AllUsers extends Component {
     }
 
     return (
-      <div className="container all-users">
+      <div className="container all-box-display">
         <br/>
           {
             /* if this is called from the user profile component -- ie filtered is true --

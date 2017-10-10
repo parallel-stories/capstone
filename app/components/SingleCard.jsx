@@ -87,26 +87,7 @@ export default class SingleCard extends Component {
     const {isReadingBranchOptions, isChangingBranch} = this.state
     const branches = this.getBranchOptions()
 
-    // const simpleChartConfig = {
-    //   chart: {
-    //     container: '#tree-simple'
-    //   },
-    //   nodeStructure: {
-    //     text: { name: 'Parent node' },
-    //     children: [
-    //       {
-    //         text: { name: 'First child' }
-    //       },
-    //       {
-    //         text: { name: 'Second child' }
-    //       }
-    //     ]
-    //   }
-    // }
-
-    // const chart = new Treant(simpleChartConfig, () => console.log('Tree Loaded'), $)
-
-    let data = {
+    const data = {
       name: 'Parent',
       children: [{
         name: 'Child One'
@@ -127,7 +108,6 @@ export default class SingleCard extends Component {
             : <div></div>
           }
           <Tree data={data} height={400} width={400} />
-
         </CardText>
         <Divider />
         <CardActions>
@@ -147,13 +127,6 @@ export default class SingleCard extends Component {
           }
           {
             this.getPrevButton(parentCardId, parentBranchId)
-          }
-          {
-          // <Snackbar
-          //   open={this.state.isChangingBranch}
-          //   message={`You are now on story branch "${currentStoryBranchId}"`}
-          //   autoHideDuration={2000}
-          // />
           }
         </CardActions>
       </Card>

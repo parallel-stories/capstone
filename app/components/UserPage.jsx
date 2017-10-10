@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 const auth = firebase.auth()
 
 //components

@@ -8,7 +8,6 @@ import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
 // firebase
 import firebase from 'app/fire'
-import 'firebase/database'
 
 // react components
 import AllStoryBranches from './AllStoryBranches'
