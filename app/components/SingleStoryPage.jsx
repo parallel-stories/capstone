@@ -25,13 +25,32 @@ export default class SingleStoryPage extends Component {
     firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
       this.setState({currentStoryBranch: snap.val()})
     })
+    // get tags for this story branch
+    this.tagsListener = firebase.database().ref(`storyBranch/${this.props.match.params.branchId}/tags`)
+    this.tagsListener.on('value', snap => {
+      const tags = snap.val()
+      if( tags ) {
+        for(const tag in tags ) {
+          this.setState({
+            tags: [...this.state.tags, tag]
+          })
+        }
+      } // end if
+    })
+  }
+
+  componentWillUnmount() {
+    if (this.tagsListener) this.tagsListener.off()
   }
 
   handleAddTag = (newTag) => {
     this.setState({
       tags: [...this.state.tags, newTag]
     })
+    // add to tags db
     firebase.database().ref('tags').child(newTag).child(this.props.match.params.branchId).set(true)
+    // add to tags in story db
+    firebase.database().ref('storyBranch').child(this.props.match.params.branchId).child('tags').child(newTag).set(true)
   }
 
 
@@ -39,7 +58,10 @@ export default class SingleStoryPage extends Component {
     this.setState({
       tags: this.state.tags.filter((c) => c !== deleteMe)
     })
+    // remove from tags db
     firebase.database().ref('tags').child(deleteMe).child(this.props.match.params.branchId).remove()
+    // remove this tag from story db
+    firebase.database().ref('storyBranch').child(this.props.match.params.branchId).child('tags').child(deleteMe).set(true)
   }
 
   render() {
