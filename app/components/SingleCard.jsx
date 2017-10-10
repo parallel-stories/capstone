@@ -37,7 +37,7 @@ export default class SingleCard extends Component {
     const {currentCard, currentStoryBranchId, currentCardId} = this.props.currentState
     const {parentBranchId, parentCardId} = this.props.parent
 
-    if (currentCard.branches) {
+    if (currentCard && currentCard.branches) {
       Object.keys(currentCard.branches).forEach(branch => {
         if (branch !== currentStoryBranchId && branch !== parentBranchId) {
           branchLinks.push(
@@ -61,11 +61,13 @@ export default class SingleCard extends Component {
     if (valCheck) return <FlatButton label={label} backgroundColor={bkColor} onClick={callback} />
   }
 
-  getBranchingButton = (rootId, cardId) => (
+  getBranchingButton = (rootId, cardId, currentCard) => {
+    return (
       <Link to={`/write/${rootId}/${cardId}/new_branch`}>
-        <FlatButton label='Create A Branch' backgroundColor='#D1B38E' />
+        <FlatButton label='Create A Branch' backgroundColor='#D1B38E' disabled={!currentCard.published} />
       </Link>
     )
+  }
 
   handleBranchExpandChange = () => {
     this.setState({branchExpanded: !this.state.expanded})
@@ -115,7 +117,9 @@ export default class SingleCard extends Component {
         <CardText>
           {
             currentCard
-            ? ReactHtmlParser(currentCard.text)
+            ? currentCard.published
+              ? ReactHtmlParser(currentCard.text)
+              : <div><h3>This card hasn't been published yet!</h3>Stay tuned for more from <Link to={`/allUsers/currentCard.userId`}>this user.</Link></div>
             : <div></div>
           }
           <Divider />
@@ -138,7 +142,7 @@ export default class SingleCard extends Component {
           <div>
           Want to write your own branch of this story?{' '}
           {
-            this.getBranchingButton(currentStoryBranchId, currentCardId)
+            this.getBranchingButton(currentStoryBranchId, currentCardId, currentCard)
           }
           </div>
           {

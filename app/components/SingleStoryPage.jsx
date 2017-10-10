@@ -29,34 +29,40 @@ export default class SingleStoryPage extends Component {
     this.tagsListener.on('value', snap => {
       const tags = snap.val()
       if( tags ) {
-        for(const tag in tags ) {
-          this.setState({
-            tags: [...this.state.tags, tag]
-          })
-        }
+        this.setState({
+          tags: Object.keys(tags)
+        })
       } // end if
     })
   }
 
   componentWillUnmount() {
-    if (this.tagsListener) this.tagsListener.off()
+    if(this.tagsListener) this.tagsListener.off()
   }
 
   handleAddTag = (newTag) => {
-    this.setState({
-      tags: [...this.state.tags, newTag]
-    })
-    // add to tags db
-    firebase.database().ref('tags').child(newTag).child(this.props.match.params.branchId).set(true)
-    // add to tags in story db
-    firebase.database().ref('storyBranch').child(this.props.match.params.branchId).child('tags').child(newTag).set(true)
+    /*
+    Tags cannot contain
+    ".", "#", "$", "[", "]"
+    */
+    if(newTag.includes(".")||newTag.includes("#")||newTag.includes("$")||newTag.includes("[")||newTag.includes("]")) {
+      alert('tags cannot contain ".", "#", "$", "[", or "]" ')
+    } else {
+      this.setState({
+        tags: [...this.state.tags, newTag]
+      })
+      // add to tags db
+      firebase.database().ref('tags').child(newTag).child(this.props.match.params.branchId).set(true)
+      // add to tags in story db
+      firebase.database().ref('storyBranch').child(this.props.match.params.branchId).child('tags').child(newTag).set(true)
+    }
   }
-
 
   handleDeleteTag = (deleteMe) => {
     this.setState({
-      tags: this.state.tags.filter((c) => c !== deleteMe)
+      tags: this.state.tags.filter(tag => tag !== deleteMe)
     })
+
     // remove from tags db
     firebase.database().ref('tags').child(deleteMe).child(this.props.match.params.branchId).remove()
     // remove this tag from story db
@@ -69,7 +75,7 @@ export default class SingleStoryPage extends Component {
 
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(storyBranch) ? [] : storyBranch.storyRoot
-      return roots.length > 1 ? roots[roots.length - 1].replace(/"/g,"") : storyBranchId.replace(/"/g,"")
+      return roots.length > 1 ? roots[roots.length - 1].replace(/"/g, '') : storyBranchId.replace(/"/g, '')
     }
 
     return (

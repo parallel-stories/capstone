@@ -1,0 +1,2099 @@
+{
+  "review" : {
+    "A A A branch off of a a a branch but earlier than the branch happens" : [ {
+      "content" : "amazing",
+      "rating" : 5,
+      "storyId" : "A A A branch off of a a a branch but earlier than the branch happens"
+    } ],
+    "All Summer in a Day" : [ {
+      "content" : "test 1",
+      "rating" : 2,
+      "storyId" : "All Summer in a Day"
+    }, {
+      "content" : "test 2",
+      "rating" : 5,
+      "storyId" : "All Summer in a Day"
+    }, {
+      "content" : "This story doesn't take place in summer. :(",
+      "rating" : 1,
+      "storyId" : "All Summer in a Day"
+    } ],
+    "Balthazar" : [ {
+      "content" : "This story is great",
+      "rating" : 4,
+      "storyId" : "Balthazar"
+    }, {
+      "content" : "This is the worst D:",
+      "rating" : 1,
+      "storyId" : "Balthazar"
+    } ],
+    "LYRICSFTW" : [ {
+      "content" : "okay",
+      "rating" : 2,
+      "storyId" : "LYRICSFTW"
+    } ],
+    "Lovely Night" : [ {
+      "content" : "This story changed my life ",
+      "rating" : 5,
+      "storyId" : "Lovely Night"
+    } ],
+    "robber bird" : [ {
+      "content" : "The best thing I've read in the last hour!!",
+      "rating" : 5,
+      "storyId" : "robber bird"
+    } ]
+  },
+  "storyBranch" : {
+    "A A A branch off of a a a branch but earlier than the branch happens" : {
+      "branchPoint" : {
+        "from" : "-Kw1ZW7PEcPIXNj640Ly",
+        "to" : "-Kw1Ztmbzg-Qu5Sb6JOQ"
+      },
+      "published" : true,
+      "storyCards" : [ "-Kw1ZW7PEcPIXNj640Ly", "-Kw1Ztmbzg-Qu5Sb6JOQ", "-Kw1Zvm6xzpWAj9jwBaU" ],
+      "storyRoot" : [ "isRoot", "A A A long root story line" ]
+    },
+    "A A A branch that comes later in the root story" : {
+      "branchPoint" : {
+        "from" : "-Kw1ZXs0BWIa-7yvKhJU",
+        "to" : "-Kw1ZhMpWoh4QQHljmX8"
+      },
+      "published" : true,
+      "storyCards" : [ "-Kw1ZW7PEcPIXNj640Ly", "-Kw1ZWrFTYEbdh-SmFZt", "-Kw1ZXs0BWIa-7yvKhJU", "-Kw1ZhMpWoh4QQHljmX8", "-Kw1ZiKC6ptYuD2euc3P" ],
+      "storyRoot" : [ "isRoot", "A A A long root story line" ]
+    },
+    "A A A long root story line" : {
+      "published" : true,
+      "storyCards" : [ "-Kw1ZW7PEcPIXNj640Ly", "-Kw1ZWrFTYEbdh-SmFZt", "-Kw1ZXs0BWIa-7yvKhJU", "-Kw1ZYqDYHVNzWfsSmlL", "-Kw1Z_1NG0YS8oVS_Lmz" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "A A A publish" : {
+      "published" : true,
+      "storyCards" : [ "-Kw1k8Li8mVb077s57Ag" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "A A A saved not published" : {
+      "published" : true,
+      "storyCards" : [ "-Kw1ib4fDv5z-PMkuWJP", "-Kw1j2b1NbqbHaxff0vr" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "A whole newww worrrrrrld" : {
+      "storyCards" : [ "-Kvn7qVvDYC4oZUR4VVd" ],
+      "storyRoot" : [ "isRoot" ],
+      "tags" : {
+        "foo" : true
+      }
+    },
+    "All Summer in a Day" : {
+      "storyCards" : [ "-KvmoI-FX9ymLPSdOoiW", "-KvmoR5ctYZXTwLDZBeZ", "-Kvmo_cicbRdCUBOCMjv", "-Kvmo_sBGFSSTWjr127O" ],
+      "storyRoot" : [ "isRoot" ],
+      "tags" : {
+        "summer" : true
+      }
+    },
+    "Angry Birdy" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpFbYGBGQnQkk6Tl3" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "BIRDS" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-Kvn2VW_ZMK2xnt8dWQF", "-Kvn2nM-1YOoRz8rZHih" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "BLAAAAAAA" ]
+    },
+    "BLAAAAAAA" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-Kvn2VW_ZMK2xnt8dWQF" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot" ]
+    },
+    "Balthazar" : {
+      "published" : true,
+      "storyCards" : [ "-KvmrGNIBnF10enAXYea", "-KvmtxZrkIREKr7jJgsT" ],
+      "storyRoot" : [ "isRoot", "Justine" ]
+    },
+    "Banana" : {
+      "published" : true,
+      "storyCards" : [ "-KvnDGU9wXoIgKD4QmEn" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Basicall" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvxcgOaFPDRBYD5pEYW", "-Kw0levK3YmvUiUXPK1B", "-Kw0lgZ1t3LYU6tCrd5G", "-Kw0lhhBtPFwgd3x3JLi" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch", "Morse Code", "What makes a good wtich" ]
+    },
+    "Bossy Wossy" : {
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvxaN03CgYfbETPeNxG" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch" ],
+      "tags" : {
+        "magic" : true,
+        "witch" : true,
+        "wizard" : true
+      }
+    },
+    "Chows on Steves" : {
+      "published" : true,
+      "storyCards" : [ "-KvmoG8sYGNNYFZk5Y_F", "-KvmxbPSHImUNGNgtYll" ],
+      "storyRoot" : [ "isRoot", "House of Leaves", "Louse of Heaves", "Spouse of Jeeves" ]
+    },
+    "Clea" : {
+      "published" : true,
+      "storyCards" : [ "-KvmrGNIBnF10enAXYea", "-Kvmw_p3xqc8u0ktVAPS" ],
+      "storyRoot" : [ "isRoot", "Justine" ]
+    },
+    "Co-op City" : {
+      "published" : true,
+      "storyCards" : [ "-KvnOQR1gx7AFF9mDSPw", "-KvnOROpIwzYJLQ-rQPz", "-KvnOa4zSU5RagUWKX0m", "-KvnOc3jh79EX2GcreR1" ],
+      "storyRoot" : [ "isRoot", "The Gunslinger" ]
+    },
+    "Continuing with Harmony" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-Kvn3ct1bvz-Dc01XOVq", "-Kvn3fXEdIr8C383Odyp" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch" ],
+      "tags" : {
+        "cool" : true,
+        "guitar" : true,
+        "hello" : true,
+        "story" : true
+      }
+    },
+    "Dobby is a Free Elf" : {
+      "published" : true,
+      "storyCards" : [ "-Kw2ZxIX0WIphwdlyWZa", "-Kw2_MhU4v3-vDiX9MEj" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Dust Mice" : {
+      "published" : true,
+      "storyCards" : [ "-KvmoI-FX9ymLPSdOoiW", "-KvmoR5ctYZXTwLDZBeZ", "-Kvmo_cicbRdCUBOCMjv", "-Kvmo_sBGFSSTWjr127O", "-Kvn4RsaYWQgV_r7zryq", "-Kvn4SzICKMu1Z__R15e" ],
+      "storyRoot" : [ "isRoot", "All Summer in a Day" ]
+    },
+    "Happy Closet" : {
+      "published" : true,
+      "storyCards" : [ "-KvmoI-FX9ymLPSdOoiW", "-KvmoR5ctYZXTwLDZBeZ", "-Kvmo_cicbRdCUBOCMjv", "-Kvn7w9G6vD3akJyJmJ2" ],
+      "storyRoot" : [ "isRoot", "All Summer in a Day" ]
+    },
+    "Harmony Stranger: the wise witch" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvmpfCzuYq0s6EwxtJ0", "-KvmqD4iod4b7uXglF-T", "-KvmqeeaFpG87-Is8hlq" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot" ]
+    },
+    "Hello TESTING" : {
+      "branchPoint" : {
+        "from" : "-KvmpXPOMcT6-m-pLD39",
+        "to" : "-KvxcvwcsPXX74LBemKi"
+      },
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvxcvwcsPXX74LBemKi" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch", "Morse Code" ]
+    },
+    "Hitchcock" : {
+      "storyCards" : [ "-KvmpFbYGBGQnQkk6Tl3", "-Kvn-r_y1jcrTSJSLoTa" ],
+      "storyRoot" : [ "isRoot", "Angry Birdy" ]
+    },
+    "House of Leaves" : {
+      "published" : true,
+      "storyCards" : [ "-KvmoG8sYGNNYFZk5Y_F", "-KvmoN2auiHFbbTsS_ft", "-KvmobHvVG8eAgZE0zP_", "-KvmocOFvepmiZ-cbKOE" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "I wish I was a baller" : {
+      "storyCards" : [ "-KvnAYeNsh2i50w93Hjo", "-KvnAcdJdbnni32EdM_F" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Justine" : {
+      "published" : true,
+      "storyCards" : [ "-KvmrGNIBnF10enAXYea", "-Kvmr_H9i_Jw4gsrsiMX" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Knights Who Say Ni " : {
+      "published" : true,
+      "storyCards" : [ "-KvmnVb0LE70jLXG8WkE" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "LYRICSFTW" : {
+      "published" : true,
+      "storyCards" : [ "-Kvn7qVvDYC4oZUR4VVd", "-KvnA4xDvWW3RJfEaI0Q" ],
+      "storyRoot" : [ "isRoot", "A whole newww worrrrrrld" ]
+    },
+    "Larry Flowerpot" : {
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvmpfCzuYq0s6EwxtJ0", "-Kvmpn6FuMQeyoW3uLBq", "-KvmpqwiHViK_WLz_7Iv" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Louse of Heaves" : {
+      "published" : true,
+      "storyCards" : [ "-KvmoG8sYGNNYFZk5Y_F", "-KvmpLQ9HpaX1mDKI86D", "-KvmpQcVuwAxDPGCZp6n" ],
+      "storyRoot" : [ "isRoot", "House of Leaves" ]
+    },
+    "Lovely Night" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpFbYGBGQnQkk6Tl3", "-Kvn1-gGcoc9LBK25u2h" ],
+      "storyRoot" : [ "isRoot", "Angry Birdy", "Hitchcock" ]
+    },
+    "Marry Me" : {
+      "storyCards" : [ "-KvmnufmxpyyRm9gK_4q" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Morse Code" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-Kvxal558APA5aTPCCqX" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch" ]
+    },
+    "Mountolive" : {
+      "published" : true,
+      "storyCards" : [ "-KvmrGNIBnF10enAXYea", "-KvmsUnP2X3tKBweWsjc" ],
+      "storyRoot" : [ "isRoot", "Justine" ]
+    },
+    "My Story" : {
+      "storyCards" : [ "-Kvn7BcRxhq8B1B4Phsh" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "My Story 1" : {
+      "storyCards" : [ "-Kvn7BcRxhq8B1B4Phsh", "-Kvn7Ob-IBeND5xUAOEB" ],
+      "storyRoot" : [ "isRoot", "My Story" ]
+    },
+    "My story" : {
+      "storyCards" : [ "-Kvn3lyg6UdX5I8bNhh4" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "NEXT PAGE" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvxcgOaFPDRBYD5pEYW", "-Kw0lU62ds5RlNmbi0Pz" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch", "Morse Code", "What makes a good wtich" ]
+    },
+    "Raz Writes a Story" : {
+      "storyCards" : [ "-Kw5xlgRZrWWsX-Sx7JU" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Response to Knights of the Round Table" : {
+      "published" : true,
+      "storyCards" : [ "-KvmnVb0LE70jLXG8WkE", "-KvmqExLLhAd8zd746OL", "-KvmqH8QmRTeCMEMGMpW" ],
+      "storyRoot" : [ "isRoot", "Knights Who Say Ni " ]
+    },
+    "Saving card" : {
+      "storyCards" : [ "-KvmoI-FX9ymLPSdOoiW", "-KvmoR5ctYZXTwLDZBeZ", "-Kvmo_cicbRdCUBOCMjv", "-Kvmo_sBGFSSTWjr127O", "-Kvn4s8lgJubR7MZWG0j" ],
+      "storyRoot" : [ "isRoot", "All Summer in a Day" ]
+    },
+    "Second Branching" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvtJdfcZcfzJeUOEcFo" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot" ]
+    },
+    "Spouse of Jeeves" : {
+      "published" : true,
+      "storyCards" : [ "-KvmoG8sYGNNYFZk5Y_F", "-KvmpLQ9HpaX1mDKI86D", "-Kvmphv1Ur-wUk4g3CA6" ],
+      "storyRoot" : [ "isRoot", "House of Leaves", "Louse of Heaves" ]
+    },
+    "Story2" : {
+      "published" : true,
+      "storyCards" : [ "-Kvn46dtJpfAgW7ga-O-" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "TESTING 3" : {
+      "storyCards" : [ "-KvytTakVfu6HQDE9jb5" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "TESTING BIRDY" : {
+      "branchPoint" : {
+        "from" : "-KvmpFbYGBGQnQkk6Tl3",
+        "to" : "-Kvxd8hbYpM8A7EBTx4-"
+      },
+      "published" : true,
+      "storyCards" : [ "-KvmpFbYGBGQnQkk6Tl3", "-Kvxd8hbYpM8A7EBTx4-" ],
+      "storyRoot" : [ "isRoot", "Angry Birdy" ]
+    },
+    "The Gunslinger" : {
+      "published" : true,
+      "storyCards" : [ "-KvnOQR1gx7AFF9mDSPw", "-KvnOROpIwzYJLQ-rQPz", "-KvnOSdWPNxWsehMVLAh" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "The Way Station" : {
+      "published" : true,
+      "storyCards" : [ "-KvnOQR1gx7AFF9mDSPw", "-KvnOROpIwzYJLQ-rQPz", "-KvnOa4zSU5RagUWKX0m", "-KvnOc3jh79EX2GcreR1", "-KvnOlPb2HmoqVsacgDm" ],
+      "storyRoot" : [ "isRoot", "The Gunslinger", "Co-op City" ]
+    },
+    "Today is the day" : {
+      "published" : true,
+      "storyCards" : [ "-KvnAd8bLahX451PncGJ" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Tweeters" : {
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvnA3e2c8zllsxlsBHp" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "BLAAAAAAA", "BIRDS" ]
+    },
+    "Unicorn Time" : {
+      "published" : true,
+      "storyCards" : [ "-Kvmol4qZEgZW-tH1A5Q", "-KvmowTuiG2iM0VJVPKT", "-Kvmp2p4W_9M7PNkMF8V" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "Unicorns the SEQUEL" : {
+      "published" : true,
+      "storyCards" : [ "-Kvmol4qZEgZW-tH1A5Q", "-KvmowTuiG2iM0VJVPKT", "-Kvn6vlJnScIw7otRMdZ" ],
+      "storyRoot" : [ "isRoot", "Unicorn Time" ]
+    },
+    "What makes a good wtich" : {
+      "branchPoint" : {
+        "from" : "-KvmpXPOMcT6-m-pLD39",
+        "to" : "-KvxcgOaFPDRBYD5pEYW"
+      },
+      "published" : true,
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvxcgOaFPDRBYD5pEYW" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch", "Morse Code" ]
+    },
+    "What makes a great Witch" : {
+      "storyCards" : [ "-KvmpXPOMcT6-m-pLD39", "-KvxaavKS1U33CFApyQe" ],
+      "storyRoot" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy" ]
+    },
+    "adsfdsergaf" : {
+      "published" : true,
+      "storyCards" : [ "-Kw1m99aft6GXoqeGCsV" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "bad bad dream" : {
+      "published" : true,
+      "storyCards" : [ "-KvmnufmxpyyRm9gK_4q", "-Kvn0nLUW8PN66dJgp3q" ],
+      "storyRoot" : [ "isRoot", "Marry Me" ]
+    },
+    "boo promises" : {
+      "storyRoot" : [ "isRoot" ]
+    },
+    "enchiladas" : {
+      "storyRoot" : [ "isRoot" ]
+    },
+    "fettucine" : {
+      "storyRoot" : [ "isRoot" ]
+    },
+    "hello world" : {
+      "published" : true,
+      "storyCards" : [ "-KvnD1rOESrsZtI1jiml" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "i forget" : {
+      "published" : true,
+      "storyCards" : [ "-KvmoI-FX9ymLPSdOoiW", "-KvmoR5ctYZXTwLDZBeZ", "-Kvmo_cicbRdCUBOCMjv", "-Kvmo_sBGFSSTWjr127O", "-Kvn4B3p4GjhikJIt5ip", "-Kvn4EV7rN_8cEKWLR4t" ],
+      "storyRoot" : [ "isRoot", "All Summer in a Day" ]
+    },
+    "lie to me" : {
+      "storyRoot" : [ "isRoot" ]
+    },
+    "new card " : {
+      "storyCards" : [ "-Kw0r85Y58Mkv3sreBsL" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "nfdsafjnsd" : {
+      "published" : true,
+      "storyCards" : [ "-Kw1m1Q8Gqfq0XDs8Gou" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "no more promises" : {
+      "storyRoot" : [ "isRoot" ]
+    },
+    "oh noooooooo it doesnt persist :(" : {
+      "storyCards" : [ "-Kvn82hBye7frG510SLX", "-Kvn85qdsRJPjvzdTzVz" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "return of the promise" : {
+      "storyCards" : [ "-Kw26uhGeSL52vwMltvo" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "robber bird" : {
+      "published" : true,
+      "storyCards" : [ "-KvmpFbYGBGQnQkk6Tl3", "-Kvn1mABbF02gtqZyes7" ],
+      "storyRoot" : [ "isRoot", "Angry Birdy" ],
+      "tags" : {
+        "bird" : true,
+        "sandwich" : true,
+        "thievery" : true
+      }
+    },
+    "test" : {
+      "storyCards" : [ "-Kw6QHnm3e0HWpn-h07a" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "test all these promises" : {
+      "storyCards" : [ "-Kw2DuNc_oif3Xl6S4mk" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "testest the promise agan" : {
+      "branchPoint" : {
+        "from" : "-Kw2EhAIYqWOEBzeuY81",
+        "to" : "-Kw2ErYRmHlV0J1O7NwO"
+      },
+      "published" : true,
+      "storyCards" : [ "-Kw2EhAIYqWOEBzeuY81", "-Kw2ErYRmHlV0J1O7NwO" ],
+      "storyRoot" : [ "isRoot", "testing all these promises" ]
+    },
+    "testing all these promises" : {
+      "published" : true,
+      "storyCards" : [ "-Kw2EhAIYqWOEBzeuY81" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "twgsdgfreq" : {
+      "published" : true,
+      "storyCards" : [ "-Kw1kft6L63pae8yeUWo" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "ugh drowning in promises" : {
+      "storyRoot" : [ "isRoot" ]
+    },
+    "yup" : {
+      "branchPoint" : {
+        "from" : "-Kw0iUS4wYmWKB8D5C5C",
+        "to" : "-Kw0qxw8_oOKlGxXCuKX"
+      },
+      "published" : true,
+      "storyCards" : [ "-Kw0iUS4wYmWKB8D5C5C", "-Kw0qxw8_oOKlGxXCuKX" ],
+      "storyRoot" : [ "isRoot", "zzz test sanitizing" ]
+    },
+    "zz changed again" : {
+      "published" : true,
+      "storyCards" : [ "-Kvx1vjnmZfXnuQbzz0S" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "zzz branch CHANGED" : {
+      "branchPoint" : {
+        "from" : "-Kvx1vjnmZfXnuQbzz0S",
+        "to" : "-Kvx23M8ofXu4aZzgyJU"
+      },
+      "published" : true,
+      "storyCards" : [ "-Kvx1vjnmZfXnuQbzz0S", "-Kvx23M8ofXu4aZzgyJU", "-Kw6WL09nnOYsaDPA4Mv", "-Kw6ZDPGymJvrRlQWiA1", "-Kw6ZTo32WfGH7eWunjO", "-Kw6ZZrnyO1IOcYmdenM", "-Kw6ZfJ_A2znCxOrBGCl", "-Kw6ZjcJkD4qZhqGKBt8", "-Kw6ZmkceIHmMTL9lJaX" ],
+      "storyRoot" : [ "isRoot", "zz changed again" ]
+    },
+    "zzz test sanitizing" : {
+      "storyCards" : [ "-Kw0iUS4wYmWKB8D5C5C" ],
+      "storyRoot" : [ "isRoot" ]
+    },
+    "zzzzzzzz so many promises" : {
+      "published" : true,
+      "storyRoot" : [ "isRoot" ]
+    }
+  },
+  "storyCard" : {
+    "-KvmnVb0LE70jLXG8WkE" : {
+      "branchTitle" : "Knights Who Say Ni ",
+      "nextCard" : "-KvmqExLLhAd8zd746OL",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>Knight 1: Ni ni ni ni ni</p><p>Knight 2: Ni ni ni?</p><p>Knight 1: Ni!</p>",
+      "userId" : "WAzu1yiZAGYJsWZxTSfVDwIa2mr2"
+    },
+    "-KvmnufmxpyyRm9gK_4q" : {
+      "branchTitle" : "Marry Me",
+      "branches" : {
+        "bad bad dream" : "-Kvn0nLUW8PN66dJgp3q"
+      },
+      "nextCard" : "-Kvn0nLUW8PN66dJgp3q",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : "",
+      "text" : "<p>I am the best, so marry me?</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvmoG8sYGNNYFZk5Y_F" : {
+      "branchTitle" : "House of Leaves",
+      "branches" : {
+        "Chows on Steves" : "-KvmxbPSHImUNGNgtYll"
+      },
+      "nextCard" : "-KvmxbPSHImUNGNgtYll",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>The book is the reader is the book.</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-KvmoI-FX9ymLPSdOoiW" : {
+      "branchTitle" : "All Summer in a Day",
+      "nextCard" : "-KvmoR5ctYZXTwLDZBeZ",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : "",
+      "text" : "<p>There once were a group of children who lived on Mars</p>",
+      "userId" : "WAzu1yiZAGYJsWZxTSfVDwIa2mr2"
+    },
+    "-KvmoN2auiHFbbTsS_ft" : {
+      "branchTitle" : "House of Leaves",
+      "nextCard" : "-KvmobHvVG8eAgZE0zP_",
+      "prevCard" : "-KvmoG8sYGNNYFZk5Y_F",
+      "published" : true,
+      "rootTitle" : "House of Leaves",
+      "text" : "<p>We (and it) may never reach the bottom of this staircase. I fear it is infinite.</p>",
+      "userId" : 1
+    },
+    "-KvmoR5ctYZXTwLDZBeZ" : {
+      "branchTitle" : "All Summer in a Day",
+      "nextCard" : "-Kvmo_cicbRdCUBOCMjv",
+      "prevCard" : "-KvmoI-FX9ymLPSdOoiW",
+      "published" : true,
+      "rootTitle" : "All Summer in a Day",
+      "text" : "<p>One of these children were named Margot</p>",
+      "userId" : 1
+    },
+    "-Kvmo_cicbRdCUBOCMjv" : {
+      "branchTitle" : "All Summer in a Day",
+      "branches" : {
+        "Happy Closet" : "-Kvn7w9G6vD3akJyJmJ2"
+      },
+      "nextCard" : "-Kvn7w9G6vD3akJyJmJ2",
+      "prevCard" : "-KvmoR5ctYZXTwLDZBeZ",
+      "published" : true,
+      "rootTitle" : "All Summer in a Day",
+      "text" : "<p>The other children locked her in a closet. <span style=\"color: rgb(102, 0, 153);\">😢</span></p>",
+      "userId" : 1
+    },
+    "-Kvmo_sBGFSSTWjr127O" : {
+      "branchTitle" : "All Summer in a Day",
+      "branches" : {
+        "Saving card" : "-Kvn4s8lgJubR7MZWG0j"
+      },
+      "nextCard" : "-Kvn4s8lgJubR7MZWG0j",
+      "prevCard" : "-Kvmo_cicbRdCUBOCMjv",
+      "published" : false,
+      "rootTitle" : "All Summer in a Day",
+      "text" : "<p><br></p>",
+      "userId" : 1
+    },
+    "-KvmobHvVG8eAgZE0zP_" : {
+      "branchTitle" : "House of Leaves",
+      "nextCard" : "-KvmocOFvepmiZ-cbKOE",
+      "prevCard" : "-KvmoN2auiHFbbTsS_ft",
+      "published" : true,
+      "rootTitle" : "House of Leaves",
+      "text" : "<p>I drop a pebble, and no sound returns.</p>",
+      "userId" : 1
+    },
+    "-KvmocOFvepmiZ-cbKOE" : {
+      "branchTitle" : "House of Leaves",
+      "nextCard" : "",
+      "prevCard" : "-KvmobHvVG8eAgZE0zP_",
+      "published" : true,
+      "rootTitle" : "House of Leaves",
+      "text" : "<p>The dark around me is shadow; the dark beneath me is absence.</p>",
+      "userId" : 1
+    },
+    "-Kvmol4qZEgZW-tH1A5Q" : {
+      "branchTitle" : "Unicorn Time",
+      "nextCard" : "-KvmowTuiG2iM0VJVPKT",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>Once upon a time, a rumors of a mythical creature roaming the streets of New York City Central Park spread. What could it be?</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvmowTuiG2iM0VJVPKT" : {
+      "branchTitle" : "Unicorn Time",
+      "branches" : {
+        "Unicorns the SEQUEL" : "-Kvn6vlJnScIw7otRMdZ"
+      },
+      "nextCard" : "-Kvn6vlJnScIw7otRMdZ",
+      "prevCard" : "-Kvmol4qZEgZW-tH1A5Q",
+      "published" : true,
+      "rootTitle" : "Unicorn Time",
+      "text" : "<p>Some say they saw a centaur. Some say they saw an ogre. But I think it was a unicorn!</p>",
+      "userId" : 1
+    },
+    "-Kvmp2p4W_9M7PNkMF8V" : {
+      "branchTitle" : "Unicorn Time",
+      "nextCard" : "",
+      "prevCard" : "-KvmowTuiG2iM0VJVPKT",
+      "published" : true,
+      "rootTitle" : "Unicorn Time",
+      "text" : "<p>I name it Uni!</p>",
+      "userId" : 1
+    },
+    "-KvmpFbYGBGQnQkk6Tl3" : {
+      "branchTitle" : "Angry Birdy",
+      "branches" : {
+        "TESTING BIRDY" : "-Kvxd8hbYpM8A7EBTx4-",
+        "robber bird" : "-Kvn1mABbF02gtqZyes7"
+      },
+      "nextCard" : "-Kvxd8hbYpM8A7EBTx4-",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>If you live in NYC, you know what the bird situation is like. </p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvmpLQ9HpaX1mDKI86D" : {
+      "branchTitle" : "Louse of Heaves",
+      "nextCard" : "-Kvmphv1Ur-wUk4g3CA6",
+      "prevCard" : "-KvmoG8sYGNNYFZk5Y_F",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "House of Leaves" ],
+      "text" : "<p>The look is the greeter is the hook is the feeder is the cook.</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-KvmpQcVuwAxDPGCZp6n" : {
+      "branchTitle" : "Louse of Heaves",
+      "nextCard" : "",
+      "prevCard" : "-KvmpLQ9HpaX1mDKI86D",
+      "published" : true,
+      "rootTitle" : "House of Leaves",
+      "text" : "<p>And so it will continue.</p>",
+      "userId" : 1
+    },
+    "-KvmpXPOMcT6-m-pLD39" : {
+      "branchTitle" : "Larry Flowerpot",
+      "branches" : {
+        "Hello TESTING" : "-KvxcvwcsPXX74LBemKi",
+        "Morse Code" : "-Kvxal558APA5aTPCCqX",
+        "What makes a good wtich" : "-KvxcgOaFPDRBYD5pEYW"
+      },
+      "nextCard" : "-KvxcvwcsPXX74LBemKi",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : "",
+      "text" : "<p>Hello all potters!</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvmpfCzuYq0s6EwxtJ0" : {
+      "branchTitle" : "Larry Flowerpot",
+      "nextCard" : "-KvmqD4iod4b7uXglF-T",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : true,
+      "rootTitle" : "Larry Flowerpot",
+      "text" : "<p>My name is Larry Flowerpot: the Good Wizard.</p>",
+      "userId" : 1
+    },
+    "-Kvmphv1Ur-wUk4g3CA6" : {
+      "branchTitle" : "Spouse of Jeeves",
+      "nextCard" : "",
+      "prevCard" : "-KvmpLQ9HpaX1mDKI86D",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "House of Leaves", "Louse of Heaves" ],
+      "text" : "<p>An entirely different concept.</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kvmpn6FuMQeyoW3uLBq" : {
+      "branchTitle" : "Larry Flowerpot",
+      "nextCard" : "-KvmpqwiHViK_WLz_7Iv",
+      "prevCard" : "-KvmpfCzuYq0s6EwxtJ0",
+      "published" : true,
+      "rootTitle" : "Larry Flowerpot",
+      "text" : "<p>I weave magic everywhere and populate the world with beautiful flowers (and flowerpots)!</p>",
+      "userId" : 1
+    },
+    "-KvmpqwiHViK_WLz_7Iv" : {
+      "branchTitle" : "Larry Flowerpot",
+      "nextCard" : "",
+      "prevCard" : "-Kvmpn6FuMQeyoW3uLBq",
+      "published" : true,
+      "rootTitle" : "Larry Flowerpot",
+      "text" : "<p>I also make delicious pancakes.</p>",
+      "userId" : 1
+    },
+    "-KvmqD4iod4b7uXglF-T" : {
+      "branchTitle" : "Harmony Stranger: the wise witch",
+      "nextCard" : "-KvmqeeaFpG87-Is8hlq",
+      "prevCard" : "-KvmpfCzuYq0s6EwxtJ0",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot" ],
+      "text" : "<p>But this story is about Harmony Stranger, Flowerpot's best friend</p>",
+      "userId" : "WAzu1yiZAGYJsWZxTSfVDwIa2mr2"
+    },
+    "-KvmqExLLhAd8zd746OL" : {
+      "branchTitle" : "Response to Knights of the Round Table",
+      "nextCard" : "-KvmqH8QmRTeCMEMGMpW",
+      "prevCard" : "-KvmnVb0LE70jLXG8WkE",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Knights Who Say Ni " ],
+      "text" : "<p>You say \"Ni.\"</p><p><br></p><p>I say \"Hi.\"</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvmqH8QmRTeCMEMGMpW" : {
+      "branchTitle" : "Response to Knights of the Round Table",
+      "nextCard" : "",
+      "prevCard" : "-KvmqExLLhAd8zd746OL",
+      "published" : true,
+      "rootTitle" : "Knights Who Say Ni ",
+      "text" : "<p>Now goodbye.</p>",
+      "userId" : 1
+    },
+    "-KvmqeeaFpG87-Is8hlq" : {
+      "branchTitle" : "Harmony Stranger: the wise witch",
+      "nextCard" : "",
+      "prevCard" : "-KvmqD4iod4b7uXglF-T",
+      "published" : true,
+      "rootTitle" : "Larry Flowerpot",
+      "text" : "<p>And her orange cat, Shookcranks, who was half-dragon and half-tabby-cat.</p>",
+      "userId" : 1
+    },
+    "-KvmrGNIBnF10enAXYea" : {
+      "branchTitle" : "Justine",
+      "nextCard" : "-Kvmw_p3xqc8u0ktVAPS",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>How many ways can love be portrayed</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kvmr_H9i_Jw4gsrsiMX" : {
+      "branchTitle" : "Justine",
+      "nextCard" : "",
+      "prevCard" : "-KvmrGNIBnF10enAXYea",
+      "published" : true,
+      "rootTitle" : "Justine",
+      "text" : "<p>We explore obsession versus feint</p>",
+      "userId" : 1
+    },
+    "-KvmsUnP2X3tKBweWsjc" : {
+      "branchTitle" : "Mountolive",
+      "nextCard" : "",
+      "prevCard" : "-KvmrGNIBnF10enAXYea",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Justine" ],
+      "text" : "<p>The transference of a high from the wildly new to a single minor aspect of the chaos</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-KvmtxZrkIREKr7jJgsT" : {
+      "branchTitle" : "Balthazar",
+      "nextCard" : "",
+      "prevCard" : "-KvmrGNIBnF10enAXYea",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Justine" ],
+      "text" : "<p>The forceful movement from the heart to the head: substituting a more natural cataloguing for sterile memorization</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kvmw_p3xqc8u0ktVAPS" : {
+      "branchTitle" : "Clea",
+      "nextCard" : "",
+      "prevCard" : "-KvmrGNIBnF10enAXYea",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Justine" ],
+      "text" : "<p>The myth of the obligation-free affair</p>",
+      "userId" : 1
+    },
+    "-KvmxbPSHImUNGNgtYll" : {
+      "branchTitle" : "Chows on Steves",
+      "nextCard" : "",
+      "prevCard" : "-KvmoG8sYGNNYFZk5Y_F",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "House of Leaves", "Louse of Heaves", "Spouse of Jeeves" ],
+      "text" : "<p>yum</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kvn-r_y1jcrTSJSLoTa" : {
+      "branchTitle" : "Hitchcock",
+      "nextCard" : "",
+      "prevCard" : "-KvmpFbYGBGQnQkk6Tl3",
+      "published" : false,
+      "rootTitle" : "Angry Birdy",
+      "text" : "<p>They attack at night</p>",
+      "userId" : "dvy8IZ2tU3YrJQnqdBpzSABlynf2"
+    },
+    "-Kvn0nLUW8PN66dJgp3q" : {
+      "branchTitle" : "bad bad dream",
+      "nextCard" : "",
+      "prevCard" : "-KvmnufmxpyyRm9gK_4q",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Marry Me" ],
+      "text" : "<p>this morning i woke up bleary-eye and beautiful, per usual. I rolled over and poked my boyfriend in the shoulder, so that he would kiss me or otherwise make a compliment of some important kind. He was pretty bleary-eyed as well, but - luckily for him, cuz otherwise he would have gotten a beating of some very violent kind - he did kiss me and tell me something nice, although I've already forgotten was. I think it was about how sweet I am (he is as discerning person, even in blearyhood.</p><p>\"Guess what I just dreamed about,\" he said.</p><p>\"What?\" I said. I hoped and assumed it was about marrying me, which I imagine is his one true goal in life.</p><p>\"We were planning our wedding -\"</p><p>(Here I chuckled to myself because duh he really has nothing else good to dream about, and I knew it).</p><p>\", but then I got too stressed out with the wedding planning, and decided I didn't want to get married anymore.\" </p><p>The hidden face inside of my real face fell, but my real face stayed smiling and good, ready for more kisses.</p>",
+      "userId" : "37dk3UmG6sUZ4dfysVOgXcK9Quw2"
+    },
+    "-Kvn1-gGcoc9LBK25u2h" : {
+      "branchTitle" : "Lovely Night",
+      "nextCard" : "",
+      "prevCard" : "-KvmpFbYGBGQnQkk6Tl3",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Angry Birdy", "Hitchcock" ],
+      "text" : "<p>They coo by my window</p>",
+      "userId" : "dvy8IZ2tU3YrJQnqdBpzSABlynf2"
+    },
+    "-Kvn1mABbF02gtqZyes7" : {
+      "branchTitle" : "robber bird",
+      "nextCard" : "",
+      "prevCard" : "-KvmpFbYGBGQnQkk6Tl3",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Angry Birdy" ],
+      "text" : "<p> Just the other day, I was eating a sandwich, a delcious sandwich, with cured ham and stewed meats and also some kind of foreign cheese whose name I cannot recall, when a bird alighted on my knee and started squawking, if that's how you spell squawking. </p><p>\"What's going on little birdy?\" I asked him, ready to listen to his troubles and also tell him my own.</p><p>\"I'm a hungry birdy.\"</p><p>\"Oh,\" I said. I was hoping for a more dramatic, bar-client to bar-tender kind of deal.</p><p>\"I'm planning on stealing your sandwich,\" he said.</p><p>\"Oh,\" I said, now hurrying a little bit on eating my sandwich so that he would have less to steal.</p><p>\"I'm gonna steal a lot of your sandwich,\" he said.</p><p>\"Oh,\" I said. (This interaction was becoming much more agressive than I had anticipated, and now I understood why people are so wary about talking to strangers).</p><p>Then an idea occurred to me:</p><p>\"Hey!\" I said. \"If I give you all my sandwich, then there is no way for you to steal it. It would be gift acceptance and not robbery.\"</p><p>\"Wow,\" the bird said, \"You have really defeated me.\"</p><p>\"Yeah,\" I said. \"Anyway, here is my sandwich. I think you'll like it.\"</p><p>The bird smiled, but just a little too craftily.</p>",
+      "userId" : "37dk3UmG6sUZ4dfysVOgXcK9Quw2"
+    },
+    "-Kvn2VW_ZMK2xnt8dWQF" : {
+      "branchTitle" : "BLAAAAAAA",
+      "branches" : {
+        "BIRDS" : "-Kvn2nM-1YOoRz8rZHih"
+      },
+      "nextCard" : "-Kvn2nM-1YOoRz8rZHih",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot" ],
+      "text" : "<p>blaaaaaa</p>",
+      "userId" : "Yj8AqLbCbAfzGXfLBGKp32yS8jg1"
+    },
+    "-Kvn2nM-1YOoRz8rZHih" : {
+      "branchTitle" : "BIRDS",
+      "nextCard" : "",
+      "prevCard" : "-Kvn2VW_ZMK2xnt8dWQF",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot", "BLAAAAAAA" ],
+      "text" : "<p>birds</p>",
+      "userId" : "Yj8AqLbCbAfzGXfLBGKp32yS8jg1"
+    },
+    "-Kvn3ct1bvz-Dc01XOVq" : {
+      "branchTitle" : "Continuing with Harmony",
+      "nextCard" : "-Kvn3fXEdIr8C383Odyp",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch" ],
+      "text" : "<p>Here we go, a hopping down the lane!</p>",
+      "userId" : "mIlF9PJnbNOoQvTqjX5lnASPK7i2"
+    },
+    "-Kvn3fXEdIr8C383Odyp" : {
+      "branchTitle" : "Continuing with Harmony",
+      "nextCard" : "",
+      "prevCard" : "-Kvn3ct1bvz-Dc01XOVq",
+      "published" : true,
+      "rootTitle" : "Harmony Stranger: the wise witch",
+      "text" : "<p><br></p>",
+      "userId" : 1
+    },
+    "-Kvn3lyg6UdX5I8bNhh4" : {
+      "branchTitle" : "My story",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : "",
+      "text" : "<p>german shepherd dog</p><p>german shepherd dog</p><p>rottweiler</p><p>hi.</p>",
+      "userId" : "bN4At1OrK7U9dB32MQpkpwWcTqD2"
+    },
+    "-Kvn46dtJpfAgW7ga-O-" : {
+      "branchTitle" : "Story2",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>22222</p>",
+      "userId" : "bN4At1OrK7U9dB32MQpkpwWcTqD2"
+    },
+    "-Kvn4B3p4GjhikJIt5ip" : {
+      "branchTitle" : "i forget",
+      "nextCard" : "-Kvn4EV7rN_8cEKWLR4t",
+      "prevCard" : "-Kvmo_sBGFSSTWjr127O",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "All Summer in a Day" ],
+      "text" : "<p>and what happened right before this?</p>",
+      "userId" : "wCglMIt8IDV5bmFECmosO4rmj9M2"
+    },
+    "-Kvn4EV7rN_8cEKWLR4t" : {
+      "branchTitle" : "i forget",
+      "nextCard" : "",
+      "prevCard" : "-Kvn4B3p4GjhikJIt5ip",
+      "published" : true,
+      "rootTitle" : "All Summer in a Day",
+      "text" : "<p>what happened before this? </p>",
+      "userId" : 1
+    },
+    "-Kvn4Kd8TUdiy9UEFt4P" : {
+      "branchTitle" : "branch",
+      "nextCard" : "",
+      "prevCard" : "-Kvmo_sBGFSSTWjr127O",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "All Summer in a Day", "i forget" ],
+      "text" : "<p>what am i doing</p>",
+      "userId" : "bN4At1OrK7U9dB32MQpkpwWcTqD2"
+    },
+    "-Kvn4RsaYWQgV_r7zryq" : {
+      "branchTitle" : "Dust Mice",
+      "nextCard" : "-Kvn4SzICKMu1Z__R15e",
+      "prevCard" : "-Kvmo_sBGFSSTWjr127O",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "All Summer in a Day" ],
+      "text" : "<p>And she stayed there and made dust mice friends</p>",
+      "userId" : "wCglMIt8IDV5bmFECmosO4rmj9M2"
+    },
+    "-Kvn4SzICKMu1Z__R15e" : {
+      "branchTitle" : "Dust Mice",
+      "nextCard" : "",
+      "prevCard" : "-Kvn4RsaYWQgV_r7zryq",
+      "published" : false,
+      "rootTitle" : "All Summer in a Day",
+      "text" : "<p><br></p>",
+      "userId" : 1
+    },
+    "-Kvn4s8lgJubR7MZWG0j" : {
+      "branchTitle" : "Saving card",
+      "nextCard" : "",
+      "prevCard" : "-Kvmo_sBGFSSTWjr127O",
+      "published" : false,
+      "rootTitle" : "All Summer in a Day",
+      "text" : "<p>Maggot had a fun day at the park.</p>",
+      "userId" : "mIlF9PJnbNOoQvTqjX5lnASPK7i2"
+    },
+    "-Kvn6vlJnScIw7otRMdZ" : {
+      "branchTitle" : "Unicorns the SEQUEL",
+      "nextCard" : "",
+      "prevCard" : "-KvmowTuiG2iM0VJVPKT",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Unicorn Time" ],
+      "text" : "<p>unicorns can get meta and make <a href=\"https://github.com/parallel-stories/capstone\" target=\"_blank\">githubsss</a></p><ol><li>wowwww</li></ol>",
+      "userId" : "uG0LVL7fXLcaYnqbvf98a1XEtX93"
+    },
+    "-Kvn7BcRxhq8B1B4Phsh" : {
+      "branchTitle" : "My Story",
+      "branches" : {
+        "My Story 1" : "-Kvn7Ob-IBeND5xUAOEB"
+      },
+      "nextCard" : "-Kvn7Ob-IBeND5xUAOEB",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : "",
+      "text" : "<p>La La La</p>",
+      "userId" : "WAzu1yiZAGYJsWZxTSfVDwIa2mr2"
+    },
+    "-Kvn7Ob-IBeND5xUAOEB" : {
+      "branchTitle" : "My Story 1",
+      "nextCard" : "",
+      "prevCard" : "-Kvn7BcRxhq8B1B4Phsh",
+      "published" : false,
+      "rootTitle" : [ "isRoot", "My Story" ],
+      "text" : "<p>Hello</p>",
+      "userId" : "WAzu1yiZAGYJsWZxTSfVDwIa2mr2"
+    },
+    "-Kvn7qVvDYC4oZUR4VVd" : {
+      "branchTitle" : "A whole newww worrrrrrld",
+      "branches" : {
+        "LYRICSFTW" : "-KvnA4xDvWW3RJfEaI0Q"
+      },
+      "nextCard" : "-KvnA4xDvWW3RJfEaI0Q",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p><a href=\"https://images.genius.com/60b5625f2b03a3c8a7b3f64012de1272.1000x588x1.jpg\" target=\"_blank\">https://images.genius.com/60b5625f2b03a3c8a7b3f64012de1272.1000x588x1.jpg</a></p><p><br></p><p><br></p><p><br></p><p>much wow</p><p><br></p>",
+      "userId" : "uG0LVL7fXLcaYnqbvf98a1XEtX93"
+    },
+    "-Kvn7w9G6vD3akJyJmJ2" : {
+      "branchTitle" : "Happy Closet",
+      "nextCard" : "",
+      "prevCard" : "-Kvmo_cicbRdCUBOCMjv",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "All Summer in a Day" ],
+      "text" : "<p>Margo had a phobia of being in large spaces, so this closet was really quite perfect. The other children knew this.</p>",
+      "userId" : "M6XqRVyvDSOJDkZNJhsu9IJRxzz1"
+    },
+    "-Kvn82hBye7frG510SLX" : {
+      "branchTitle" : "oh noooooooo it doesnt persist :(",
+      "nextCard" : "-Kvn85qdsRJPjvzdTzVz",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : "",
+      "text" : "<p>my whole new world :( : ( : ( : : ( </p><p><a href=\"https://images.genius.com/60b5625f2b03a3c8a7b3f64012de1272.1000x588x1.jpg\" target=\"_blank\">https://images.genius.com/60b5625f2b03a3c8a7b3f64012de1272.1000x588x1.jpg</a></p>",
+      "userId" : "uG0LVL7fXLcaYnqbvf98a1XEtX93"
+    },
+    "-Kvn85qdsRJPjvzdTzVz" : {
+      "branchTitle" : "oh noooooooo it doesnt persist :(",
+      "nextCard" : "",
+      "prevCard" : "-Kvn82hBye7frG510SLX",
+      "published" : true,
+      "rootTitle" : "oh noooooooo it doesnt persist :(",
+      "text" : "<p><br></p>",
+      "userId" : 1
+    },
+    "-KvnA3e2c8zllsxlsBHp" : {
+      "branchTitle" : "Tweeters",
+      "nextCard" : "",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : false,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot", "BLAAAAAAA", "BIRDS" ],
+      "text" : "<p>birds tweet a lot dont they</p>",
+      "userId" : "SHL9KQyLcATSU1lfLksXIBDKUxL2"
+    },
+    "-KvnA4xDvWW3RJfEaI0Q" : {
+      "branchTitle" : "LYRICSFTW",
+      "nextCard" : "",
+      "prevCard" : "-Kvn7qVvDYC4oZUR4VVd",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "A whole newww worrrrrrld" ],
+      "text" : "<p>A NEW FANTASTIC POOOOINT OF VIEWWWWWWWW. </p>",
+      "userId" : "ZaYMznOzaCOH28ONwVb7aW3IGr03"
+    },
+    "-KvnAYeNsh2i50w93Hjo" : {
+      "branchTitle" : "I wish I was a baller",
+      "nextCard" : "-KvnAcdJdbnni32EdM_F",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : "",
+      "text" : "<p>I wish I had a something in a hat with a something</p>",
+      "userId" : "SHL9KQyLcATSU1lfLksXIBDKUxL2"
+    },
+    "-KvnAcdJdbnni32EdM_F" : {
+      "branchTitle" : "I wish I was a baller",
+      "nextCard" : "",
+      "prevCard" : "-KvnAYeNsh2i50w93Hjo",
+      "published" : true,
+      "rootTitle" : "I wish I was a baller",
+      "text" : "<p>I wish I had a girl who looked good I would call her</p>",
+      "userId" : 1
+    },
+    "-KvnAd8bLahX451PncGJ" : {
+      "branchTitle" : "Today is the day",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>I came to parallel stories.</p><p><br></p><p>and WHAT I SAW. </p><p><br></p><p>WAS NOT WHAT I SAW.</p><p><br></p><p>IT WAS ALL A BRANCH.</p><p><br></p><p>IT'S A BRANCH</p><p><br></p><p>A NEW BRANCH</p><p><br></p><p>MUCH WOW</p>",
+      "userId" : "ZaYMznOzaCOH28ONwVb7aW3IGr03"
+    },
+    "-KvnD1rOESrsZtI1jiml" : {
+      "branchTitle" : "hello world",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>hiiiiii</p>",
+      "userId" : "WAzu1yiZAGYJsWZxTSfVDwIa2mr2"
+    },
+    "-KvnDGU9wXoIgKD4QmEn" : {
+      "branchTitle" : "Banana",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>hello, i'm a little banana, don't eat me. the end. </p>",
+      "userId" : "ZaYMznOzaCOH28ONwVb7aW3IGr03"
+    },
+    "-KvnOQR1gx7AFF9mDSPw" : {
+      "branchTitle" : "The Gunslinger",
+      "nextCard" : "-KvnOROpIwzYJLQ-rQPz",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>Roland</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-KvnOROpIwzYJLQ-rQPz" : {
+      "branchTitle" : "The Gunslinger",
+      "branches" : {
+        "Co-op City" : "-KvnOa4zSU5RagUWKX0m"
+      },
+      "nextCard" : "-KvnOa4zSU5RagUWKX0m",
+      "prevCard" : "-KvnOQR1gx7AFF9mDSPw",
+      "published" : true,
+      "rootTitle" : "The Gunslinger",
+      "text" : "<p>Is</p>",
+      "userId" : 1
+    },
+    "-KvnOSdWPNxWsehMVLAh" : {
+      "branchTitle" : "The Gunslinger",
+      "nextCard" : "",
+      "prevCard" : "-KvnOROpIwzYJLQ-rQPz",
+      "published" : true,
+      "rootTitle" : "The Gunslinger",
+      "text" : "<p>Hongry</p>",
+      "userId" : 1
+    },
+    "-KvnOa4zSU5RagUWKX0m" : {
+      "branchTitle" : "Co-op City",
+      "nextCard" : "-KvnOc3jh79EX2GcreR1",
+      "prevCard" : "-KvnOROpIwzYJLQ-rQPz",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "The Gunslinger" ],
+      "text" : "<p>Aiming with his heart</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-KvnOc3jh79EX2GcreR1" : {
+      "branchTitle" : "Co-op City",
+      "branches" : {
+        "The Way Station" : "-KvnOlPb2HmoqVsacgDm"
+      },
+      "nextCard" : "-KvnOlPb2HmoqVsacgDm",
+      "prevCard" : "-KvnOa4zSU5RagUWKX0m",
+      "published" : true,
+      "rootTitle" : "The Gunslinger",
+      "text" : "<p>not with his eye</p>",
+      "userId" : 1
+    },
+    "-KvnOlPb2HmoqVsacgDm" : {
+      "branchTitle" : "The Way Station",
+      "nextCard" : "",
+      "prevCard" : "-KvnOc3jh79EX2GcreR1",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "The Gunslinger", "Co-op City" ],
+      "text" : "<p>the undead boy waits</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-KvtJdfcZcfzJeUOEcFo" : {
+      "branchTitle" : "Second Branching",
+      "nextCard" : "",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot" ],
+      "text" : "<p>This is the life</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-Kvx1vjnmZfXnuQbzz0S" : {
+      "branchTitle" : "zz changed again",
+      "branches" : {
+        "zzz branch CHANGED" : "-Kvx23M8ofXu4aZzgyJU"
+      },
+      "nextCard" : "-Kvx23M8ofXu4aZzgyJU",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>zz</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kvx23M8ofXu4aZzgyJU" : {
+      "branchTitle" : "zzz branch CHANGED",
+      "nextCard" : "-Kw6WL09nnOYsaDPA4Mv",
+      "prevCard" : "-Kvx1vjnmZfXnuQbzz0S",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "zz changed again" ],
+      "text" : "<p>bah</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-KvxaN03CgYfbETPeNxG" : {
+      "branchTitle" : "Bossy Wossy",
+      "nextCard" : "",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : true,
+      "rootTitle" : "Harmony Stranger: the wise witch",
+      "text" : "<p>Change the world!</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvxaavKS1U33CFApyQe" : {
+      "branchTitle" : "What makes a great Witch",
+      "nextCard" : "",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : true,
+      "rootTitle" : "Bossy Wossy",
+      "text" : "<p>Hard work!</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-Kvxal558APA5aTPCCqX" : {
+      "branchTitle" : "Morse Code",
+      "nextCard" : "",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch" ],
+      "text" : "<p>Hello here</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvxcgOaFPDRBYD5pEYW" : {
+      "branchTitle" : "What makes a good wtich",
+      "branches" : {
+        "Basicall" : "-Kw0levK3YmvUiUXPK1B"
+      },
+      "nextCard" : "-Kw0levK3YmvUiUXPK1B",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch", "Morse Code" ],
+      "text" : "<p>Something</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvxcvwcsPXX74LBemKi" : {
+      "branchTitle" : "Hello TESTING",
+      "nextCard" : "",
+      "prevCard" : "-KvmpXPOMcT6-m-pLD39",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch", "Morse Code" ],
+      "text" : "<p>TEST TWO</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-Kvxd8hbYpM8A7EBTx4-" : {
+      "branchTitle" : "TESTING BIRDY",
+      "nextCard" : "",
+      "prevCard" : "-KvmpFbYGBGQnQkk6Tl3",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Angry Birdy" ],
+      "text" : "<p>TEST TEST</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-KvytTakVfu6HQDE9jb5" : {
+      "branchTitle" : "TESTING 3",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : "",
+      "text" : "<p>This is test #3</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-Kw0iUS4wYmWKB8D5C5C" : {
+      "branchTitle" : "zzz test sanitizing",
+      "branches" : {
+        "yup" : "-Kw0qxw8_oOKlGxXCuKX"
+      },
+      "nextCard" : "-Kw0qxw8_oOKlGxXCuKX",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>here is some <a href=\"http://google.com\" target=\"_blank\">html</a></p><p><strong><em><u>bold</u></em></strong></p><p><br></p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw0lU62ds5RlNmbi0Pz" : {
+      "branchTitle" : "NEXT PAGE",
+      "nextCard" : "",
+      "prevCard" : "-KvxcgOaFPDRBYD5pEYW",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch", "Morse Code", "What makes a good wtich" ],
+      "text" : "<p>this is clearly next</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-Kw0levK3YmvUiUXPK1B" : {
+      "branchTitle" : "Basicall",
+      "nextCard" : "-Kw0lgZ1t3LYU6tCrd5G",
+      "prevCard" : "-KvxcgOaFPDRBYD5pEYW",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "Larry Flowerpot", "Harmony Stranger: the wise witch", "Bossy Wossy", "What makes a great Witch", "Morse Code", "What makes a good wtich" ],
+      "text" : "<p>BOSOFEAF</p>",
+      "userId" : "hi2QjsWg5TQ3M4upATVJUCUn1Tv1"
+    },
+    "-Kw0lgZ1t3LYU6tCrd5G" : {
+      "branchTitle" : "Basicall",
+      "nextCard" : "-Kw0lhhBtPFwgd3x3JLi",
+      "prevCard" : "-Kw0levK3YmvUiUXPK1B",
+      "published" : true,
+      "rootTitle" : "What makes a good wtich",
+      "text" : "<p>May the world is losing it</p>",
+      "userId" : 1
+    },
+    "-Kw0lhhBtPFwgd3x3JLi" : {
+      "branchTitle" : "Basicall",
+      "nextCard" : "",
+      "prevCard" : "-Kw0lgZ1t3LYU6tCrd5G",
+      "published" : true,
+      "rootTitle" : "What makes a good wtich",
+      "text" : "<p>but who knows</p>",
+      "userId" : 1
+    },
+    "-Kw0qxw8_oOKlGxXCuKX" : {
+      "branchTitle" : "yup",
+      "nextCard" : "",
+      "prevCard" : "-Kw0iUS4wYmWKB8D5C5C",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "zzz test sanitizing" ],
+      "text" : "<p>AYUP</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw0r85Y58Mkv3sreBsL" : {
+      "branchTitle" : "new card ",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>new card</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1ZW7PEcPIXNj640Ly" : {
+      "branchTitle" : "A A A long root story line",
+      "branches" : {
+        "A A A branch off of a a a branch but earlier than the branch happens" : "-Kw1Ztmbzg-Qu5Sb6JOQ"
+      },
+      "nextCard" : "-Kw1Ztmbzg-Qu5Sb6JOQ",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1ZWrFTYEbdh-SmFZt" : {
+      "branchTitle" : "A A A long root story line",
+      "nextCard" : "-Kw1ZXs0BWIa-7yvKhJU",
+      "prevCard" : "-Kw1ZW7PEcPIXNj640Ly",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test2</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1ZXs0BWIa-7yvKhJU" : {
+      "branchTitle" : "A A A long root story line",
+      "branches" : {
+        "A A A branch that comes later in the root story" : "-Kw1ZhMpWoh4QQHljmX8"
+      },
+      "nextCard" : "-Kw1ZhMpWoh4QQHljmX8",
+      "prevCard" : "-Kw1ZWrFTYEbdh-SmFZt",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test3</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1ZYqDYHVNzWfsSmlL" : {
+      "branchTitle" : "A A A long root story line",
+      "nextCard" : "-Kw1Z_1NG0YS8oVS_Lmz",
+      "prevCard" : "-Kw1ZXs0BWIa-7yvKhJU",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test4</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1Z_1NG0YS8oVS_Lmz" : {
+      "branchTitle" : "A A A long root story line",
+      "nextCard" : "",
+      "prevCard" : "-Kw1ZYqDYHVNzWfsSmlL",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test5</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1ZhMpWoh4QQHljmX8" : {
+      "branchTitle" : "A A A branch that comes later in the root story",
+      "nextCard" : "-Kw1ZiKC6ptYuD2euc3P",
+      "prevCard" : "-Kw1ZXs0BWIa-7yvKhJU",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "A A A long root story line" ],
+      "text" : "<p>test 4a</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1ZiKC6ptYuD2euc3P" : {
+      "branchTitle" : "A A A branch that comes later in the root story",
+      "nextCard" : "",
+      "prevCard" : "-Kw1ZhMpWoh4QQHljmX8",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "A A A long root story line" ],
+      "text" : "<p>test 5a</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1Ztmbzg-Qu5Sb6JOQ" : {
+      "branchTitle" : "A A A branch off of a a a branch but earlier than the branch happens",
+      "nextCard" : "-Kw1Zvm6xzpWAj9jwBaU",
+      "prevCard" : "-Kw1ZW7PEcPIXNj640Ly",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "A A A long root story line" ],
+      "text" : "<p>test 2a</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1Zvm6xzpWAj9jwBaU" : {
+      "branchTitle" : "A A A branch off of a a a branch but earlier than the branch happens",
+      "nextCard" : "",
+      "prevCard" : "-Kw1Ztmbzg-Qu5Sb6JOQ",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "A A A long root story line" ],
+      "text" : "<p>test 3b</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1ib4fDv5z-PMkuWJP" : {
+      "branchTitle" : "A A A saved not published",
+      "nextCard" : "-Kw1j2b1NbqbHaxff0vr",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1j2b1NbqbHaxff0vr" : {
+      "branchTitle" : "A A A saved not published",
+      "nextCard" : "",
+      "prevCard" : "-Kw1ib4fDv5z-PMkuWJP",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>title published, card not</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1k8Li8mVb077s57Ag" : {
+      "branchTitle" : "A A A publish",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1kft6L63pae8yeUWo" : {
+      "branchTitle" : "twgsdgfreq",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>wergre</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1m1Q8Gqfq0XDs8Gou" : {
+      "branchTitle" : "nfdsafjnsd",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>fdafndsjkwfasd</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1m99aft6GXoqeGCsV" : {
+      "branchTitle" : "adsfdsergaf",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>adsfaerfwefsad</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1pRyRDXSlYdqR0oBG" : {
+      "branchTitle" : "console",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>log</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1qi0LWBU_aYxHCG1B" : {
+      "branchTitle" : "sup",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>whats</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1qzLaaJ_pnP25KCUL" : {
+      "branchTitle" : "pssh",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>pfft</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1uQOG5dPwfutpchpp" : {
+      "branchTitle" : "test promise",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>promise key</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1waWxgC_0nL_6ZbTq" : {
+      "branchTitle" : "test",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1wcgwia6RML8WBd2o" : {
+      "branchTitle" : "test",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1weSDpPcay2gECvdM" : {
+      "branchTitle" : "test",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1wjDjsWhYLzpq8DG6" : {
+      "branchTitle" : "test",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw1wweoLqdTimhDSL3M" : {
+      "branchTitle" : "yup",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw2-xPzX9sqr0ESaVPC" : {
+      "branchTitle" : "zzzzzzzz so many promises",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>ugh</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw21WTFHVkM9vP-DAqZ" : {
+      "branchTitle" : "ugh drowning in promises",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>:( :( :(</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw21piYxj4LCtPZLwyy" : {
+      "branchTitle" : "no more promises",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>aaaaacccckk</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw22A577G19R0Jp6Klz" : {
+      "branchTitle" : "boo promises",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>don't undrestada</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw22FzDPrz_AET5KbPk" : {
+      "branchTitle" : "lie to me",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>promise</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw22iuJ4n3K80dsGxiW" : {
+      "branchTitle" : "fettucine",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>alfredo</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw23NViGa1E7BWZJ49f" : {
+      "branchTitle" : "enchiladas",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>mole</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw26uhGeSL52vwMltvo" : {
+      "branchTitle" : "return of the promise",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>dunh dunh dunnnnnnnn</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw2DuNc_oif3Xl6S4mk" : {
+      "branchTitle" : "test all these promises",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw2EhAIYqWOEBzeuY81" : {
+      "branchTitle" : "testing all these promises",
+      "branches" : {
+        "testest the promise agan" : "-Kw2ErYRmHlV0J1O7NwO"
+      },
+      "nextCard" : "-Kw2ErYRmHlV0J1O7NwO",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw2ErYRmHlV0J1O7NwO" : {
+      "branchTitle" : "testest the promise agan",
+      "nextCard" : "",
+      "prevCard" : "-Kw2EhAIYqWOEBzeuY81",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "testing all these promises" ],
+      "text" : "<p>asdgasf</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw2_MhU4v3-vDiX9MEj" : {
+      "branchTitle" : "Dobby is a Free Elf",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : true,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>preciousssss</p>",
+      "userId" : "BtcH6ezQNtVUC7wHL0WtVBv5cuX2"
+    },
+    "-Kw5xlgRZrWWsX-Sx7JU" : {
+      "branchTitle" : "Raz Writes a Story",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>yayayayayayaa</p>",
+      "userId" : "BtcH6ezQNtVUC7wHL0WtVBv5cuX2"
+    },
+    "-Kw6QHnm3e0HWpn-h07a" : {
+      "branchTitle" : "test",
+      "nextCard" : "",
+      "prevCard" : "",
+      "published" : false,
+      "rootTitle" : [ "isRoot" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw6WL09nnOYsaDPA4Mv" : {
+      "branchTitle" : "zzz branch CHANGED",
+      "nextCard" : "-Kw6ZDPGymJvrRlQWiA1",
+      "prevCard" : "-Kvx23M8ofXu4aZzgyJU",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "zz changed again" ],
+      "text" : "<p>so I could keep writing</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw6ZDPGymJvrRlQWiA1" : {
+      "branchTitle" : "zzz branch CHANGED",
+      "nextCard" : "-Kw6ZTo32WfGH7eWunjO",
+      "prevCard" : "-Kw6WL09nnOYsaDPA4Mv",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "zz changed again" ],
+      "text" : "<p>test</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw6ZTo32WfGH7eWunjO" : {
+      "branchTitle" : "zzz branch CHANGED",
+      "nextCard" : "-Kw6ZZrnyO1IOcYmdenM",
+      "prevCard" : "-Kw6ZDPGymJvrRlQWiA1",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "zz changed again" ],
+      "text" : "<p>publish and continue</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw6ZZrnyO1IOcYmdenM" : {
+      "branchTitle" : "zzz branch CHANGED",
+      "nextCard" : "-Kw6ZfJ_A2znCxOrBGCl",
+      "prevCard" : "-Kw6ZTo32WfGH7eWunjO",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "zz changed again" ],
+      "text" : "<p>publish and continue</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw6ZfJ_A2znCxOrBGCl" : {
+      "branchTitle" : "zzz branch CHANGED",
+      "nextCard" : "-Kw6ZjcJkD4qZhqGKBt8",
+      "prevCard" : "-Kw6ZZrnyO1IOcYmdenM",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "zz changed again" ],
+      "text" : "<p>publish and read</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw6ZjcJkD4qZhqGKBt8" : {
+      "branchTitle" : "zzz branch CHANGED",
+      "nextCard" : "-Kw6ZmkceIHmMTL9lJaX",
+      "prevCard" : "-Kw6ZfJ_A2znCxOrBGCl",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "zz changed again" ],
+      "text" : "<p>publish and contiunue again</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    },
+    "-Kw6ZmkceIHmMTL9lJaX" : {
+      "branchTitle" : "zzz branch CHANGED",
+      "nextCard" : "",
+      "prevCard" : "-Kw6ZjcJkD4qZhqGKBt8",
+      "published" : true,
+      "rootTitle" : [ "isRoot", "zz changed again" ],
+      "text" : "<p>piblish and read again</p>",
+      "userId" : "kcVvWi1LKQauAei8WFUTyFbqshG3"
+    }
+  },
+  "storyRoot" : {
+    "A A A long root story line" : {
+      "A A A branch off of a a a branch but earlier than the branch happens" : true,
+      "A A A branch that comes later in the root story" : true,
+      "isRoot" : true
+    },
+    "A A A publish" : {
+      "isRoot" : true
+    },
+    "A A A saved not published" : {
+      "isRoot" : true
+    },
+    "A whole newww worrrrrrld" : {
+      "LYRICSFTW" : true,
+      "isRoot" : true
+    },
+    "All Summer in a Day" : {
+      "Dust Mice" : true,
+      "Happy Closet" : true,
+      "Saving card" : true,
+      "i forget" : true,
+      "isRoot" : true
+    },
+    "Angry Birdy" : {
+      "Hitchcock" : true,
+      "TESTING BIRDY" : true,
+      "isRoot" : true,
+      "robber bird" : true
+    },
+    "BIRDS" : {
+      "Tweeters" : true
+    },
+    "BLAAAAAAA" : {
+      "BIRDS" : true
+    },
+    "Banana" : {
+      "isRoot" : true
+    },
+    "Bossy Wossy" : {
+      "What makes a great Witch" : true
+    },
+    "Co-op City" : {
+      "The Way Station" : true
+    },
+    "Dobby is a Free Elf" : {
+      "isRoot" : true
+    },
+    "Harmony Stranger: the wise witch" : {
+      "Bossy Wossy" : true,
+      "Continuing with Harmony" : true
+    },
+    "Hitchcock" : {
+      "Lovely Night" : true
+    },
+    "House of Leaves" : {
+      "Louse of Heaves" : true,
+      "isRoot" : true
+    },
+    "I wish I was a baller" : {
+      "isRoot" : true
+    },
+    "Justine" : {
+      "Balthazar" : true,
+      "Clea" : true,
+      "Mountolive" : true,
+      "isRoot" : true
+    },
+    "Knights Who Say Ni " : {
+      "Response to Knights of the Round Table" : true,
+      "isRoot" : true
+    },
+    "Larry Flowerpot" : {
+      "BLAAAAAAA" : true,
+      "Harmony Stranger: the wise witch" : true,
+      "Second Branching" : true,
+      "isRoot" : true
+    },
+    "Louse of Heaves" : {
+      "Spouse of Jeeves" : true
+    },
+    "Marry Me" : {
+      "bad bad dream" : true,
+      "isRoot" : true
+    },
+    "Morse Code" : {
+      "Hello TESTING" : true,
+      "What makes a good wtich" : true
+    },
+    "My Story" : {
+      "My Story 1" : true,
+      "isRoot" : true
+    },
+    "My story" : {
+      "isRoot" : true
+    },
+    "Raz Writes a Story" : {
+      "isRoot" : true
+    },
+    "Spouse of Jeeves" : {
+      "Chows on Steves" : true
+    },
+    "Story2" : {
+      "isRoot" : true
+    },
+    "TESTING 3" : {
+      "isRoot" : true
+    },
+    "The Gunslinger" : {
+      "Co-op City" : true,
+      "isRoot" : true
+    },
+    "Today is the day" : {
+      "isRoot" : true
+    },
+    "Unicorn Time" : {
+      "Unicorns the SEQUEL" : true,
+      "isRoot" : true
+    },
+    "What makes a good wtich" : {
+      "Basicall" : true,
+      "NEXT PAGE" : true
+    },
+    "What makes a great Witch" : {
+      "Morse Code" : true
+    },
+    "adsfdsergaf" : {
+      "isRoot" : true
+    },
+    "hello world" : {
+      "isRoot" : true
+    },
+    "i forget" : {
+      "branch" : true
+    },
+    "new card " : {
+      "isRoot" : true
+    },
+    "nfdsafjnsd" : {
+      "isRoot" : true
+    },
+    "oh noooooooo it doesnt persist :(" : {
+      "isRoot" : true
+    },
+    "return of the promise" : {
+      "isRoot" : true
+    },
+    "test" : {
+      "isRoot" : true
+    },
+    "test all these promises" : {
+      "isRoot" : true
+    },
+    "testing all these promises" : {
+      "isRoot" : true,
+      "testest the promise agan" : true
+    },
+    "twgsdgfreq" : {
+      "isRoot" : true
+    },
+    "zz changed again" : {
+      "isRoot" : true,
+      "zzz branch CHANGED" : true
+    },
+    "zzz test sanitizing" : {
+      "isRoot" : true,
+      "yup" : true
+    }
+  },
+  "tags" : {
+    "bird" : {
+      "robber bird" : true
+    },
+    "magic" : {
+      "Bossy Wossy" : true
+    },
+    "sandwich" : {
+      "robber bird" : true
+    },
+    "thievery" : {
+      "robber bird" : true
+    },
+    "witch" : {
+      "Bossy Wossy" : true
+    },
+    "wizard" : {
+      "Bossy Wossy" : true
+    }
+  },
+  "user" : {
+    "1" : {
+      "description" : "I'm absolutely a real human being",
+      "storyBranches" : {
+        "All Summer in a Day" : true,
+        "Basicall" : true,
+        "Clea" : true,
+        "Co-op City" : true,
+        "Continuing with Harmony" : true,
+        "Dust Mice" : true,
+        "Harmony Stranger: the wise witch" : true,
+        "House of Leaves" : true,
+        "I wish I was a baller" : true,
+        "Justine" : true,
+        "Larry Flowerpot" : true,
+        "Louse of Heaves" : true,
+        "Response to Knights of the Round Table" : true,
+        "The Gunslinger" : true,
+        "Unicorn Time" : true,
+        "branch 2" : true,
+        "i forget" : true,
+        "oh noooooooo it doesnt persist :(" : true,
+        "root array should be array" : true,
+        "ternary didn't unset" : true,
+        "test the branches" : true
+      },
+      "username" : "TheOriginal"
+    },
+    "37dk3UmG6sUZ4dfysVOgXcK9Quw2" : {
+      "description" : "I like stories about birds!",
+      "storyBranches" : {
+        "bad bad dream" : true,
+        "robber bird" : true
+      },
+      "username" : "Flintwinch"
+    },
+    "BtcH6ezQNtVUC7wHL0WtVBv5cuX2" : {
+      "description" : "hahahahaaha",
+      "faves" : {
+        "robber bird" : true
+      },
+      "following" : {
+        "37dk3UmG6sUZ4dfysVOgXcK9Quw2" : true
+      },
+      "storyBranches" : {
+        "Dobby is a Free Elf" : true,
+        "Raz Writes a Story" : true
+      },
+      "unpublishedCards" : {
+        "-Kw2ZxIX0WIphwdlyWZa" : true,
+        "-Kw5xlgRZrWWsX-Sx7JU" : true
+      },
+      "username" : "rosala"
+    },
+    "M6XqRVyvDSOJDkZNJhsu9IJRxzz1" : {
+      "description" : "I live in a closet",
+      "storyBranches" : {
+        "Happy Closet" : true
+      },
+      "username" : "Octamerous"
+    },
+    "SHL9KQyLcATSU1lfLksXIBDKUxL2" : {
+      "description" : "Writer by Day. Writer by Night",
+      "storyBranches" : {
+        "I wish I was a baller" : true,
+        "Tweeters" : true
+      },
+      "username" : "Bibliopolist"
+    },
+    "WAzu1yiZAGYJsWZxTSfVDwIa2mr2" : {
+      "description" : "A good library will never be too neat, or too dusty, because somebody will always be in it, taking books off the shelves and staying up late reading them.",
+      "faves" : {
+        "Bossy Wossy" : true,
+        "Chows on Steves" : true,
+        "Happy Closet" : true,
+        "robber bird" : true
+      },
+      "storyBranches" : {
+        "All Summer in a Day" : true,
+        "Harmony Stranger: the wise witch" : true,
+        "Knights Who Say Ni " : true,
+        "My Story" : true,
+        "My Story 1" : true,
+        "hello world" : true
+      },
+      "username" : "captainjen"
+    },
+    "Yj8AqLbCbAfzGXfLBGKp32yS8jg1" : {
+      "description" : "I like my own stories",
+      "faves" : {
+        "BLAAAAAAA" : true,
+        "Larry Flowerpot" : true
+      },
+      "storyBranches" : {
+        "BIRDS" : true,
+        "BLAAAAAAA" : true
+      },
+      "username" : "idontknow"
+    },
+    "ZaYMznOzaCOH28ONwVb7aW3IGr03" : {
+      "description" : "Gryffindor and Proud! 🦁🦁🦁",
+      "storyBranches" : {
+        "Banana" : true,
+        "LYRICSFTW" : true,
+        "Today is the day" : true
+      },
+      "username" : "HarryPotterFan42"
+    },
+    "bN4At1OrK7U9dB32MQpkpwWcTqD2" : {
+      "description" : "There is no friend as loyal as a book",
+      "faves" : {
+        "BIRDS" : true
+      },
+      "storyBranches" : {
+        "My story" : true,
+        "Story2" : true,
+        "branch" : true
+      },
+      "username" : "HemingwayRocks"
+    },
+    "dvy8IZ2tU3YrJQnqdBpzSABlynf2" : {
+      "description" : "Test Description Here",
+      "faves" : {
+        "Angry Birdy" : true
+      },
+      "storyBranches" : {
+        "Hitchcock" : true,
+        "Lovely Night" : true
+      },
+      "username" : "WhoIsThis"
+    },
+    "hi2QjsWg5TQ3M4upATVJUCUn1Tv1" : {
+      "description" : "My favorite cat is Pusheen",
+      "faves" : {
+        "Harmony Stranger: the wise witch" : true
+      },
+      "storyBranches" : {
+        "Angry Birdy" : true,
+        "Basicall" : true,
+        "Bossy Wossy" : true,
+        "Hello TESTING" : true,
+        "Larry Flowerpot" : true,
+        "Marry Me" : true,
+        "Morse Code" : true,
+        "NEXT PAGE" : true,
+        "Response to Knights of the Round Table" : true,
+        "Second Branching" : true,
+        "TESTING 3" : true,
+        "TESTING BIRDY" : true,
+        "Unicorn Time" : true,
+        "What makes a good wtich" : true,
+        "What makes a great Witch" : true
+      },
+      "username" : "Kittenberg123"
+    },
+    "kcVvWi1LKQauAei8WFUTyFbqshG3" : {
+      "description" : "I don't know what my username means",
+      "storyBranches" : {
+        "A A A branch off of a a a branch but earlier than the branch happens" : true,
+        "A A A branch that comes later in the root story" : true,
+        "A A A long root story line" : true,
+        "A A A publish" : true,
+        "A A A saved not published" : true,
+        "adsfdsergaf" : true,
+        "boo promises" : true,
+        "enchiladas" : true,
+        "fettucine" : true,
+        "lie to me" : true,
+        "new card " : true,
+        "nfdsafjnsd" : true,
+        "no more promises" : true,
+        "return of the promise" : true,
+        "test" : true,
+        "test all these promises" : true,
+        "test promise" : true,
+        "testest the promise agan" : true,
+        "testing all these promises" : true,
+        "twgsdgfreq" : true,
+        "ugh drowning in promises" : true,
+        "yup" : true,
+        "zz changed again" : true,
+        "zzz branch CHANGED" : true,
+        "zzz test sanitizing" : true,
+        "zzzzzzzz so many promises" : true
+      },
+      "unpublishedCards" : {
+        "-Kw0iUS4wYmWKB8D5C5C" : true,
+        "-Kw0r85Y58Mkv3sreBsL" : true,
+        "-Kw1j2b1NbqbHaxff0vr" : true,
+        "-Kw6QHnm3e0HWpn-h07a" : true
+      },
+      "username" : "Hendred8Whoopz"
+    },
+    "mIlF9PJnbNOoQvTqjX5lnASPK7i2" : {
+      "description" : "Fan of both numbers and words",
+      "storyBranches" : {
+        "Continuing with Harmony" : true,
+        "Saving card" : true
+      },
+      "username" : "NumbersSmith"
+    },
+    "uG0LVL7fXLcaYnqbvf98a1XEtX93" : {
+      "description" : "No two persons ever read the same book.",
+      "faves" : {
+        "Unicorn Time" : true,
+        "Unicorns the SEQUEL" : true
+      },
+      "storyBranches" : {
+        "A whole newww worrrrrrld" : true,
+        "Unicorns the SEQUEL" : true,
+        "oh noooooooo it doesnt persist :(" : true
+      },
+      "username" : "CaptainColonel"
+    },
+    "wCglMIt8IDV5bmFECmosO4rmj9M2" : {
+      "description" : "0000 1100 100281 0019",
+      "storyBranches" : {
+        "Dust Mice" : true,
+        "i forget" : true
+      },
+      "username" : "M00000001dajsh"
+    }
+  }
+}

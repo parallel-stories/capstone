@@ -22,6 +22,8 @@ import { dialogStyle } from '../stylesheets/MatUIStyle'
 import { saveCard, publishCard } from '../utils/write.js'
 import history from '../history'
 
+import _ from 'lodash'
+
 export default class WriteSpace extends Component {
   constructor(props) {
     super(props)
@@ -32,6 +34,7 @@ export default class WriteSpace extends Component {
       dirtyTitle: false,
       editTitle: true,
       titleIsPub: false,
+      openUnauthPopUp: true,
       // saveCard & publishCard depend on the state below not being refactored
       cardId: '',
       card: {
@@ -75,21 +78,43 @@ export default class WriteSpace extends Component {
           })
         })
       })
-    } else if (this.props.match.params.cardId) { // if editing saved card
-      firebase.database().ref('storyCard').child(this.props.match.params.cardId).once('value', snap => {
-        if (!snap.val().published) {
-          // check if title is published to allow/prevent editing
-          firebase.database().ref(`storyBranch/${snap.val().branchTitle}`).once('value', branchSnap => {
-            const titleIsPub = (branchSnap.val().published)
+    } else if (this.props.match.params.storyBranch) { // if continuing published storyline
+      const storyBranchId = decodeURI(this.props.match.params.storyBranch)
+      firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
+        // check if title is published to allow/prevent editing
+        const titleIsPub = (snap.val().published)
+        const lastStoryCardId = snap.val().storyCards[snap.val().storyCards.length - 1]
+        firebase.database().ref(`storyCard/${lastStoryCardId}`).once('value', cardSnap => {
+          if (cardSnap.val().userId == this.state.user.uid) {
             this.setState({
               titleIsPub: titleIsPub,
-              cardId: this.props.match.params.cardId,
-              card: snap.val()
+              card: Object.assign({}, this.state.card, {
+                branchTitle: storyBranchId,
+                prevCard: lastStoryCardId,
+                rootTitle: cardSnap.val().rootTitle,
+                userId: cardSnap.val().userId
+              })
             })
-          })
-        } else {
-          history.push(`/read/${snap.val().branchTitle}/${this.state.cardId}`)
-        }
+          } else history.push(`/read/${this.props.match.params.storyBranch}`)
+        })
+      })
+    } else if (this.props.match.params.cardId) { // if editing saved card
+      firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
+        if (snap.val().userId == this.state.user.uid) {
+          if (!snap.val().published) {
+            // check if title is published to allow/prevent editing
+            firebase.database().ref(`storyBranch/${snap.val().branchTitle}`).once('value', branchSnap => {
+              const titleIsPub = (branchSnap.val().published)
+              this.setState({
+                titleIsPub: titleIsPub,
+                cardId: this.props.match.params.cardId,
+                card: snap.val()
+              })
+            })
+          } else {
+            history.push(`/read/${snap.val().branchTitle}/${this.state.cardId}`)
+          }
+        } else history.push('/404')
       })
     }
   }
@@ -165,9 +190,35 @@ export default class WriteSpace extends Component {
     } else if (this.state.card.text == '') {
       alert('Please write some text.')
     } else {
-      publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
-      .then(cardKey => history.push(`/read/${this.state.card.branchTitle}/${cardKey}`))
+      return publishCard(this.state.card, this.state.cardId) // imported from functions folder. returns card ID
     }
+  }
+
+  publishAndContinue = (evt) => {
+    this.publishStory(evt)
+    .then(cardKey => {
+      this.setState({
+        openSubmit: false,
+        dirtyText: false,
+        dirtyTitle: false,
+        editTitle: false,
+        titleIsPub: true,
+        cardId: '',
+        card: Object.assign({}, this.state.card, {
+          text: '',
+          rootTitle: this.state.card.rootTitle != []
+            ? this.state.card.rootTitle
+            : [this.state.card.branchTitle],
+          prevCard: cardKey,
+          nextCard: ''
+        })
+      })
+    })
+  }
+
+  publishAndRead = (evt) => {
+    this.publishStory(evt)
+    .then(cardKey => history.push(`/read/${this.state.card.branchTitle}/${cardKey}`))
   }
 
   // to open/close dialog box on sumit story
@@ -182,15 +233,35 @@ export default class WriteSpace extends Component {
   }
   handleClose = () => { this.setState({openSubmit: false}) }
 
+  handleUnauthPopUpClose = () => { this.setState({openUnauthPopUp: false}) }
+
   render() {
     // actions to submit/cancel story submission
     const actionsDialog = [
       <FlatButton key='cancel' label="Cancel" primary={true} onClick={this.handleClose} />,
-      <FlatButton key='submit' label="Publish Card & Continue Story" primary={true} keyboardFocused={true} onClick={this.publishStory} />,
+      <FlatButton label="Publish Card & Continue Story" primary={true} keyboardFocused={true} onClick={this.publishAndContinue} />,
+      <FlatButton label="Publish Card & Read Story" primary={true} keyboardFocused={true} onClick={this.publishAndRead} />
+    ]
+
+    const unauthPopUpActions = [
+      <FlatButton key='cancel' label="Cancel" primary={true} onClick={this.handleUnauthPopUpClose} />
     ]
 
     return (
       <div>
+          {!this.state.user &&
+            <Dialog
+            title="Please Log In"
+            actions={unauthPopUpActions}
+            modal={false}
+            open={this.state.openUnauthPopUp}
+            onRequestClose={this.handleUnauthPopUpClose}
+            contentStyle={dialogStyle}
+            autoScrollBodyContent={true}
+          > In order to write a story, you must log in using the button on the top right.
+          </Dialog>
+          }
+
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12" style={{'height': '435px'}}>
 
@@ -278,7 +349,7 @@ export default class WriteSpace extends Component {
           contentStyle={dialogStyle}
           autoScrollBodyContent={true}
         >
-          <form onSubmit={this.publishStory} />
+          <form onSubmit={this.publishAndRead} />
           <h2>{this.state.card.branchTitle}</h2>
           { ReactHtmlParser(this.state.card.text) }
         </Dialog>

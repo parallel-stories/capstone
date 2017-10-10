@@ -9,7 +9,7 @@ import SingleCard from './SingleCard'
 import IconButton from 'material-ui/IconButton'
 import RightArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import LeftArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
-import FlatButton from 'material-ui/FlatButton''
+import FlatButton from 'material-ui/FlatButton'
 
 // react swipe components
 import ReactDOM from 'react-dom'
@@ -104,7 +104,7 @@ class StoryBranchNav extends Component {
 
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(currentStoryBranch) ? [] : currentStoryBranch.storyRoot
-      return roots.length > 1 ? roots[roots.length - 1] : currentStoryBranchId
+      return roots.length > 1 ? roots[roots.length - 1].replace(/"/g, '') : currentStoryBranchId
     }
 
     const navButtonStyle = {
