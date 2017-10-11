@@ -119,7 +119,7 @@ export default class SingleCard extends Component {
             currentCard
             ? currentCard.published
               ? ReactHtmlParser(currentCard.text)
-              : <div><h3>This card hasn't been published yet!</h3>Stay tuned for more from <Link to={`/allUsers/currentCard.userId`}>this user.</Link></div>
+              : <div><h3>This card hasn't been published yet!</h3>Stay tuned for more from <Link to={`/allUsers/${currentCard.userId}`}>this user.</Link></div>
             : <div></div>
           }
           <Divider />
