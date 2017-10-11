@@ -10,6 +10,10 @@ import Dialog from 'material-ui/Dialog'
 import Divider from 'material-ui/Divider'
 import Toggle from 'material-ui/Toggle'
 
+// firebase
+import firebase from 'app/fire'
+const auth = firebase.auth()
+
 // html parser
 import ReactHtmlParser from 'react-html-parser'
 
@@ -26,8 +30,28 @@ export default class SingleCard extends Component {
     super(props)
     this.state = {
       isReadingBranchOptions: false,
-      branchExpanded: false
-    }
+      branchExpanded: false,
+      checked: false,
+      loggedIn: false,
+      userId: ''
+      }
+  }
+  
+  componentDidMount() {
+    // check to see if a user bookmarked this card
+    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
+      if( user ) {
+        this.setState({
+          loggedIn: true,
+          userId: user.uid,
+        })
+        this.bookmarksListener = firebase.database().ref(`user/${user.uid}/bookmarks/${this.props.currentState.currentCardId}`)
+        this.bookmarksListener.on('value', snap => {
+          const val = snap.val()
+          if( val !== null ) this.setState({checked: val})
+        })
+      }
+    })) // end on AuthStateChanged
   }
 
   handleDownClick = () => this.setState({isReadingBranchOptions: true})
