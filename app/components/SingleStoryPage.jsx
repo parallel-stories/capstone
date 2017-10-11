@@ -16,6 +16,7 @@ export default class SingleStoryPage extends Component {
     this.state = {
       currentStoryBranch: {},
       tags: [],
+      imageURL: 'https://giphy.com/embed/3o85xonfOvQzN3eCNG',
     }
   }
 
@@ -34,19 +35,37 @@ export default class SingleStoryPage extends Component {
         })
       } // end if
     })
+    // get an image from getty
+    this.getImage(this.props.match.params.branchId)
   }
 
   componentWillUnmount() {
     if(this.tagsListener) this.tagsListener.off()
   }
 
+  getImage = (query) => {
+    const apiKey = 'l8WLH4sOyOBYS502ZWwnJIEIElfeIXWs'
+    const source = `https://api.giphy.com/v1/gifs/search?q=${query}&api_key=${apiKey}&rating=G&limit=20`
+
+    /* grabs the first image from getty API that matches the query */
+    fetch(`${source}`)
+      .then(res => res.json())
+      .then(data => {
+        const rand = Math.floor(Math.random() * 20)
+        const slug = data.data[rand].id
+        this.setState({ imageURL: `https://giphy.com/embed/${slug}` })
+      })
+      .catch(() => console.log("error"))
+
+  }
+
   handleAddTag = (newTag) => {
     /*
-    Tags cannot contain
+    Here because data sent to firebase cannot contain
     ".", "#", "$", "[", "]"
     */
     if(newTag.includes(".")||newTag.includes("#")||newTag.includes("$")||newTag.includes("[")||newTag.includes("]")) {
-      alert('tags cannot contain ".", "#", "$", "[", or "]" ')
+      alert(`tags cannot contain ".", "#", "$", "[", or "]" `)
     } else {
       this.setState({
         tags: [...this.state.tags, newTag]
@@ -79,30 +98,34 @@ export default class SingleStoryPage extends Component {
     }
 
     return (
-      <div className="story-container">
-        <div className="story-container">
-          <h2 className="align-center">{storyBranchId}</h2>
-          <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
-          <span>
-            <img className="story-branch" src="http://lorempixel.com/400/200/" alt="This is an amazing picture." />
-          </span>
-          <br/>
+      <div className="container-fluid">
+        <div className="story-container row">
+          <div className="story-container col-lg-6 col-md-6 col-sm-6">
+            <h2 className="align-center">{storyBranchId}</h2>
+            <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
+            <div className='giphy-responsive'>
+              <iframe src={`${this.state.imageURL}`} width="100%" height="100%" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
+            </div>
+            <div className="start-read">
+              {
+                !_.isEmpty(storyBranch) &&
+                <Link to={`/read/${storyBranchId}/${storyBranch.storyCards.shift()}`}><FlatButton label="Start Reading" backgroundColor="#50AD55"></FlatButton></Link>
+              }
+            </div>
+          </div>
+
+          <div className="start-read col-lg-6 col-md-6 col-sm-6">
+            <p></p>
+            <ChipInput
+              value={this.state.tags}
+              fullWidth={true}
+              hintText="Add a Tag"
+              onRequestAdd={(chip) => this.handleAddTag(chip)}
+              onRequestDelete={(chip) => this.handleDeleteTag(chip)}
+              />
+          </div>
         </div>
-        <div className="start-read">
-          {
-            !_.isEmpty(storyBranch) &&
-            <Link to={`/read/${storyBranchId}/${storyBranch.storyCards.shift()}`}><FlatButton label="Start Reading" backgroundColor="#50AD55"></FlatButton></Link>
-          }
-        </div>
-        <div className="start-read">
-          <ChipInput
-            value={this.state.tags}
-            fullWidth={true}
-            hintText="Add a Tag"
-            onRequestAdd={(chip) => this.handleAddTag(chip)}
-            onRequestDelete={(chip) => this.handleDeleteTag(chip)}
-            />
-        </div>
+        <hr />
         <Reviews storyId={storyBranchId}/>
       </div>
     )

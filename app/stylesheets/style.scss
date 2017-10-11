@@ -52,7 +52,7 @@ body {
 }
 
 .subtext {
-  font-size: .8em
+  font-size: .4em
 }
 
 /* button styling */
@@ -225,13 +225,14 @@ input.form-control {
   display: flex;
   display: -webkit-flex;
   justify-content: space-around;
-  align-items: stretch;
+  align-items: center;
   background-color: white
 }
 
 .flex-arrows {
   width: 100px;
   flex: 0 0 100px;
+  align-items: center;
 }
 
 .flex-card {
@@ -262,6 +263,17 @@ input.form-control {
   flex-direction: column
 }
 
+/* giphy */
+.giphy-responsive {
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%;
+  position: relative;
+}
+
+.giphy-embed {
+  position: absolute;
+}
 
 svg.cardBranchTree .node circle {
 	fill: #006064;
@@ -285,4 +297,9 @@ svg.cardBranchTree path.link {
 	fill: none;
 	stroke: #D1B38E;
 	stroke-width: 1.5px;
+}
+
+.no-bullets {
+  list-style-type: none;
+  font-size: 24px;
 }

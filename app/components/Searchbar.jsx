@@ -84,7 +84,12 @@ export default class Searchbar extends Component {
     this.setState({ query: this.state.query })
   }
   // clears the query from the searchbar
-  clearQuery() { this.setState({ query: '' }) }
+  clearQuery() {
+    this.setState({
+      query: '',
+      value: 'none',
+    })
+  }
 
   handleSubmit(evt) {
     evt.preventDefault()
@@ -108,7 +113,9 @@ export default class Searchbar extends Component {
     } else {
       for(const key in this.state.allStoryBranches) {
         if(this.state.allStoryBranches.hasOwnProperty(key) &&
-          key.toLowerCase().match(this.state.query.toLowerCase())) {
+        ( key.toLowerCase().match(this.state.query.toLowerCase()) || (this.state.allStoryBranches[key].description &&
+          this.state.allStoryBranches[key].description.toLowerCase().match(this.state.query.toLowerCase()))
+        )) {
             filtered[key] = this.state.allStoryBranches[key]
         }
       }
@@ -130,6 +137,15 @@ export default class Searchbar extends Component {
         </form>
         {
           this.state.query.length>0 &&
+          filtered.length !== this.state.titles.length && (
+            <div className='showing-search-results'>
+              <span>Now showing {Object.keys(filtered).length} of {this.state.titles.length} total</span>
+              <button onClick={this.clearQuery}>Show all</button>
+            </div>
+          )
+        }
+        {
+          this.state.value!=='none' &&
           filtered.length !== this.state.titles.length && (
             <div className='showing-search-results'>
               <span>Now showing {Object.keys(filtered).length} of {this.state.titles.length} total</span>
