@@ -36,7 +36,7 @@ const createCard = function(card) {
   .then(snap => {
     const cardKey = snap.key
     // add branch to user branches if it doesn't exist
-    return firebase.database().ref(`user/${card.userId}/wnches/${card.branchTitle}`).set(true)
+    return firebase.database().ref(`user/${card.userId}/storyBranches/${card.branchTitle}`).set(true)
     // update previous card to point to this one
     .then(() => card.prevCard && firebase.database().ref(`storyCard/${card.prevCard}/nextCard`).set(cardKey))
     // keep returning card key
