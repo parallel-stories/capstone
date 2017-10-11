@@ -167,12 +167,26 @@ export default class SingleCard extends Component {
       }
     }
 
+    const bookmarkButtonStyle = {
+      checked: {
+        color: '#FFB6C1',
+        width: '70px',
+        height: '70px',
+        padding: '20px'
+      },
+      unchecked: {
+        width: '70px',
+        height: '70px',
+        padding: '20px'
+      }
+    }
+
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.handleToggle}>
         <CardHeader>
           <Checkbox
-            checkedIcon={<ActionFavorite style={{color: '#FFB6C1'}} />}
-            uncheckedIcon={<ActionFavoriteBorder />}
+            checkedIcon={<ActionFavorite style={bookmarkButtonStyle.checked} />}
+            uncheckedIcon={<ActionFavoriteBorder style={bookmarkButtonStyle.unchecked} />}
             checked={this.state.checked}
             onCheck={this.updateCheck.bind(this)}
           />
