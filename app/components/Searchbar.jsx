@@ -113,7 +113,9 @@ export default class Searchbar extends Component {
     } else {
       for(const key in this.state.allStoryBranches) {
         if(this.state.allStoryBranches.hasOwnProperty(key) &&
-          key.toLowerCase().match(this.state.query.toLowerCase())) {
+        ( key.toLowerCase().match(this.state.query.toLowerCase()) || (this.state.allStoryBranches[key].description &&
+          this.state.allStoryBranches[key].description.toLowerCase().match(this.state.query.toLowerCase()))
+        )) {
             filtered[key] = this.state.allStoryBranches[key]
         }
       }
