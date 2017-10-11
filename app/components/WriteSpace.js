@@ -39,6 +39,7 @@ export default class WriteSpace extends Component {
       cardId: '',
       card: {
         branchTitle: '',
+        branchDesc: '',
         branches: {},
         nextCard: '',
         prevCard: '',
@@ -248,7 +249,7 @@ export default class WriteSpace extends Component {
     ]
 
     return (
-      <div>
+      <div className="container-fluid">
           {!this.state.user &&
             <Dialog
             title="Please Log In"
@@ -280,6 +281,13 @@ export default class WriteSpace extends Component {
                         className="form-control"
                         value={this.state.card.branchTitle}
                         placeholder="Story Title"
+                        id="titleField"
+                        onChange={this.changeBranchTitle} />
+                      <br/>
+                      <input type="text"
+                        className="form-control"
+                        value={this.state.card.branchDesc}
+                        placeholder="Story Description"
                         id="titleField"
                         onChange={this.changeBranchTitle} />
                     </h2>
@@ -314,7 +322,7 @@ export default class WriteSpace extends Component {
             <ReactQuill value={this.state.card.text}
               onChange={this.changeStoryText}
               className="container container-fluid"
-              style={{'height': '250px'}} />
+              style={{'height': '300px'}} />
           </div>
         </div>
         <div className="row">
