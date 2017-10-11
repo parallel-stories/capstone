@@ -51,9 +51,8 @@ export default class SingleStoryPage extends Component {
     fetch(`${source}`)
       .then(res => res.json())
       .then(data => {
-        console.log("WHAT IS THIS?????", data)
-        // const rand = Math.floor(Math.random() * data.images.length)
-        // this.setState({ imageURL: data.images[0].display_sizes[0].uri })
+        const slug = data.data[0].id
+        this.setState({ imageURL: `https://giphy.com/embed/${slug}` })
       })
       .catch(() => console.log("error"))
 
@@ -97,8 +96,7 @@ export default class SingleStoryPage extends Component {
       const roots = _.isEmpty(storyBranch) ? [] : storyBranch.storyRoot
       return roots.length > 1 ? roots[roots.length - 1].replace(/"/g,"") : storyBranchId.replace(/"/g,"")
     }
-    console.log('WHAT IS THE IMAGE', this.state.imageURL)
-
+    
     return (
       <div className="story-container">
         <div>
