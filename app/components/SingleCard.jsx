@@ -54,6 +54,31 @@ export default class SingleCard extends Component {
     })) // end on AuthStateChanged
   }
 
+  componentWillUnmount() {
+    if (this.bookmarksListener) this.bookmarksListener.off()
+    this.unsubscribe()
+  }
+
+  updateCheck() {
+    this.setState((oldState) => {
+      return {
+        checked: !oldState.checked,
+      }
+    })
+    this.updateUserPref()
+  }
+
+  updateUserPref = () => {
+    const cardKey = this.props.currentState.currentCardId
+    if( !this.state.checked) {
+      // adds story when bookmarked
+      firebase.database().ref('user').child(this.state.userId).child('bookmarks').child(cardKey).set(true)
+    } else {
+      // removes story when un-bookmarked
+      firebase.database().ref('user').child(this.state.userId).child('bookmarks').child(cardKey).remove()
+    }
+  }
+
   handleDownClick = () => this.setState({isReadingBranchOptions: true})
 
   getBranchOptions = () => {
