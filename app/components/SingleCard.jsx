@@ -111,6 +111,8 @@ export default class SingleCard extends Component {
       }
     }
 
+    console.log('what is the current card?', currentCard)
+
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.handleToggle}>
         <CardTitle title="" subtitle={`Scene originally from "${currentCard.branchTitle}"`} subtitleStyle={{padding: '3px 10px 3px 0px', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right'}} />

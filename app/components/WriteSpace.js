@@ -138,6 +138,13 @@ export default class WriteSpace extends Component {
     })
   }
 
+  changeBranchDesc = (evt) => {
+    this.setState({
+      dirtyText: true,
+      card: Object.assign({}, this.state.card, {branchDesc: evt.target.value})
+    })
+  }
+
   // change Title from H2 to Input field
   editTitle = () => {
     this.setState({
@@ -188,6 +195,8 @@ export default class WriteSpace extends Component {
 
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
+    } else if (this.state.card.branchDesc == '') {
+      alert('Please give this story a description.')
     } else if (this.state.card.text == '') {
       alert('Please write some text.')
     } else {
@@ -226,6 +235,8 @@ export default class WriteSpace extends Component {
   handleOpen = () => {
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
+    } else if (this.state.card.branchDesc == '') {
+      alert('Please give this story a description.')
     } else if (this.state.card.text == '') {
       alert('Please write some text.')
     } else {
@@ -249,7 +260,7 @@ export default class WriteSpace extends Component {
     ]
 
     return (
-      <div className="container-fluid">
+      <div className="container container-fluid">
           {!this.state.user &&
             <Dialog
             title="Please Log In"
@@ -268,49 +279,59 @@ export default class WriteSpace extends Component {
 
             <div className="form-group container">
             {// if title is pub, don't allow title to be changed, otherwise allow editing based on state.editTitle status
-              this.state.titleIsPub
-                ? <h2>
+              this.state.titleIsPub?
+                <div>
+                  <h2>
                     {this.state.card.branchTitle}
                   </h2>
-                : !this.state.editTitle
-                  ? <h2>
-                      {this.state.card.branchTitle}
-                    </h2>
-                  : <h2>
-                      <input type="text"
-                        className="form-control"
-                        value={this.state.card.branchTitle}
-                        placeholder="Story Title"
-                        id="titleField"
-                        onChange={this.changeBranchTitle} />
-                      <br/>
-                      <input type="text"
-                        className="form-control"
-                        value={this.state.card.branchDesc}
-                        placeholder="Story Description"
-                        id="titleField"
-                        onChange={this.changeBranchTitle} />
-                    </h2>
-            }
+                  <p>
+                    {this.state.card.branchDesc}
+                  </p>
+                </div>
+              : !this.state.editTitle?
+                <div>
+                  <h2>
+                    {this.state.card.branchTitle}
+                  </h2>
+                  <p>
+                    {this.state.card.branchDesc}
+                  </p>
+                </div>
+              : <h2>
+                <input type="text"
+                      className="form-control"
+                      value={this.state.card.branchTitle}
+                      placeholder="Story Title"
+                      id="titleField"
+                      onChange={this.changeBranchTitle} />
+                <br/>
+                <input type="text"
+                      className="form-control"
+                      value={this.state.card.branchDesc}
+                      placeholder="Story Description"
+                      id="titleField"
+                      onChange={this.changeBranchDesc} />
               <div className="subtext">
               {// if title is pub, no save/edit links should be displayed beneath title; otherwise display links based on state.editTitle status and if there is actually title text to save
-                this.state.titleIsPub
-                  ? <Link to="#">
-                      &nbsp;
-                    </Link>
-                  : !this.state.editTitle
-                    ? <Link to="#" onClick={this.editTitle}>
-                        (edit title)
-                      </Link>
-                    : (this.state.card.branchTitle != '')
-                      ? <Link to="#" onClick={this.saveTitle}>
-                          (save title)
-                        </Link>
-                      : <Link to="#">
-                          &nbsp;
-                        </Link>
+              this.state.titleIsPub ?
+                <Link to="#">
+                  &nbsp;
+                </Link>
+              : !this.state.editTitle ?
+                <Link to="#" onClick={this.editTitle}>
+                  (edit title)
+                </Link>
+              : (this.state.card.branchTitle != '') ?
+                <Link to="#" onClick={this.saveTitle}>
+                  (save title and description)
+                </Link>
+              : <Link to="#">
+                  &nbsp;
+                </Link>
               }
               </div>
+              </h2>
+            }
             </div>
 
           {
@@ -322,12 +343,13 @@ export default class WriteSpace extends Component {
             <ReactQuill value={this.state.card.text}
               onChange={this.changeStoryText}
               className="container container-fluid"
-              style={{'height': '300px'}} />
+              style={{'height': '250px', 'marginBottom': '50px'}} />
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-12">
-            <div className="container">
+        <br />
+        <div className="container container-fluid">
+          <div className="row">
+            <div className="col-sm-12 col-md-12 col-lg-12">
               <RaisedButton key='save'
                 label="SAVE SCENE"
                 backgroundColor="#D2B48C"
@@ -348,6 +370,8 @@ export default class WriteSpace extends Component {
             </div>
           </div>
         </div>
+        <br />
+        <br />
         <Dialog
           title="Submit a New Story"
           actions={actionsDialog}
