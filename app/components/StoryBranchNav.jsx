@@ -51,8 +51,11 @@ class StoryBranchNav extends Component {
   }
 
   arrowKeyPress = (e) => {
-    if (e.keyCode == 37) this.handleNavClick('left')
-    if (e.keyCode == 39) this.handleNavClick('right')
+    const {currentStoryBranch, selector, branchingPointIndex} = this.state
+    if (!_.isEmpty(currentStoryBranch)) {
+      if ((selector > branchingPointIndex) && (e.keyCode == 37)) this.handleNavClick('left')
+      if ((selector < currentStoryBranch.storyCards.length - 1) && (e.keyCode == 39)) this.handleNavClick('right')
+    }
   }
 
   componentDidMount() {
