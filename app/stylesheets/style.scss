@@ -225,13 +225,14 @@ input.form-control {
   display: flex;
   display: -webkit-flex;
   justify-content: space-around;
-  align-items: stretch;
+  align-items: center;
   background-color: white
 }
 
 .flex-arrows {
   width: 100px;
   flex: 0 0 100px;
+  align-items: center;
 }
 
 .flex-card {
@@ -296,4 +297,9 @@ svg.cardBranchTree path.link {
 	fill: none;
 	stroke: #D1B38E;
 	stroke-width: 1.5px;
+}
+
+.no-bullets {
+  list-style-type: none;
+  font-size: 24px;
 }

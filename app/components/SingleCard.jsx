@@ -4,11 +4,20 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
 // material ui
-import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card'
+import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import Divider from 'material-ui/Divider'
 import Toggle from 'material-ui/Toggle'
+// material ui components for bookmarks
+import Checkbox from 'material-ui/Checkbox'
+import ActionFavorite from 'material-ui/svg-icons/action/bookmark'
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/bookmark-border'
+
+
+// firebase
+import firebase from 'app/fire'
+const auth = firebase.auth()
 
 // html parser
 import ReactHtmlParser from 'react-html-parser'
@@ -26,7 +35,54 @@ export default class SingleCard extends Component {
     super(props)
     this.state = {
       isReadingBranchOptions: false,
-      branchExpanded: false
+      branchExpanded: false,
+      checked: false,
+      loggedIn: false,
+      userId: ''
+      }
+  }
+  
+  componentDidMount() {
+    // check to see if a user bookmarked this card
+    this.unsubscribe = auth.onAuthStateChanged(user => this.setState({ user }, () => {
+      if( user ) {
+        this.setState({
+          loggedIn: true,
+          userId: user.uid,
+        })
+        let branchKey = this.props.currentState.currentStoryBranchId
+        this.bookmarksListener = firebase.database().ref(`user/${user.uid}/bookmarks/${branchKey}`)
+        this.bookmarksListener.on('value', snap => {
+          const val = snap.val()
+          if( val !== null ) this.setState({checked: true})
+        })
+      }
+    })) // end on AuthStateChanged
+  }
+
+  componentWillUnmount() {
+    if (this.bookmarksListener) this.bookmarksListener.off()
+    this.unsubscribe()
+  }
+
+  updateCheck() {
+    this.setState((oldState) => {
+      return {
+        checked: !oldState.checked,
+      }
+    })
+    this.updateUserPref()
+  }
+
+  updateUserPref = () => {
+    let branchKey = this.props.currentState.currentStoryBranchId
+    let cardVal = this.props.currentState.currentCardId
+    if( !this.state.checked) {
+      // adds story when bookmarked
+      firebase.database().ref('user').child(this.state.userId).child('bookmarks').child(branchKey).set(cardVal)
+    } else {
+      // removes story when un-bookmarked
+      firebase.database().ref('user').child(this.state.userId).child('bookmarks').child(branchKey).remove()
     }
   }
 
@@ -113,6 +169,14 @@ export default class SingleCard extends Component {
 
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.handleToggle}>
+        <CardHeader>
+          <Checkbox
+            checkedIcon={<ActionFavorite style={{color: '#FFB6C1'}} />}
+            uncheckedIcon={<ActionFavoriteBorder />}
+            checked={this.state.checked}
+            onCheck={this.updateCheck.bind(this)}
+          />
+        </CardHeader>
         <CardTitle title="" subtitle={`Scene originally from "${currentCard.branchTitle}"`} subtitleStyle={{padding: '3px 10px 3px 0px', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right'}} />
         <CardText>
           {
