@@ -22,30 +22,34 @@ export default class SingleStoryPage extends Component {
         userId: ''
       },
       tags: [],
-      storyCards: [{}]
+      storyCards: [{
+        branchTitle: '',
+        branches: {},
+        nextCard: '',
+        prevCard: '',
+        published: false,
+        rootTitle: [],
+        text: '',
+        userId: ''
+      }]
     }
   }
 
   componentDidMount() {
-    getBranchInfo(this.props.match.params.branchId)
-    .then(branchObj => {
-      if (branchObj.published) {
+    firebase.database().ref(`storyBranch/${this.props.match.params.branchId}`).once('value')
+    .then(snap => {
+      const branchObj = snap.val()
+      if (!branchObj.published) history.push('/404')
+      else {
         this.setState({currentStoryBranch: branchObj})
-        return getStoryInfo(branchObj.storyCards)
-      } else history.push('/404')
+        return branchObj.storyCards
+      }
     })
-    .then(cardObjArr =>
-      Promise.all(cardObjArr)
-      .then(resolvedCards => {
-        this.setState({storyCards: resolvedCards})
-      })
-
-
-      this.setState({
-      authors: obj.authors,
-      text: obj.text
-    }))
-    // get tags for this story branch
+    .then(cardArr => Promise.all(cardArr.map(cardId => firebase.database().ref(`storyCard/${cardId}`).once('value'))))
+    .then(promisedCardsArr => {
+      const resolvedCardsArr = promisedCardsArr.map(snap => snap.val())
+      this.setState({storyCards: resolvedCardsArr})
+    })
     this.tagsListener = firebase.database().ref(`storyBranch/${this.props.match.params.branchId}/tags`)
     this.tagsListener.on('value', snap => {
       const tags = snap.val()
@@ -100,8 +104,8 @@ export default class SingleStoryPage extends Component {
             <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
             <div className="start-read">
               {
-                !_.isEmpty(storyBranch) &&
-                <Link to={`/read/${storyBranchId}/${storyBranch.storyCards.shift()}`}><FlatButton label="Start Reading" backgroundColor="#50AD55"></FlatButton></Link>
+                !_.isEmpty(this.state.storyCards[0].text) &&
+                this.state.storyCards.map(storyCard => <div>{storyCard.text}</div>)
               }
             </div>
           </div>
