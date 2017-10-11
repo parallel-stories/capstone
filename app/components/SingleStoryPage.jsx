@@ -16,7 +16,7 @@ export default class SingleStoryPage extends Component {
     this.state = {
       currentStoryBranch: {},
       tags: [],
-      imageURL: 'http://lorempixel.com/400/200/',
+      imageURL: 'https://giphy.com/embed/3o85xonfOvQzN3eCNG',
     }
   }
 
@@ -44,15 +44,16 @@ export default class SingleStoryPage extends Component {
   }
 
   getImage = (query) => {
-    const api = 'https://api.gettyimages.com/v3/search/images?fields=id,title,thumb,referral_destinations&sort_order=most_popular&phrase='
-    const headers = { 'Api-Key': 'qk4wms73dv6nf7fjzb3q927k' }
+    const apiKey = 'l8WLH4sOyOBYS502ZWwnJIEIElfeIXWs'
+    const source = `http://api.giphy.com/v1/gifs/search?q=${query}&api_key=${apiKey}&limit=1`
 
     /* grabs the first image from getty API that matches the query */
-    fetch(`${api}/${query}`, { headers })
+    fetch(`${source}`)
       .then(res => res.json())
       .then(data => {
-        const rand = Math.floor(Math.random() * data.images.length)
-        this.setState({ imageURL: data.images[0].display_sizes[0].uri })
+        console.log("WHAT IS THIS?????", data)
+        // const rand = Math.floor(Math.random() * data.images.length)
+        // this.setState({ imageURL: data.images[0].display_sizes[0].uri })
       })
       .catch(() => console.log("error"))
 
@@ -103,9 +104,9 @@ export default class SingleStoryPage extends Component {
         <div>
           <h2 className="align-center">{storyBranchId}</h2>
           <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
-          <span>
-            <img className="story-branch" src={this.state.imageURL} alt="This is an amazing picture." />
-          </span>
+          <div className='giphy-responsive'>
+            <iframe src={`${this.state.imageURL}`} width="100%" height="100%" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
+          </div>
           <br/>
         </div>
         <div className="start-read">
