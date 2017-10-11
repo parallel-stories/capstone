@@ -106,7 +106,6 @@ export default class SingleStoryPage extends Component {
             <div className='giphy-responsive'>
               <iframe src={`${this.state.imageURL}`} width="100%" height="100%" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
             </div>
-            <br/>
             <div className="start-read">
               {
                 !_.isEmpty(storyBranch) &&
