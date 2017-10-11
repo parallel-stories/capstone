@@ -105,7 +105,7 @@ export default class UserProfile extends Component {
   render() {
     const { user, storyBranches, unpublishedCards, favorites, bookmarks, usersFollowed, resolvedDrafts } = this.state
     let cardKeys = Object.keys(unpublishedCards)
-    console.log('da bookmarks', bookmarks)
+    
     return (
       <div className="container-fluid" >
         {!user ?
@@ -129,7 +129,7 @@ export default class UserProfile extends Component {
                 </p>
                 </div>)
               : (<div className="row" >
-                <ul>
+                <ul className="no-bullets">
                 {resolvedDrafts.map((draft, index) => (
                   <li key={draft}><Link to={`/write/${cardKeys[index]}`}>{draft}</Link></li>
                 ))}
@@ -166,7 +166,7 @@ export default class UserProfile extends Component {
                 </p>
                 </div>)
               : (<div className="row" >
-                <ul>
+                <ul className="no-bullets">
                 {Object.keys(bookmarks).map(branchKey => {
                   let card = bookmarks[branchKey]
                   return <li key={branchKey}><Link to={`/read/${branchKey}/${card}`}>{branchKey}</Link></li>
