@@ -45,7 +45,7 @@ export default class SingleStoryPage extends Component {
 
   getImage = (query) => {
     const apiKey = 'l8WLH4sOyOBYS502ZWwnJIEIElfeIXWs'
-    const source = `http://api.giphy.com/v1/gifs/search?q=${query}&api_key=${apiKey}&rating=PG&limit=20`
+    const source = `https://api.giphy.com/v1/gifs/search?q=${query}&api_key=${apiKey}&rating=G&limit=20`
 
     /* grabs the first image from getty API that matches the query */
     fetch(`${source}`)
