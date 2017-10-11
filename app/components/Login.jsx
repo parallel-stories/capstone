@@ -5,6 +5,8 @@ import firebase from 'app/fire'
 // material ui
 import FlatButton from 'material-ui/FlatButton'
 
+import history from '../history'
+
 const google = new firebase.auth.GoogleAuthProvider()
 
 const loggingStyles = {
@@ -43,6 +45,6 @@ export default ({ auth }) =>
   // redirects.
   <FlatButton
     className='google-login'
-    onClick={() => auth.signInWithPopup(google)}
+    onClick={() => auth.signInWithPopup(google).then( () => history.push(`/userProfile`) )}
     label="LOGIN"
     style={loggingStyles.button} />
