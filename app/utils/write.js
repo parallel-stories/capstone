@@ -1,5 +1,4 @@
 import firebase from 'app/fire'
-import 'firebase/database'
 
 export const saveCard = function(card, cardId) {
   card.published = false

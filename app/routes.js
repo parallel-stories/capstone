@@ -17,6 +17,7 @@ import Searchbar from './components/Searchbar'
 import BranchStepper from './components/BranchStepper'
 import AllUsers from './components/AllUsers'
 import UserPage from './components/UserPage'
+import FullStory from './components/FullStory'
 
 class Routes extends Component {
   render() {
@@ -32,6 +33,7 @@ class Routes extends Component {
             <Route exact path="/write/continue/:storyBranch" render={(props)=><WriteSpace isBranch={false} {...props} />} />
             <Route exact path="/write/:rootId/:cardId/new_branch" render={(props)=><WriteSpace isBranch={true} {...props} />} />
             <Route exact path="/read" component={Searchbar} />
+            <Route exact path="/read/full/:branchId" component={FullStory} />
             <Route exact path="/read/:branchId" component={SingleStoryPage} />
             <Route exact path="/read/:branchId/:cardId" component={BranchStepper} />
             <Route path="/userProfile" component={UserProfile} />
