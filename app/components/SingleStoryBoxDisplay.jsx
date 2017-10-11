@@ -94,7 +94,7 @@ export default class SingleStoryBoxDisplay extends Component {
 
   render() {
     const {storyBranchTitle, storyBranchDetails, thisKey} = this.props
-    
+
     const getStoryRootTitle = () => {
       const roots = _.isEmpty(storyBranchDetails) ? [] : storyBranchDetails.storyRoot
       return roots.length > 1 ? roots[roots.length - 1] : storyBranchTitle
@@ -114,7 +114,11 @@ export default class SingleStoryBoxDisplay extends Component {
       <Link key={thisKey} to={`/read/${thisKey}`}>
         <CardTitle title={storyBranchTitle} subtitle={getStoryRootTitle()} />
         <CardText>
-          No description available
+          { storyBranchDetails.description?
+            <p>{storyBranchDetails.description}</p>
+            :
+            <p>No description available</p>
+          }
         </CardText>
       </Link>
       {this.state.isMyStory ? <RaisedButton label="Continue Writing" secondary={true} onClick={this.continueMyStory} />: null}
