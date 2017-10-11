@@ -225,13 +225,14 @@ input.form-control {
   display: flex;
   display: -webkit-flex;
   justify-content: space-around;
-  align-items: stretch;
+  align-items: center;
   background-color: white
 }
 
 .flex-arrows {
   width: 100px;
   flex: 0 0 100px;
+  align-items: center;
 }
 
 .flex-card {
