@@ -50,7 +50,16 @@ class StoryBranchNav extends Component {
     })
   }
 
+  arrowKeyPress = (e) => {
+    const {currentStoryBranch, selector, branchingPointIndex} = this.state
+    if (!_.isEmpty(currentStoryBranch)) {
+      if ((selector > branchingPointIndex) && (e.keyCode == 37)) this.handleNavClick('left')
+      if ((selector < currentStoryBranch.storyCards.length - 1) && (e.keyCode == 39)) this.handleNavClick('right')
+    }
+  }
+
   componentDidMount() {
+    document.addEventListener('keydown', this.arrowKeyPress.bind(this))
     const {branchId, cardId, branchingPointIndex} = this.props
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
     .then(info => this.updateFullState(branchId, cardId, info, branchingPointIndex))
@@ -60,6 +69,10 @@ class StoryBranchNav extends Component {
     const {branchId, cardId, branchingPointIndex} = nextProps
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
     .then(info => this.updateFullState(branchId, cardId, info, branchingPointIndex))
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.arrowKeyPress.bind(this))
   }
 
   handleOptionClick = () => {
