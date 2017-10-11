@@ -36,6 +36,7 @@ export default class UserProfile extends Component {
       storyBranches: {},
       unpublishedCards:{},
       favorites: {},
+      bookmarks: {},
       usersFollowed: {},
       displayName: '',
       description: '',
@@ -54,6 +55,7 @@ export default class UserProfile extends Component {
             storyBranches: !user.val().storyBranches ? {} : user.val().storyBranches,
             unpublishedCards: !user.val().unpublishedCards ? {} : user.val().unpublishedCards,
             favorites: !user.val().faves ? {} : user.val().faves,
+            bookmarks: !user.val().bookmarks ? {} : user.val().bookmarks,
             usersFollowed: !user.val().following ? {} : user.val().following,
             displayName: !user.val().username? '' : user.val().username,
             description: !user.val().description? '' : user.val().description,
@@ -101,7 +103,7 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    const { user, storyBranches, unpublishedCards, favorites, usersFollowed, resolvedDrafts } = this.state
+    const { user, storyBranches, unpublishedCards, favorites, bookmarks, usersFollowed, resolvedDrafts } = this.state
     let cardKeys = Object.keys(unpublishedCards)
     return (
       <div className="container-fluid" >
@@ -133,8 +135,8 @@ export default class UserProfile extends Component {
                 </ul>
                 </div>)
             }
-
             <hr />
+
             <h2>My Story Branches</h2>
             { _.isEmpty(storyBranches)
               ? (<div>
@@ -154,6 +156,22 @@ export default class UserProfile extends Component {
                 </div>)
             }
             <hr />
+
+            <h2>Bookmarks</h2>
+            {_.isEmpty(bookmarks)
+              ? (<div>
+                <p>
+                  It looks like you don't have any bookmarks.
+                </p>
+                </div>)
+              : (<div className="row" >
+                <ul>
+                You do have bookmarks!
+                </ul>
+                </div>)
+            }
+            <hr />
+
             <h2>Favorited Stories</h2>
             { _.isEmpty(favorites)
               ? (<div>
