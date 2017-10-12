@@ -43,7 +43,6 @@ class LandingPage extends Component {
               Don’t hold back in integrating your personal experiences or wild imagination with Parallel Stories!
             </p>
             <br />
-            <br />
             <p>
               Use the navigation bar on the top left of this page to{' '}
               <br />
