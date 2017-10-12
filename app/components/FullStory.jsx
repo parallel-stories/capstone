@@ -5,9 +5,10 @@ import _ from 'lodash'
 import FlatButton from 'material-ui/FlatButton'
 // tagging imports
 import ChipInput from 'material-ui-chip-input'
+// html parser
+import ReactHtmlParser from 'react-html-parser'
 // react components
 import Reviews from './Reviews'
-import {getBranchInfo, getStoryInfo} from '../utils/fullStory'
 import history from '../history'
 
 export default class SingleStoryPage extends Component {
@@ -105,7 +106,7 @@ export default class SingleStoryPage extends Component {
             <div className="start-read">
               {
                 !_.isEmpty(this.state.storyCards[0].text) &&
-                this.state.storyCards.map(storyCard => <div>{storyCard.text}</div>)
+                this.state.storyCards.map(storyCard => ReactHtmlParser(storyCard.text))
               }
             </div>
           </div>
