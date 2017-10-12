@@ -223,43 +223,49 @@ export default class SingleCard extends Component {
       },
       button: {
         width: '50px',
-        height: '50px',
-        float: 'left'
+        height: '50px'
       }
     }
 
     const checkbox = {
-      padding: '0px 20px 20px 20px',
+      padding: '0px 20px 0px 20px',
       width: '40px',
-      height: '40px',
-      float: 'right'
+      height: '40px'
+    }
+
+    const jumpButtons = {
+ 
     }
 
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.handleToggle}>
-        <CardHeader style={{paddingBottom: '50px', paddingRight: '10px', paddingLeft: '10px'}}>
-          <IconButton
-          iconStyle={buttonStyle.icon}
-          style={buttonStyle.button}
-          className="col swipe-btn-left-right flex-arrows"
-          onClick={() =>this.handleJumpStart()}
-          tooltip="Jump to start of story"
-          tooltipPosition={'bottom-left'}
-          touch={true}
-          >
-            <SkipPrevious color="#006064"/>
-          </IconButton>
-          <IconButton
-          iconStyle={buttonStyle.icon}
-          style={buttonStyle.button}
-          className="col swipe-btn-left-right flex-arrows"
-          onClick={() =>this.handleJumpLast()}
-          tooltip="Jump to end of story"
-          tooltipPosition={'bottom-right'}
-          touch={true}
-          >
-            <SkipNext color="#006064"/>
-          </IconButton>
+        <CardHeader id="HEADER" style={{paddingRight: '10px', paddingLeft: '10px'}}>
+          <div id="headerbuttons" className='flex-container'>
+            <div id="jumpbuttons" className='flex-arrows'>
+            <IconButton
+            iconStyle={buttonStyle.icon}
+            style={buttonStyle.button}
+            className="col swipe-btn-left-right"
+            onClick={() =>this.handleJumpStart()}
+            tooltip="Jump to start of story"
+            tooltipPosition={'bottom-left'}
+            touch={true}
+            >
+              <SkipPrevious color="#006064"/>
+            </IconButton>
+            <IconButton
+            iconStyle={buttonStyle.icon}
+            style={buttonStyle.button}
+            className="col swipe-btn-left-right"
+            onClick={() =>this.handleJumpLast()}
+            tooltip="Jump to end of story"
+            tooltipPosition={'bottom-right'}
+            touch={true}
+            >
+              <SkipNext color="#006064"/>
+            </IconButton>
+            </div>
+            <div className='flex-arrows'>
           <Checkbox
             style={checkbox}
             checkedIcon={<ActionFavorite style={buttonStyle.checked} />}
@@ -267,6 +273,8 @@ export default class SingleCard extends Component {
             checked={this.state.checked}
             onCheck={this.updateCheck.bind(this)}
           />
+          </div>
+          </div>
         </CardHeader>
         <CardTitle onClick={() => history.push(`/allUsers/${this.state.author.id}`)} title={`Scene originally from "${currentCard.branchTitle}"`} subtitle={`by ${this.state.author.username || 'Anonymous'}`} titleStyle={{ padding: '3px 10px 0 0', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right', fontSize: '1em' }} subtitleStyle={{ padding: '0 10px 3px 0', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right', fontStyle: 'italic', cursor: 'pointer' }} />
         <CardText>
