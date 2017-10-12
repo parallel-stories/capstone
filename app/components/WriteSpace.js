@@ -195,8 +195,6 @@ export default class WriteSpace extends Component {
 
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
-    } else if (this.state.card.branchDesc == '') {
-      alert('Please give this story a description.')
     } else if (this.state.card.text == '') {
       alert('Please write some text.')
     } else {
@@ -231,12 +229,10 @@ export default class WriteSpace extends Component {
     .then(cardKey => history.push(`/read/${this.state.card.branchTitle}/${cardKey}`))
   }
 
-  // to open/close dialog box on sumit story
+  // to open/close dialog box on submit story
   handleOpen = () => {
     if (this.state.card.branchTitle == '') {
       alert('Please give your story a title.')
-    } else if (this.state.card.branchDesc == '') {
-      alert('Please give this story a description.')
     } else if (this.state.card.text == '') {
       alert('Please write some text.')
     } else {
