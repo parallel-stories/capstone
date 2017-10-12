@@ -10,8 +10,8 @@ import Dialog from 'material-ui/Dialog'
 import Divider from 'material-ui/Divider'
 import Toggle from 'material-ui/Toggle'
 import IconButton from 'material-ui/IconButton'
-import SkipPrevious from 'material-ui/svg-icons/av/skip-previous'
-import SkipNext from 'material-ui/svg-icons/av/skip-next'
+import FirstPage from 'material-ui/svg-icons/navigation/first-page'
+import LastPage from 'material-ui/svg-icons/navigation/last-page'
 // material ui components for bookmarks
 import Checkbox from 'material-ui/Checkbox'
 import ActionFavorite from 'material-ui/svg-icons/action/bookmark'
@@ -251,7 +251,7 @@ export default class SingleCard extends Component {
             tooltipPosition={'bottom-left'}
             touch={true}
             >
-              <SkipPrevious color="#006064"/>
+              <FirstPage color="#006064"/>
             </IconButton>
             <IconButton
             iconStyle={buttonStyle.icon}
@@ -262,7 +262,7 @@ export default class SingleCard extends Component {
             tooltipPosition={'bottom-right'}
             touch={true}
             >
-              <SkipNext color="#006064"/>
+              <LastPage color="#006064"/>
             </IconButton>
             </div>
             <div className='flex-arrows'>
