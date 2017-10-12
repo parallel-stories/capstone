@@ -47,9 +47,10 @@ export default class WriteSpace extends Component {
         rootTitle: ['isRoot'],
         text: '',
         userId: ''
-      }
+      },
       // end saveCard & publishCard needs
-
+      openPrevCard: false,
+      prevCardText: ''
       // TODO: implement warnings
       // to check for inputs -- can't be blank
       // and can't be more than 500 characters
@@ -73,6 +74,7 @@ export default class WriteSpace extends Component {
       firebase.database().ref(`storyCard/${this.props.match.params.cardId}`).once('value', snap => {
         // get root title array of root card from firebase
         this.setState({
+          prevCardText: snap.val().text,
           card: Object.assign({}, this.state.card, {
             rootTitle: [...snap.val().rootTitle, snap.val().branchTitle],
             prevCard: this.props.match.params.cardId
@@ -88,6 +90,7 @@ export default class WriteSpace extends Component {
         firebase.database().ref(`storyCard/${lastStoryCardId}`).once('value', cardSnap => {
           if (cardSnap.val().userId == this.state.user.uid) {
             this.setState({
+              prevCardText: cardSnap.val().text,
               titleIsPub: titleIsPub,
               card: Object.assign({}, this.state.card, {
                 branchTitle: storyBranchId,
@@ -110,6 +113,12 @@ export default class WriteSpace extends Component {
                 titleIsPub: titleIsPub,
                 cardId: this.props.match.params.cardId,
                 card: snap.val()
+              })
+            })
+            // get prev card text
+            firebase.database().ref(`storyCard/${snap.val().prevCard}/text`).once('value', snap => {
+              this.setState({
+                prevCardText: snap.val()
               })
             })
           } else {
@@ -159,6 +168,7 @@ export default class WriteSpace extends Component {
         editTitle: false,
         cardId: cardKey
       })
+      history.push(`/write/${cardKey}`)
     })
   }
 
@@ -241,6 +251,10 @@ export default class WriteSpace extends Component {
   }
   handleClose = () => { this.setState({openSubmit: false}) }
 
+  handlePrevCardOpen = () => this.setState({openPrevCard: true})
+
+  handlePrevCardClose = () => this.setState({openPrevCard: false})
+
   handleUnauthPopUpClose = () => { this.setState({openUnauthPopUp: false}) }
 
   render() {
@@ -249,6 +263,10 @@ export default class WriteSpace extends Component {
       <FlatButton key='cancel' label="Cancel" primary={true} onClick={this.handleClose} />,
       <FlatButton label="Publish Card & Continue Story" primary={true} keyboardFocused={true} onClick={this.publishAndContinue} />,
       <FlatButton label="Publish Card & Read Story" primary={true} keyboardFocused={true} onClick={this.publishAndRead} />
+    ]
+
+    const prevCardDialog = [
+      <FlatButton key='close' label="Close" primary={true} onClick={this.handlePrevCardClose} />
     ]
 
     const unauthPopUpActions = [
@@ -275,66 +293,76 @@ export default class WriteSpace extends Component {
 
             <div className="form-group container">
             {// if title is pub, don't allow title to be changed, otherwise allow editing based on state.editTitle status
-              this.state.titleIsPub?
-                <div>
+              this.state.titleIsPub
+              ? <div>
                   <h2>
                     {this.state.card.branchTitle}
                   </h2>
-                  <p>
-                    {this.state.card.branchDesc}
-                  </p>
+                  <span style={{lineHeight: '125%'}}>
+                    {
+                      (this.state.card.branchDesc != '')
+                        && this.state.card.branchDesc
+                    }
+                  </span>
                 </div>
-              : !this.state.editTitle?
-                <div>
-                  <h2>
-                    {this.state.card.branchTitle}
-                  </h2>
-                  <p>
-                    {this.state.card.branchDesc}
-                  </p>
-                </div>
-              : <h2>
-                <input type="text"
-                      className="form-control"
-                      value={this.state.card.branchTitle}
-                      placeholder="Story Title"
-                      id="titleField"
-                      onChange={this.changeBranchTitle} />
-                <br/>
-                <input type="text"
-                      className="form-control"
-                      value={this.state.card.branchDesc}
-                      placeholder="Story Description"
-                      id="titleField"
-                      onChange={this.changeBranchDesc} />
-              <div className="subtext">
+              : !this.state.editTitle
+                ? <div>
+                    <h2>
+                      {this.state.card.branchTitle}
+                    </h2>
+                    <span style={{lineHeight: '125%'}}>
+                      {
+                        (this.state.card.branchDesc != '')
+                          && this.state.card.branchDesc
+                      }
+                    </span>
+                  </div>
+                : <div>
+                    <h2>
+                      <input type="text"
+                        className="form-control"
+                        value={this.state.card.branchTitle}
+                        placeholder="Story Title"
+                        id="titleField"
+                        onChange={this.changeBranchTitle} />
+                    </h2>
+                    <span>
+                      <input type="text"
+                        style={{fontSize: '.75em', height: '75%', lineHeight: '75%'}}
+                        className="form-control"
+                        value={this.state.card.branchDesc}
+                        placeholder="Story Description"
+                        id="titleField"
+                        onChange={this.changeBranchDesc} />
+                    </span>
+                  </div>
+              }
+              {
+                (this.state.card.rootTitle.length > 1) && (
+                  <div className="subtext" style={{float: 'right'}}>...A branch of <i>{this.state.card.rootTitle[this.state.card.rootTitle.length-1]}</i></div>
+                )
+              }
+
+            <div className="subtext">
               {// if title is pub, no save/edit links should be displayed beneath title; otherwise display links based on state.editTitle status and if there is actually title text to save
-              this.state.titleIsPub ?
-                <Link to="#">
+              this.state.titleIsPub
+              ? <Link to="#">
                   &nbsp;
                 </Link>
-              : !this.state.editTitle ?
-                <Link to="#" onClick={this.editTitle}>
-                  (edit title)
-                </Link>
-              : (this.state.card.branchTitle != '') ?
-                <Link to="#" onClick={this.saveTitle}>
-                  (save title and description)
-                </Link>
-              : <Link to="#">
-                  &nbsp;
-                </Link>
+              : !this.state.editTitle
+                ? <Link to="#" onClick={this.editTitle}>
+                    (edit title and description)
+                  </Link>
+                : (this.state.card.branchTitle != '')
+                  ? <Link to="#" onClick={this.saveTitle}>
+                      (save title and description)
+                    </Link>
+                  : <Link to="#">
+                      &nbsp;
+                    </Link>
               }
               </div>
-              </h2>
-            }
             </div>
-
-          {
-            (this.state.card.rootTitle.length > 1) && (
-              <div className="container">...A branch of <i>{this.state.card.rootTitle[this.state.card.rootTitle.length-1]}</i></div>
-            )
-          }
 
             <ReactQuill value={this.state.card.text}
               onChange={this.changeStoryText}
@@ -363,11 +391,11 @@ export default class WriteSpace extends Component {
                 backgroundColor="#B83939"
                 onClick={this.clearStory}
                 disabled={!this.state.card.text.length} />
-              <RaisedButton key='clear'
+              <RaisedButton key='prevcard'
                 label="VIEW PREV CARD"
-                backgroundColor="#D2B48C"
-                onClick={this.clearStory}
-                disabled={!this.state.card.text.length}
+                backgroundColor="#FAFBF6"
+                onClick={this.handlePrevCardOpen}
+                disabled={!this.state.card.prevCard}
                 style={{float: 'right'}} />
             </div>
           </div>
@@ -387,7 +415,18 @@ export default class WriteSpace extends Component {
           <h2>{this.state.card.branchTitle}</h2>
           { ReactHtmlParser(this.state.card.text) }
         </Dialog>
-      </div>
+        <Dialog
+          title="(Previous Card)"
+          actions={prevCardDialog}
+          modal={false}
+          open={this.state.openPrevCard}
+          onRequestClose={this.handlePrevCardClose}
+          contentStyle={dialogStyle}
+          autoScrollBodyContent={true}
+        >
+        {ReactHtmlParser(this.state.prevCardText)}
+        </Dialog>
+        </div>
     )
   }
 }
