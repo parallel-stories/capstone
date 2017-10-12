@@ -282,11 +282,17 @@ svg.cardBranchTree .node circle {
 }
 
 svg.cardBranchTree .node text {
-	font-size: 13px;
-	background-color: black;
+	font-size: 15px;
 	fill: #006064;
   margin: 5px;
-  padding: 10px
+  padding: 10px;
+  font-weight: bold
+}
+
+svg.cardBranchTree .tree-click-branch text {
+  fill: #ed744f;
+  font-size: 20px;
+  font-weight: bold
 }
 
 svg.cardBranchTree .node {
@@ -302,4 +308,9 @@ svg.cardBranchTree path.link {
 .no-bullets {
   list-style-type: none;
   font-size: 24px;
+}
+
+.tree-container {
+  display: block;
+  margin: 0 auto;
 }

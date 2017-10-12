@@ -120,8 +120,11 @@ export default class SingleStoryPage extends Component {
         <div className="story-container row">
           <div className="story-container col-lg-6 col-md-6 col-sm-6">
             <h2 className="align-center">{storyBranchId}</h2>
+            <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
             <div><i>by <Link to={`/allUsers/${this.state.author.id}`}>{(this.state.author.username != '') ? this.state.author.username : 'Anonymous'}</Link></i></div>
-            <h4 className="align-center">Root:{' '}<Link to={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</Link></h4>
+            <br />
+            <Link to={`/story_tree/${storyBranchId}`}><FlatButton label="See Story Tree" backgroundColor="#50AD55"></FlatButton></Link>
+            <br />
             <div className='giphy-responsive'>
               <iframe src={`${this.state.imageURL}`} width="100%" height="100%" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
             </div>
