@@ -106,12 +106,16 @@ export default class SingleStoryPage extends Component {
             <div className='giphy-responsive'>
               <iframe src={`${this.state.imageURL}`} width="100%" height="100%" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
             </div>
-            <div className="start-read">
               {
-                !_.isEmpty(storyBranch) &&
-                <Link to={`/read/${storyBranchId}/${storyBranch.storyCards.shift()}`}><FlatButton label="Start Reading" backgroundColor="#50AD55"></FlatButton></Link>
+                !_.isEmpty(storyBranch) && (
+                  <div className="start-read">
+                    <h4 className="align-center">Start Reading:</h4>
+                    <Link to={`/read/${storyBranchId}/${storyBranch.storyCards.shift()}`}><FlatButton label="Branch View" backgroundColor="#50AD55"></FlatButton></Link>
+                    &nbsp;
+                    <Link to={`/read/full/${storyBranchId}`}><FlatButton label="Full Story View" backgroundColor="#50AD55"></FlatButton></Link>
+                  </div>
+                )
               }
-            </div>
           </div>
 
           <div className="start-read col-lg-6 col-md-6 col-sm-6">

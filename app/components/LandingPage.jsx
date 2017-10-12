@@ -42,6 +42,7 @@ class LandingPage extends Component {
               Lay the foundation for the roots of a story or contribute to existing story trees. 
               Don’t hold back in integrating your personal experiences or wild imagination with Parallel Stories!
             </p>
+            <br />
             <p>
               Use the navigation bar on the top left of this page to{' '}
               <br />
@@ -104,7 +105,6 @@ class LandingPage extends Component {
             <h3>Thank you for visiting our capstone project!</h3>
             <p>This project's frontened was created with React and Material-UI</p>
             <p>This project's backend is hosted on Firebase</p>
-            <p>More info about individual members here? or nah?</p>
           </div>
         </div>
 
