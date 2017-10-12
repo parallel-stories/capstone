@@ -363,6 +363,12 @@ export default class WriteSpace extends Component {
                 backgroundColor="#B83939"
                 onClick={this.clearStory}
                 disabled={!this.state.card.text.length} />
+              <RaisedButton key='clear'
+                label="VIEW PREV CARD"
+                backgroundColor="#D2B48C"
+                onClick={this.clearStory}
+                disabled={!this.state.card.text.length}
+                style={{float: 'right'}} />
             </div>
           </div>
         </div>
