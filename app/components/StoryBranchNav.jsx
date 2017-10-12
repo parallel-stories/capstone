@@ -59,7 +59,7 @@ class StoryBranchNav extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.arrowKeyPress.bind(this))
+    document.addEventListener('keydown', this.arrowKeyPress)
     const {branchId, cardId, branchingPointIndex} = this.props
     Promise.all([getStoryBranch(branchId), getStoryCard(cardId)])
     .then(info => this.updateFullState(branchId, cardId, info, branchingPointIndex))
@@ -72,7 +72,7 @@ class StoryBranchNav extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.arrowKeyPress.bind(this))
+    document.removeEventListener('keydown', this.arrowKeyPress)
   }
 
   handleOptionClick = () => {

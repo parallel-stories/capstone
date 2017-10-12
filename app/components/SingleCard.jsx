@@ -38,7 +38,11 @@ export default class SingleCard extends Component {
       branchExpanded: false,
       checked: false,
       loggedIn: false,
-      userId: ''
+      userId: '',
+      author: {
+        id: '',
+        username: ''
+      }
     }
   }
 
@@ -58,6 +62,16 @@ export default class SingleCard extends Component {
         })
       }
     })) // end on AuthStateChanged
+    // load author
+    firebase.database().ref(`user/${this.props.currentState.currentCard.userId}`).once('value')
+    .then(snap => {
+      this.setState({
+        author: {
+          id: this.props.currentState.currentCard.userId,
+          username: snap.val().username
+        }
+      })
+    })
   }
 
   componentWillUnmount() {
@@ -197,7 +211,7 @@ export default class SingleCard extends Component {
             onCheck={this.updateCheck.bind(this)}
           />
         </CardHeader>
-        <CardTitle title="" subtitle={`Scene originally from "${currentCard.branchTitle}"`} subtitleStyle={{ padding: '3px 10px 3px 0px', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right' }} />
+        <CardTitle onClick={() => history.push(`/allUsers/${this.state.author.id}`)} title={`Scene originally from "${currentCard.branchTitle}"`} subtitle={`by ${this.state.author.username || 'Anonymous'}`} titleStyle={{ padding: '3px 10px 0 0', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right', fontSize: '1em' }} subtitleStyle={{ padding: '0 10px 3px 0', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right', fontStyle: 'italic', cursor: 'pointer' }} />
         <CardText>
           {
             currentCard

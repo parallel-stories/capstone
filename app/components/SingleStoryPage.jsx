@@ -17,13 +17,31 @@ export default class SingleStoryPage extends Component {
       currentStoryBranch: {},
       tags: [],
       imageURL: 'https://giphy.com/embed/3o85xonfOvQzN3eCNG',
+      author: {
+        id: '',
+        username: ''
+      }
     }
   }
 
   componentDidMount() {
     const storyBranchId = this.props.match.params.branchId
-    firebase.database().ref(`storyBranch/${storyBranchId}`).once('value', snap => {
+    firebase.database().ref(`storyBranch/${storyBranchId}`).once('value')
+    .then(snap => {
       this.setState({currentStoryBranch: snap.val()})
+      return snap.val()
+    })
+    // load author
+    .then(storyBranch => {
+      firebase.database().ref(`user/${storyBranch.userId}`).once('value')
+      .then(snap => {
+        this.setState({
+          author: {
+            id: storyBranch.userId,
+            username: snap.val().username
+          }
+        })
+      })
     })
     // get tags for this story branch
     this.tagsListener = firebase.database().ref(`storyBranch/${this.props.match.params.branchId}/tags`)
@@ -102,16 +120,21 @@ export default class SingleStoryPage extends Component {
         <div className="story-container row">
           <div className="story-container col-lg-6 col-md-6 col-sm-6">
             <h2 className="align-center">{storyBranchId}</h2>
-            <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
+            <div><i>by <Link to={`/allUsers/${this.state.author.id}`}>{(this.state.author.username != '') ? this.state.author.username : 'Anonymous'}</Link></i></div>
+            <h4 className="align-center">Root:{' '}<Link to={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</Link></h4>
             <div className='giphy-responsive'>
               <iframe src={`${this.state.imageURL}`} width="100%" height="100%" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
             </div>
-            <div className="start-read">
               {
-                !_.isEmpty(storyBranch) &&
-                <Link to={`/read/${storyBranchId}/${storyBranch.storyCards.shift()}`}><FlatButton label="Start Reading" backgroundColor="#50AD55"></FlatButton></Link>
+                !_.isEmpty(storyBranch) && (
+                  <div className="start-read">
+                    <h4 className="align-center">Start Reading:</h4>
+                    <Link to={`/read/${storyBranchId}/${storyBranch.storyCards[0]}`}><FlatButton label="Branch View" backgroundColor="#50AD55"></FlatButton></Link>
+                    &nbsp;
+                    <Link to={`/read/full/${storyBranchId}`}><FlatButton label="Full Story View" backgroundColor="#50AD55"></FlatButton></Link>
+                  </div>
+                )
               }
-            </div>
           </div>
 
           <div className="start-read col-lg-6 col-md-6 col-sm-6">
