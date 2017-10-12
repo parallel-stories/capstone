@@ -151,13 +151,11 @@ export default class SingleCard extends Component {
 
   handleJumpStart = () => {
     let branchId = this.props.currentState.currentStoryBranchId
-    console.log('hello?')
     firebase.database().ref('storyBranch').child(branchId).child('storyCards').once('value')
     .then(snap => {
       return snap.val()[0]
     })
     .then(firstCard => {
-      console.log('we here?')
       history.push(`/read/${branchId}/${firstCard}`)
     })
   }
