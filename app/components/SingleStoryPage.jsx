@@ -129,7 +129,7 @@ export default class SingleStoryPage extends Component {
                 !_.isEmpty(storyBranch) && (
                   <div className="start-read">
                     <h4 className="align-center">Start Reading:</h4>
-                    <Link to={`/read/${storyBranchId}/${storyBranch.storyCards.shift()}`}><FlatButton label="Branch View" backgroundColor="#50AD55"></FlatButton></Link>
+                    <Link to={`/read/${storyBranchId}/${storyBranch.storyCards[0]}`}><FlatButton label="Branch View" backgroundColor="#50AD55"></FlatButton></Link>
                     &nbsp;
                     <Link to={`/read/full/${storyBranchId}`}><FlatButton label="Full Story View" backgroundColor="#50AD55"></FlatButton></Link>
                   </div>
