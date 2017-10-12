@@ -9,6 +9,8 @@ import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import Divider from 'material-ui/Divider'
 import Toggle from 'material-ui/Toggle'
+import IconButton from 'material-ui/IconButton'
+import SkipPrevious from 'material-ui/svg-icons/av/skip-previous'
 // material ui components for bookmarks
 import Checkbox from 'material-ui/Checkbox'
 import ActionFavorite from 'material-ui/svg-icons/action/bookmark'
@@ -133,6 +135,13 @@ export default class SingleCard extends Component {
     this.setState({ branchExpanded: !this.state.branchExpanded })
   };
 
+  handleJumpStart = () => {
+    let branchId = this.props.currentState.currentStoryBranchId
+    //query firebase for first card in branch
+    //history.push to that card
+    firebase.database().ref('storyBranch').child(branchId).child('storyCards')
+  }
+
   render() {
     const { currentCard, currentStoryBranchId, currentCardId } = this.props.currentState
     const { parentBranchId, parentCardId } = this.props.parent
@@ -167,7 +176,7 @@ export default class SingleCard extends Component {
       }
     }
 
-    const bookmarkButtonStyle = {
+    const buttonStyle = {
       checked: {
         color: '#FFB6C1',
         width: '40px',
@@ -176,6 +185,15 @@ export default class SingleCard extends Component {
       unchecked: {
         width: '40px',
         height: '40px'
+      },
+      icon: {
+        width: '50px',
+        height: '50px'
+      },
+      button: {
+        width: '50px',
+        height: '50px',
+        float: 'left'
       }
     }
 
@@ -188,11 +206,22 @@ export default class SingleCard extends Component {
 
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.handleToggle}>
-        <CardHeader style={{paddingBottom: '50px', paddingRight: '10px'}}>
+        <CardHeader style={{paddingBottom: '50px', paddingRight: '10px', paddingLeft: '10px'}}>
+          <IconButton
+          iconStyle={buttonStyle.icon}
+          style={buttonStyle.button}
+          className="col swipe-btn-left-right flex-arrows"
+          onClick={() => this.handleJumpStart}
+          tooltip="Jump to start of story"
+          tooltipPosition={'bottom-right'}
+          touch={true}
+          >
+            <SkipPrevious color="#006064"/>
+          </IconButton>
           <Checkbox
             style={checkbox}
-            checkedIcon={<ActionFavorite style={bookmarkButtonStyle.checked} />}
-            uncheckedIcon={<ActionFavoriteBorder style={bookmarkButtonStyle.unchecked} />}
+            checkedIcon={<ActionFavorite style={buttonStyle.checked} />}
+            uncheckedIcon={<ActionFavoriteBorder style={buttonStyle.unchecked} />}
             checked={this.state.checked}
             onCheck={this.updateCheck.bind(this)}
           />
