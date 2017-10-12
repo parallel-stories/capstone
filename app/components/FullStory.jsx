@@ -32,11 +32,16 @@ export default class SingleStoryPage extends Component {
         rootTitle: [],
         text: '',
         userId: ''
+      }],
+      authors: [{
+        id: '',
+        username: ''
       }]
     }
   }
 
   componentDidMount() {
+    // get storycards
     firebase.database().ref(`storyBranch/${this.props.match.params.branchId}`).once('value')
     .then(snap => {
       const branchObj = snap.val()
@@ -50,7 +55,17 @@ export default class SingleStoryPage extends Component {
     .then(promisedCardsArr => {
       const resolvedCardsArr = promisedCardsArr.map(snap => snap.val())
       this.setState({storyCards: resolvedCardsArr})
+      return resolvedCardsArr
     })
+    // get users
+    .then(cardsArr => new Set(cardsArr.map(card => card.userId)))
+    .then(authorIdSet => [...authorIdSet])
+    .then(authorIdArr => Promise.all(authorIdArr.map(authorId => firebase.database().ref(`user/${authorId}`).once('value')))
+      .then(promisedAuthorArr => promisedAuthorArr.map(snap => snap.val().username))
+      .then(authorUsernames => authorUsernames.map((username, idx) => ({id: authorIdArr[idx], username: username})))
+      .then(authorObjArr => this.setState({authors: authorObjArr}))
+    )
+    // tags
     this.tagsListener = firebase.database().ref(`storyBranch/${this.props.match.params.branchId}/tags`)
     this.tagsListener.on('value', snap => {
       const tags = snap.val()
@@ -102,6 +117,18 @@ export default class SingleStoryPage extends Component {
         <div className="story-container row">
           <div className="story-container col-lg-6 col-md-6 col-sm-6">
             <h2 className="align-center">{storyBranchId}</h2>
+            {
+              !_.isEmpty(this.state.authors[0].id) && (
+                <div><i>by {
+                  this.state.authors.map((author, idx) => (
+                    <span key={author.id}>
+                      {(idx !== 0) && <span>, </span>}
+                      <Link to={`/allUsers/${author.id}`}>{(author.username != '') ? author.username : 'Anonymous'}</Link>
+                    </span>
+                  ))
+                }</i></div>
+              )
+            }
             <h4 className="align-center">Root:{' '}<a href={`/read/${getStoryRootTitle()}`}>"{getStoryRootTitle()}"</a></h4>
             <div className="start-read">
               {
