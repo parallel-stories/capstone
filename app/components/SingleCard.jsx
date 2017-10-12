@@ -62,7 +62,7 @@ export default class SingleCard extends Component {
         })
       }
     })) // end on AuthStateChanged
-    // load authors
+    // load author
     firebase.database().ref(`user/${this.props.currentState.currentCard.userId}`).once('value')
     .then(snap => {
       this.setState({
