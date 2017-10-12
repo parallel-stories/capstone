@@ -107,7 +107,7 @@ export default class UserProfile extends Component {
     let cardKeys = Object.keys(unpublishedCards)
 
     return (
-      <div className="container-fluid" >
+      <div className="container-fluid user-profile" >
         {!user ?
           <h1>Please login to view your profile!</h1>
           :
@@ -127,7 +127,7 @@ export default class UserProfile extends Component {
                 {_.isEmpty(unpublishedCards)
                   ? (<div>
                     <p>
-                      It looks like you don't have any drafts.  Would you like to write a story?
+                      It looks like you don't have any drafts.  Would you like to <Link to='/write'>write a story</Link>?
                     </p>
                     </div>)
                   : (<div className="row" >
@@ -145,7 +145,7 @@ export default class UserProfile extends Component {
                 {_.isEmpty(bookmarks)
                   ? (<div>
                     <p>
-                      It looks like you don't have any bookmarks.
+                      It looks like you don't have any bookmarks!
                     </p>
                     </div>)
                   : (<div className="row" >
@@ -196,7 +196,7 @@ export default class UserProfile extends Component {
                 />
             </div>
             :
-            <div className="row" >
+            <div className="row users-following" >
               <AllUsers
                 filtered={true}
                 userId={this.state.user.uid}
