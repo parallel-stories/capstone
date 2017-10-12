@@ -11,6 +11,7 @@ import Divider from 'material-ui/Divider'
 import Toggle from 'material-ui/Toggle'
 import IconButton from 'material-ui/IconButton'
 import SkipPrevious from 'material-ui/svg-icons/av/skip-previous'
+import SkipNext from 'material-ui/svg-icons/av/skip-next'
 // material ui components for bookmarks
 import Checkbox from 'material-ui/Checkbox'
 import ActionFavorite from 'material-ui/svg-icons/action/bookmark'
@@ -160,6 +161,18 @@ export default class SingleCard extends Component {
     })
   }
 
+  handleJumpLast = () => {
+    let branchId = this.props.currentState.currentStoryBranchId
+    firebase.database().ref('storyBranch').child(branchId).child('storyCards').once('value')
+    .then(snap => {
+      let cardArr = snap.val()
+      return cardArr[cardArr.length-1]
+    })
+    .then(lastCard => {
+      history.push(`/read/${branchId}/${lastCard}`)
+    })
+  }
+
   render() {
     const { currentCard, currentStoryBranchId, currentCardId } = this.props.currentState
     const { parentBranchId, parentCardId } = this.props.parent
@@ -231,10 +244,21 @@ export default class SingleCard extends Component {
           className="col swipe-btn-left-right flex-arrows"
           onClick={() =>this.handleJumpStart()}
           tooltip="Jump to start of story"
-          tooltipPosition={'bottom-right'}
+          tooltipPosition={'bottom-left'}
           touch={true}
           >
             <SkipPrevious color="#006064"/>
+          </IconButton>
+          <IconButton
+          iconStyle={buttonStyle.icon}
+          style={buttonStyle.button}
+          className="col swipe-btn-left-right flex-arrows"
+          onClick={() =>this.handleJumpLast()}
+          tooltip="Jump to end of story"
+          tooltipPosition={'bottom-right'}
+          touch={true}
+          >
+            <SkipNext color="#006064"/>
           </IconButton>
           <Checkbox
             style={checkbox}
