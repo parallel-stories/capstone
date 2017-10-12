@@ -137,9 +137,15 @@ export default class SingleCard extends Component {
 
   handleJumpStart = () => {
     let branchId = this.props.currentState.currentStoryBranchId
-    //query firebase for first card in branch
-    //history.push to that card
-    firebase.database().ref('storyBranch').child(branchId).child('storyCards')
+    console.log('hello?')
+    firebase.database().ref('storyBranch').child(branchId).child('storyCards').once('value')
+    .then(snap => {
+      return snap.val()[0]
+    })
+    .then(firstCard => {
+      console.log('we here?')
+      history.push(`/read/${branchId}/${firstCard}`)
+    })
   }
 
   render() {
@@ -211,7 +217,7 @@ export default class SingleCard extends Component {
           iconStyle={buttonStyle.icon}
           style={buttonStyle.button}
           className="col swipe-btn-left-right flex-arrows"
-          onClick={() => this.handleJumpStart}
+          onClick={() =>this.handleJumpStart()}
           tooltip="Jump to start of story"
           tooltipPosition={'bottom-right'}
           touch={true}
