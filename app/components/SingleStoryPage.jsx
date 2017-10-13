@@ -125,9 +125,11 @@ export default class SingleStoryPage extends Component {
             <br />
             <Link to={`/story_tree/${storyBranchId}`}><FlatButton label="See Story Tree" backgroundColor="#50AD55"></FlatButton></Link>
             <br />
-            <div className='giphy-responsive'>
-              <iframe src={`${this.state.imageURL}`} width="100%" height="100%" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
-            </div>
+            <div style={{width: '200px', height: '190px', backgroundImage: 'url(https://image.flaticon.com/icons/svg/140/140671.svg)', backgroundSize: '698px 550px', backgroundPosition: '-77px 0'}} />
+            {/* <div className='giphy-responsive'>
+                  <iframe src={`${this.state.imageURL}`} width="100%" height="100%" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
+                </div>
+            */}
               {
                 !_.isEmpty(storyBranch) && (
                   <div className="start-read">
