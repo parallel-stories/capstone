@@ -277,7 +277,7 @@ export default class SingleCard extends Component {
           </div>
         </CardHeader>
         <CardTitle onClick={() => history.push(`/allUsers/${this.state.author.id}`)} title={`Scene originally from "${currentCard.branchTitle}"`} subtitle={`by ${this.state.author.username || 'Anonymous'}`} titleStyle={{ padding: '3px 10px 0 0', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right', fontSize: '1em' }} subtitleStyle={{ padding: '0 10px 3px 0', color: 'white', backgroundColor: '#d4d4d4', textAlign: 'right', fontStyle: 'italic', cursor: 'pointer' }} />
-        <CardText>
+        <CardText style={{textAlign: 'left'}}>
           {
             currentCard
               ? currentCard.published

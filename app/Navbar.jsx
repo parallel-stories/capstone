@@ -45,8 +45,8 @@ class Navbar extends Component {
         style={{boxShadow: 'none', fontFamily: 'Berkshire Swash, cursive', textAlign: 'center'}}>
         <Drawer open={this.state.open}>
           <MenuItem onClick={(e) => { this.handleLink(e, 'home') }}>Home</MenuItem>
-          <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'read') }}>Read Stories</MenuItem>
+          <MenuItem onClick={(e) => { this.handleLink(e, 'write') }}>Write a Story</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'allUsers') }}>All Users</MenuItem>
           <MenuItem onClick={(e) => { this.handleLink(e, 'userProfile') }}>User Profile</MenuItem>
           <MenuItem onClick={this.handleToggle} className="close-drawer">Close</MenuItem>

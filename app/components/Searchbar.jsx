@@ -128,7 +128,7 @@ export default class Searchbar extends Component {
             hintText="Search by title or description"
             dataSource={this.state.titles}
             filter={ AutoComplete.fuzzyFilter }
-            floatingLabelText="Search"
+            floatingLabelText="Search by title or description"
             searchText={this.state.query}
             onUpdateInput={this.handleUpdateInput}
             onNewRequest={this.handleNewRequest}
