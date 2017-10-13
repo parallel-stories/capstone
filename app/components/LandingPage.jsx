@@ -34,12 +34,12 @@ class LandingPage extends Component {
           </div>
           <div className="col col-sm-6 col-md-6 col-lg-6 align-right">
             <h1>
-              Welcome to <span className="title">Parallel Stories</span>!
+              Welcome to <span className="title">Parallel Stories!</span>
             </h1>
             <br />
             <p>
               Parallel Stories allows you to read and write stories with the feature to create alternate or parallel storylines.
-              Lay the foundation for the roots of a story or contribute to existing story trees. 
+              Lay the foundation for the roots of a story or contribute to existing story trees.
               Don’t hold back in integrating your personal experiences or wild imagination with Parallel Stories!
             </p>
             <br />
