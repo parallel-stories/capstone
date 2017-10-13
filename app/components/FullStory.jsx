@@ -118,8 +118,8 @@ export default class SingleStoryPage extends Component {
       let currCard = ReactHtmlParser(this.state.storyCards[idx].text)[0].props.children
       fullText += currCard.toString() + '\n'
     }
-    doc.text(fullText)
-    doc.save('test.pdf')
+    doc.text(fullText, 10, 10)
+    doc.save(`${this.props.match.params.branchId}.pdf`)
   }
 
   render() {
