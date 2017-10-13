@@ -13,7 +13,7 @@ import history from '../history'
 
 // react-pdf -- create a pdf from text
 // source: https://github.com/diegomura/react-pdf
-
+import jsPDF from 'jsPDF'
 
 export default class SingleStoryPage extends Component {
   constructor(props) {
@@ -112,12 +112,14 @@ export default class SingleStoryPage extends Component {
   and prints them to PDF without HTML tags
   */
   exportToPDF = () => {
+    let doc = new jsPDF()
     let fullText = ''
     for( const idx in this.state.storyCards ){
       let currCard = ReactHtmlParser(this.state.storyCards[idx].text)[0].props.children
       fullText += currCard.toString() + '\n'
     }
-    console.log('full text....', fullText)
+    doc.text(fullText)
+    doc.save('test.pdf')
   }
 
   render() {
