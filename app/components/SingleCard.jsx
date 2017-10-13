@@ -114,7 +114,7 @@ export default class SingleCard extends Component {
       Object.keys(currentCard.branches).forEach(branch => {
         if (branch !== currentStoryBranchId && branch !== parentBranchId) {
           branchLinks.push(
-            <Link
+            <span><Link
               key={branch}
               to={`/read/${branch}/${currentCard.branches[branch]}`}
               onClick={() => {
@@ -122,7 +122,7 @@ export default class SingleCard extends Component {
                 this.props.handleOptionClick()
               }}>
               {branch}
-            </Link>
+            </Link><br /></span>
           )
         }
       })
