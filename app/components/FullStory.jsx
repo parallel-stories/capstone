@@ -11,6 +11,10 @@ import ReactHtmlParser from 'react-html-parser'
 import Reviews from './Reviews'
 import history from '../history'
 
+// react-pdf -- create a pdf from text
+// source: https://github.com/diegomura/react-pdf
+
+
 export default class SingleStoryPage extends Component {
   constructor(props) {
     super(props)
@@ -36,7 +40,7 @@ export default class SingleStoryPage extends Component {
       authors: [{
         id: '',
         username: ''
-      }]
+      }],
     }
   }
 
@@ -103,6 +107,19 @@ export default class SingleStoryPage extends Component {
     firebase.database().ref('storyBranch').child(this.props.match.params.branchId).child('tags').child(deleteMe).remove()
   }
 
+  /*
+  this function concatenates all of the text currently on the screen
+  and prints them to PDF without HTML tags
+  */
+  exportToPDF = () => {
+    let fullText = ''
+    for( const idx in this.state.storyCards ){
+      let currCard = ReactHtmlParser(this.state.storyCards[idx].text)[0].props.children
+      fullText += currCard.toString() + '\n'
+    }
+    console.log('full text....', fullText)
+  }
+
   render() {
     const storyBranchId = this.props.match.params.branchId
     const storyBranch = this.state.currentStoryBranch
@@ -137,6 +154,8 @@ export default class SingleStoryPage extends Component {
               }
             </div>
           </div>
+
+          <FlatButton label="Export as PDF" backgroundColor="#C0A485" onClick={this.exportToPDF}/>
 
           <div className="start-read col-lg-6 col-md-6 col-sm-6">
             <p></p>
