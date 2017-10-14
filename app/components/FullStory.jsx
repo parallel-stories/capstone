@@ -126,8 +126,8 @@ export default class SingleStoryPage extends Component {
       for( let i=0; i<cardText.length; i++ ) {
         let currCard = ReactHtmlParser(this.state.storyCards[idx].text)[i].props.children
 
-        if( typeof currCard[0] === 'string')
-          fullText += currCard.toString() + '\n' + '\n'
+        if( typeof currCard[0] === 'string') fullText += currCard.toString() + '\n' + '\n'
+        else fullText += '* * * * *\n\n'
       }
     }
 
