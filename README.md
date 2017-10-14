@@ -6,13 +6,13 @@ Parallel Stories allows you to read and write stories with the feature to create
 Check out the app at [https://parallel-stories.com/](https://parallel-stories.com/).
 
 ## Built With
-Based off *firebones* from https://github.com/queerviolet/firebones
-React.js
-Firebase
-Material-UI
-Quill.js
-react-tree-graph
-react-html-parser
+Based off *firebones* from https://github.com/queerviolet/firebones<br />
+React.js<br />
+Firebase<br />
+Material-UI<br />
+Quill.js<br />
+react-tree-graph<br />
+react-html-parser<br />
 
 ## Authors
 - Chuen Yan (Jamie) Lau
