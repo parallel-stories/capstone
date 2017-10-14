@@ -112,13 +112,47 @@ export default class SingleStoryPage extends Component {
   and prints them to PDF without HTML tags
   */
   exportToPDF = () => {
-    let doc = new jsPDF()
-    let fullText = ''
+    // @TODO: Need to simplify this demo
+
+    let doc = new jsPDF('p', 'in', 'letter'),
+      sizes = [12, 16, 20],
+      fonts = [['Times', 'Roman'], ['Helvetica', ''], ['Times', 'Italic']],
+      font, size, lines,
+      margin = 0.5, // inches on a 8.5 x 11 inch sheet.
+      verticalOffset = margin,
+      fullText = ''
+
     for( const idx in this.state.storyCards ){
       let currCard = ReactHtmlParser(this.state.storyCards[idx].text)[0].props.children
-      fullText += currCard.toString() + '\n'
+      fullText += currCard.toString() + ' '
     }
-    doc.text(fullText, 10, 10)
+
+    // the 3 blocks of text
+    for (var i in fonts) {
+      if (fonts.hasOwnProperty(i)) {
+        font = fonts[i]
+        size = sizes[i]
+
+        lines = doc.setFont(font[0], font[1])
+    					.setFontSize(size)
+    					.splitTextToSize(fullText, 7.5)
+    		// Don't want to preset font, size to calculate the lines?
+    		// .splitTextToSize(text, maxsize, options)
+    		// allows you to pass an object with any of the following:
+    		// {
+    		// 	'fontSize': 12
+    		// 	, 'fontStyle': 'Italic'
+    		// 	, 'fontName': 'Times'
+    		// }
+    		// Without these, .splitTextToSize will use current / default
+    		// font Family, Style, Size.
+        doc.text(0.5, verticalOffset + size / 72, lines)
+
+        verticalOffset += (lines.length + 0.5) * size / 72
+      }
+    }
+
+    // save pdf with branch title
     doc.save(`${this.props.match.params.branchId}.pdf`)
   }
 
