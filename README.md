@@ -7,11 +7,17 @@ Check out the app at [https://parallel-stories.com/](https://parallel-stories.co
 
 ### Built With
 Based off *firebones* from https://github.com/queerviolet/firebones
+
 React.js
+
 Firebase
+
 Material-UI
+
 Quill.js
+
 react-tree-graph
+
 react-html-parser
 
 ### Authors
