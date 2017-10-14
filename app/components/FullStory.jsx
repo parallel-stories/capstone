@@ -116,36 +116,33 @@ export default class SingleStoryPage extends Component {
 
     let doc = new jsPDF('p', 'in', 'letter'),
       sizes = [12, 16, 20],
-      fonts = [['Times', 'Roman'], ['Helvetica', ''], ['Times', 'Italic']],
+      fonts = [['Helvetica', '']],
       font, size, lines,
       margin = 0.5, // inches on a 8.5 x 11 inch sheet.
       verticalOffset = margin,
       fullText = ''
 
     for( const idx in this.state.storyCards ){
-      let currCard = ReactHtmlParser(this.state.storyCards[idx].text)[0].props.children
-      fullText += currCard.toString() + ' '
+      let cardText = ReactHtmlParser(this.state.storyCards[idx].text)
+
+      for( let i=0; i<cardText.length; i++ ) {
+        let currCard = ReactHtmlParser(this.state.storyCards[idx].text)[i].props.children
+        fullText += currCard.toString() + '\n' + '\n'
+      }
     }
+
+    console.log('full text....', fullText)
 
     // the 3 blocks of text
     for (var i in fonts) {
       if (fonts.hasOwnProperty(i)) {
         font = fonts[i]
-        size = sizes[i]
+        size = 12
 
         lines = doc.setFont(font[0], font[1])
     					.setFontSize(size)
     					.splitTextToSize(fullText, 7.5)
-    		// Don't want to preset font, size to calculate the lines?
-    		// .splitTextToSize(text, maxsize, options)
-    		// allows you to pass an object with any of the following:
-    		// {
-    		// 	'fontSize': 12
-    		// 	, 'fontStyle': 'Italic'
-    		// 	, 'fontName': 'Times'
-    		// }
-    		// Without these, .splitTextToSize will use current / default
-    		// font Family, Style, Size.
+
         doc.text(0.5, verticalOffset + size / 72, lines)
 
         verticalOffset += (lines.length + 0.5) * size / 72
