@@ -7,18 +7,18 @@ Check out the app at [https://parallel-stories.com/](https://parallel-stories.co
 
 ## Built With
 Based off *firebones* from https://github.com/queerviolet/firebones<br />
-React.js<br />
-Firebase<br />
-Material-UI<br />
-Quill.js<br />
-react-tree-graph<br />
-react-html-parser<br />
+[React.js](https://reactjs.org/)<br />
+[Firebase](https://firebase.google.com/)<br />
+[Material-UI](http://www.material-ui.com/#/)<br />
+[Quill.js](https://github.com/quilljs/quill)<br />
+[react-tree-graph](https://github.com/jpb12/react-tree-graph)<br />
+[react-html-parser](https://github.com/wrakky/react-html-parser)<br />
 
 ## Authors
-- Chuen Yan (Jamie) Lau
-- Jennifer Joo
-- Rasprit Kaur
-- Mieka Page
+- [Chuen Yan (Jamie) Lau](https://github.com/cylau1031)
+- [Jennifer Joo](https://github.com/Corvids)
+- [Rasprit Kaur](https://github.com/rkaur01)
+- [Mieka Page](https://github.com/miekapage)
 
 ## License
 This project is licensed under the MIT license.
