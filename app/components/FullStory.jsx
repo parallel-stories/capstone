@@ -112,8 +112,6 @@ export default class SingleStoryPage extends Component {
   and prints them to PDF without HTML tags
   */
   exportToPDF = () => {
-    // @TODO: Need to simplify this demo
-
     let doc = new jsPDF('p', 'in', 'letter'),
       sizes = [12, 16, 20],
       fonts = [['Helvetica', '']],
@@ -133,7 +131,6 @@ export default class SingleStoryPage extends Component {
 
     console.log('full text....', fullText)
 
-    // the 3 blocks of text
     for (var i in fonts) {
       if (fonts.hasOwnProperty(i)) {
         font = fonts[i]
@@ -149,7 +146,6 @@ export default class SingleStoryPage extends Component {
       }
     }
 
-    // save pdf with branch title
     doc.save(`${this.props.match.params.branchId}.pdf`)
   }
 
