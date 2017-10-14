@@ -70,7 +70,7 @@ export default class UserProfile extends Component {
         })
       })
     }
-  }))  
+  }))
   }
 
   componentWillUnmount() {
@@ -105,9 +105,9 @@ export default class UserProfile extends Component {
   render() {
     const { user, storyBranches, unpublishedCards, favorites, bookmarks, usersFollowed, resolvedDrafts } = this.state
     let cardKeys = Object.keys(unpublishedCards)
-    
+
     return (
-      <div className="container-fluid" >
+      <div className="container-fluid user-profile" >
         {!user ?
           <h1>Please login to view your profile!</h1>
           :
@@ -121,62 +121,48 @@ export default class UserProfile extends Component {
               editDesc={this.editDesc}
               updateUserInfo={this.updateUserInfo}/>
             <hr />
-            <h2>My Draft Scenes</h2>
-            {_.isEmpty(unpublishedCards)
-              ? (<div>
-                <p>
-                  It looks like you don't have any drafts.
-                </p>
-                </div>)
-              : (<div className="row" >
-                <ul className="no-bullets">
-                {resolvedDrafts.map((draft, index) => (
-                  <li key={draft}><Link to={`/write/${cardKeys[index]}`}>{draft}</Link></li>
-                ))}
-                </ul>
-                </div>)
-            }
+            <div className="row">
+              <div className="col col-lg-6 col-md-6 col-sm-6">
+                <h3>My Draft Scenes</h3>
+                {_.isEmpty(unpublishedCards)
+                  ? (<div>
+                    <p>
+                      It looks like you don't have any drafts.  Would you like to <Link to='/write'>write a story</Link>?
+                    </p>
+                    </div>)
+                  : (<div className="row" >
+                    <ul className="no-bullets">
+                    {resolvedDrafts.map((draft, index) => (
+                      <li key={draft}><Link to={`/write/${cardKeys[index]}`}>{draft}</Link></li>
+                    ))}
+                    </ul>
+                    </div>)
+                }
+              </div>
+
+              <div className="col col-lg-6 col-md-6 col-sm-6">
+                <h3>Bookmarks</h3>
+                {_.isEmpty(bookmarks)
+                  ? (<div>
+                    <p>
+                      It looks like you don't have any bookmarks!
+                    </p>
+                    </div>)
+                  : (<div className="row" >
+                    <ul className="no-bullets">
+                    {Object.keys(bookmarks).map(branchKey => {
+                      let card = bookmarks[branchKey]
+                      return <li key={branchKey}><Link to={`/read/${branchKey}/${card}`}>{branchKey}</Link></li>
+                    })}
+                    </ul>
+                    </div>)
+                }
+              </div>
+            </div>
+
             <hr />
 
-            <h2>My Story Branches</h2>
-            { _.isEmpty(storyBranches)
-              ? (<div>
-                  <p>
-                    It looks like you didn't write any stories yet.
-                    Click the button below to start writing a story.
-                  </p>
-                  <RaisedButton
-                    label="Write a New Story"
-                    onClick={(e) => { this.handleLink(e, 'write') }}
-                    backgroundColor='#50AD55'
-                    style={landingStyles.button}
-                  />
-                </div>)
-              : (<div className="row" >
-                  <AllStoryBranches searchResults={storyBranches} searching={true} />
-                </div>)
-            }
-            <hr />
-
-            <h2>Bookmarks</h2>
-            {_.isEmpty(bookmarks)
-              ? (<div>
-                <p>
-                  It looks like you don't have any bookmarks.
-                </p>
-                </div>)
-              : (<div className="row" >
-                <ul className="no-bullets">
-                {Object.keys(bookmarks).map(branchKey => {
-                  let card = bookmarks[branchKey]
-                  return <li key={branchKey}><Link to={`/read/${branchKey}/${card}`}>{branchKey}</Link></li>
-                })}
-                </ul>
-                </div>)
-            }
-            <hr />
-
-            <h2>Favorited Stories</h2>
+            <h3 className="sub-header-profile">Favorited Stories</h3>
             { _.isEmpty(favorites)
               ? (<div>
                   <p>
@@ -195,7 +181,7 @@ export default class UserProfile extends Component {
                 </div>)
             }
             <hr />
-            <h2>Users You're Following</h2>
+            <h3 className="sub-header-profile">Users You're Following</h3>
             { _.isEmpty(usersFollowed)?
               <div>
                 <p>
@@ -210,13 +196,34 @@ export default class UserProfile extends Component {
                 />
             </div>
             :
-            <div className="row" >
+            <div className="row users-following" >
               <AllUsers
                 filtered={true}
                 userId={this.state.user.uid}
                 followedUsers={this.state.usersFollowed}/>
             </div>
           }
+          <hr />
+
+          <h3 className="sub-header-profile">Your Story Branches</h3>
+          { _.isEmpty(storyBranches)
+            ? (<div>
+              <p>
+              It looks like you didn't write any stories yet.
+              Click the button below to start writing a story.
+              </p>
+              <RaisedButton
+                label="Write a New Story"
+                onClick={(e) => { this.handleLink(e, 'write') }}
+                backgroundColor='#50AD55'
+                style={landingStyles.button}
+              />
+              </div>)
+              : (<div className="row" >
+                <AllStoryBranches searchResults={storyBranches} searching={true} />
+              </div>)
+          }
+
           </div>
         } {/* end check to see if user is logged in */}
         <br />

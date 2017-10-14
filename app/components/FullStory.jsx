@@ -11,6 +11,10 @@ import ReactHtmlParser from 'react-html-parser'
 import Reviews from './Reviews'
 import history from '../history'
 
+// react-pdf -- create a pdf from text
+// source: https://github.com/diegomura/react-pdf
+import jsPDF from 'jsPDF'
+
 export default class SingleStoryPage extends Component {
   constructor(props) {
     super(props)
@@ -36,7 +40,7 @@ export default class SingleStoryPage extends Component {
       authors: [{
         id: '',
         username: ''
-      }]
+      }],
     }
   }
 
@@ -103,6 +107,48 @@ export default class SingleStoryPage extends Component {
     firebase.database().ref('storyBranch').child(this.props.match.params.branchId).child('tags').child(deleteMe).remove()
   }
 
+  /*
+  this function concatenates all of the text currently on the screen
+  and prints them to PDF without HTML tags
+  */
+  exportToPDF = () => {
+    let doc = new jsPDF('p', 'in', 'letter'),
+      sizes = [12, 16, 20],
+      fonts = [['Helvetica', '']],
+      font, size, lines,
+      margin = 0.5, // inches on a 8.5 x 11 inch sheet.
+      verticalOffset = margin,
+      fullText = ''
+
+    for( const idx in this.state.storyCards ){
+      let cardText = ReactHtmlParser(this.state.storyCards[idx].text)
+
+      for( let i=0; i<cardText.length; i++ ) {
+        let currCard = ReactHtmlParser(this.state.storyCards[idx].text)[i].props.children
+
+        if( typeof currCard[0] === 'string') fullText += currCard.toString() + '\n' + '\n'
+        else fullText += '* * * * *\n\n'
+      }
+    }
+
+    for (var i in fonts) {
+      if (fonts.hasOwnProperty(i)) {
+        font = fonts[i]
+        size = 12
+
+        lines = doc.setFont(font[0], font[1])
+    					.setFontSize(size)
+    					.splitTextToSize(fullText, 7.5)
+
+        doc.text(0.5, verticalOffset + size / 72, lines)
+
+        verticalOffset += (lines.length + 0.5) * size / 72
+      }
+    }
+
+    doc.save(`${this.props.match.params.branchId}.pdf`)
+  }
+
   render() {
     const storyBranchId = this.props.match.params.branchId
     const storyBranch = this.state.currentStoryBranch
@@ -137,6 +183,8 @@ export default class SingleStoryPage extends Component {
               }
             </div>
           </div>
+
+          <FlatButton label="Export as PDF" backgroundColor="#C0A485" onClick={this.exportToPDF}/>
 
           <div className="start-read col-lg-6 col-md-6 col-sm-6">
             <p></p>

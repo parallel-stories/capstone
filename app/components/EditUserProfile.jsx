@@ -38,7 +38,7 @@ export default class EditUserProfile extends Component {
 
     if( this.props.isEditing ) {
       return (
-        <div>
+        <div className="profile-intro">
           <span>
             <h1>
               Welcome {user.displayName}!
@@ -56,7 +56,7 @@ export default class EditUserProfile extends Component {
                                           onChange={this.props.editDisplayName}/>
             </span>
           </div>
-          <div>
+          <div className="profile-intro">
             <span>
               <b></b><TextField id="desc"
                             defaultValue={description}
@@ -69,7 +69,7 @@ export default class EditUserProfile extends Component {
       )
     }
     return (
-      <div>
+      <div className="profile-intro">
         <span>
           <h1>
             Welcome {user.displayName}!
