@@ -1,4 +1,4 @@
-# Parallel Stori
+# Parallel Stories
 
 Parallel Stories allows you to read and write stories with the feature to create alternate or parallel storylines. Lay the foundation for the roots of a story or contribute to existing story trees. Don’t hold back in integrating your personal experiences or wild imagination with Parallel Stories!
 
@@ -63,7 +63,7 @@ npm run test-watch
 ```
 
 ## Contributing
-Please read the [Contribution Guide](https://github.com/parallel-stories/capstone/blob/master/CONTRIBUTION_GUIDE.md) for details on our code of conduct and process for issues and pull requests.
+Please read the [Contribution Guide](https://github.com/parallel-stories/capstone/blob/readme-%2346/CONTRIBUTION_GUIDE.md) for details on our code of conduct and process for issues and pull requests.
 
 ## Authors
 - [Chuen Yan (Jamie) Lau](https://github.com/cylau1031)
